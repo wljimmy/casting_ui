@@ -1,0 +1,32 @@
+<section class="section">
+    <h2>图片控件</h2>
+    
+    <div class="image-container container-grid-3 container-height-auto">
+        <!-- 带标题图片 -->
+        <div id="image-with-title" class="image image-md image-with-title" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/400/400?random=1" alt="图片1" loading="lazy">
+            <div class="image-title">带标题图片</div>
+        </div>
+        
+        <!-- 无标题图片 -->
+        <div id="image-sm" class="image image-sm" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/200/200?random=2" alt="图片2" loading="lazy">
+        </div>
+        <div id="image-md" class="image image-md" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/400/400?random=3" alt="图片3" loading="lazy">
+        </div>
+        <div id="image-lg" class="image image-lg" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/600/600?random=4" alt="图片4" loading="lazy">
+        </div>
+        
+        <!-- 圆角图片 -->
+        <div id="image-rounded" class="image image-md image-rounded" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/400/400?random=5" alt="图片5" loading="lazy">
+        </div>
+        
+        <!-- 方形图片 -->
+        <div id="image-square" class="image image-md image-square" onclick="zoomImage(this.querySelector('img').src)">
+            <img src="https://picsum.photos/400/400?random=6" alt="图片6" loading="lazy">
+        </div>
+    </div>
+</section>

@@ -1,0 +1,184 @@
+<!-- 交互控件 -->
+<section id="interaction-controls" class="section">
+    <h2>交互控件</h2>
+    
+    <!-- 按钮 -->
+    <div class="section-subtitle">
+        <h3>按钮</h3>
+    </div>
+    <div id="button-container" class="button-container container-grid-4 container-height-auto">
+        <!-- 按钮尺寸 -->
+        <button id="btn-sm" class="btn btn-primary btn-sm">小按钮</button>
+        <button id="btn-md" class="btn btn-primary btn-md">中按钮</button>
+        <button id="btn-lg" class="btn btn-primary btn-lg">大按钮</button>
+        
+        <!-- 按钮样式 -->
+        <button id="btn-primary" class="btn btn-primary">主要按钮</button>
+        <button id="btn-secondary" class="btn btn-secondary">次要按钮</button>
+        <button id="btn-text" class="btn btn-text">文本按钮</button>
+        <button id="btn-icon" class="btn btn-icon btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+        </button>
+        <button id="btn-loading" class="btn btn-primary btn-loading">加载中</button>
+        
+        <!-- 按钮状态 -->
+        <button id="btn-default" class="btn btn-primary">默认状态</button>
+        <button id="btn-hover" class="btn btn-primary" style="cursor: pointer;">Hover状态</button>
+        <button id="btn-disabled" class="btn btn-primary" disabled>禁用状态</button>
+    </div>
+
+    <!-- 输入框 -->
+    <div class="section-subtitle">
+        <h3>输入框</h3>
+    </div>
+    <div id="input-container" class="input-container container-height-auto">
+        <!-- 单行输入框 -->
+        <div id="input-group-1" class="input-group">
+            <label class="input-label">单行输入框</label>
+            <input id="input-text" type="text" class="input" placeholder="请输入内容">
+            <span class="input-hint">这是提示信息</span>
+        </div>
+        
+        <!-- 错误状态输入框 -->
+        <div id="input-group-2" class="input-group">
+            <label class="input-label">错误状态</label>
+            <input id="input-error" type="text" class="input error" placeholder="请输入内容">
+            <span class="input-error">这是错误信息</span>
+        </div>
+        
+        <!-- 成功状态输入框 -->
+        <div id="input-group-3" class="input-group">
+            <label class="input-label">成功状态</label>
+            <input id="input-success" type="text" class="input success" placeholder="请输入内容">
+        </div>
+        
+        <!-- 禁用状态输入框 -->
+        <div id="input-group-4" class="input-group">
+            <label class="input-label">禁用状态</label>
+            <input id="input-disabled" type="text" class="input" placeholder="请输入内容" disabled>
+        </div>
+        
+        <!-- 多行输入框 -->
+        <div id="input-group-5" class="input-group">
+            <label class="input-label">多行输入框</label>
+            <textarea id="textarea" class="textarea" placeholder="请输入内容"></textarea>
+        </div>
+        
+        <!-- 数字输入框 -->
+        <div id="input-group-6" class="input-group">
+            <label class="input-label">数字输入框</label>
+            <input id="input-number" type="number" class="input" placeholder="请输入数字">
+        </div>
+        
+        <!-- 搜索输入框 -->
+        <div id="input-group-7" class="input-group">
+            <label class="input-label">搜索输入框</label>
+            <input id="input-search" type="search" class="input" placeholder="请输入搜索内容">
+        </div>
+        
+        <!-- 密码输入框 -->
+        <div id="input-group-8" class="input-group">
+            <label class="input-label">密码输入框</label>
+            <input id="input-password" type="password" class="input" placeholder="请输入密码">
+        </div>
+    </div>
+
+    <!-- 选择控件 -->
+    <div class="section-subtitle">
+        <h3>选择控件</h3>
+    </div>
+    <div id="select-container" class="select-container container-height-auto">
+        <!-- 单选框 -->
+        <div id="radio-group-1" class="input-group">
+            <label class="input-label">单选框（横向）</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input id="radio1-1" type="radio" name="radio1">
+                    <label for="radio1-1">选项1</label>
+                </div>
+                <div class="radio-item">
+                    <input id="radio1-2" type="radio" name="radio1">
+                    <label for="radio1-2">选项2</label>
+                </div>
+                <div class="radio-item">
+                    <input id="radio1-3" type="radio" name="radio1">
+                    <label for="radio1-3">选项3</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 复选框 -->
+        <div id="checkbox-group-1" class="input-group">
+            <label class="input-label">复选框（纵向）</label>
+            <div class="checkbox-group vertical">
+                <div class="checkbox-item">
+                    <input id="checkbox1" type="checkbox">
+                    <label for="checkbox1">选项1</label>
+                </div>
+                <div class="checkbox-item">
+                    <input id="checkbox2" type="checkbox">
+                    <label for="checkbox2">选项2</label>
+                </div>
+                <div class="checkbox-item">
+                    <input id="checkbox3" type="checkbox">
+                    <label for="checkbox3">选项3</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 下拉选择器 -->
+        <div id="select-group-1" class="input-group">
+            <label class="input-label">下拉选择器</label>
+            <select id="select-1" class="select">
+                <option value="">请选择</option>
+                <option value="1">选项1</option>
+                <option value="2">选项2</option>
+                <option value="3">选项3</option>
+            </select>
+        </div>
+        
+        <!-- 开关 -->
+        <div id="switch-group-1" class="input-group">
+            <label class="input-label">开关（不同尺寸）</label>
+            <div style="display: flex; align-items: center; gap: 24px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>小</span>
+                    <label id="switch-sm" class="switch switch-sm">
+                        <input type="checkbox">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>中</span>
+                    <label id="switch-md" class="switch">
+                        <input type="checkbox">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span>大</span>
+                    <label id="switch-lg" class="switch switch-lg">
+                        <input type="checkbox">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 滑块 -->
+        <div id="slider-group-1" class="input-group">
+            <label class="input-label">滑块</label>
+            <input id="slider-1" type="range" class="slider" min="0" max="100" value="50">
+        </div>
+        
+        <!-- 日期选择器 -->
+        <div id="date-group-1" class="input-group">
+            <label class="input-label">日期选择器</label>
+            <input id="date-input-1" type="date" class="date-input">
+        </div>
+    </div>
+</section>
