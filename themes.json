@@ -1,0 +1,112 @@
+{
+  "themes": [
+    {
+      "name": "默认主题",
+      "colors": {
+        "primary-color": "#165DFF",
+        "primary-hover": "#0E48D3",
+        "primary-active": "#0A36A8",
+        "gray-100": "#F5F7FA",
+        "gray-200": "#E4E7ED",
+        "gray-300": "#C0C4CC",
+        "gray-400": "#909399",
+        "gray-500": "#606266",
+        "gray-600": "#303133",
+        "gray-700": "#1E1E1E",
+        "success-color": "#67C23A",
+        "warning-color": "#E6A23C",
+        "error-color": "#F56C6C",
+        "info-color": "#909399",
+        "bg-color": "#FFFFFF",
+        "bg-gray": "#F5F7FA",
+        "border-color": "#E4E7ED",
+        "border-hover": "#C0C4CC",
+        "text-primary": "#303133",
+        "text-secondary": "#606266",
+        "text-light": "#909399",
+        "text-disabled": "#C0C4CC"
+      }
+    },
+    {
+      "name": "深色主题",
+      "colors": {
+        "primary-color": "#409EFF",
+        "primary-hover": "#66B1FF",
+        "primary-active": "#3A8EE6",
+        "gray-100": "#1F1F1F",
+        "gray-200": "#2C2C2C",
+        "gray-300": "#404040",
+        "gray-400": "#666666",
+        "gray-500": "#999999",
+        "gray-600": "#CCCCCC",
+        "gray-700": "#E5E5E5",
+        "success-color": "#67C23A",
+        "warning-color": "#E6A23C",
+        "error-color": "#F56C6C",
+        "info-color": "#909399",
+        "bg-color": "#1E1E1E",
+        "bg-gray": "#1F1F1F",
+        "border-color": "#404040",
+        "border-hover": "#666666",
+        "text-primary": "#E5E5E5",
+        "text-secondary": "#CCCCCC",
+        "text-light": "#999999",
+        "text-disabled": "#666666"
+      }
+    },
+    {
+      "name": "绿色主题",
+      "colors": {
+        "primary-color": "#67C23A",
+        "primary-hover": "#85CE61",
+        "primary-active": "#529B2E",
+        "gray-100": "#F0F9EB",
+        "gray-200": "#E1F5C4",
+        "gray-300": "#C2E7B0",
+        "gray-400": "#A4D48B",
+        "gray-500": "#86C270",
+        "gray-600": "#67C23A",
+        "gray-700": "#489B22",
+        "success-color": "#67C23A",
+        "warning-color": "#E6A23C",
+        "error-color": "#F56C6C",
+        "info-color": "#909399",
+        "bg-color": "#FFFFFF",
+        "bg-gray": "#F0F9EB",
+        "border-color": "#E1F5C4",
+        "border-hover": "#C2E7B0",
+        "text-primary": "#303133",
+        "text-secondary": "#606266",
+        "text-light": "#909399",
+        "text-disabled": "#C0C4CC"
+      }
+    },
+    {
+      "name": "橙色主题",
+      "colors": {
+        "primary-color": "#E6A23C",
+        "primary-hover": "#EEB560",
+        "primary-active": "#CF8B17",
+        "gray-100": "#FDF6EC",
+        "gray-200": "#FAE7C9",
+        "gray-300": "#F5D08A",
+        "gray-400": "#E6A23C",
+        "gray-500": "#CF8B17",
+        "gray-600": "#B37B14",
+        "gray-700": "#996C11",
+        "success-color": "#67C23A",
+        "warning-color": "#E6A23C",
+        "error-color": "#F56C6C",
+        "info-color": "#909399",
+        "bg-color": "#FFFFFF",
+        "bg-gray": "#FDF6EC",
+        "border-color": "#FAE7C9",
+        "border-hover": "#F5D08A",
+        "text-primary": "#303133",
+        "text-secondary": "#606266",
+        "text-light": "#909399",
+        "text-disabled": "#C0C4CC"
+      }
+    }
+  ]
+}

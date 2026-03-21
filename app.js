@@ -411,9 +411,123 @@ function closeImageZoom() {
     }
 }
 
+// 主题管理模块
+class ThemeManager {
+    constructor() {
+        this.themes = [];
+        this.currentTheme = null;
+        this.init();
+    }
+
+    async init() {
+        try {
+            // 加载主题配置
+            const response = await fetch('themes.json');
+            const data = await response.json();
+            this.themes = data.themes;
+            this.currentTheme = this.themes[0]; // 默认使用第一个主题
+            this.applyTheme(this.currentTheme);
+            this.createThemeSelector();
+        } catch (error) {
+            console.error('加载主题配置失败:', error);
+        }
+    }
+
+    applyTheme(theme) {
+        if (!theme || !theme.colors) return;
+
+        this.currentTheme = theme;
+        const root = document.documentElement;
+
+        // 应用主题颜色到CSS变量
+        for (const [key, value] of Object.entries(theme.colors)) {
+            root.style.setProperty(`--${key}`, value);
+        }
+
+        // 保存当前主题到本地存储
+        localStorage.setItem('currentTheme', theme.name);
+    }
+
+    createThemeSelector() {
+        // 创建主题选择器容器
+        const selectorContainer = document.createElement('div');
+        selectorContainer.className = 'theme-selector';
+        selectorContainer.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--size-md);
+            box-shadow: var(--shadow-md);
+        `;
+
+        // 创建标题
+        const title = document.createElement('h4');
+        title.textContent = '主题选择';
+        title.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            font-size: 16px;
+            color: var(--text-primary);
+        `;
+        selectorContainer.appendChild(title);
+
+        // 创建主题选择列表
+        const themeList = document.createElement('div');
+        themeList.className = 'theme-list';
+        themeList.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            gap: var(--size-sm);
+        `;
+
+        // 添加主题选项
+        this.themes.forEach(theme => {
+            const themeOption = document.createElement('button');
+            themeOption.className = 'theme-option';
+            themeOption.textContent = theme.name;
+            themeOption.style.cssText = `
+                padding: var(--size-sm) var(--size-md);
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-sm);
+                background: ${theme.name === this.currentTheme?.name ? 'var(--primary-color)' : 'var(--bg-color)'};
+                color: ${theme.name === this.currentTheme?.name ? 'white' : 'var(--text-primary)'};
+                cursor: pointer;
+                transition: all var(--transition-normal);
+                text-align: left;
+            `;
+
+            themeOption.addEventListener('click', () => {
+                this.applyTheme(theme);
+                // 更新所有主题选项的样式
+                document.querySelectorAll('.theme-option').forEach(option => {
+                    option.style.background = option.textContent === theme.name ? 'var(--primary-color)' : 'var(--bg-color)';
+                    option.style.color = option.textContent === theme.name ? 'white' : 'var(--text-primary)';
+                });
+            });
+
+            themeList.appendChild(themeOption);
+        });
+
+        selectorContainer.appendChild(themeList);
+        document.body.appendChild(selectorContainer);
+    }
+
+    getCurrentTheme() {
+        return this.currentTheme;
+    }
+
+    getThemes() {
+        return this.themes;
+    }
+}
+
 // 基础交互框架
 class UI {
     constructor() {
+        this.themeManager = new ThemeManager();
         this.init();
     }
 
@@ -507,6 +621,11 @@ class UI {
                 // 添加验证规则
             }
         };
+    }
+
+    // 主题管理相关
+    getThemeManager() {
+        return this.themeManager;
     }
 }
 
