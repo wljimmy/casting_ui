@@ -11,8 +11,8 @@ import('./core.js').then(module => {
         import('./modal.js'),
         import('./message.js'),
         import('./image-zoom.js'),
-        import('./theme-manager.js'),
         import('./color-picker.js'),
+        import('./theme-manager.js'),
         import('./ui.js')
     ]);
 }).then(() => {

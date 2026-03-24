@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Module Test</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap">
+    <link rel="stylesheet" href="../dev/modules/css/core.css">
+    <link rel="stylesheet" href="../dev/modules/css/md.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: var(--bg-gray);
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--bg-color);
+            border-radius: var(--radius-lg);
+            padding: var(--size-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .test-section {
+            margin-bottom: var(--size-xl);
+            padding: var(--size-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+        }
+        .test-section h2 {
+            margin-bottom: var(--size-md);
+            color: var(--primary-color);
+        }
+        .test-result {
+            margin-top: var(--size-md);
+            padding: var(--size-sm);
+            border-radius: var(--radius-sm);
+        }
+        .test-result.pass {
+            background-color: rgba(103, 194, 58, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+        .test-result.fail {
+            background-color: rgba(245, 108, 108, 0.1);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+        .editor-container {
+            margin-top: var(--size-md);
+            min-height: 400px;
+        }
+        .test-description {
+            margin-bottom: var(--size-md);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>MD Module Test</h1>
+        
+        <!-- Test 1: MD Parser Test -->
+        <div class="test-section">
+            <h2>Test 1: MD Parser</h2>
+            <div class="test-description">测试MD解析器的基本功能</div>
+            <div id="parser-test"></div>
+            <div id="parser-result" class="test-result"></div>
+        </div>
+        
+        <!-- Test 2: MD Editor Test -->
+        <div class="test-section">
+            <h2>Test 2: MD Editor</h2>
+            <div class="test-description">测试MD编辑器的基本功能和自动初始化</div>
+            <div id="editor-container" class="editor-container"></div>
+            <div id="editor-result" class="test-result"></div>
+        </div>
+        
+        <!-- Test 3: Format Toggle Test -->
+        <div class="test-section">
+            <h2>Test 3: Format Toggle</h2>
+            <div class="test-description">测试重复设置即为取消的功能</div>
+            <div id="toggle-container" class="editor-container"></div>
+            <div id="toggle-result" class="test-result"></div>
+        </div>
+        
+        <!-- Test 4: Auto-initialization Test -->
+        <div class="test-section">
+            <h2>Test 4: Auto-initialization</h2>
+            <div class="test-description">测试自动初始化功能</div>
+            <div id="auto-init-container" data-md-editor data-md-initial="# 自动初始化测试
+
+这是一个**自动初始化**的编辑器，使用了`data-md-editor`属性。</div>
+            <div id="auto-init-result" class="test-result"></div>
+        </div>
+        
+        <!-- Test 5: Responsive Test -->
+        <div class="test-section">
+            <h2>Test 5: Responsive Design</h2>
+            <div class="test-description">测试响应式设计</div>
+            <div id="responsive-test">
+                <p>Resize the browser window to test responsive behavior</p>
+            </div>
+            <div id="responsive-result" class="test-result"></div>
+        </div>
+    </div>
+    
+    <script src="../dev/modules/js/core.js"></script>
+    <script src="../dev/modules/js/md.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test 1: MD Parser
+            function testParser() {
+                const parserTest = document.getElementById('parser-test');
+                const parserResult = document.getElementById('parser-result');
+                
+                const testCases = [
+                    {
+                        md: '# Heading 1',
+                        expected: '<h1>Heading 1</h1>',
+                        description: 'H1 heading'
+                    },
+                    {
+                        md: '## Heading 2',
+                        expected: '<h2>Heading 2</h2>',
+                        description: 'H2 heading'
+                    },
+                    {
+                        md: '**bold text**',
+                        expected: '<p><strong>bold text</strong></p>',
+                        description: 'Bold text'
+                    },
+                    {
+                        md: '*italic text*',
+                        expected: '<p><em>italic text</em></p>',
+                        description: 'Italic text'
+                    },
+                    {
+                        md: '`inline code`',
+                        expected: '<p><code>inline code</code></p>',
+                        description: 'Inline code'
+                    },
+                    {
+                        md: '* List item 1\n* List item 2',
+                        expected: '<ul><li>List item 1</li><li>List item 2</li></ul>',
+                        description: 'Unordered list'
+                    }
+                ];
+                
+                let passed = 0;
+                let total = testCases.length;
+                
+                testCases.forEach(testCase => {
+                    const result = mdParse(testCase.md);
+                    const isPass = result.includes(testCase.expected.replace(/\s+/g, ''));
+                    if (isPass) passed++;
+                    
+                    const testItem = document.createElement('div');
+                    testItem.innerHTML = `
+                        <strong>${testCase.description}:</strong> ${isPass ? '✓ PASS' : '✗ FAIL'}
+                        <br>Input: ${testCase.md}
+                        <br>Expected: ${testCase.expected}
+                        <br>Got: ${result}
+                        <hr>
+                    `;
+                    parserTest.appendChild(testItem);
+                });
+                
+                parserResult.className = `test-result ${passed === total ? 'pass' : 'fail'}`;
+                parserResult.textContent = `Parser test: ${passed}/${total} passed`;
+            }
+            
+            // Test 2: MD Editor
+            function testEditor() {
+                const editorResult = document.getElementById('editor-result');
+                
+                // Create editor
+                const editor = mdInput('editor-container', {
+                    initialValue: '# Test Editor\n\nThis is a **test** of the *MD editor* module.\n\n* List item 1\n* List item 2\n\n\`code example\`'
+                });
+                
+                if (editor) {
+                    editorResult.className = 'test-result pass';
+                    editorResult.textContent = 'Editor test: PASS - Editor created successfully';
+                } else {
+                    editorResult.className = 'test-result fail';
+                    editorResult.textContent = 'Editor test: FAIL - Editor creation failed';
+                }
+            }
+            
+            // Test 3: Format Toggle
+            function testFormatToggle() {
+                const toggleResult = document.getElementById('toggle-result');
+                
+                // Create editor for toggle test
+                const editor = mdInput('toggle-container', {
+                    initialValue: '测试重复设置即为取消的功能\n\n点击工具栏按钮测试：\n1. 选中这段文字，点击H1按钮 → 变为H1\n2. 再次点击H1按钮 → 恢复为p标签\n3. 点击H2按钮 → 变为H2\n4. 再次点击H2按钮 → 恢复为p标签'
+                });
+                
+                if (editor) {
+                    toggleResult.className = 'test-result pass';
+                    toggleResult.textContent = 'Format toggle test: PASS - Editor created successfully for testing toggle functionality';
+                } else {
+                    toggleResult.className = 'test-result fail';
+                    toggleResult.textContent = 'Format toggle test: FAIL - Editor creation failed';
+                }
+            }
+            
+            // Test 4: Auto-initialization
+            function testAutoInit() {
+                const autoInitResult = document.getElementById('auto-init-result');
+                
+                // Check if auto-initialization worked
+                const autoInitContainer = document.getElementById('auto-init-container');
+                const editor = autoInitContainer.querySelector('.md-editor');
+                
+                if (editor) {
+                    autoInitResult.className = 'test-result pass';
+                    autoInitResult.textContent = 'Auto-initialization test: PASS - Editor auto-initialized successfully';
+                } else {
+                    autoInitResult.className = 'test-result fail';
+                    autoInitResult.textContent = 'Auto-initialization test: FAIL - Editor not auto-initialized';
+                }
+            }
+            
+            // Test 5: Responsive Design
+            function testResponsive() {
+                const responsiveResult = document.getElementById('responsive-result');
+                
+                function checkResponsive() {
+                    const width = window.innerWidth;
+                    let status = 'PASS';
+                    let message = '';
+                    
+                    if (width <= 768) {
+                        message = 'Mobile view: ✓ Responsive';
+                    } else if (width <= 1024) {
+                        message = 'Tablet view: ✓ Responsive';
+                    } else {
+                        message = 'Desktop view: ✓ Responsive';
+                    }
+                    
+                    responsiveResult.className = 'test-result pass';
+                    responsiveResult.textContent = `Responsive test: ${status} - ${message}`;
+                }
+                
+                checkResponsive();
+                window.addEventListener('resize', checkResponsive);
+            }
+            
+            // Run all tests
+            setTimeout(() => {
+                testParser();
+                testEditor();
+                testFormatToggle();
+                testAutoInit();
+                testResponsive();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

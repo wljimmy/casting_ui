@@ -174,6 +174,8 @@ class ColorPicker extends PopupBase {
             gap: var(--size-sm);
         `;
 
+        const initialColor = options.initialColor || '#165DFF';
+        
         const colorDisplay = document.createElement('div');
         colorDisplay.className = 'color-display';
         colorDisplay.style.cssText = `
@@ -181,7 +183,7 @@ class ColorPicker extends PopupBase {
             height: 60px;
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
-            background-color: #165DFF;
+            background-color: ${initialColor};
         `;
 
         const colorInfo = document.createElement('div');
@@ -200,7 +202,7 @@ class ColorPicker extends PopupBase {
             margin-bottom: var(--size-xs);
             font-size: 12px;
         `;
-        colorValue.textContent = '#165DFF';
+        colorValue.textContent = initialColor;
 
         const formatSelector = document.createElement('div');
         formatSelector.className = 'format-selector';
@@ -423,6 +425,7 @@ class ColorPicker extends PopupBase {
             border-radius: var(--radius-sm);
             cursor: pointer;
         `;
+        colorInput.value = initialColor;
 
         colorInput.addEventListener('change', () => {
             const color = colorInput.value;
@@ -442,7 +445,7 @@ class ColorPicker extends PopupBase {
             font-family: monospace;
             font-size: 12px;
         `;
-        textInput.value = '#165DFF';
+        textInput.value = initialColor;
 
         textInput.addEventListener('input', () => {
             const color = textInput.value;

@@ -43,6 +43,12 @@
             border-radius: var(--radius-md);
             border-left: 4px solid var(--primary-color);
         }
+        .theme-info {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: var(--gray-50);
+            border-radius: var(--radius-sm);
+        }
     </style>
 </head>
 <body>
@@ -50,13 +56,14 @@
         <h1>主题管理模块测试</h1>
         
         <div class="section">
-            <h2>内置主题测试</h2>
-            <p>测试切换内置主题。</p>
+            <h2>主题管理功能测试</h2>
+            <p>测试主题管理模块的核心功能。</p>
             
             <div class="button-group">
-                <button class="btn btn-primary" onclick="testDefaultTheme()">默认主题</button>
-                <button class="btn btn-default" onclick="testDarkTheme()">深色主题</button>
-                <button class="btn btn-default" onclick="testLightTheme()">浅色主题</button>
+                <button class="btn btn-primary" onclick="testInitThemeManager()">初始化主题管理器</button>
+                <button class="btn btn-default" onclick="testOpenThemeSelector()">打开主题选择器</button>
+                <button class="btn btn-default" onclick="testGetCurrentTheme()">获取当前主题</button>
+                <button class="btn btn-default" onclick="testGetThemes()">获取所有主题</button>
             </div>
             
             <div class="theme-preview">
@@ -64,98 +71,131 @@
                 <p>这是主题预览区域，展示当前主题的样式效果。</p>
                 <button class="btn btn-primary">主要按钮</button>
                 <button class="btn btn-default">默认按钮</button>
+                <div class="tag tag-success">成功</div>
+                <div class="tag tag-warning">警告</div>
+                <div class="tag tag-error">错误</div>
+                <div class="tag tag-info">信息</div>
             </div>
         </div>
         
         <div class="section">
-            <h2>自定义主题测试</h2>
-            <p>测试创建和应用自定义主题。</p>
+            <h2>主题信息</h2>
+            <p>显示当前主题的详细信息。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testCustomTheme()">应用自定义主题</button>
-                <button class="btn btn-default" onclick="testResetTheme()">重置主题</button>
+            <div class="theme-info" id="themeInfo">
+                <p>点击上方按钮获取主题信息</p>
             </div>
-            
+        </div>
+        
+        <div class="section">
+            <h2>测试结果</h2>
             <div class="result-container">
                 <h3>操作结果：</h3>
-                <div id="themeResult"></div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>从JSON加载主题测试</h2>
-            <p>测试从JSON文件加载主题。</p>
-            
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testLoadThemeFromJson()">从JSON加载主题</button>
+                <div id="testResult"></div>
             </div>
         </div>
     </div>
     
     <script src="../../dev/modules/js/core.js"></script>
+    <script src="../../dev/modules/js/color-picker.js"></script>
     <script src="../../dev/modules/js/theme-manager.js"></script>
     <script>
-        // 测试默认主题
-        function testDefaultTheme() {
-            applyTheme('default');
-            document.getElementById('themeResult').textContent = '已应用默认主题';
+        let themeManager = null;
+        
+        // 测试初始化主题管理器
+        async function testInitThemeManager() {
+            try {
+                themeManager = new ThemeManager();
+                await themeManager.init();
+                document.getElementById('testResult').textContent = '主题管理器初始化成功';
+                updateThemeInfo();
+            } catch (error) {
+                document.getElementById('testResult').textContent = '主题管理器初始化失败: ' + error.message;
+            }
         }
         
-        // 测试深色主题
-        function testDarkTheme() {
-            applyTheme('dark');
-            document.getElementById('themeResult').textContent = '已应用深色主题';
-        }
-        
-        // 测试浅色主题
-        function testLightTheme() {
-            applyTheme('light');
-            document.getElementById('themeResult').textContent = '已应用浅色主题';
-        }
-        
-        // 测试自定义主题
-        function testCustomTheme() {
-            const customTheme = {
-                'primary-color': '#ff6b6b',
-                'bg-color': '#f8f9fa',
-                'text-color': '#333333',
-                'border-color': '#dee2e6',
-                'success-color': '#28a745',
-                'error-color': '#dc3545',
-                'warning-color': '#ffc107',
-                'info-color': '#17a2b8'
-            };
+        // 测试打开主题选择器
+        function testOpenThemeSelector() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
             
-            applyTheme('custom', customTheme);
-            document.getElementById('themeResult').textContent = '已应用自定义主题';
+            themeManager.openThemeSelector();
+            document.getElementById('testResult').textContent = '主题选择器已打开';
         }
         
-        // 测试重置主题
-        function testResetTheme() {
-            applyTheme('default');
-            document.getElementById('themeResult').textContent = '已重置为默认主题';
+        // 测试获取当前主题
+        function testGetCurrentTheme() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
+            
+            const currentTheme = themeManager.getCurrentTheme();
+            if (currentTheme) {
+                document.getElementById('testResult').textContent = '当前主题: ' + currentTheme.name;
+                updateThemeInfo();
+            } else {
+                document.getElementById('testResult').textContent = '未设置当前主题';
+            }
         }
         
-        // 测试从JSON加载主题
-        function testLoadThemeFromJson() {
-            // 模拟从JSON加载主题
-            const themeJson = {
-                'name': 'json-theme',
-                'colors': {
-                    'primary-color': '#4ecdc4',
-                    'bg-color': '#292f36',
-                    'text-color': '#ffffff',
-                    'border-color': '#444444',
-                    'success-color': '#45b7d1',
-                    'error-color': '#ff6b6b',
-                    'warning-color': '#ffe66d',
-                    'info-color': '#1a535c'
+        // 测试获取所有主题
+        function testGetThemes() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
+            
+            const themes = themeManager.getThemes();
+            if (themes && themes.length > 0) {
+                document.getElementById('testResult').textContent = '主题数量: ' + themes.length;
+                updateThemeInfo();
+            } else {
+                document.getElementById('testResult').textContent = '未加载到主题';
+            }
+        }
+        
+        // 更新主题信息显示
+        function updateThemeInfo() {
+            if (!themeManager) return;
+            
+            const currentTheme = themeManager.getCurrentTheme();
+            const themes = themeManager.getThemes();
+            
+            let infoHTML = '';
+            
+            if (currentTheme) {
+                infoHTML += `<h4>当前主题</h4>`;
+                infoHTML += `<p><strong>名称:</strong> ${currentTheme.name}</p>`;
+                if (currentTheme.description) {
+                    infoHTML += `<p><strong>描述:</strong> ${currentTheme.description}</p>`;
                 }
-            };
+                infoHTML += `<p><strong>主色调:</strong> <span style="display: inline-block; width: 20px; height: 20px; background-color: ${currentTheme.colors['primary-color']}; border-radius: 50%; margin-left: 10px;"></span> ${currentTheme.colors['primary-color']}</p>`;
+            }
             
-            applyTheme(themeJson.name, themeJson.colors);
-            document.getElementById('themeResult').textContent = '已从JSON加载主题';
+            if (themes && themes.length > 0) {
+                infoHTML += `<h4>所有主题</h4>`;
+                themes.forEach(theme => {
+                    infoHTML += `<p>${theme.name} ${theme.name === currentTheme?.name ? '(当前)' : ''}${theme.description ? ': ' + theme.description : ''}</p>`;
+                });
+            }
+            
+            document.getElementById('themeInfo').innerHTML = infoHTML;
         }
+        
+        // 页面加载时自动初始化
+        window.onload = async function() {
+            try {
+                themeManager = new ThemeManager();
+                await themeManager.init();
+                document.getElementById('testResult').textContent = '页面加载时自动初始化主题管理器成功';
+                updateThemeInfo();
+            } catch (error) {
+                document.getElementById('testResult').textContent = '页面加载时自动初始化主题管理器失败: ' + error.message;
+            }
+        };
     </script>
 </body>
 </html>
