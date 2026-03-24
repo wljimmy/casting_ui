@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: image-zoom.js
+ * Description: 图片放大模块，支持点击图片放大查看
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */

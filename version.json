@@ -1,0 +1,91 @@
+{
+  "name": "Casting UI Framework",
+  "version": "0.2.0",
+  "description": "极简UI框架，专注于提供基础的UI组件和交互功能",
+  "author": "Bingo工作室",
+  "email": "wljimmy@hotmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bingo-studio/casting-ui.git"
+  },
+  "homepage": "https://github.com/bingo-studio/casting-ui#readme",
+  "bugs": {
+    "url": "https://github.com/bingo-studio/casting-ui/issues"
+  },
+  "releaseDate": "2026-03-25",
+  "changelog": "docs/logs/version.md",
+  "modules": {
+    "core": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/core.js",
+      "description": "核心模块，提供调试、遮罩、弹窗基类等功能"
+    },
+    "modal": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/modal.js",
+      "description": "弹窗模块，提供模态框功能"
+    },
+    "message": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/message.js",
+      "description": "消息提示模块，提供Toast、Loading等功能"
+    },
+    "image-zoom": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/image-zoom.js",
+      "description": "图片放大模块，支持点击图片放大查看"
+    },
+    "theme-manager": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/theme-manager.js",
+      "description": "主题管理模块，支持主题切换和自定义主题"
+    },
+    "color-picker": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/color-picker.js",
+      "description": "颜色选择器模块，支持多种颜色格式"
+    },
+    "ui": {
+      "version": "0.2.0",
+      "file": "dev/modules/js/ui.js",
+      "description": "UI框架模块，提供UI组件管理"
+    },
+    "md": {
+      "version": "0.1.0",
+      "file": "dev/modules/js/md.js",
+      "description": "Markdown编辑器模块"
+    },
+    "core-css": {
+      "version": "0.2.0",
+      "file": "dev/modules/css/core.css",
+      "description": "核心样式，包含CSS变量和基础样式"
+    },
+    "components-css": {
+      "version": "0.2.0",
+      "file": "dev/modules/css/components.css",
+      "description": "组件样式，包含所有UI组件的样式"
+    },
+    "md-css": {
+      "version": "0.1.0",
+      "file": "dev/modules/css/md.css",
+      "description": "Markdown编辑器样式"
+    }
+  },
+  "dist": {
+    "v0.1.0": {
+      "releaseDate": "2024-01-01",
+      "files": ["Casting.css", "Casting.js"],
+      "status": "stable"
+    }
+  },
+  "techStack": {
+    "html": "HTML5",
+    "css": "CSS3",
+    "javascript": "ES6+"
+  },
+  "compatibility": {
+    "browsers": ["Chrome 80+", "Firefox 75+", "Safari 13+", "Edge 80+"],
+    "mobile": ["iOS Safari 13+", "Chrome Android 80+"]
+  }
+}

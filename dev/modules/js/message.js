@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: message.js
+ * Description: 消息提示模块，提供Toast、Loading等功能
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */

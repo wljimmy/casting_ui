@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: index.js
+ * Description: 模块加载器，按需加载各功能模块
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */

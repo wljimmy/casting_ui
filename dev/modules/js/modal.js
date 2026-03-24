@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: modal.js
+ * Description: 弹窗模块，提供模态框功能
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */

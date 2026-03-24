@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: ui.js
+ * Description: UI框架模块，提供UI组件管理
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */

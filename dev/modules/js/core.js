@@ -1,5 +1,8 @@
 /* 
  * Casting UI Framework
+ * Version: 0.2.0
+ * Module: core.js
+ * Description: 核心模块，提供调试、遮罩、弹窗基类等功能
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */
