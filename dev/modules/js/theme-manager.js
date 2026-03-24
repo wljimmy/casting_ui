@@ -300,6 +300,20 @@ class ThemeManager extends PopupBase {
                     color: var(--text-primary);
                 `;
 
+                // 添加主题描述
+                if (theme.description) {
+                    const themeDescription = document.createElement('div');
+                    themeDescription.className = 'theme-card-description';
+                    themeDescription.textContent = theme.description;
+                    themeDescription.style.cssText = `
+                        font-size: 12px;
+                        color: var(--text-secondary);
+                        margin-bottom: var(--size-sm);
+                        line-height: 1.4;
+                    `;
+                    themeCard.appendChild(themeDescription);
+                }
+
                 const colorPreview = document.createElement('div');
                 colorPreview.className = 'color-preview';
                 colorPreview.style.cssText = `
