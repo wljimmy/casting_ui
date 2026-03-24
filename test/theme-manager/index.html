@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题管理模块测试</title>
+    <link rel="stylesheet" href="../../dev/modules/css/core.css">
+    <link rel="stylesheet" href="../../dev/modules/css/components.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .theme-preview {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .theme-preview h3 {
+            color: var(--primary-color);
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--gray-100);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>主题管理模块测试</h1>
+        
+        <div class="section">
+            <h2>内置主题测试</h2>
+            <p>测试切换内置主题。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testDefaultTheme()">默认主题</button>
+                <button class="btn btn-default" onclick="testDarkTheme()">深色主题</button>
+                <button class="btn btn-default" onclick="testLightTheme()">浅色主题</button>
+            </div>
+            
+            <div class="theme-preview">
+                <h3>主题预览</h3>
+                <p>这是主题预览区域，展示当前主题的样式效果。</p>
+                <button class="btn btn-primary">主要按钮</button>
+                <button class="btn btn-default">默认按钮</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>自定义主题测试</h2>
+            <p>测试创建和应用自定义主题。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testCustomTheme()">应用自定义主题</button>
+                <button class="btn btn-default" onclick="testResetTheme()">重置主题</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>操作结果：</h3>
+                <div id="themeResult"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>从JSON加载主题测试</h2>
+            <p>测试从JSON文件加载主题。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testLoadThemeFromJson()">从JSON加载主题</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../dev/modules/js/core.js"></script>
+    <script src="../../dev/modules/js/theme-manager.js"></script>
+    <script>
+        // 测试默认主题
+        function testDefaultTheme() {
+            applyTheme('default');
+            document.getElementById('themeResult').textContent = '已应用默认主题';
+        }
+        
+        // 测试深色主题
+        function testDarkTheme() {
+            applyTheme('dark');
+            document.getElementById('themeResult').textContent = '已应用深色主题';
+        }
+        
+        // 测试浅色主题
+        function testLightTheme() {
+            applyTheme('light');
+            document.getElementById('themeResult').textContent = '已应用浅色主题';
+        }
+        
+        // 测试自定义主题
+        function testCustomTheme() {
+            const customTheme = {
+                'primary-color': '#ff6b6b',
+                'bg-color': '#f8f9fa',
+                'text-color': '#333333',
+                'border-color': '#dee2e6',
+                'success-color': '#28a745',
+                'error-color': '#dc3545',
+                'warning-color': '#ffc107',
+                'info-color': '#17a2b8'
+            };
+            
+            applyTheme('custom', customTheme);
+            document.getElementById('themeResult').textContent = '已应用自定义主题';
+        }
+        
+        // 测试重置主题
+        function testResetTheme() {
+            applyTheme('default');
+            document.getElementById('themeResult').textContent = '已重置为默认主题';
+        }
+        
+        // 测试从JSON加载主题
+        function testLoadThemeFromJson() {
+            // 模拟从JSON加载主题
+            const themeJson = {
+                'name': 'json-theme',
+                'colors': {
+                    'primary-color': '#4ecdc4',
+                    'bg-color': '#292f36',
+                    'text-color': '#ffffff',
+                    'border-color': '#444444',
+                    'success-color': '#45b7d1',
+                    'error-color': '#ff6b6b',
+                    'warning-color': '#ffe66d',
+                    'info-color': '#1a535c'
+                }
+            };
+            
+            applyTheme(themeJson.name, themeJson.colors);
+            document.getElementById('themeResult').textContent = '已从JSON加载主题';
+        }
+    </script>
+</body>
+</html>
