@@ -11,55 +11,24 @@
         <div class="theme-selector-demo">
             <h5>使用说明：</h5>
             <ul>
-                <li>点击右侧的主题选择器面板</li>
+                <li>点击下方按钮打开主题选择器</li>
                 <li>选择一个主题，界面会立即更新</li>
                 <li>刷新页面后，会保持上次选择的主题</li>
             </ul>
             
-            <div class="theme-preview">
-                <h5>主题预览：</h5>
-                <div class="theme-preview-cards">
-                    <div class="theme-preview-card">
-                        <h6>默认主题</h6>
-                        <div class="theme-color-preview">
-                            <div class="color-box" style="background-color: #165DFF;"></div>
-                            <div class="color-box" style="background-color: #F5F7FA;"></div>
-                            <div class="color-box" style="background-color: #E4E7ED;"></div>
-                            <div class="color-box" style="background-color: #303133;"></div>
-                        </div>
-                    </div>
-                    <div class="theme-preview-card">
-                        <h6>深色主题</h6>
-                        <div class="theme-color-preview">
-                            <div class="color-box" style="background-color: #409EFF;"></div>
-                            <div class="color-box" style="background-color: #1E1E1E;"></div>
-                            <div class="color-box" style="background-color: #404040;"></div>
-                            <div class="color-box" style="background-color: #E5E5E5;"></div>
-                        </div>
-                    </div>
-                    <div class="theme-preview-card">
-                        <h6>绿色主题</h6>
-                        <div class="theme-color-preview">
-                            <div class="color-box" style="background-color: #67C23A;"></div>
-                            <div class="color-box" style="background-color: #F0F9EB;"></div>
-                            <div class="color-box" style="background-color: #E1F5C4;"></div>
-                            <div class="color-box" style="background-color: #303133;"></div>
-                        </div>
-                    </div>
-                    <div class="theme-preview-card">
-                        <h6>橙色主题</h6>
-                        <div class="theme-color-preview">
-                            <div class="color-box" style="background-color: #E6A23C;"></div>
-                            <div class="color-box" style="background-color: #FDF6EC;"></div>
-                            <div class="color-box" style="background-color: #FAE7C9;"></div>
-                            <div class="color-box" style="background-color: #303133;"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="theme-selector-buttons">
+                <button class="btn btn-primary" onclick="openThemeSelector({ mode: 'modal' })">弹窗打开主题选择器</button>
+                <button class="btn btn-default" onclick="openThemeSelector({ mode: 'inline', container: '#inlineThemeContainer' })">内联打开主题选择器</button>
+            </div>
+            
+            <div id="inlineThemeContainer" class="inline-theme-container">
+                <!-- 内联主题选择器将在这里显示 -->
             </div>
         </div>
     </div>
 </section>
+
+
 
 <style>
     .theme-selector-container {
@@ -83,36 +52,33 @@
         margin-bottom: var(--size-sm);
     }
     
-    .theme-preview {
-        margin-top: var(--size-lg);
-    }
-    
-    .theme-preview-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: var(--size-md);
-        margin-top: var(--size-md);
-    }
-    
-    .theme-preview-card {
-        padding: var(--size-md);
-        background-color: var(--bg-color);
-        border-radius: var(--radius-md);
-        border: 1px solid var(--border-color);
-        text-align: center;
-    }
-    
-    .theme-color-preview {
+    .theme-selector-buttons {
         display: flex;
-        gap: var(--size-sm);
-        margin-top: var(--size-sm);
-        justify-content: center;
+        gap: var(--size-md);
+        margin: var(--size-md) 0;
     }
     
-    .color-box {
-        width: 30px;
-        height: 30px;
+    .btn {
+        padding: var(--size-sm) var(--size-md);
+        border: none;
         border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: all var(--transition-normal);
+    }
+    
+    .btn-primary {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-default {
+        background: var(--bg-color);
+        color: var(--text-primary);
         border: 1px solid var(--border-color);
+    }
+    
+    .inline-theme-container {
+        margin-top: var(--size-md);
+        min-height: 200px;
     }
 </style>

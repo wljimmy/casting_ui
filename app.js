@@ -411,25 +411,172 @@ function closeImageZoom() {
     }
 }
 
-// 主题管理模块
-class ThemeManager {
+// 弹出机制基类
+class PopupBase {
     constructor() {
+        this.init();
+    }
+
+    init() {
+        // 初始化基础设置
+    }
+
+    // 打开组件
+    open(options = {}) {
+        const mode = options.mode || (options.container ? 'inline' : 'modal');
+        const container = options.container;
+
+        if (mode === 'modal') {
+            return this.openModal(options);
+        } else if (mode === 'inline' && container) {
+            return this.openInline(options);
+        }
+
+        return Promise.reject('Invalid mode or container');
+    }
+
+    // 弹窗模式
+    openModal(options = {}) {
+        return new Promise((resolve, reject) => {
+            try {
+                const overlay = showOverlay({
+                    id: this.getOverlayId(),
+                    type: 'transparent',
+                    zIndex: 1000
+                });
+
+                const container = this.createContainer({ ...options, resolve, reject, overlay });
+                overlay.appendChild(container);
+
+                // 显示遮罩
+                setTimeout(() => {
+                    overlay.classList.add('show');
+                }, 10);
+
+                // 处理点击遮罩关闭
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('show');
+                        setTimeout(() => {
+                            hideOverlay(this.getOverlayId());
+                            reject(this.getCloseReason());
+                        }, 300);
+                    }
+                });
+
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    // 内联模式
+    openInline(options = {}) {
+        const { container, ...restOptions } = options;
+
+        return new Promise((resolve, reject) => {
+            try {
+                // 检查是否已存在内联组件
+                let existingComponent = container.querySelector(this.getInlineSelector());
+                if (existingComponent) {
+                    // 切换显示/隐藏
+                    existingComponent.style.display = existingComponent.style.display === 'none' ? 'block' : 'none';
+                    return Promise.reject(this.getToggleReason());
+                }
+
+                // 创建组件容器
+                const componentContainer = this.createContainer({ ...restOptions, resolve, reject });
+                componentContainer.className = this.getInlineClassName();
+                componentContainer.style.cssText = this.getInlineStyle();
+
+                // 移除固定定位相关样式
+                const header = componentContainer.querySelector(this.getHeaderSelector());
+                if (header) {
+                    this.adjustInlineHeader(header);
+                }
+
+                container.appendChild(componentContainer);
+
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+    // 模板方法，子类需要实现
+    getOverlayId() {
+        return 'popup-overlay';
+    }
+
+    getInlineSelector() {
+        return '.popup-inline';
+    }
+
+    getInlineClassName() {
+        return 'popup-inline';
+    }
+
+    getInlineStyle() {
+        return `
+            position: relative;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--size-md);
+            box-shadow: var(--shadow-md);
+            margin-top: var(--size-sm);
+            z-index: 1000;
+            width: 100%;
+            min-width: 400px;
+            max-width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+        `;
+    }
+
+    getHeaderSelector() {
+        return '.popup-header';
+    }
+
+    adjustInlineHeader(header) {
+        header.style.position = 'relative';
+        header.style.top = '0';
+        header.style.left = '0';
+        header.style.right = '0';
+    }
+
+    getCloseReason() {
+        return 'Popup closed';
+    }
+
+    getToggleReason() {
+        return 'Popup toggled';
+    }
+
+    // 子类需要实现的方法
+    createContainer(options) {
+        throw new Error('Subclass must implement createContainer method');
+    }
+}
+
+// 主题管理模块
+class ThemeManager extends PopupBase {
+    constructor() {
+        super();
         this.themes = [];
         this.currentTheme = null;
-        this.init();
     }
 
     async init() {
         try {
-            // 加载主题配置
-            const response = await fetch('themes.json');
+            // 加载主题配置（使用绝对路径）
+            const response = await fetch('/themes.json');
             const data = await response.json();
             this.themes = data.themes;
             this.currentTheme = this.themes[0]; // 默认使用第一个主题
             this.applyTheme(this.currentTheme);
-            this.createThemeSelector();
         } catch (error) {
-            console.error('加载主题配置失败:', error);
+            debug('加载主题配置失败', null, { error: error.message });
         }
     }
 
@@ -448,71 +595,583 @@ class ThemeManager {
         localStorage.setItem('currentTheme', theme.name);
     }
 
-    createThemeSelector() {
-        // 创建主题选择器容器
-        const selectorContainer = document.createElement('div');
-        selectorContainer.className = 'theme-selector';
-        selectorContainer.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
+    // 打开主题选择器
+    openThemeSelector(options = {}) {
+        return this.open(options);
+    }
+
+    // 模板方法实现
+    getOverlayId() {
+        return 'theme-selector-overlay';
+    }
+
+    getInlineSelector() {
+        return '.theme-selector-inline';
+    }
+
+    getInlineClassName() {
+        return 'theme-selector-inline';
+    }
+
+    getHeaderSelector() {
+        return '.theme-selector-header';
+    }
+
+    getCloseReason() {
+        return 'Theme selector closed';
+    }
+
+    getToggleReason() {
+        return 'Theme selector toggled';
+    }
+
+    // 创建主题选择器容器
+    createContainer(options = {}) {
+        const { resolve, reject, overlay } = options;
+
+        const container = document.createElement('div');
+        container.className = 'theme-selector-container';
+        container.style.cssText = `
+            width: 90vw;
+            max-width: 800px;
+            max-height: 80vh;
             background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: var(--size-md);
-            box-shadow: var(--shadow-md);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         `;
 
-        // 创建标题
-        const title = document.createElement('h4');
-        title.textContent = '主题选择';
+        // 创建头部
+        const header = document.createElement('div');
+        header.className = 'theme-selector-header';
+        header.style.cssText = `
+            padding: var(--size-lg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            z-index: 10;
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = '主题管理';
         title.style.cssText = `
-            margin: 0 0 var(--size-md) 0;
-            font-size: 16px;
+            margin: 0;
             color: var(--text-primary);
         `;
-        selectorContainer.appendChild(title);
 
-        // 创建主题选择列表
+        const closeButton = document.createElement('button');
+        closeButton.className = 'theme-selector-close';
+        closeButton.textContent = '×';
+        closeButton.style.cssText = `
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-normal);
+        `;
+
+        closeButton.addEventListener('mouseenter', () => {
+            closeButton.style.backgroundColor = 'var(--gray-100)';
+            closeButton.style.color = 'var(--text-primary)';
+        });
+
+        closeButton.addEventListener('mouseleave', () => {
+            closeButton.style.backgroundColor = 'transparent';
+            closeButton.style.color = 'var(--text-light)';
+        });
+
+        closeButton.addEventListener('click', () => {
+            if (overlay) {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    hideOverlay('theme-selector-overlay');
+                    if (reject) reject('Theme selector closed');
+                }, 300);
+            } else {
+                const inlineSelector = closeButton.closest('.theme-selector-inline');
+                if (inlineSelector) {
+                    inlineSelector.style.display = 'none';
+                    if (reject) reject('Theme selector closed');
+                }
+            }
+        });
+
+        header.appendChild(title);
+        header.appendChild(closeButton);
+        container.appendChild(header);
+
+        // 创建内容区域
+        const content = document.createElement('div');
+        content.className = 'theme-selector-content';
+        content.style.cssText = `
+            padding: var(--size-lg);
+            overflow-y: auto;
+            flex: 1;
+        `;
+
+        // 创建主题管理区域
+        const themeManagement = document.createElement('div');
+        themeManagement.className = 'theme-management';
+        themeManagement.style.cssText = `
+            margin-bottom: var(--size-xl);
+        `;
+
+        const managementTitle = document.createElement('h4');
+        managementTitle.textContent = '主题管理';
+        managementTitle.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            color: var(--text-primary);
+        `;
+
+        const managementButtons = document.createElement('div');
+        managementButtons.className = 'management-buttons';
+        managementButtons.style.cssText = `
+            display: flex;
+            gap: var(--size-md);
+            margin-bottom: var(--size-md);
+        `;
+
+        const addButton = document.createElement('button');
+        addButton.className = 'btn btn-primary';
+        addButton.textContent = '添加主题';
+        addButton.style.cssText = `
+            padding: var(--size-sm) var(--size-md);
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        `;
+
+        const importButton = document.createElement('button');
+        importButton.className = 'btn btn-default';
+        importButton.textContent = '导入主题';
+        importButton.style.cssText = `
+            padding: var(--size-sm) var(--size-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        `;
+
+        const exportButton = document.createElement('button');
+        exportButton.className = 'btn btn-default';
+        exportButton.textContent = '导出主题';
+        exportButton.style.cssText = `
+            padding: var(--size-sm) var(--size-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        `;
+
+        managementButtons.appendChild(addButton);
+        managementButtons.appendChild(importButton);
+        managementButtons.appendChild(exportButton);
+        themeManagement.appendChild(managementTitle);
+        themeManagement.appendChild(managementButtons);
+
+        // 创建主题列表
+        const themeListSection = document.createElement('div');
+        themeListSection.className = 'theme-list-section';
+        themeListSection.style.cssText = `
+            margin-bottom: var(--size-xl);
+        `;
+
+        const themeListTitle = document.createElement('h4');
+        themeListTitle.textContent = '主题列表';
+        themeListTitle.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            color: var(--text-primary);
+        `;
+
         const themeList = document.createElement('div');
         themeList.className = 'theme-list';
         themeList.style.cssText = `
-            display: flex;
-            flex-direction: column;
-            gap: var(--size-sm);
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--size-md);
         `;
 
         // 添加主题选项
-        this.themes.forEach(theme => {
-            const themeOption = document.createElement('button');
-            themeOption.className = 'theme-option';
-            themeOption.textContent = theme.name;
-            themeOption.style.cssText = `
-                padding: var(--size-sm) var(--size-md);
+        if (this.themes && this.themes.length > 0) {
+            this.themes.forEach(theme => {
+                const themeCard = document.createElement('div');
+                themeCard.className = 'theme-card';
+                themeCard.style.cssText = `
+                    padding: var(--size-md);
+                    border: 2px solid ${theme.name === this.currentTheme?.name ? 'var(--primary-color)' : 'var(--border-color)'};
+                    border-radius: var(--radius-md);
+                    background: var(--bg-color);
+                    cursor: pointer;
+                    transition: all var(--transition-normal);
+                    position: relative;
+                `;
+
+                themeCard.addEventListener('mouseenter', () => {
+                    themeCard.style.boxShadow = 'var(--shadow-md)';
+                });
+
+                themeCard.addEventListener('mouseleave', () => {
+                    themeCard.style.boxShadow = 'none';
+                });
+
+                themeCard.addEventListener('click', () => {
+                    this.applyTheme(theme);
+                    // 更新所有主题卡片的样式
+                    document.querySelectorAll('.theme-card').forEach(card => {
+                        const cardName = card.querySelector('.theme-card-name').textContent;
+                        card.style.borderColor = cardName === theme.name ? 'var(--primary-color)' : 'var(--border-color)';
+                    });
+                });
+
+                const themeName = document.createElement('div');
+                themeName.className = 'theme-card-name';
+                themeName.textContent = theme.name;
+                themeName.style.cssText = `
+                    font-weight: 600;
+                    margin-bottom: var(--size-sm);
+                    color: var(--text-primary);
+                `;
+
+                const colorPreview = document.createElement('div');
+                colorPreview.className = 'color-preview';
+                colorPreview.style.cssText = `
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: var(--size-xs);
+                    margin-bottom: var(--size-sm);
+                `;
+
+                // 添加颜色块
+                const colors = [
+                    theme.colors['primary-color'],
+                    theme.colors['bg-color'],
+                    theme.colors['gray-100'],
+                    theme.colors['text-primary']
+                ];
+
+                colors.forEach(color => {
+                    const colorBox = document.createElement('div');
+                    colorBox.className = 'color-box';
+                    colorBox.style.cssText = `
+                        width: 100%;
+                        aspect-ratio: 1;
+                        border-radius: var(--radius-sm);
+                        background-color: ${color};
+                        border: 1px solid var(--border-color);
+                    `;
+                    colorPreview.appendChild(colorBox);
+                });
+
+                const actionButtons = document.createElement('div');
+                actionButtons.className = 'theme-card-actions';
+                actionButtons.style.cssText = `
+                    display: flex;
+                    gap: var(--size-xs);
+                    margin-top: var(--size-sm);
+                `;
+
+                const editButton = document.createElement('button');
+                editButton.className = 'btn btn-sm btn-default';
+                editButton.textContent = '编辑';
+                editButton.style.cssText = `
+                    padding: 4px 8px;
+                    border: 1px solid var(--border-color);
+                    border-radius: var(--radius-sm);
+                    background: var(--bg-color);
+                    color: var(--text-primary);
+                    cursor: pointer;
+                    font-size: 12px;
+                    flex: 1;
+                `;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'btn btn-sm btn-error';
+                deleteButton.textContent = '删除';
+                deleteButton.style.cssText = `
+                    padding: 4px 8px;
+                    border: 1px solid var(--error-color);
+                    border-radius: var(--radius-sm);
+                    background: var(--bg-color);
+                    color: var(--error-color);
+                    cursor: pointer;
+                    font-size: 12px;
+                    flex: 1;
+                `;
+
+                actionButtons.appendChild(editButton);
+                actionButtons.appendChild(deleteButton);
+                themeCard.appendChild(themeName);
+                themeCard.appendChild(colorPreview);
+                themeCard.appendChild(actionButtons);
+                themeList.appendChild(themeCard);
+            });
+        } else {
+            // 显示加载中提示
+            const loadingMessage = document.createElement('div');
+            loadingMessage.textContent = '主题加载中...';
+            loadingMessage.style.cssText = `
+                text-align: center;
+                padding: var(--size-lg);
+                color: var(--text-secondary);
+            `;
+            themeList.appendChild(loadingMessage);
+        }
+
+        themeListSection.appendChild(themeListTitle);
+        themeListSection.appendChild(themeList);
+
+        // 创建示例组件区域
+        const exampleSection = document.createElement('div');
+        exampleSection.className = 'example-section';
+
+        const exampleTitle = document.createElement('h4');
+        exampleTitle.textContent = '示例组件';
+        exampleTitle.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            color: var(--text-primary);
+        `;
+
+        const exampleComponent = document.createElement('div');
+        exampleComponent.className = 'example-component';
+        exampleComponent.style.cssText = `
+            padding: var(--size-lg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-color);
+        `;
+
+        // 示例组件HTML
+        exampleComponent.innerHTML = `
+            <div class="component-demo">
+                <div class="main-content">
+                    <h1 class="magazine-title">Modern Magazine Layout</h1>
+                    <h2 class="magazine-subtitle">现代杂志风设计 · 配色方案预览</h2>
+                    <p class="magazine-paragraph">
+                        这是一套为现代杂志设计的配色方案，兼顾视觉高级感与阅读舒适度。主色调采用低饱和的高级色系，中性灰层次分明，功能色克制且醒目，完美适配图文混排的杂志排版需求。
+                    </p>
+                    <img src="https://picsum.photos/800/400?1" class="magazine-img">
+                    <p class="magazine-paragraph">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <p class="magazine-paragraph">
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 杂志排版的核心是色彩层次与阅读节奏，这套配色方案通过主色、中性色的精准搭配，营造出既时尚又不失温度的视觉体验。
+                    </p>
+                </div>
+
+                <div class="sidebar">
+                    <div class="btn-group">
+                        <div class="btn-title">按钮组件</div>
+                        <button class="btn btn-primary">主色调按钮</button>
+                        <button class="btn btn-default">默认按钮</button>
+                    </div>
+                    <div class="tag-group">
+                        <div class="btn-title">功能色标签</div>
+                        <span class="tag tag-success">成功</span>
+                        <span class="tag tag-warning">警告</span>
+                        <span class="tag tag-error">错误</span>
+                        <span class="tag tag-info">信息</span>
+                    </div>
+                    <div class="text-group">
+                        <div class="btn-title">文本色层次</div>
+                        <div class="text-item text-primary">主要文本色</div>
+                        <div class="text-item text-secondary">次要文本色</div>
+                        <div class="text-item text-light">辅助文本色</div>
+                        <div class="text-item text-disabled">禁用文本色</div>
+                    </div>
+                    <div class="bg-group">
+                        <div class="btn-title">背景色示例</div>
+                        <div class="bg-item bg-primary">主色背景</div>
+                        <div class="bg-item bg-gray">灰色背景</div>
+                        <div class="bg-item bg-white">白色背景</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 添加示例组件样式
+        const exampleStyle = document.createElement('style');
+        exampleStyle.textContent = `
+            .component-demo {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: var(--size-lg);
+            }
+
+            .main-content h1 {
+                color: var(--primary-color);
+                margin-bottom: var(--size-md);
+            }
+
+            .main-content h2 {
+                color: var(--text-primary);
+                margin-bottom: var(--size-md);
+            }
+
+            .main-content p {
+                color: var(--text-secondary);
+                margin-bottom: var(--size-md);
+                line-height: 1.6;
+            }
+
+            .magazine-img {
+                width: 100%;
+                border-radius: var(--radius-md);
+                margin: var(--size-md) 0;
+            }
+
+            .sidebar {
+                display: flex;
+                flex-direction: column;
+                gap: var(--size-md);
+            }
+
+            .btn-group, .tag-group, .text-group, .bg-group {
+                padding: var(--size-md);
                 border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                background: var(--bg-color);
+            }
+
+            .btn-title {
+                font-weight: 600;
+                margin-bottom: var(--size-sm);
+                color: var(--text-primary);
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                padding: var(--size-sm);
+                margin-bottom: var(--size-xs);
+                border: none;
                 border-radius: var(--radius-sm);
-                background: ${theme.name === this.currentTheme?.name ? 'var(--primary-color)' : 'var(--bg-color)'};
-                color: ${theme.name === this.currentTheme?.name ? 'white' : 'var(--text-primary)'};
                 cursor: pointer;
                 transition: all var(--transition-normal);
-                text-align: left;
-            `;
+            }
 
-            themeOption.addEventListener('click', () => {
-                this.applyTheme(theme);
-                // 更新所有主题选项的样式
-                document.querySelectorAll('.theme-option').forEach(option => {
-                    option.style.background = option.textContent === theme.name ? 'var(--primary-color)' : 'var(--bg-color)';
-                    option.style.color = option.textContent === theme.name ? 'white' : 'var(--text-primary)';
-                });
-            });
+            .btn-primary {
+                background: var(--primary-color);
+                color: white;
+            }
 
-            themeList.appendChild(themeOption);
-        });
+            .btn-default {
+                background: var(--bg-color);
+                color: var(--text-primary);
+                border: 1px solid var(--border-color);
+            }
 
-        selectorContainer.appendChild(themeList);
-        document.body.appendChild(selectorContainer);
+            .tag {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 16px;
+                font-size: 12px;
+                margin-right: var(--size-xs);
+                margin-bottom: var(--size-xs);
+            }
+
+            .tag-success {
+                background: var(--success-color);
+                color: white;
+            }
+
+            .tag-warning {
+                background: var(--warning-color);
+                color: white;
+            }
+
+            .tag-error {
+                background: var(--error-color);
+                color: white;
+            }
+
+            .tag-info {
+                background: var(--info-color);
+                color: white;
+            }
+
+            .text-item {
+                margin-bottom: var(--size-xs);
+            }
+
+            .text-primary {
+                color: var(--text-primary);
+            }
+
+            .text-secondary {
+                color: var(--text-secondary);
+            }
+
+            .text-light {
+                color: var(--text-light);
+            }
+
+            .text-disabled {
+                color: var(--text-disabled);
+            }
+
+            .bg-item {
+                padding: var(--size-sm);
+                border-radius: var(--radius-sm);
+                margin-bottom: var(--size-xs);
+                color: white;
+                text-align: center;
+            }
+
+            .bg-primary {
+                background: var(--primary-color);
+            }
+
+            .bg-gray {
+                background: var(--gray-100);
+                color: var(--text-primary);
+            }
+
+            .bg-white {
+                background: var(--bg-color);
+                color: var(--text-primary);
+                border: 1px solid var(--border-color);
+            }
+
+            @media (max-width: 768px) {
+                .component-demo {
+                    grid-template-columns: 1fr;
+                }
+            }
+        `;
+
+        exampleSection.appendChild(exampleTitle);
+        exampleSection.appendChild(exampleComponent);
+        exampleSection.appendChild(exampleStyle);
+
+        content.appendChild(themeManagement);
+        content.appendChild(themeListSection);
+        content.appendChild(exampleSection);
+        container.appendChild(content);
+
+        return container;
     }
 
     getCurrentTheme() {
@@ -627,10 +1286,658 @@ class UI {
     getThemeManager() {
         return this.themeManager;
     }
+
+    // 颜色选择器相关
+    getColorPicker() {
+        if (!this.colorPicker) {
+            this.colorPicker = new ColorPicker();
+        }
+        return this.colorPicker;
+    }
+}
+
+// 颜色选择器类
+class ColorPicker extends PopupBase {
+    constructor() {
+        super();
+    }
+
+    init() {
+        // 初始化颜色选择器
+    }
+
+    // 打开颜色选择器
+    open(options = {}) {
+        const presetColors = options.presetColors || [
+            '#165DFF', '#67C23A', '#E6A23C', '#F56C6C', '#909399',
+            '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF',
+            '#FFFF00', '#FF00FF', '#00FFFF', '#808080', '#800000'
+        ];
+        const format = options.format || 'hex'; // hex, rgb, rgba
+
+        return super.open({ ...options, presetColors, format });
+    }
+
+    // 模板方法实现
+    getOverlayId() {
+        return 'color-picker-overlay';
+    }
+
+    getInlineSelector() {
+        return '.color-picker-inline';
+    }
+
+    getInlineClassName() {
+        return 'color-picker-inline';
+    }
+
+    getHeaderSelector() {
+        return '.color-picker-header';
+    }
+
+    getCloseReason() {
+        return 'Color picker closed';
+    }
+
+    getToggleReason() {
+        return 'Color picker toggled';
+    }
+
+    // 创建颜色选择器容器
+    createContainer(options = {}) {
+        const { presetColors, format, resolve, reject, overlay } = options;
+
+        const container = document.createElement('div');
+        container.className = 'color-picker-container';
+        container.style.cssText = `
+            width: 90vw;
+            max-width: 500px;
+            max-height: 70vh;
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        `;
+
+        // 创建头部
+        const header = document.createElement('div');
+        header.className = 'color-picker-header';
+        header.style.cssText = `
+            padding: var(--size-lg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            z-index: 10;
+        `;
+
+        const title = document.createElement('h3');
+        title.textContent = '颜色选择器';
+        title.style.cssText = `
+            margin: 0;
+            color: var(--text-primary);
+        `;
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'color-picker-close';
+        closeButton.textContent = '×';
+        closeButton.style.cssText = `
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-normal);
+        `;
+
+        closeButton.addEventListener('mouseenter', () => {
+            closeButton.style.backgroundColor = 'var(--gray-100)';
+            closeButton.style.color = 'var(--text-primary)';
+        });
+
+        closeButton.addEventListener('mouseleave', () => {
+            closeButton.style.backgroundColor = 'transparent';
+            closeButton.style.color = 'var(--text-light)';
+        });
+
+        closeButton.addEventListener('click', () => {
+            if (overlay) {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    hideOverlay('color-picker-overlay');
+                    reject('Color picker closed');
+                }, 300);
+            } else {
+                const inlinePicker = closeButton.closest('.color-picker-inline');
+                if (inlinePicker) {
+                    inlinePicker.style.display = 'none';
+                    reject('Color picker closed');
+                }
+            }
+        });
+
+        header.appendChild(title);
+        header.appendChild(closeButton);
+        container.appendChild(header);
+
+        // 创建内容区域
+        const content = document.createElement('div');
+        content.className = 'color-picker-content';
+        content.style.cssText = `
+            padding: var(--size-lg);
+            overflow-y: auto;
+            flex: 1;
+        `;
+
+        // 创建颜色预览
+        const colorPreview = document.createElement('div');
+        colorPreview.className = 'color-preview-section';
+        colorPreview.style.cssText = `
+            margin-bottom: var(--size-lg);
+        `;
+
+        const previewTitle = document.createElement('h4');
+        previewTitle.textContent = '颜色预览';
+        previewTitle.style.cssText = `
+            margin: 0 0 var(--size-sm) 0;
+            color: var(--text-primary);
+            font-size: 14px;
+        `;
+
+        const previewContainer = document.createElement('div');
+        previewContainer.className = 'preview-container';
+        previewContainer.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: var(--size-sm);
+        `;
+
+        const colorDisplay = document.createElement('div');
+        colorDisplay.className = 'color-display';
+        colorDisplay.style.cssText = `
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: #165DFF;
+        `;
+
+        const colorInfo = document.createElement('div');
+        colorInfo.className = 'color-info';
+        colorInfo.style.cssText = `
+            flex: 1;
+        `;
+
+        const colorValue = document.createElement('div');
+        colorValue.className = 'color-value';
+        colorValue.style.cssText = `
+            font-family: monospace;
+            padding: var(--size-xs);
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--size-xs);
+            font-size: 12px;
+        `;
+        colorValue.textContent = '#165DFF';
+
+        const formatSelector = document.createElement('div');
+        formatSelector.className = 'format-selector';
+        formatSelector.style.cssText = `
+            display: flex;
+            gap: var(--size-xs);
+        `;
+
+        const formatOptions = ['hex', 'rgb', 'rgba'];
+        formatOptions.forEach(fmt => {
+            const formatOption = document.createElement('button');
+            formatOption.className = `format-option ${fmt === format ? 'active' : ''}`;
+            formatOption.textContent = fmt.toUpperCase();
+            formatOption.style.cssText = `
+                padding: 2px 8px;
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-sm);
+                background: ${fmt === format ? 'var(--primary-color)' : 'var(--bg-color)'};
+                color: ${fmt === format ? 'white' : 'var(--text-primary)'};
+                cursor: pointer;
+                font-size: 10px;
+            `;
+
+            formatOption.addEventListener('click', () => {
+                // 更新激活状态
+                document.querySelectorAll('.format-option').forEach(opt => {
+                    opt.style.background = 'var(--bg-color)';
+                    opt.style.color = 'var(--text-primary)';
+                });
+                formatOption.style.background = 'var(--primary-color)';
+                formatOption.style.color = 'white';
+
+                // 更新格式并重新显示颜色值
+                const currentColor = colorDisplay.style.backgroundColor;
+                const newFormat = fmt;
+                const formattedColor = this.formatColor(currentColor, newFormat);
+                colorValue.textContent = formattedColor;
+            });
+
+            formatSelector.appendChild(formatOption);
+        });
+
+        colorInfo.appendChild(colorValue);
+        colorInfo.appendChild(formatSelector);
+        previewContainer.appendChild(colorDisplay);
+        previewContainer.appendChild(colorInfo);
+        colorPreview.appendChild(previewTitle);
+        colorPreview.appendChild(previewContainer);
+
+        // 创建预设颜色
+        const presetColorsSection = document.createElement('div');
+        presetColorsSection.className = 'preset-colors-section';
+        presetColorsSection.style.cssText = `
+            margin-bottom: var(--size-lg);
+        `;
+
+        const presetTitle = document.createElement('h4');
+        presetTitle.textContent = '预设颜色';
+        presetTitle.style.cssText = `
+            margin: 0 0 var(--size-sm) 0;
+            color: var(--text-primary);
+            font-size: 14px;
+        `;
+
+        const presetGrid = document.createElement('div');
+        presetGrid.className = 'preset-grid';
+        presetGrid.style.cssText = `
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+            gap: var(--size-xs);
+        `;
+
+        presetColors.forEach(color => {
+            const colorBox = document.createElement('div');
+            colorBox.className = 'color-box';
+            colorBox.style.cssText = `
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: var(--radius-sm);
+                background-color: ${color};
+                border: 1px solid transparent;
+                cursor: pointer;
+                transition: all var(--transition-normal);
+            `;
+
+            colorBox.addEventListener('mouseenter', () => {
+                colorBox.style.transform = 'scale(1.1)';
+                colorBox.style.boxShadow = 'var(--shadow-md)';
+            });
+
+            colorBox.addEventListener('mouseleave', () => {
+                colorBox.style.transform = 'scale(1)';
+                colorBox.style.boxShadow = 'none';
+            });
+
+            colorBox.addEventListener('click', () => {
+                colorDisplay.style.backgroundColor = color;
+                const formattedColor = this.formatColor(color, format);
+                colorValue.textContent = formattedColor;
+            });
+
+            presetGrid.appendChild(colorBox);
+        });
+
+        presetColorsSection.appendChild(presetTitle);
+        presetColorsSection.appendChild(presetGrid);
+
+        // 创建标准色盘
+        const colorWheelSection = document.createElement('div');
+        colorWheelSection.className = 'color-wheel-section';
+        colorWheelSection.style.cssText = `
+            margin-bottom: var(--size-xl);
+        `;
+
+        const wheelTitle = document.createElement('h4');
+        wheelTitle.textContent = '标准色盘';
+        wheelTitle.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            color: var(--text-primary);
+        `;
+
+        const colorWheel = document.createElement('div');
+        colorWheel.className = 'color-wheel';
+        colorWheel.style.cssText = `
+            width: 100%;
+            height: 200px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(to right, red, yellow, lime, aqua, blue, magenta, red);
+            position: relative;
+            cursor: crosshair;
+            margin-bottom: var(--size-md);
+        `;
+
+        // 添加亮度滑块
+        const brightnessSlider = document.createElement('input');
+        brightnessSlider.type = 'range';
+        brightnessSlider.min = '0';
+        brightnessSlider.max = '100';
+        brightnessSlider.value = '100';
+        brightnessSlider.className = 'brightness-slider';
+        brightnessSlider.style.cssText = `
+            width: 100%;
+            height: 6px;
+            border-radius: var(--radius-full);
+            background: linear-gradient(to right, black, white);
+            outline: none;
+            -webkit-appearance: none;
+        `;
+
+        brightnessSlider.addEventListener('input', () => {
+            const brightness = brightnessSlider.value;
+            colorWheel.style.filter = `brightness(${brightness}%)`;
+        });
+
+        colorWheel.addEventListener('click', (e) => {
+            const rect = colorWheel.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // 创建临时 canvas 来获取点击位置的颜色
+            const canvas = document.createElement('canvas');
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            const ctx = canvas.getContext('2d');
+            
+            // 绘制渐变
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, 'red');
+            gradient.addColorStop(1/6, 'yellow');
+            gradient.addColorStop(2/6, 'lime');
+            gradient.addColorStop(3/6, 'aqua');
+            gradient.addColorStop(4/6, 'blue');
+            gradient.addColorStop(5/6, 'magenta');
+            gradient.addColorStop(1, 'red');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 获取点击位置的颜色
+            const imageData = ctx.getImageData(x, y, 1, 1);
+            const [r, g, b] = imageData.data;
+            const color = `rgb(${r}, ${g}, ${b})`;
+            
+            colorDisplay.style.backgroundColor = color;
+            const formattedColor = this.formatColor(color, format);
+            colorValue.textContent = formattedColor;
+        });
+
+        colorWheelSection.appendChild(wheelTitle);
+        colorWheelSection.appendChild(colorWheel);
+        colorWheelSection.appendChild(brightnessSlider);
+
+        // 创建颜色输入
+        const colorInputSection = document.createElement('div');
+        colorInputSection.className = 'color-input-section';
+        colorInputSection.style.cssText = `
+            margin-bottom: var(--size-xl);
+        `;
+
+        const inputTitle = document.createElement('h4');
+        inputTitle.textContent = '手动输入';
+        inputTitle.style.cssText = `
+            margin: 0 0 var(--size-md) 0;
+            color: var(--text-primary);
+        `;
+
+        const inputContainer = document.createElement('div');
+        inputContainer.className = 'input-container';
+        inputContainer.style.cssText = `
+            display: flex;
+            gap: var(--size-sm);
+        `;
+
+        const colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.className = 'color-input';
+        colorInput.style.cssText = `
+            width: 50px;
+            height: 32px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        `;
+
+        colorInput.addEventListener('change', () => {
+            const color = colorInput.value;
+            colorDisplay.style.backgroundColor = color;
+            const formattedColor = this.formatColor(color, format);
+            colorValue.textContent = formattedColor;
+        });
+
+        const textInput = document.createElement('input');
+        textInput.type = 'text';
+        textInput.className = 'text-input';
+        textInput.style.cssText = `
+            flex: 1;
+            padding: var(--size-xs) var(--size-sm);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            font-size: 12px;
+        `;
+        textInput.value = '#165DFF';
+
+        textInput.addEventListener('input', () => {
+            const color = textInput.value;
+            try {
+                colorDisplay.style.backgroundColor = color;
+            } catch (e) {
+                // 忽略无效颜色
+            }
+        });
+
+        inputContainer.appendChild(colorInput);
+        inputContainer.appendChild(textInput);
+        colorInputSection.appendChild(inputTitle);
+        colorInputSection.appendChild(inputContainer);
+
+        // 创建按钮区域
+        const buttonSection = document.createElement('div');
+        buttonSection.className = 'button-section';
+        buttonSection.style.cssText = `
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--size-sm);
+            padding-top: var(--size-sm);
+            border-top: 1px solid var(--border-color);
+        `;
+
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'btn btn-default';
+        cancelButton.textContent = '取消';
+        cancelButton.style.cssText = `
+            padding: var(--size-xs) var(--size-sm);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            font-size: 12px;
+        `;
+
+        cancelButton.addEventListener('click', () => {
+            if (overlay) {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    hideOverlay('color-picker-overlay');
+                    reject('Color picker cancelled');
+                }, 300);
+            } else {
+                const inlinePicker = cancelButton.closest('.color-picker-inline');
+                if (inlinePicker) {
+                    inlinePicker.style.display = 'none';
+                    reject('Color picker cancelled');
+                }
+            }
+        });
+
+        const confirmButton = document.createElement('button');
+        confirmButton.className = 'btn btn-primary';
+        confirmButton.textContent = '确认';
+        confirmButton.style.cssText = `
+            padding: var(--size-xs) var(--size-sm);
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            font-size: 12px;
+        `;
+
+        confirmButton.addEventListener('click', () => {
+            const color = colorDisplay.style.backgroundColor;
+            const formattedColor = this.formatColor(color, format);
+            
+            if (overlay) {
+                overlay.classList.remove('show');
+                setTimeout(() => {
+                    hideOverlay('color-picker-overlay');
+                    resolve(formattedColor);
+                }, 300);
+            } else {
+                const inlinePicker = confirmButton.closest('.color-picker-inline');
+                if (inlinePicker) {
+                    inlinePicker.style.display = 'none';
+                    resolve(formattedColor);
+                }
+            }
+        });
+
+        buttonSection.appendChild(cancelButton);
+        buttonSection.appendChild(confirmButton);
+
+        content.appendChild(colorPreview);
+        content.appendChild(colorWheelSection);
+        content.appendChild(presetColorsSection);
+        content.appendChild(colorInputSection);
+        content.appendChild(buttonSection);
+        container.appendChild(content);
+
+        return container;
+    }
+
+    // 格式化颜色
+    formatColor(color, format) {
+        try {
+            if (format === 'hex') {
+                // 如果是rgb或rgba格式，转换为hex
+                if (color.startsWith('rgb')) {
+                    const rgbMatch = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\s*(,\s*([\d.]+))?\)/);
+                    if (rgbMatch) {
+                        const r = parseInt(rgbMatch[1]);
+                        const g = parseInt(rgbMatch[2]);
+                        const b = parseInt(rgbMatch[3]);
+                        const a = rgbMatch[5] ? parseFloat(rgbMatch[5]) : 1;
+                        
+                        if (a === 1) {
+                            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+                        } else {
+                            return `rgba(${r}, ${g}, ${b}, ${a})`;
+                        }
+                    }
+                }
+                return color.toUpperCase();
+            } else if (format === 'rgb') {
+                // 如果是hex格式，转换为rgb
+                if (color.startsWith('#')) {
+                    const hex = color.replace('#', '');
+                    const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
+                    const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
+                    const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
+                    return `rgb(${r}, ${g}, ${b})`;
+                } else if (color.startsWith('rgba')) {
+                    return color.replace('rgba', 'rgb').replace(/,\s*[\d.]+\)$/, ')');
+                }
+                return color;
+            } else if (format === 'rgba') {
+                // 如果是hex格式，转换为rgba
+                if (color.startsWith('#')) {
+                    const hex = color.replace('#', '');
+                    const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
+                    const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
+                    const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
+                    return `rgba(${r}, ${g}, ${b}, 1)`;
+                } else if (color.startsWith('rgb')) {
+                    return color.replace('rgb', 'rgba').replace(')', ', 1)');
+                }
+                return color;
+            }
+            return color;
+        } catch (error) {
+            return color;
+        }
+    }
+}
+
+// 全局主题选择器函数
+function openThemeSelector(options) {
+    debug('启动主题选择器', null, options);
+    if (window.ui) {
+        debug('UI实例存在，获取ThemeManager', null, { ui: window.ui });
+        const themeManager = window.ui.getThemeManager();
+        // 处理容器选择器
+        if (options.container && typeof options.container === 'string') {
+            debug('处理容器选择器', options.container, { selector: options.container });
+            options.container = document.querySelector(options.container);
+            debug('容器元素', options.container, { container: options.container });
+        }
+        debug('调用ThemeManager.openThemeSelector', themeManager);
+        themeManager.openThemeSelector(options);
+    } else {
+        debug('UI实例不存在，延迟重试', null, { retry: true });
+        // 如果UI实例还未创建，延迟重试
+        setTimeout(() => openThemeSelector(options), 100);
+    }
+}
+
+// 颜色选择器函数
+function openColorPicker(options) {
+    debug('启动颜色选择器', null, options);
+    if (window.ui) {
+        debug('UI实例存在，调用颜色选择器', null, { ui: window.ui });
+        const colorPicker = window.ui.getColorPicker();
+        // 处理容器选择器
+        if (options.container && typeof options.container === 'string') {
+            debug('处理容器选择器', options.container, { selector: options.container });
+            options.container = document.querySelector(options.container);
+            debug('容器元素', options.container, { container: options.container });
+        }
+        debug('调用ColorPicker.open', colorPicker);
+        return colorPicker.open(options);
+    } else {
+        debug('UI实例不存在，延迟重试', null, { retry: true });
+        // 如果UI实例还未创建，延迟重试
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                openColorPicker(options).then(resolve);
+            }, 100);
+        });
+    }
 }
 
 // 在DOM加载完成后初始化UI
 document.addEventListener('DOMContentLoaded', function() {
     debug('DOM加载完成，初始化UI');
-    const ui = new UI();
+    window.ui = new UI();
 });

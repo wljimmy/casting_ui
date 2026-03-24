@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色选择器测试</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--gray-100);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--primary-color);
+        }
+        .color-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color);
+            margin: 10px 0;
+        }
+        .inline-container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>颜色选择器测试</h1>
+        
+        <div class="section">
+            <h2>基本功能测试</h2>
+            <p>测试颜色选择器的基本功能，包括弹窗模式和内联模式。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testModalColorPicker()">弹窗打开颜色选择器</button>
+                <button class="btn btn-default" onclick="testInlineColorPicker()">内联打开颜色选择器</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>选择结果：</h3>
+                <div id="colorResult" style="font-family: monospace;"></div>
+                <div id="colorPreview" class="color-preview" style="background-color: #165DFF;"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>自定义预设颜色</h2>
+            <p>测试使用自定义预设颜色的颜色选择器。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testCustomPresetColors()">自定义预设颜色</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>选择结果：</h3>
+                <div id="customColorResult" style="font-family: monospace;"></div>
+                <div id="customColorPreview" class="color-preview" style="background-color: #FF6B6B;"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>不同颜色格式</h2>
+            <p>测试不同颜色格式的输出。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testHexFormat()">HEX格式</button>
+                <button class="btn btn-default" onclick="testRgbFormat()">RGB格式</button>
+                <button class="btn btn-default" onclick="testRgbaFormat()">RGBA格式</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>选择结果：</h3>
+                <div id="formatColorResult" style="font-family: monospace;"></div>
+                <div id="formatColorPreview" class="color-preview" style="background-color: #4ECDC4;"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>内联模式测试</h2>
+            <p>测试内联模式的颜色选择器。</p>
+            
+            <button class="btn btn-default" onclick="testInlineMode()">内联打开颜色选择器</button>
+            
+            <div id="inlineColorContainer" class="inline-container">
+                <!-- 内联颜色选择器将在这里显示 -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../app.js"></script>
+    <script>
+        // 测试弹窗模式颜色选择器
+        function testModalColorPicker() {
+            openColorPicker({
+                mode: 'modal',
+                format: 'hex'
+            })
+            .then(color => {
+                document.getElementById('colorResult').textContent = `选择的颜色: ${color}`;
+                document.getElementById('colorPreview').style.backgroundColor = color;
+                console.log('选择的颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试内联模式颜色选择器
+        function testInlineColorPicker() {
+            openColorPicker({
+                mode: 'inline',
+                container: '#colorPreview',
+                format: 'hex'
+            })
+            .then(color => {
+                document.getElementById('colorResult').textContent = `选择的颜色: ${color}`;
+                document.getElementById('colorPreview').style.backgroundColor = color;
+                console.log('选择的颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试自定义预设颜色
+        function testCustomPresetColors() {
+            const customPresets = [
+                '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+                '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
+            ];
+            
+            openColorPicker({
+                mode: 'modal',
+                presetColors: customPresets,
+                format: 'hex'
+            })
+            .then(color => {
+                document.getElementById('customColorResult').textContent = `选择的颜色: ${color}`;
+                document.getElementById('customColorPreview').style.backgroundColor = color;
+                console.log('选择的颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试HEX格式
+        function testHexFormat() {
+            openColorPicker({
+                mode: 'modal',
+                format: 'hex'
+            })
+            .then(color => {
+                document.getElementById('formatColorResult').textContent = `HEX格式: ${color}`;
+                document.getElementById('formatColorPreview').style.backgroundColor = color;
+                console.log('HEX格式颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试RGB格式
+        function testRgbFormat() {
+            openColorPicker({
+                mode: 'modal',
+                format: 'rgb'
+            })
+            .then(color => {
+                document.getElementById('formatColorResult').textContent = `RGB格式: ${color}`;
+                document.getElementById('formatColorPreview').style.backgroundColor = color;
+                console.log('RGB格式颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试RGBA格式
+        function testRgbaFormat() {
+            openColorPicker({
+                mode: 'modal',
+                format: 'rgba'
+            })
+            .then(color => {
+                document.getElementById('formatColorResult').textContent = `RGBA格式: ${color}`;
+                document.getElementById('formatColorPreview').style.backgroundColor = color;
+                console.log('RGBA格式颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+        
+        // 测试内联模式
+        function testInlineMode() {
+            openColorPicker({
+                mode: 'inline',
+                container: '#inlineColorContainer',
+                format: 'hex'
+            })
+            .then(color => {
+                alert(`选择的颜色: ${color}`);
+                console.log('选择的颜色:', color);
+            })
+            .catch(error => {
+                console.log('颜色选择器已取消:', error);
+            });
+        }
+    </script>
+</body>
+</html>

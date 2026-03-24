@@ -1,0 +1,1477 @@
+现代杂志风配色方案合集+排版规范
+
+本文档包含13套适配现代杂志设计的高级感配色方案（含3套时尚黑色主题），以及完整的杂志风排版规范（字号、行距、分割线等），所有配色均遵循「低饱和、高质感、层次分明」原则，排版规范贴合主流时尚杂志设计，可直接复制到项目中使用，适配纯原生UI框架与思源宋体。
+
+一、配色方案合集（13套）
+
+所有配色均包含「主色系+中性灰+功能色+背景色+边框色+文本色」完整维度，CSS变量格式统一，可直接复制到`:root`中全局生效。
+
+基础款（1-10套，原有经典配色）
+
+方案1：极简高级蓝（基础款）
+
+- 风格特点：极简克制，科技感与高级感兼具，中性灰层次柔和
+
+- 适用场景：科技杂志、财经杂志、高端商业杂志
+
+/* 主色系 */
+--primary-color: #165DFF;
+--primary-hover: #0E48D3;
+--primary-active: #0A36A8;
+
+/* 中性灰 */
+--gray-100: #F8F9FA;
+--gray-200: #E9ECEF;
+--gray-300: #DEE2E6;
+--gray-400: #ADB5BD;
+--gray-500: #6C757D;
+--gray-600: #495057;
+--gray-700: #343A40;
+
+/* 功能色 */
+--success-color: #5CAC49;
+--warning-color: #D89F42;
+--error-color: #E06666;
+--info-color: #868E96;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F8F9FA;
+
+/* 边框色 */
+--border-color: #E9ECEF;
+--border-hover: #DEE2E6;
+
+/* 文本色 */
+--text-primary: #212529;
+--text-secondary: #495057;
+--text-light: #868E96;
+--text-disabled: #ADB5BD;
+
+方案2：莫兰迪粉棕（复古杂志）
+
+- 风格特点：低饱和粉棕调，复古温柔，视觉温润不刺眼
+
+- 适用场景：时尚生活杂志、女性杂志、文艺美学杂志
+
+/* 主色系 */
+--primary-color: #C8A2C8;
+--primary-hover: #B185B1;
+--primary-active: #9A699A;
+
+/* 中性灰 */
+--gray-100: #F9F7F7;
+--gray-200: #F0E9E9;
+--gray-300: #D9CFCF;
+--gray-400: #B3A3A3;
+--gray-500: #8C7E7E;
+--gray-600: #665C5C;
+--gray-700: #403838;
+
+/* 功能色 */
+--success-color: #A8D08D;
+--warning-color: #F4B084;
+--error-color: #E78383;
+--info-color: #A19595;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F9F7F7;
+
+/* 边框色 */
+--border-color: #F0E9E9;
+--border-hover: #D9CFCF;
+
+/* 文本色 */
+--text-primary: #3A3333;
+--text-secondary: #665C5C;
+--text-light: #8C7E7E;
+--text-disabled: #B3A3A3;
+
+方案3：轻奢黑金（高端时尚）
+
+- 风格特点：经典黑金搭配，奢华高级，对比强烈却不张扬
+
+- 适用场景：奢侈品杂志、高端时尚杂志、珠宝腕表杂志
+
+/* 主色系 */
+--primary-color: #D4AF37;
+--primary-hover: #BFA030;
+--primary-active: #A68C29;
+
+/* 中性灰 */
+--gray-100: #F5F5F5;
+--gray-200: #E8E8E8;
+--gray-300: #D1D1D1;
+--gray-400: #A1A1A1;
+--gray-500: #717171;
+--gray-600: #424242;
+--gray-700: #1A1A1A;
+
+/* 功能色 */
+--success-color: #6E8B3D;
+--warning-color: #CD853F;
+--error-color: #8B0000;
+--info-color: #708090;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F5F5F5;
+
+/* 边框色 */
+--border-color: #E8E8E8;
+--border-hover: #D1D1D1;
+
+/* 文本色 */
+--text-primary: #1A1A1A;
+--text-secondary: #424242;
+--text-light: #717171;
+--text-disabled: #A1A1A1;
+
+方案4：清冷薄荷绿（文艺杂志）
+
+- 风格特点：低饱和薄荷绿，清新文艺，自带自然呼吸感
+
+- 适用场景：文学杂志、艺术杂志、自然生活方式杂志
+
+/* 主色系 */
+--primary-color: #98FB98;
+--primary-hover: #87E887;
+--primary-active: #76D776;
+
+/* 中性灰 */
+--gray-100: #F7FFFA;
+--gray-200: #EFF8F2;
+--gray-300: #D6E9DC;
+--gray-400: #A8C9B4;
+--gray-500: #7A9982;
+--gray-600: #4C6950;
+--gray-700: #1E391E;
+
+/* 功能色 */
+--success-color: #6B8E23;
+--warning-color: #DEB887;
+--error-color: #CD5C5C;
+--info-color: #8FBC8F;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F7FFFA;
+
+/* 边框色 */
+--border-color: #EFF8F2;
+--border-hover: #D6E9DC;
+
+/* 文本色 */
+--text-primary: #1E391E;
+--text-secondary: #4C6950;
+--text-light: #7A9982;
+--text-disabled: #A8C9B4;
+
+方案5：焦糖暖棕（复古文艺）
+
+- 风格特点：焦糖暖棕调，复古温暖，自带胶片质感
+
+- 适用场景：旅行杂志、美食杂志、复古文艺杂志
+
+/* 主色系 */
+--primary-color: #CD853F;
+--primary-hover: #B87333;
+--primary-active: #A36228;
+
+/* 中性灰 */
+--gray-100: #FFFBF5;
+--gray-200: #F5EFE0;
+--gray-300: #E0D4B9;
+--gray-400: #BFA882;
+--gray-500: #9F8C5B;
+--gray-600: #7F7034;
+--gray-700: #5F541D;
+
+/* 功能色 */
+--success-color: #8FBC8F;
+--warning-color: #F0E68C;
+--error-color: #DC143C;
+--info-color: #708090;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #FFFBF5;
+
+/* 边框色 */
+--border-color: #F5EFE0;
+--border-hover: #E0D4B9;
+
+/* 文本色 */
+--text-primary: #5F541D;
+--text-secondary: #7F7034;
+--text-light: #9F8C5B;
+--text-disabled: #BFA882;
+
+方案6：静谧紫灰（潮流杂志）
+
+- 风格特点：低饱和紫灰调，潮流小众，兼具个性与高级感
+
+- 适用场景：青年潮流杂志、创意设计杂志、艺术潮流杂志
+
+/* 主色系 */
+--primary-color: #9370DB;
+--primary-hover: #8062C0;
+--primary-active: #6D53A6;
+
+/* 中性灰 */
+--gray-100: #F8F5FF;
+--gray-200: #EEE6FF;
+--gray-300: #D9CCF2;
+--gray-400: #B3A1D9;
+--gray-500: #8C7AA0;
+--gray-600: #665877;
+--gray-700: #403A4E;
+
+/* 功能色 */
+--success-color: #7CCD7C;
+--warning-color: #FFB90F;
+--error-color: #FF6347;
+--info-color: #87CEEB;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F8F5FF;
+
+/* 边框色 */
+--border-color: #EEE6FF;
+--border-hover: #D9CCF2;
+
+/* 文本色 */
+--text-primary: #403A4E;
+--text-secondary: #665877;
+--text-light: #8C7AA0;
+--text-disabled: #B3A1D9;
+
+方案7：海盐蓝白（北欧极简）
+
+- 风格特点：浅海盐蓝调，北欧极简，干净通透有呼吸感
+
+- 适用场景：家居设计杂志、极简风格杂志、生活方式杂志
+
+/* 主色系 */
+--primary-color: #87CEEB;
+--primary-hover: #73B8D6;
+--primary-active: #5FA4C3;
+
+/* 中性灰 */
+--gray-100: #F0F8FF;
+--gray-200: #E0F0FF;
+--gray-300: #C1D9EE;
+--gray-400: #9AB9D1;
+--gray-500: #7399B4;
+--gray-600: #4D7997;
+--gray-700: #26597A;
+
+/* 功能色 */
+--success-color: #90EE90;
+--warning-color: #FFE4B5;
+--error-color: #FFA07A;
+--info-color: #B0C4DE;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F0F8FF;
+
+/* 边框色 */
+--border-color: #E0F0FF;
+--border-hover: #C1D9EE;
+
+/* 文本色 */
+--text-primary: #26597A;
+--text-secondary: #4D7997;
+--text-light: #7399B4;
+--text-disabled: #9AB9D1;
+
+方案8：复古红棕（经典时尚）
+
+- 风格特点：经典红棕调，复古优雅，自带老派时尚感
+
+- 适用场景：经典时尚杂志、复古穿搭杂志、高端服饰杂志
+
+/* 主色系 */
+--primary-color: #8B4513;
+--primary-hover: #783A10;
+--primary-active: #652F0D;
+
+/* 中性灰 */
+--gray-100: #FDF5E6;
+--gray-200: #F5E6CC;
+--gray-300: #E6CC99;
+--gray-400: #CCAA66;
+--gray-500: #99804D;
+--gray-600: #665533;
+--gray-700: #332B1A;
+
+/* 功能色 */
+--success-color: #556B2F;
+--warning-color: #FF8C00;
+--error-color: #B22222;
+--info-color: #708090;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #FDF5E6;
+
+/* 边框色 */
+--border-color: #F5E6CC;
+--border-hover: #E6CC99;
+
+/* 文本色 */
+--text-primary: #332B1A;
+--text-secondary: #665533;
+--text-light: #99804D;
+--text-disabled: #CCAA66;
+
+方案9：松烟灰绿（小众设计）
+
+- 风格特点：低饱和灰绿调，小众高级，自带沉静质感
+
+- 适用场景：小众设计杂志、艺术评论杂志、独立文化杂志
+
+/* 主色系 */
+--primary-color: #5F9EA0;
+--primary-hover: #50898B;
+--primary-active: #417375;
+
+/* 中性灰 */
+--gray-100: #F5F8F8;
+--gray-200: #E8EEEE;
+--gray-300: #CED8D8;
+--gray-400: #A0B4B4;
+--gray-500: #728888;
+--gray-600: #445C5C;
+--gray-700: #163030;
+
+/* 功能色 */
+--success-color: #4F7942;
+--warning-color: #C7A05D;
+--error-color: #A64B4B;
+--info-color: #6C8B92;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #F5F8F8;
+
+/* 边框色 */
+--border-color: #E8EEEE;
+--border-hover: #CED8D8;
+
+/* 文本色 */
+--text-primary: #163030;
+--text-secondary: #445C5C;
+--text-light: #728888;
+--text-disabled: #A0B4B4;
+
+方案10：柑橘橙黄（活力时尚）
+
+- 风格特点：明亮柑橘橙，活力四射，年轻时尚有张力
+
+- 适用场景：运动杂志、年轻时尚杂志、潮流生活杂志
+
+/* 主色系 */
+--primary-color: #FF7F50;
+--primary-hover: #FF6337;
+--primary-active: #FF4D1F;
+
+/* 中性灰 */
+--gray-100: #FFF8F0;
+--gray-200: #FFE8CC;
+--gray-300: #FFD8A8;
+--gray-400: #FFB780;
+--gray-500: #FF9758;
+--gray-600: #E07730;
+--gray-700: #B35718;
+
+/* 功能色 */
+--success-color: #32CD32;
+--warning-color: #FFD700;
+--error-color: #FF0000;
+--info-color: #1E90FF;
+
+/* 背景色 */
+--bg-color: #FFFFFF;
+--bg-gray: #FFF8F0;
+
+/* 边框色 */
+--border-color: #FFE8CC;
+--border-hover: #FFD8A8;
+
+/* 文本色 */
+--text-primary: #B35718;
+--text-secondary: #E07730;
+--text-light: #FF9758;
+--text-disabled: #FFB780;
+
+新增：时尚黑色主题（11-13套，非纯黑，深色系）
+
+方案11：炭黑冷灰（高端冷峻）
+
+- 风格特点：主色为炭黑色（非纯黑），搭配冷调灰色，冷峻高级，自带禁欲感，适配高端暗黑系杂志
+
+- 适用场景：高端时尚杂志、暗黑系潮流杂志、奢侈品男士杂志
+
+/* 主色系（炭黑，非纯黑） */
+--primary-color: #1A1A1A;
+--primary-hover: #0F0F0F;
+--primary-active: #050505;
+
+/* 中性灰（冷调，适配炭黑） */
+--gray-100: #F0F0F0;
+--gray-200: #E0E0E0;
+--gray-300: #C8C8C8;
+--gray-400: #A0A0A0;
+--gray-500: #787878;
+--gray-600: #505050;
+--gray-700: #282828;
+
+/* 功能色（低饱和，不抢主色） */
+--success-color: #4CAF50;
+--warning-color: #FFB74D;
+--error-color: #E53935;
+--info-color: #64B5F6;
+
+/* 背景色（浅灰衬托炭黑，避免压抑） */
+--bg-color: #FFFFFF;
+--bg-gray: #F5F5F5;
+
+/* 边框色（冷灰，弱化对比） */
+--border-color: #E0E0E0;
+--border-hover: #C8C8C8;
+
+/* 文本色（层次分明，适配炭黑主色） */
+--text-primary: #1A1A1A;
+--text-secondary: #505050;
+--text-light: #787878;
+--text-disabled: #A0A0A0;
+
+方案12：墨黑酒红（复古时尚）
+
+- 风格特点：主色为墨黑色（带轻微紫调，非纯黑），搭配低饱和酒红辅助色，复古高级，氛围感拉满
+
+- 适用场景：复古时尚杂志、高端美妆杂志、复古穿搭杂志
+
+/* 主色系（墨黑，带轻微紫调） */
+--primary-color: #222021;
+--primary-hover: #171617;
+--primary-active: #0C0C0C;
+
+/* 中性灰（暖调，适配墨黑+酒红） */
+--gray-100: #F7F5F6;
+--gray-200: #E9E5E7;
+--gray-300: #D1C9CD;
+--gray-400: #B0A6AB;
+--gray-500: #8F8389;
+--gray-600: #6E646A;
+--gray-700: #4D454A;
+
+/* 功能色（酒红为主，低饱和） */
+--success-color: #66BB6A;
+--warning-color: #FFA726;
+--error-color: #C2185B;
+--info-color: #7986CB;
+
+/* 背景色（米白，中和墨黑的压抑） */
+--bg-color: #FAFAFA;
+--bg-gray: #F7F5F6;
+
+/* 边框色（暖灰，贴合复古调性） */
+--border-color: #E9E5E7;
+--border-hover: #D1C9CD;
+
+/* 文本色（适配墨黑主色，不刺眼） */
+--text-primary: #222021;
+--text-secondary: #6E646A;
+--text-light: #8F8389;
+--text-disabled: #B0A6AB;
+
+方案13：深灰黑薄荷（小众高级）
+
+- 风格特点：主色为深灰黑（介于灰与黑之间，非纯黑），搭配清冷薄荷绿辅助色，小众高级，反差感强但不突兀
+
+- 适用场景：小众设计杂志、艺术杂志、青年潮流杂志
+
+/* 主色系（深灰黑，非纯黑） */
+--primary-color: #282C34;
+--primary-hover: #1E2228;
+--primary-active: #14171C;
+
+/* 中性灰（冷调，适配深灰黑） */
+--gray-100: #F8F9FA;
+--gray-200: #E9ECEF;
+--gray-300: #DEE2E6;
+--gray-400: #CED4DA;
+--gray-500: #ADB5BD;
+--gray-600: #6C757D;
+--gray-700: #495057;
+
+/* 功能色（薄荷绿为主，清新中和深色） */
+--success-color: #51CF66;
+--warning-color: #FFD93D;
+--error-color: #E03131;
+--info-color: #8CE99A;
+
+/* 背景色（纯白，突出深灰黑与薄荷绿的对比） */
+--bg-color: #FFFFFF;
+--bg-gray: #F8F9FA;
+
+/* 边框色（浅灰，弱化深色的沉重感） */
+--border-color: #E9ECEF;
+--border-hover: #DEE2E6;
+
+/* 文本色（层次清晰，适配深灰黑主色） */
+--text-primary: #282C34;
+--text-secondary: #6C757D;
+--text-light: #ADB5BD;
+--text-disabled: #CED4DA;
+
+二、现代杂志风排版规范（可直接复用）
+
+以下排版规范贴合主流时尚杂志设计，适配思源宋体（含低分屏优化），纯原生CSS实现，不依赖任何框架，可直接复制到项目中，与上述配色方案搭配使用，打造统一的杂志视觉效果。
+
+1. 标题层级规范（核心，适配思源宋体）
+
+杂志标题强调层级感，结合思源宋体的粗细变化，区分主标题、副标题、栏目标题，低分屏自动加粗优化。
+
+/* 主标题（杂志封面/大栏目标题） */
+.magazine-h1 {
+  font-family: var(--font-serif);
+  font-size: 36px; /* 移动端28px */
+  font-weight: 900; /* 低分屏最粗，高分屏700 */
+  line-height: 1.2;
+  color: var(--primary-color);
+  margin-bottom: 24px;
+  letter-spacing: 1px; /* 增加高级感 */
+}
+
+/* 副标题（栏目副标题/文章副标题） */
+.magazine-h2 {
+  font-family: var(--font-serif);
+  font-size: 28px; /* 移动端22px */
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  letter-spacing: 0.8px;
+}
+
+/* 三级标题（文章小标题/板块标题） */
+.magazine-h3 {
+  font-family: var(--font-serif);
+  font-size: 22px; /* 移动端18px */
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* 四级标题（小板块/引用标题） */
+.magazine-h4 {
+  font-family: var(--font-serif);
+  font-size: 18px; /* 移动端16px */
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+/* 响应式适配（移动端） */
+@media (max-width: 768px) {
+  .magazine-h1 { font-size: 28px; }
+  .magazine-h2 { font-size: 22px; }
+  .magazine-h3 { font-size: 18px; }
+  .magazine-h4 { font-size: 16px; }
+}
+
+/* 低分屏优化（标题加粗） */
+@media screen and (max-resolution: 192dpi),
+       screen and (max-resolution: 1dppx) {
+  .magazine-h1 {
+    font-weight: 900;
+    -webkit-text-stroke: 0.3px rgba(0,0,0,0.15);
+  }
+  .magazine-h2 { font-weight: 800; }
+}
+
+2. 字号规范（全局统一，适配阅读体验）
+
+杂志正文字号需兼顾可读性与高级感，避免过小或过大，结合思源宋体的特性，设置如下：
+
+/* 全局字号变量（方便统一调整） */
+:root {
+  --font-size-body: 16px; /* 正文默认字号 */
+  --font-size-small: 14px; /* 辅助文本/注释 */
+  --font-size-xsmall: 12px; /* 标签/版权信息 */
+  --font-size-large: 18px; /* 重点正文/引言 */
+}
+
+/* 正文样式 */
+.magazine-body {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body); /* 低分屏500，高分屏400 */
+  line-height: 1.8; /* 杂志正文标准行距 */
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  text-align: justify; /* 两端对齐，杂志标准排版 */
+}
+
+/* 辅助文本（注释/说明） */
+.magazine-small {
+  font-size: var(--font-size-small);
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* 极小文本（标签/版权） */
+.magazine-xsmall {
+  font-size: var(--font-size-xsmall);
+  color: var(--text-disabled);
+  line-height: 1.5;
+}
+
+/* 重点正文（引言/强调段落） */
+.magazine-large {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin: 24px 0;
+}
+
+3. 行距与段落间距规范
+
+杂志排版的核心是“呼吸感”，行距和段落间距需合理，避免拥挤或松散，不同文本类型区分设置：
+
+/* 行距规范（已整合到上述样式，此处单独强调） */
+/* 标题行距：1.2-1.4，紧凑有力量 */
+/* 正文行距：1.8，舒适易读 */
+/* 辅助文本行距：1.5-1.6，简洁不拖沓 */
+
+/* 段落间距规范 */
+.magazine-section {
+  margin-bottom: 40px; /* 大板块间距 */
+}
+
+.magazine-paragraph {
+  margin-bottom: 20px; /* 普通段落间距 */
+  text-indent: 2em; /* 中文杂志正文首行缩进2字符（可选，按需开启） */
+}
+
+/* 标题与正文间距 */
+.magazine-h1 + .magazine-body,
+.magazine-h2 + .magazine-body {
+  margin-top: -8px; /* 标题与正文轻微贴合，避免过大空隙 */
+}
+
+/* 列表与正文间距 */
+.magazine-list {
+  margin: 16px 0 24px 24px;
+}
+
+4. 分割线样式规范（杂志风专属，不突兀）
+
+杂志分割线避免粗重、生硬，采用细线条、低饱和色，或简约装饰性分割，贴合整体高级感：
+
+/* 基础分割线（最常用，页面分区） */
+.magazine-divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--border-color);
+  margin: 32px 0;
+  border: none;
+}
+
+/* 装饰性分割线（栏目之间，带轻微设计感） */
+.magazine-divider-decor {
+  height: 1px;
+  width: 80%;
+  margin: 40px auto;
+  background-color: var(--border-color);
+  position: relative;
+  border: none;
+}
+
+.magazine-divider-decor::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+/* 细分割线（小标题下方，轻微点缀） */
+.magazine-divider-thin {
+  height: 1px;
+  width: 40%;
+  background-color: var(--border-color);
+  margin: 8px 0 16px;
+  border: none;
+}
+
+5. 图文排版规范（杂志核心，图文结合）
+
+杂志排版讲究图文呼应，图片与文字的间距、排版方式需统一，避免杂乱：
+
+/* 图片容器（统一圆角，贴合杂志风格） */
+.magazine-img-container {
+  margin: 24px 0;
+  border-radius: 8px; /* 轻微圆角，不生硬 */
+  overflow: hidden; /* 避免图片溢出 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06); /* 轻微阴影，提升层次感 */
+}
+
+/* 图片样式（响应式，避免拉伸） */
+.magazine-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* 保持图片比例 */
+}
+
+/* 图片说明文字（杂志标准，下方居中） */
+.magazine-img-caption {
+  font-size: var(--font-size-small);
+  color: var(--text-light);
+  text-align: center;
+  padding: 8px 0;
+  background-color: var(--gray-100);
+}
+
+/* 图文混排（双列/多列，杂志常用） */
+.magazine-multi-column {
+  columns: 2; /* 双列排版 */
+  column-gap: 30px; /* 列间距 */
+  column-rule: 1px solid var(--border-color); /* 列分隔线 */
+  margin: 32px 0;
+}
+
+/* 响应式：移动端取消多列 */
+@media (max-width: 992px) {
+  .magazine-multi-column {
+    columns: 1;
+    column-rule: none;
+  }
+}
+
+/* 图片左/右环绕（杂志细节排版） */
+.magazine-img-float-left {
+  float: left;
+  width: 40%;
+  margin: 0 20px 16px 0;
+}
+
+.magazine-img-float-right {
+  float: right;
+  width: 40%;
+  margin: 0 0 16px 20px;
+}
+
+6. 引用与列表样式规范
+
+杂志中的引用、列表需突出重点，同时保持整体风格统一，不突兀：
+
+/* 引用样式（杂志引言/名人名言） */
+.magazine-quote {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-large);
+  font-style: italic; /* 斜体，贴合引用风格 */
+  line-height: 1.8;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--primary-color); /* 左侧竖线，突出引用 */
+  padding: 16px 24px;
+  margin: 24px 0;
+  background-color: var(--gray-100);
+  border-radius: 0 8px 8px 0;
+}
+
+/* 无序列表（杂志栏目列表） */
+.magazine-ul {
+  list-style: none; /* 取消默认圆点 */
+  margin: 16px 0 24px 24px;
+}
+
+.magazine-ul li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+
+.magazine-ul li::before {
+  content: "•"; /* 自定义圆点，更精致 */
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* 有序列表（步骤/排名类） */
+.magazine-ol {
+  list-style: none;
+  counter-reset: mag-counter; /* 自定义计数器 */
+  margin: 16px 0 24px 24px;
+}
+
+.magazine-ol li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 28px;
+  counter-increment: mag-counter;
+}
+
+.magazine-ol li::before {
+  content: counter(mag-counter) ".";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+7. 特殊元素样式规范（标签、按钮、版权）
+
+杂志中的标签、按钮等元素，需贴合整体风格，避免过于花哨，突出高级感：
+
+/* 杂志标签（栏目标签/分类标签） */
+.magazine-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px; /* 圆角标签，杂志常用 */
+  font-size: var(--font-size-xsmall);
+  font-weight: 600;
+  background-color: var(--gray-100);
+  color: var(--text-secondary);
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* 重点标签（突出显示） */
+.magazine-tag-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+}
+
+/* 杂志按钮（适配杂志风格，不突兀） */
+.magazine-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.magazine-btn-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+}
+
+.magazine-btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.magazine-btn-default {
+  background-color: var(--gray-100);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* 版权信息（杂志底部规范） */
+.magazine-copyright {
+  font-size: var(--font-size-xsmall);
+  color: var(--text-disabled);
+  text-align: center;
+  padding: 24px 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+}
+
+8. 低分屏适配补充规范（贴合思源宋体优化）
+
+结合之前的思源宋体低分屏优化，补充排版适配，保证低分屏下杂志风格不变、可读性提升：
+
+/* 低分屏排版优化 */
+@media screen and (max-resolution: 192dpi),
+       screen and (max-resolution: 1dppx) {
+  /* 正文加粗，提升清晰度 */
+  .magazine-body {
+    font-weight: 600;
+    -webkit-text-stroke: 0.2px rgba(0,0,0,0.1);
+  }
+  /* 缩小行距，避免拥挤 */
+  .magazine-body { line-height: 1.7; }
+  /* 图片阴影加深，提升层次感 */
+  .magazine-img-container {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+}
+
+三、示例页面代码（含13套配色适配，含最后3套黑色主题）
+
+以下为可直接复制运行的示例页面代码，整合上述所有排版规范，同时融入13套配色（重点包含最后3套时尚黑色主题），可通过切换`:root`中的配色变量，查看不同配色的实际呈现效果，适配思源宋体，纯原生实现。
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代杂志风示例页面（含3套黑色主题）</title>
+    <!-- 引入思源宋体（包含400/600/700/900字重，适配排版规范） -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 第一步：选择配色（可替换为13套中的任意一套，下方为最后3套黑色主题，按需切换） */
+        :root {
+            /* 可选1：方案11 炭黑冷灰（高端冷峻）- 取消注释即可使用 */
+            /* --primary-color: #1A1A1A;
+            --primary-hover: #0F0F0F;
+            --primary-active: #050505;
+            --gray-100: #F0F0F0;
+            --gray-200: #E0E0E0;
+            --gray-300: #C8C8C8;
+            --gray-400: #A0A0A0;
+            --gray-500: #787878;
+            --gray-600: #505050;
+            --gray-700: #282828;
+            --success-color: #4CAF50;
+            --warning-color: #FFB74D;
+            --error-color: #E53935;
+            --info-color: #64B5F6;
+            --bg-color: #FFFFFF;
+            --bg-gray: #F5F5F5;
+            --border-color: #E0E0E0;
+            --border-hover: #C8C8C8;
+            --text-primary: #1A1A1A;
+            --text-secondary: #505050;
+            --text-light: #787878;
+            --text-disabled: #A0A0A0; */
+
+            /* 可选2：方案12 墨黑酒红（复古时尚）- 取消注释即可使用 */
+            /* --primary-color: #222021;
+            --primary-hover: #171617;
+            --primary-active: #0C0C0C;
+            --gray-100: #F7F5F6;
+            --gray-200: #E9E5E7;
+            --gray-300: #D1C9CD;
+            --gray-400: #B0A6AB;
+            --gray-500: #8F8389;
+            --gray-600: #6E646A;
+            --gray-700: #4D454A;
+            --success-color: #66BB6A;
+            --warning-color: #FFA726;
+            --error-color: #C2185B;
+            --info-color: #7986CB;
+            --bg-color: #FAFAFA;
+            --bg-gray: #F7F5F6;
+            --border-color: #E9E5E7;
+            --border-hover: #D1C9CD;
+            --text-primary: #222021;
+            --text-secondary: #6E646A;
+            --text-light: #8F8389;
+            --text-disabled: #B0A6AB; */
+
+            /* 可选3：方案13 深灰黑薄荷（小众高级）- 取消注释即可使用（默认展示） */
+            --primary-color: #282C34;
+            --primary-hover: #1E2228;
+            --primary-active: #14171C;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --success-color: #51CF66;
+            --warning-color: #FFD93D;
+            --error-color: #E03131;
+            --info-color: #8CE99A;
+            --bg-color: #FFFFFF;
+            --bg-gray: #F8F9FA;
+            --border-color: #E9ECEF;
+            --border-hover: #DEE2E6;
+            --text-primary: #282C34;
+            --text-secondary: #6C757D;
+            --text-light: #ADB5BD;
+            --text-disabled: #CED4DA;
+
+            /* 全局字号变量（固定，与排版规范一致） */
+            --font-size-body: 16px;
+            --font-size-small: 14px;
+            --font-size-xsmall: 12px;
+            --font-size-large: 18px;
+            --font-serif: 'Noto Serif SC', serif;
+            --font-weight-body: 400;
+        }
+
+        /* 全局重置（避免浏览器默认样式干扰） */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 1. 标题层级规范（完整复用排版规范） */
+        .magazine-h1 {
+            font-family: var(--font-serif);
+            font-size: 36px; /* 移动端28px */
+            font-weight: 900; /* 低分屏最粗，高分屏700 */
+            line-height: 1.2;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+            letter-spacing: 1px; /* 增加高级感 */
+        }
+
+        .magazine-h2 {
+            font-family: var(--font-serif);
+            font-size: 28px; /* 移动端22px */
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: 0.8px;
+        }
+
+        .magazine-h3 {
+            font-family: var(--font-serif);
+            font-size: 22px; /* 移动端18px */
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .magazine-h4 {
+            font-family: var(--font-serif);
+            font-size: 18px; /* 移动端16px */
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        /* 2. 字号与正文规范 */
+        .magazine-body {
+            font-family: var(--font-serif);
+            font-size: var(--font-size-body);
+            font-weight: var(--font-weight-body);
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .magazine-small {
+            font-size: var(--font-size-small);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .magazine-xsmall {
+            font-size: var(--font-size-xsmall);
+            color: var(--text-disabled);
+            line-height: 1.5;
+        }
+
+        .magazine-large {
+            font-size: var(--font-size-large);
+            font-weight: 600;
+            line-height: 1.7;
+            color: var(--text-primary);
+            margin: 24px 0;
+        }
+
+        /* 3. 行距与段落间距规范 */
+        .magazine-section {
+            margin-bottom: 40px;
+        }
+
+        .magazine-paragraph {
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+
+        .magazine-h1 + .magazine-body,
+        .magazine-h2 + .magazine-body {
+            margin-top: -8px;
+        }
+
+        .magazine-list {
+            margin: 16px 0 24px 24px;
+        }
+
+        /* 4. 分割线样式规范 */
+        .magazine-divider {
+            height: 1px;
+            width: 100%;
+            background-color: var(--border-color);
+            margin: 32px 0;
+            border: none;
+        }
+
+        .magazine-divider-decor {
+            height: 1px;
+            width: 80%;
+            margin: 40px auto;
+            background-color: var(--border-color);
+            position: relative;
+            border: none;
+        }
+
+        .magazine-divider-decor::before {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .magazine-divider-thin {
+            height: 1px;
+            width: 40%;
+            background-color: var(--border-color);
+            margin: 8px 0 16px;
+            border: none;
+        }
+
+        /* 5. 图文排版规范 */
+        .magazine-img-container {
+            margin: 24px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .magazine-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .magazine-img-caption {
+            font-size: var(--font-size-small);
+            color: var(--text-light);
+            text-align: center;
+            padding: 8px 0;
+            background-color: var(--gray-100);
+        }
+
+        .magazine-multi-column {
+            columns: 2;
+            column-gap: 30px;
+            column-rule: 1px solid var(--border-color);
+            margin: 32px 0;
+        }
+
+        .magazine-img-float-left {
+            float: left;
+            width: 40%;
+            margin: 0 20px 16px 0;
+        }
+
+        .magazine-img-float-right {
+            float: right;
+            width: 40%;
+            margin: 0 0 16px 20px;
+        }
+
+        /* 6. 引用与列表样式规范 */
+        .magazine-quote {
+            font-family: var(--font-serif);
+            font-size: var(--font-size-large);
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--primary-color);
+            padding: 16px 24px;
+            margin: 24px 0;
+            background-color: var(--gray-100);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .magazine-ul {
+            list-style: none;
+            margin: 16px 0 24px 24px;
+        }
+
+        .magazine-ul li {
+            position: relative;
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+
+        .magazine-ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .magazine-ol {
+            list-style: none;
+            counter-reset: mag-counter;
+            margin: 16px 0 24px 24px;
+        }
+
+        .magazine-ol li {
+            position: relative;
+            margin-bottom: 8px;
+            padding-left: 28px;
+            counter-increment: mag-counter;
+        }
+
+        .magazine-ol li::before {
+            content: counter(mag-counter) ".";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* 7. 特殊元素样式规范 */
+        .magazine-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: var(--font-size-xsmall);
+            font-weight: 600;
+            background-color: var(--gray-100);
+            color: var(--text-secondary);
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .magazine-tag-primary {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border: none;
+        }
+
+        .magazine-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: var(--font-serif);
+            font-size: var(--font-size-body);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .magazine-btn-primary {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        .magazine-btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .magazine-btn-default {
+            background-color: var(--gray-100);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .magazine-copyright {
+            font-size: var(--font-size-xsmall);
+            color: var(--text-disabled);
+            text-align: center;
+            padding: 24px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 8. 低分屏适配补充规范 */
+        @media screen and (max-resolution: 192dpi),
+               screen and (max-resolution: 1dppx) {
+            .magazine-h1 {
+                font-weight: 900;
+                -webkit-text-stroke: 0.3px rgba(0,0,0,0.15);
+            }
+            .magazine-h2 { font-weight: 800; }
+            .magazine-body {
+                font-weight: 600;
+                -webkit-text-stroke: 0.2px rgba(0,0,0,0.1);
+                line-height: 1.7;
+            }
+            .magazine-img-container {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+        }
+
+        /* 移动端响应式适配 */
+        @media (max-width: 992px) {
+            .magazine-multi-column {
+                columns: 1;
+                column-rule: none;
+            }
+            .magazine-img-float-left,
+            .magazine-img-float-right {
+                float: none;
+                width: 100%;
+                margin: 16px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .magazine-h1 { font-size: 28px; }
+            .magazine-h2 { font-size: 22px; }
+            .magazine-h3 { font-size: 18px; }
+            .magazine-h4 { font-size: 16px; }
+            body { padding: 20px 10px; }
+        }
+    </style>
+</head>
+&lt;body&gt;
+    <!-- 杂志封面级标题 -->
+    <h1 class="magazine-h1">时尚杂志 · 黑色主题特辑</h1>
+    &lt;hr class="magazine-divider-decor"&gt;
+
+    <!-- 栏目板块1：卷首语 -->
+    <section class="magazine-section">
+        <h2 class="magazine-h2">卷首语</h2>
+        <hr class="magazine-divider-thin">
+        <p class="magazine-large">以黑为底，以质为魂，解锁现代杂志的高级感表达。</p>
+        <p class="magazine-paragraph">黑色从不局限于单一表达，它可以是冷峻利落的高端质感，是复古优雅的氛围感，也是小众个性的反差美学。本特辑整合3套时尚黑色主题配色，结合专业杂志排版规范，打造兼具视觉冲击力与阅读舒适度的杂志效果，适配各类高端、复古、小众风格的杂志设计。</p>
+        <p class="magazine-paragraph">以下内容完整呈现排版规范的所有元素，切换`:root`中的配色变量，即可查看3套黑色主题的不同呈现效果，所有代码可直接复用、按需调整。</p>
+    </section>
+
+    <hr class="magazine-divider"&gt;
+
+    <!-- 栏目板块2：主题介绍（图文混排） -->
+    <section class="magazine-section">
+        <h2 class="magazine-h2">黑色主题 · 三重表达</h2>
+        <hr class="magazine-divider-thin">
+        
+        <!-- 图文环绕示例 -->
+        <div class="magazine-img-container magazine-img-float-left">
+            <img src="https://via.placeholder.com/400x300" alt="黑色主题杂志排版示例" class="magazine-img">
+            <div class="magazine-img-caption">黑色主题杂志排版效果（示例图）</div>
+        </div>
+
+        <h3 class="magazine-h3">炭黑冷灰 · 高端冷峻</h3>
+        <p class="magazine-body">主色为炭黑色（非纯黑），搭配冷调灰色系，自带禁欲感与高级感，线条利落、层次分明，适配高端时尚杂志、暗黑系潮流杂志、奢侈品男士杂志，凸显沉稳大气的视觉气质。</p>
+
+        <h3 class="magazine-h3">墨黑酒红 · 复古时尚</h3>
+        <p class="magazine-body">墨黑色底调（带轻微紫调）搭配低饱和酒红辅助色，复古氛围感拉满，温柔又高级，适配复古时尚杂志、高端美妆杂志、复古穿搭杂志，自带老派时尚的韵味。</p>
+
+        <h3 class="magazine-h3">深灰黑薄荷 · 小众高级</h3>
+        <p class="magazine-body">深灰黑（介于灰与黑之间）搭配清冷薄荷绿，反差感强烈却不突兀，小众又有质感，适配小众设计杂志、艺术杂志、青年潮流杂志，打破黑色的沉闷感，增添清新气息。</p>
+
+        <!-- 标签示例 -->
+        <div class="magazine-tag-container">
+            <span class="magazine-tag magazine-tag-primary">黑色主题</span>
+            <span class="magazine-tag">高端时尚</span>
+            <span class="magazine-tag">复古美学</span>
+            <span class="magazine-tag">小众设计</span>
+            <span class="magazine-tag">排版规范</span>
+        </div>
+    </section>
+
+    <hr class="magazine-divider"&gt;
+
+    <!-- 栏目板块3：排版元素展示 -->
+    <section class="magazine-section">
+        <h2 class="magazine-h2">排版元素 · 完整呈现</h2>
+        <hr class="magazine-divider-thin">
+
+        <!-- 引用示例 -->
+        <blockquote class="magazine-quote">
+            好的杂志排版，是文字与视觉的完美共生；而优质的配色，是提升杂志高级感的核心密钥。黑色主题的多元表达，让每一页都兼具质感与记忆点。
+        </blockquote>
+
+<!-- 双列排版示例 -->
+        <div class="magazine-multi-column">
+            <div>
+                <h3 class="magazine-h3">无序列表示例</h3>
+                <ul class="magazine-ul">
+                    <li>适配思源宋体，低分屏优化，可读性拉满</li>
+                    <li>纯原生CSS实现，不依赖任何框架，可直接复用</li>
+                    <li>包含标题、正文、引用、图片等全场景元素</li>
+                    <li>响应式适配，移动端、PC端均有良好体验</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="magazine-h3">有序列表示例</h3>
+                <ol class="magazine-ol">
+                    <li>复制示例代码到本地，保存为HTML文件</li>
+                    <li>在`:root`中切换3套黑色主题配色（取消对应注释）</li>
+                    <li>用浏览器打开文件，查看实际呈现效果</li>
+                    <li>按需调整字号、间距等参数，适配自身需求</li>
+                </ol>
+            </div>
+        &lt;/div&gt;
+
+        <!-- 按钮示例 -->
+        <div style="margin: 32px 0; text-align: center;">
+            <a href="#" class="magazine-btn magazine-btn-primary">查看更多配色</a>
+            <a href="#" class="magazine-btn magazine-btn-default" style="margin-left: 16px;">复制排版规范</a>
+        </div>
+    </section&gt;
+
+    &lt;hr class="magazine-divider"&gt;
+
+    <!-- 栏目板块4：底部版权 -->
+    <footer>
+        <div class="magazine-copyright">
+            © 2024 现代杂志风排版规范 · 黑色主题特辑 | 所有配色与排版规范可直接复用
+        </div>
+    </footer>
+</body>
+</html>
+
+四、使用说明
+
+1. 配色使用：将选中的配色方案代码复制到CSS的`:root`选择器中，全局生效；黑色主题配色建议搭配白色/浅灰背景，避免整体过于压抑。示例页面中已内置3套黑色主题配色，取消对应注释即可快速切换查看效果。
+
+2. 排版规范使用：将上述排版规范的CSS代码复制到全局`style.css`中，给对应元素添加类名（如`.magazine-h1`、`.magazine-body`）即可应用。
+
+3. 字体搭配：所有规范均适配思源宋体（Noto Serif SC），需确保CDN引入正确（包含400/700/900字重）。
+
+4. 适配调整：可根据实际杂志风格，微调字号、行距、间距等数值，建议保持整体比例不变。
+
+5. 兼容性：排版规范均为纯原生CSS实现，兼容现代主流浏览器，老旧浏览器自动降级，不影响核心体验。
+
+1. 配色使用：将选中的配色方案代码复制到CSS的`:root`选择器中，全局生效；黑色主题配色建议搭配白色/浅灰背景，避免整体过于压抑。
+
+2. 排版规范使用：将上述排版规范的CSS代码复制到全局`style.css`中，给对应元素添加类名（如`.magazine-h1`、`.magazine-body`）即可应用。
+
+3. 字体搭配：所有规范均适配思源宋体（Noto Serif SC），需确保CDN引入正确（包含400/700/900字重）。
+
+4. 适配调整：可根据实际杂志风格，微调字号、行距、间距等数值，建议保持整体比例不变。
+
+5. 兼容性：排版规范均为纯原生CSS实现，兼容现代主流浏览器，老旧浏览器自动降级，不影响核心体验。
