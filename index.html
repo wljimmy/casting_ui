@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casting UI Framework</title>
+    <!-- 引入思源宋体CDN -->
+    <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap">
+    <link rel="stylesheet" href="dev/modules/css/core.css">
+    <link rel="stylesheet" href="dev/modules/css/components.css">
+    <style>
+        /* 全局grid布局 */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: grid;
+            grid-template-rows: 70px 1fr;
+            grid-template-columns: 250px 1fr;
+            grid-template-areas:
+                "header header"
+                "sidebar content";
+        }
+        
+        .app-header {
+            grid-area: header;
+            background-color: white;
+            color: var(--primary-color);
+            padding: var(--size-lg);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            z-index: 200;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .app-header h1 {
+            margin: 0;
+        }
+        
+        .app-sidebar {
+            grid-area: sidebar;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            padding: var(--size-lg);
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .app-content {
+            grid-area: content;
+            background-color: var(--bg-gray);
+            padding: var(--size-lg);
+            overflow-y: auto;
+        }
+        
+        .app-sidebar h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--size-md);
+            color: var(--text-primary);
+            padding-bottom: var(--size-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu > li {
+            margin-bottom: var(--size-sm);
+        }
+        
+        .sidebar-menu > li > a {
+            display: block;
+            padding: var(--size-sm) var(--size-md);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+            font-weight: 500;
+        }
+        
+        .sidebar-menu > li > a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary-color);
+        }
+        
+        .sidebar-menu > li > a.active {
+            background-color: rgba(22, 93, 255, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .submenu {
+            list-style: none;
+            padding: var(--size-xs) 0;
+            margin: var(--size-xs) 0;
+            margin-left: var(--size-md);
+        }
+        
+        .submenu li {
+            margin-bottom: var(--size-xs);
+        }
+        
+        .submenu a {
+            display: block;
+            padding: var(--size-xs) var(--size-md);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .submenu a:hover {
+            background-color: var(--gray-100);
+            color: var(--primary-color);
+        }
+        
+        .submenu a.active {
+            background-color: rgba(22, 93, 255, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .section {
+            margin-bottom: var(--size-xl);
+            background-color: var(--bg-color);
+            border-radius: var(--radius-lg);
+            padding: var(--size-lg);
+            box-shadow: var(--shadow-sm);
+            content-visibility: auto;
+        }
+        
+        .section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--size-md);
+            color: var(--text-primary);
+            padding-bottom: var(--size-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-subtitle {
+            margin: var(--size-md) 0;
+        }
+        
+        .section-subtitle h3 {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: var(--size-sm);
+        }
+        
+        .example-title {
+            display: flex;
+            align-items: center;
+            gap: var(--size-sm);
+        }
+        
+        .example-info {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: normal;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                grid-template-rows: 60px auto 1fr;
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "content";
+            }
+            
+            .app-header {
+                height: 60px;
+                padding: var(--size-md);
+            }
+            
+            .app-header h1 {
+                font-size: 20px;
+            }
+            
+            .app-sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: var(--size-md);
+                height: auto;
+            }
+            
+            .app-content {
+                padding: var(--size-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <h1>Casting UI Framework</h1>
+    </header>
+    
+    <aside class="app-sidebar">
+        <h2>组件分类</h2>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#basic-layout" class="active">基础布局组件</a>
+                <ul class="submenu">
+                    <li><a href="#card-container">卡片容器</a></li>
+                    <li><a href="#general-container">通用容器</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#interaction-controls">交互控件</a>
+                <ul class="submenu">
+                    <li><a href="#button-container">按钮</a></li>
+                    <li><a href="#input-container">输入框</a></li>
+                    <li><a href="#select-container">选择控件</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#feedback-components">反馈组件</a>
+                <ul class="submenu">
+                    <li><a href="#modal-container-1">弹窗</a></li>
+                    <li><a href="#toast-container">Toast</a></li>
+                    <li><a href="#loading-container">加载类</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#data-display">数据展示组件</a>
+                <ul class="submenu">
+                    <li><a href="#image-container">图片控件</a></li>
+                    <li><a href="#list-container">列表</a></li>
+                    <li><a href="#table-container">表格</a></li>
+                    <li><a href="#badge-container">标签/徽章</a></li>
+                    <li><a href="#progress-container">进度条</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#general-ui">通用UI元素</a>
+                <ul class="submenu">
+                    <li><a href="#text-container">文本</a></li>
+                    <li><a href="#icon-container">图标</a></li>
+                    <li><a href="#divider-container">分隔组件</a></li>
+                    <li><a href="#theme-selector">主题选择器</a></li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+    
+    <main class="app-content" id="content-container">
+        <!-- 内容将通过JavaScript动态加载 -->
+    </main>
+    
+    <script>
+        // 导航菜单点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+            const contentContainer = document.getElementById('content-container');
+            
+            // 初始加载第一个页面
+            loadPage('basic-layout');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 更新激活状态
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 处理子菜单的激活状态
+                    const parentLi = this.closest('li');
+                    if (parentLi.parentElement.classList.contains('submenu')) {
+                        const parentLink = parentLi.parentElement.previousElementSibling;
+                        if (parentLink) {
+                            parentLink.classList.add('active');
+                        }
+                    }
+                    
+                    // 获取目标页面
+                    const targetId = this.getAttribute('href').substring(1);
+                    loadPage(targetId);
+                });
+            });
+            
+            // 加载页面函数
+            function loadPage(pageId) {
+                showLoading();
+                
+                // 映射页面ID到文件路径
+                const pageMap = {
+                    // 一级菜单
+                    'basic-layout': 'pages/basic-layout/index.html',
+                    'interaction-controls': 'pages/interaction-controls/index.html',
+                    'feedback-components': 'pages/feedback-components/index.html',
+                    'data-display': 'pages/data-display/index.html',
+                    'general-ui': 'pages/general-ui/index.html',
+                    // 二级菜单
+                    'card-container': 'pages/basic-layout/card-container/index.html',
+                    'general-container': 'pages/basic-layout/general-container/index.html',
+                    'button-container': 'pages/interaction-controls/button-container/index.html',
+                    'input-container': 'pages/interaction-controls/input-container/index.html',
+                    'select-container': 'pages/interaction-controls/select-container/index.html',
+                    'modal-container-1': 'pages/feedback-components/modal-container-1/index.html',
+                    'toast-container': 'pages/feedback-components/toast-container/index.html',
+                    'loading-container': 'pages/feedback-components/loading-container/index.html',
+                    'image-container': 'pages/data-display/image-container/index.html',
+                    'list-container': 'pages/data-display/list-container/index.html',
+                    'table-container': 'pages/data-display/table-container/index.html',
+                    'badge-container': 'pages/data-display/badge-container/index.html',
+                    'progress-container': 'pages/data-display/progress-container/index.html',
+                    'text-container': 'pages/general-ui/text-container/index.html',
+                    'icon-container': 'pages/general-ui/icon-container/index.html',
+                    'divider-container': 'pages/general-ui/divider-container/index.html',
+                    'theme-selector': 'pages/general-ui/theme-selector/index.html'
+                };
+                
+                const filePath = pageMap[pageId];
+                if (filePath) {
+                    fetch(filePath)
+                        .then(response => response.text())
+                        .then(html => {
+                            contentContainer.innerHTML = html;
+                            hideLoading();
+                        })
+                        .catch(error => {
+                            console.error('加载页面失败:', error);
+                            contentContainer.innerHTML = '<div class="section"><h2>页面加载失败</h2><p>请刷新页面重试</p></div>';
+                            hideLoading();
+                        });
+                } else {
+                    contentContainer.innerHTML = '<div class="section"><h2>页面不存在</h2><p>请选择左侧菜单中的有效选项</p></div>';
+                    hideLoading();
+                }
+            }
+            
+            // 隐藏加载遮罩
+            function hideLoading() {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                    setTimeout(() => {
+                        if (document.getElementById('loadingOverlay')) {
+                            document.body.removeChild(loadingOverlay);
+                        }
+                    }, 300);
+                }
+            }
+        });
+    </script>
+    <script src="dev/modules/js/core.js"></script>
+    <script src="dev/modules/js/modal.js"></script>
+    <script src="dev/modules/js/message.js"></script>
+    <script src="dev/modules/js/image-zoom.js"></script>
+    <script src="dev/modules/js/theme-manager.js"></script>
+    <script src="dev/modules/js/color-picker.js"></script>
+    <script src="dev/modules/js/ui.js"></script>
+</body>
+</html>
