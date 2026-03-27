@@ -6,32 +6,7 @@
     <title>弹窗模块测试</title>
     <link rel="stylesheet" href="../../dev/modules/css/core.css">
     <link rel="stylesheet" href="../../dev/modules/css/components.css">
-    <style>
-        .test-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: var(--bg-color);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-        }
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .result-container {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--gray-100);
-            border-radius: var(--radius-md);
-            border-left: 4px solid var(--primary-color);
-        }
-    </style>
+
 </head>
 <body>
     <div class="test-container">
@@ -115,10 +90,10 @@
             showModal({
                 title: '自定义弹窗',
                 content: `
-                    <div style="padding: 20px;">
+                    <div>
                         <h3>自定义内容</h3>
                         <p>这是一个带有自定义HTML内容的弹窗</p>
-                        <input type="text" placeholder="请输入内容" style="width: 100%; padding: 8px; margin: 10px 0;">
+                        <input type="text" placeholder="请输入内容" class="input">
                     </div>
                 `,
                 width: '400px',

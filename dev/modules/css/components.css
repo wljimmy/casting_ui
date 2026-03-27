@@ -1048,22 +1048,27 @@ input:checked + .switch-slider:before {
     background-color: var(--gray-200);
 }
 
-/* 标签/徽章 */
+/* 标签/徽章 - 使用padding控制高度 */
 .badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--size-xs) var(--size-sm);
+    justify-content: center;
+    padding: 0.35em 0.65em;
     border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: text-top;
     transition: all var(--transition-normal);
 }
 
-.badge-sm { padding: 2px 8px; font-size: 10px; }
-.badge-md { padding: var(--size-xs) var(--size-sm); font-size: 12px; }
-.badge-lg { padding: var(--size-sm) var(--size-md); font-size: 14px; }
+/* 徽章尺寸 */
+.badge-sm { padding: 0.25em 0.5em; font-size: 10px; }
+.badge-md { padding: 0.35em 0.65em; font-size: 12px; }
+.badge-lg { padding: 0.45em 0.8em; font-size: 14px; }
 
-/* 徽章样式 */
+/* 徽章颜色 */
 .badge-primary { background-color: var(--primary-color); color: white; }
 .badge-secondary { background-color: var(--gray-200); color: var(--text-primary); }
 .badge-success { background-color: var(--success-color); color: white; }
@@ -1123,6 +1128,44 @@ input:checked + .switch-slider:before {
 .badge-close:hover {
     opacity: 0.7;
 }
+
+/* 语义化标签 */
+.badge.hot,
+.badge.new,
+.badge.recommend,
+.badge.update,
+.badge.demo,
+.badge.tip,
+.badge.official,
+.badge.pro,
+.badge.beta,
+.badge.fixed {
+    font-size: 0.85em;
+}
+
+/* 标签颜色 */
+.badge.hot { background-color: var(--error-color); color: white; }
+.badge.new,
+.badge.recommend,
+.badge.official,
+.badge.update { background-color: var(--primary-color); color: white; }
+.badge.pro { background-color: #e67e22; color: white; }
+.badge.demo { background-color: var(--info-color); color: white; }
+.badge.tip { background-color: var(--success-color); color: white; }
+.badge.beta { background-color: var(--warning-color); color: white; }
+.badge.fixed { background-color: var(--gray-500); color: white; }
+
+/* 自动文字内容 */
+.badge.hot::before { content: "hot"; }
+.badge.new::before { content: "new"; }
+.badge.recommend::before { content: "推荐"; }
+.badge.update::before { content: "update"; }
+.badge.demo::before { content: "demo"; }
+.badge.tip::before { content: "tip"; }
+.badge.official::before { content: "官方"; }
+.badge.pro::before { content: "pro"; }
+.badge.beta::before { content: "beta"; }
+.badge.fixed::before { content: "fixed"; }
 
 /* 文本样式 */
 .text-lg { font-size: 16px; line-height: 1.6; color: var(--text-primary); }
@@ -1222,3 +1265,177 @@ input:checked + .switch-slider:before {
 
 .placeholder-lg { padding: var(--size-xl); }
 .placeholder-sm { padding: var(--size-sm); }
+
+/* 菜单组件 */
+menu {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+/* 菜单列表 */
+menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 菜单项 */
+menu li {
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+menu li a {
+    display: block;
+    padding: var(--size-sm) var(--size-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+}
+
+menu li:hover {
+    background-color: var(--gray-100);
+}
+
+menu li.active {
+    background-color: rgba(22, 93, 255, 0.1);
+}
+
+menu li.active a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 菜单缩进 */
+menu > ul > li > a {
+    padding-left: var(--size-md); /* 一级菜单不缩进 */
+}
+
+menu > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 1em); /* 二级菜单缩进1个字 */
+}
+
+menu > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 2em); /* 三级菜单缩进2个字 */
+}
+
+menu > ul > li > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 3em); /* 四级菜单缩进3个字 */
+}
+
+/* 子菜单 */
+menu ul ul {
+    display: none;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--border-color);
+}
+
+menu ul ul ul {
+    border-top: none;
+    border-left: 1px solid var(--border-color);
+}
+
+/* 菜单分隔线 */
+menu .menu-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--size-xs) 0;
+}
+
+/* 菜单图标 */
+menu .menu-icon {
+    margin-right: var(--size-sm);
+    font-size: 14px;
+}
+
+/* 菜单徽章 */
+menu .menu-badge {
+    margin-left: var(--size-sm);
+    font-size: 12px;
+}
+
+/* 响应式菜单 */
+@media (max-width: 768px) {
+    menu {
+        width: 100%;
+    }
+}
+
+/* 代码块样式 */
+/* 基础代码块样式 - 不带有 language 类的 pre 标签 */
+pre:not([class*="language-"]) {
+    background-color: var(--gray-100);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--size-md);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: var(--size-md);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* 基础 code 样式 - 不带有 language 类的 code 标签 */
+code:not([class*="language-"]) {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 300;
+    background-color: var(--gray-100);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+}
+
+/* 基础 pre > code 样式 - 都不带有 language 类 */
+pre:not([class*="language-"]) > code:not([class*="language-"]) {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Prism 代码块容器样式增强 */
+pre[class*="language-"] {
+    border-radius: var(--radius-md);
+    margin-bottom: var(--size-md);
+}
+
+/* Prism 代码块内的代码样式 */
+pre[class*="language-"] code[class*="language-"] {
+    font-weight: 300;
+}
+
+/* 代码块滚动条样式 */
+pre::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: var(--gray-100);
+    border-radius: var(--radius-full);
+}
+
+pre::-webkit-scrollbar-thumb {
+    background-color: var(--gray-300);
+    border-radius: var(--radius-full);
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+    background-color: var(--gray-400);
+}
+
+pre::-webkit-scrollbar-thumb:active {
+    background-color: var(--gray-500);
+}

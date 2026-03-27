@@ -1,0 +1,93 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.2.0
+ * Module: magazine.css
+ * Description: 杂志风格样式组件
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
+/* 杂志风格布局 */
+.magazine-layout {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar content";
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 320px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 杂志风格头部 */
+.magazine-header {
+    grid-area: header;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    position: relative;
+}
+
+.magazine-header::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color), var(--warning-color));
+}
+
+.magazine-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.magazine-logo {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary-color), #36cfc9);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);
+}
+
+.magazine-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.magazine-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.magazine-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.magazine-search {
+    position: relative;
+}
+
+.magazine-search input {
+    width: 280px;
+    padding: 12px 20px 12px 48px;
+    border:

@@ -1,5 +1,98 @@
 # 版本更新日志
 
+## v0.2.1 (2026-03-28)
+
+### 新增功能
+
+#### 菜单组件 (ui.js)
+- **v0.2.1** - 新增菜单组件
+- 支持多级菜单结构（最多4级）
+- 支持通过HTML结构定义菜单内容
+- 支持data属性标记引用位置或执行内容
+- 支持动态添加菜单项
+- 自动渲染和事件处理
+
+#### Badge组件 (components.css)
+- **v0.2.1** - 新增Badge小标记组件
+- 支持多种语义化标签：hot、new、recommend、update、demo、tip、official、pro、beta、fixed
+- 支持不同尺寸：sm、md、lg
+- 支持多种颜色主题：primary、secondary、success、warning、error
+- 支持描边样式
+- 支持带数字角标
+- 支持可关闭徽章
+- 自动文本内容显示
+
+#### 信息提示组件 (components.css)
+- **v0.2.1** - 新增信息提示组件
+- 支持四种类型：info、success、warning、error
+- 支持带标题的信息提示
+- 支持带列表的内容展示
+- 纯CSS组件，无需JavaScript
+
+#### Prism代码高亮集成
+- **v1.29.0** - 集成Prism.js代码高亮库
+- 支持HTML、JavaScript、CSS等语言高亮
+- 适配Casting UI框架风格
+- 支持动态内容加载后自动高亮
+
+### 功能优化
+
+#### 核心样式 (core.css)
+- **v0.2.1** - 布局系统增强
+- 新增顶部+左侧边栏+右侧内容布局结构
+- 新增header搜索框样式
+- 新增位置控制类：右对齐、居中
+- 优化容器最小高度设置
+
+#### 组件样式 (components.css)
+- **v0.2.1** - 组件样式重构
+- 重构Badge组件样式，使用padding控制高度
+- 统一所有标签和徽章的高度为1em
+- 优化代码块样式，字重设置为300
+- 添加代码块滚动条样式
+- 优化信息提示组件样式
+
+#### UI模块 (ui.js)
+- **v0.2.1** - 功能增强
+- 新增菜单组件初始化和管理
+- 优化页面加载逻辑
+- 支持Prism代码高亮自动触发
+
+#### Markdown编辑器样式 (md.css)
+- **v0.2.1** - 样式优化
+- 优化编辑器容器样式
+- 调整预览区域样式
+
+### 新增页面
+
+#### 组件文档页面
+- 菜单组件文档页面 (pages/interaction-controls/menu-container/)
+- Badge组件文档页面 (pages/data-display/badge-container/)
+- 信息提示组件文档页面 (pages/feedback-components/message-container/)
+- 初始化指南页面 (pages/init-guide/)
+
+#### 测试页面
+- 菜单组件测试页面 (test/menu/)
+- Badge组件测试页面 (test/badge/)
+
+### 项目结构更新
+- 新增Prism代码高亮目录 (dev/modules/css/prism/、dev/modules/js/prism/)
+- 新增初始化指南页面目录 (pages/init-guide/)
+- 新增菜单组件文档目录 (pages/interaction-controls/menu-container/)
+- 新增信息提示组件文档目录 (pages/feedback-components/message-container/)
+
+### 模块版本汇总
+
+| 模块 | 文件 | 版本 | 描述 |
+|------|------|------|------|
+| core-css | dev/modules/css/core.css | 0.2.1 | 核心样式，包含CSS变量和基础样式 |
+| components-css | dev/modules/css/components.css | 0.2.1 | 组件样式，包含所有UI组件的样式 |
+| md-css | dev/modules/css/md.css | 0.2.1 | Markdown编辑器样式 |
+| prism-css | dev/modules/css/prism/prism.css | 1.29.0 | Prism代码高亮样式 |
+| prism-js | dev/modules/js/prism/prism.js | 1.29.0 | Prism代码高亮库 |
+
+---
+
 ## v0.2.0 (2026-03-25)
 
 ### 新增功能
@@ -60,10 +153,10 @@
 | color-picker | dev/modules/js/color-picker.js | 0.2.0 | 颜色选择器模块，支持多种颜色格式 |
 | ui | dev/modules/js/ui.js | 0.2.0 | UI框架模块，提供UI组件管理 |
 | index | dev/modules/js/index.js | 0.2.0 | 模块加载器，按需加载各功能模块 |
-| md | dev/modules/js/md.js | 0.1.0 | Markdown编辑器模块 |
+| md | dev/modules/js/md.js | 0.2.0 | Markdown编辑器模块 |
 | core-css | dev/modules/css/core.css | 0.2.0 | 核心样式，包含CSS变量和基础样式 |
 | components-css | dev/modules/css/components.css | 0.2.0 | 组件样式，包含所有UI组件的样式 |
-| md-css | dev/modules/css/md.css | 0.1.0 | Markdown编辑器样式 |
+| md-css | dev/modules/css/md.css | 0.2.0 | Markdown编辑器样式 |
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "Casting UI Framework",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "极简UI框架，专注于提供基础的UI组件和交互功能",
   "author": "Bingo工作室",
   "email": "wljimmy@hotmail.com",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/bingo-studio/casting-ui/issues"
   },
-  "releaseDate": "2026-03-25",
+  "releaseDate": "2026-03-28",
   "changelog": "docs/logs/version.md",
   "modules": {
     "core": {
@@ -52,24 +52,34 @@
       "description": "UI框架模块，提供UI组件管理"
     },
     "md": {
-      "version": "0.1.0",
+      "version": "0.2.0",
       "file": "dev/modules/js/md.js",
       "description": "Markdown编辑器模块"
     },
     "core-css": {
-      "version": "0.2.0",
+      "version": "0.2.1",
       "file": "dev/modules/css/core.css",
       "description": "核心样式，包含CSS变量和基础样式"
     },
     "components-css": {
-      "version": "0.2.0",
+      "version": "0.2.1",
       "file": "dev/modules/css/components.css",
       "description": "组件样式，包含所有UI组件的样式"
     },
     "md-css": {
-      "version": "0.1.0",
+      "version": "0.2.1",
       "file": "dev/modules/css/md.css",
       "description": "Markdown编辑器样式"
+    },
+    "prism-css": {
+      "version": "1.29.0",
+      "file": "dev/modules/css/prism/prism.css",
+      "description": "Prism代码高亮样式"
+    },
+    "prism-js": {
+      "version": "1.29.0",
+      "file": "dev/modules/js/prism/prism.js",
+      "description": "Prism代码高亮库"
     }
   },
   "dist": {
