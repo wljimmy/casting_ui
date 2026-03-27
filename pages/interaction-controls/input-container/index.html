@@ -1,55 +1,383 @@
 <section class="section">
-    <h2>输入框</h2>
-    
-    <div class="input-container container-height-auto">
-        <!-- 单行输入框 -->
-        <div id="input-group-1" class="input-group">
-            <label class="input-label">单行输入框</label>
-            <input id="input-text" type="text" class="input" placeholder="请输入内容">
-            <span class="input-hint">这是提示信息</span>
+    <h2>表单控件</h2>
+    <p>表单控件组件提供完整的表单元素，包括输入框、文本域、单选、复选、开关、滑块等。</p>
+
+    <div class="section-subtitle">
+        <h3>1. 输入框</h3>
+        <p>基础输入框组件，支持多种类型和状态。</p>
+
+        <div class="input-container container-height-auto" style="margin-bottom: 24px;">
+            <!-- 单行输入框 -->
+            <div class="input-group">
+                <label class="input-label">单行输入框</label>
+                <input type="text" class="input" placeholder="请输入内容">
+                <span class="input-hint">这是提示信息</span>
+            </div>
+
+            <!-- 错误状态输入框 -->
+            <div class="input-group">
+                <label class="input-label">错误状态</label>
+                <input type="text" class="input error" placeholder="请输入内容">
+                <span class="input-error">这是错误信息</span>
+            </div>
+
+            <!-- 成功状态输入框 -->
+            <div class="input-group">
+                <label class="input-label">成功状态</label>
+                <input type="text" class="input success" placeholder="请输入内容">
+            </div>
+
+            <!-- 禁用状态输入框 -->
+            <div class="input-group">
+                <label class="input-label">禁用状态</label>
+                <input type="text" class="input" placeholder="请输入内容" disabled>
+            </div>
+
+            <!-- 数字输入框 -->
+            <div class="input-group">
+                <label class="input-label">数字输入框</label>
+                <input type="number" class="input" placeholder="请输入数字">
+            </div>
+
+            <!-- 搜索输入框 -->
+            <div class="input-group">
+                <label class="input-label">搜索输入框</label>
+                <input type="search" class="input" placeholder="请输入搜索内容">
+            </div>
+
+            <!-- 密码输入框 -->
+            <div class="input-group">
+                <label class="input-label">密码输入框</label>
+                <input type="password" class="input" placeholder="请输入密码">
+            </div>
         </div>
-        
-        <!-- 错误状态输入框 -->
-        <div id="input-group-2" class="input-group">
-            <label class="input-label">错误状态</label>
-            <input id="input-error" type="text" class="input error" placeholder="请输入内容">
-            <span class="input-error">这是错误信息</span>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.input</code></td>
+                    <td>基础输入框样式</td>
+                </tr>
+                <tr>
+                    <td><code>.input.error</code></td>
+                    <td>错误状态</td>
+                </tr>
+                <tr>
+                    <td><code>.input.success</code></td>
+                    <td>成功状态</td>
+                </tr>
+                <tr>
+                    <td><code>.input-group</code></td>
+                    <td>输入框组容器</td>
+                </tr>
+                <tr>
+                    <td><code>.input-label</code></td>
+                    <td>输入框标签</td>
+                </tr>
+                <tr>
+                    <td><code>.input-hint</code></td>
+                    <td>提示信息</td>
+                </tr>
+                <tr>
+                    <td><code>.input-error</code></td>
+                    <td>错误信息</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;div class="input-group"&gt;
+    &lt;label class="input-label"&gt;用户名&lt;/label&gt;
+    &lt;input type="text" class="input" placeholder="请输入用户名"&gt;
+    &lt;span class="input-hint"&gt;用户名长度为3-20个字符&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否，纯 CSS 组件。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>2. 文本域</h3>
+        <p>多行文本输入组件。</p>
+
+        <div class="input-group" style="margin-bottom: 24px;">
+            <label class="input-label">多行文本域</label>
+            <textarea class="textarea" placeholder="请输入内容" rows="4"></textarea>
         </div>
-        
-        <!-- 成功状态输入框 -->
-        <div id="input-group-3" class="input-group">
-            <label class="input-label">成功状态</label>
-            <input id="input-success" type="text" class="input success" placeholder="请输入内容">
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.textarea</code></td>
+                    <td>文本域样式，支持 resize: vertical</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;textarea class="textarea" placeholder="请输入内容" rows="4"&gt;&lt;/textarea&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>3. 单选框</h3>
+        <p>单选框组件用于在多个选项中选择一项。</p>
+
+        <div class="radio-group" style="margin-bottom: 24px;">
+            <label class="radio-item">
+                <input type="radio" name="radio-demo" value="1" checked>
+                <span class="radio-label">选项一</span>
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="radio-demo" value="2">
+                <span class="radio-label">选项二</span>
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="radio-demo" value="3" disabled>
+                <span class="radio-label">选项三（禁用）</span>
+            </label>
         </div>
-        
-        <!-- 禁用状态输入框 -->
-        <div id="input-group-4" class="input-group">
-            <label class="input-label">禁用状态</label>
-            <input id="input-disabled" type="text" class="input" placeholder="请输入内容" disabled>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.radio-group</code></td>
+                    <td>单选框组容器</td>
+                </tr>
+                <tr>
+                    <td><code>.radio-item</code></td>
+                    <td>单选框项</td>
+                </tr>
+                <tr>
+                    <td><code>.radio-label</code></td>
+                    <td>单选框标签</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;div class="radio-group"&gt;
+    &lt;label class="radio-item"&gt;
+        &lt;input type="radio" name="gender" value="male"&gt;
+        &lt;span class="radio-label"&gt;男&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="radio-item"&gt;
+        &lt;input type="radio" name="gender" value="female"&gt;
+        &lt;span class="radio-label"&gt;女&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>4. 复选框</h3>
+        <p>复选框组件用于在多个选项中选择多项。</p>
+
+        <div class="checkbox-group" style="margin-bottom: 24px;">
+            <label class="checkbox-item">
+                <input type="checkbox" value="1" checked>
+                <span class="checkbox-label">选项一</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" value="2">
+                <span class="checkbox-label">选项二</span>
+            </label>
+            <label class="checkbox-item">
+                <input type="checkbox" value="3" disabled>
+                <span class="checkbox-label">选项三（禁用）</span>
+            </label>
         </div>
-        
-        <!-- 多行输入框 -->
-        <div id="input-group-5" class="input-group">
-            <label class="input-label">多行输入框</label>
-            <textarea id="textarea" class="textarea" placeholder="请输入内容"></textarea>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.checkbox-group</code></td>
+                    <td>复选框组容器</td>
+                </tr>
+                <tr>
+                    <td><code>.checkbox-item</code></td>
+                    <td>复选框项</td>
+                </tr>
+                <tr>
+                    <td><code>.checkbox-label</code></td>
+                    <td>复选框标签</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;div class="checkbox-group"&gt;
+    &lt;label class="checkbox-item"&gt;
+        &lt;input type="checkbox" value="reading"&gt;
+        &lt;span class="checkbox-label"&gt;阅读&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="checkbox-item"&gt;
+        &lt;input type="checkbox" value="sports"&gt;
+        &lt;span class="checkbox-label"&gt;运动&lt;/span&gt;
+    &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>5. 开关</h3>
+        <p>开关组件用于表示两种状态之间的切换。</p>
+
+        <div style="margin-bottom: 24px;">
+            <label class="switch" style="margin-right: 24px;">
+                <input type="checkbox" checked>
+                <span class="switch-slider"></span>
+            </label>
+            <label class="switch" style="margin-right: 24px;">
+                <input type="checkbox">
+                <span class="switch-slider"></span>
+            </label>
+            <label class="switch">
+                <input type="checkbox" disabled>
+                <span class="switch-slider"></span>
+            </label>
         </div>
-        
-        <!-- 数字输入框 -->
-        <div id="input-group-6" class="input-group">
-            <label class="input-label">数字输入框</label>
-            <input id="input-number" type="number" class="input" placeholder="请输入数字">
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.switch</code></td>
+                    <td>开关容器</td>
+                </tr>
+                <tr>
+                    <td><code>.switch-slider</code></td>
+                    <td>开关滑块</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;label class="switch"&gt;
+    &lt;input type="checkbox" checked&gt;
+    &lt;span class="switch-slider"&gt;&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>6. 滑块</h3>
+        <p>滑块组件用于在范围内选择数值。</p>
+
+        <div class="input-group" style="margin-bottom: 24px;">
+            <label class="input-label">基础滑块</label>
+            <input type="range" class="slider" min="0" max="100" value="50">
         </div>
-        
-        <!-- 搜索输入框 -->
-        <div id="input-group-7" class="input-group">
-            <label class="input-label">搜索输入框</label>
-            <input id="input-search" type="search" class="input" placeholder="请输入搜索内容">
+
+        <div class="input-group" style="margin-bottom: 24px;">
+            <label class="input-label">带步长的滑块</label>
+            <input type="range" class="slider" min="0" max="100" step="10" value="30">
         </div>
-        
-        <!-- 密码输入框 -->
-        <div id="input-group-8" class="input-group">
-            <label class="input-label">密码输入框</label>
-            <input id="input-password" type="password" class="input" placeholder="请输入密码">
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.slider</code></td>
+                    <td>滑块样式</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;input type="range" class="slider" min="0" max="100" value="50"&gt;
+
+&lt;!-- 带步长 --&gt;
+&lt;input type="range" class="slider" min="0" max="100" step="10" value="30"&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>7. 表单验证</h3>
+        <p>框架提供基础的表单验证样式。</p>
+
+        <div class="message message-info">
+            <div>
+                <strong>验证状态：</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li><code>.error</code> - 错误状态，边框变红</li>
+                    <li><code>.success</code> - 成功状态，边框变绿</li>
+                    <li><code>.warning</code> - 警告状态，边框变黄</li>
+                </ul>
+            </div>
+        </div>
+
+        <h4>使用说明</h4>
+        <pre class="language-javascript"><code class="language-javascript">// 表单验证示例
+const form = document.querySelector('form');
+const input = form.querySelector('.input');
+
+// 验证失败
+input.classList.add('error');
+
+// 验证成功
+input.classList.add('success');</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，需要 JavaScript 进行验证逻辑。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>8. 使用建议</h3>
+        <div class="message message-info">
+            <div>
+                <strong>最佳实践：</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>始终为输入框添加 label 标签，提升可访问性</li>
+                    <li>使用 input-hint 提供输入提示，使用 input-error 显示错误信息</li>
+                    <li>单选框和复选框应使用相同的 name 属性进行分组</li>
+                    <li>开关适合表示即时生效的设置项</li>
+                    <li>滑块适合选择范围明确的数值</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
