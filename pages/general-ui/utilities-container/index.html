@@ -1,0 +1,230 @@
+<section class="section">
+    <h2>工具类组件</h2>
+    <p>工具类组件提供常用的辅助样式，用于控制间距、文本样式等。</p>
+
+    <div class="section-subtitle">
+        <h3>1. 间距占位符</h3>
+        <p>间距占位符用于在元素之间创建固定间距。</p>
+
+        <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+            <div style="background: var(--primary-color); color: white; padding: 8px; border-radius: var(--radius-sm);">元素 1</div>
+            <div class="spacer-xs" style="background: rgba(255,0,0,0.1);"><span style="font-size: 10px; color: #666;">.spacer-xs (4px)</span></div>
+            <div style="background: var(--success-color); color: white; padding: 8px; border-radius: var(--radius-sm);">元素 2</div>
+            <div class="spacer-sm" style="background: rgba(255,0,0,0.1);"><span style="font-size: 10px; color: #666;">.spacer-sm (8px)</span></div>
+            <div style="background: var(--warning-color); color: white; padding: 8px; border-radius: var(--radius-sm);">元素 3</div>
+            <div class="spacer-md" style="background: rgba(255,0,0,0.1);"><span style="font-size: 10px; color: #666;">.spacer-md (16px)</span></div>
+            <div style="background: var(--error-color); color: white; padding: 8px; border-radius: var(--radius-sm);">元素 4</div>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>高度</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.spacer-xs</code></td>
+                    <td>4px</td>
+                    <td>超小间距</td>
+                </tr>
+                <tr>
+                    <td><code>.spacer-sm</code></td>
+                    <td>8px</td>
+                    <td>小间距</td>
+                </tr>
+                <tr>
+                    <td><code>.spacer-md</code></td>
+                    <td>16px</td>
+                    <td>中间距</td>
+                </tr>
+                <tr>
+                    <td><code>.spacer-lg</code></td>
+                    <td>24px</td>
+                    <td>大间距</td>
+                </tr>
+                <tr>
+                    <td><code>.spacer-xl</code></td>
+                    <td>32px</td>
+                    <td>超大间距</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;div&gt;元素 1&lt;/div&gt;
+&lt;div class="spacer-md"&gt;&lt;/div&gt;
+&lt;div&gt;元素 2&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>2. 文本样式</h3>
+        <p>文本样式类用于快速设置文本的外观。</p>
+
+        <h4>2.1 文本颜色</h4>
+        <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+            <p class="text-muted" style="margin-bottom: 8px;">.text-muted - 灰色文本（次要信息）</p>
+            <p style="color: var(--text-primary); margin-bottom: 8px;">默认文本 - 主要文本颜色</p>
+            <p style="color: var(--text-secondary); margin-bottom: 8px;">次要文本 - 描述性文本</p>
+        </div>
+
+        <h4>2.2 字体样式</h4>
+        <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+            <p class="text-serif" style="margin-bottom: 8px;">.text-serif - 宋体文本（中文衬线字体）</p>
+            <p style="font-family: var(--font-sans); margin-bottom: 8px;">默认无衬线字体</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>样式</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-muted</code></td>
+                    <td>color: var(--text-secondary)</td>
+                    <td>灰色文本，用于次要信息</td>
+                </tr>
+                <tr>
+                    <td><code>.text-serif</code></td>
+                    <td>font-family: 宋体</td>
+                    <td>中文衬线字体</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;!-- 灰色文本 --&gt;
+&lt;p class="text-muted"&gt;这是次要信息&lt;/p&gt;
+
+&lt;!-- 宋体文本 --&gt;
+&lt;p class="text-serif"&gt;这是宋体文本&lt;/p&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>3. 占位符</h3>
+        <p>占位符用于显示加载状态或预留内容位置。</p>
+
+        <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
+            <div class="placeholder" style="width: 100%; height: 20px; margin-bottom: 8px;"></div>
+            <div class="placeholder" style="width: 80%; height: 20px; margin-bottom: 8px;"></div>
+            <div class="placeholder" style="width: 60%; height: 20px;"></div>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>样式</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.placeholder</code></td>
+                    <td>背景动画效果</td>
+                    <td>占位符，带闪烁动画效果</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;!-- 文本占位符 --&gt;
+&lt;div class="placeholder" style="width: 100%; height: 20px;"&gt;&lt;/div&gt;
+
+&lt;!-- 图片占位符 --&gt;
+&lt;div class="placeholder" style="width: 200px; height: 150px;"&gt;&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>4. 折叠面板</h3>
+        <p>折叠面板用于展示可展开/收起的内容。</p>
+
+        <div class="collapse-panel" style="margin-bottom: 16px;">
+            <div class="collapse-panel-header" onclick="this.nextElementSibling.classList.toggle('active')" style="cursor: pointer; padding: 12px; background: var(--gray-100); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+                <strong>点击展开/收起</strong>
+                <span>▼</span>
+            </div>
+            <div class="collapse-panel-content" style="padding: 12px; display: none;">
+                <p>这是折叠面板的内容区域，可以放置任意内容。</p>
+            </div>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.collapse-panel</code></td>
+                    <td>折叠面板容器</td>
+                </tr>
+                <tr>
+                    <td><code>.collapse-panel-header</code></td>
+                    <td>面板头部，点击触发折叠</td>
+                </tr>
+                <tr>
+                    <td><code>.collapse-panel-content</code></td>
+                    <td>面板内容区域</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;div class="collapse-panel"&gt;
+    &lt;div class="collapse-panel-header"&gt;
+        标题
+    &lt;/div&gt;
+    &lt;div class="collapse-panel-content"&gt;
+        内容区域
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，需要 JavaScript 控制展开/收起状态。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>5. 使用建议</h3>
+        <div class="message message-info">
+            <div>
+                <strong>最佳实践：</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>使用间距占位符替代空的 div 标签</li>
+                    <li>文本样式类应与语义化标签配合使用</li>
+                    <li>占位符适合加载状态，骨架屏适合复杂布局</li>
+                    <li>折叠面板内容较多时考虑使用</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// 简单的折叠面板交互
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.collapse-panel-header')) {
+        const content = e.target.closest('.collapse-panel-header').nextElementSibling;
+        if (content) {
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+});
+</script>

@@ -55,30 +55,18 @@
                         <ul>
                             <li data-id="card-container" data-page="card-container">
                                 <a href="#" onclick="loadPage('card-container')">
-                                <span>卡片容器</span> <span class="menu-badge badge new"></span>
-                            </a>
+                                    <span>卡片容器</span>
+                                </a>
                             </li>
                             <li data-id="general-container" data-page="general-container">
                                 <a href="#" onclick="loadPage('general-container')">
-                                    <span>通用容器</span>
+                                    <span>通用容器</span> <span class="menu-badge badge new"></span>
                                 </a>
                             </li>
                             <li data-id="layout-container" data-page="layout-container">
-                                <a href="#">
-                                    <span>布局容器</span>
+                                <a href="#" onclick="loadPage('layout-container')">
+                                    <span>布局容器</span> <span class="menu-badge badge new"></span>
                                 </a>
-                                <ul>
-                                    <li data-id="sidebar-layout" data-page="sidebar-layout">
-                                        <a href="#" onclick="loadPage('sidebar-layout')">
-                                            <span>侧边栏布局</span>
-                                        </a>
-                                    </li>
-                                    <li data-id="header-layout" data-page="header-layout">
-                                        <a href="#" onclick="loadPage('header-layout')">
-                                            <span>顶部布局</span>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -130,12 +118,17 @@
                             </li>
                             <li data-id="md-container" data-page="md-container">
                                 <a href="#" onclick="loadPage('md-container')">
-                                <span>MD编辑器</span> <span class="menu-badge badge beta"></span>
-                            </a>
+                                    <span>MD编辑器</span> <span class="menu-badge badge beta"></span>
+                                </a>
                             </li>
                             <li data-id="menu-container" data-page="menu-container">
                                 <a href="#" onclick="loadPage('menu-container')">
                                     <span>菜单组件</span>
+                                </a>
+                            </li>
+                            <li data-id="core-functions" data-page="core-functions">
+                                <a href="#" onclick="loadPage('core-functions')">
+                                    <span>核心JS功能</span> <span class="menu-badge badge new"></span>
                                 </a>
                             </li>
                         </ul>
@@ -227,8 +220,13 @@
                             </li>
                             <li data-id="theme-selector" data-page="theme-selector">
                                 <a href="#" onclick="loadPage('theme-selector')">
-                                <span>主题选择器</span> <span class="menu-badge badge hot"></span>
-                            </a>
+                                    <span>主题选择器</span> <span class="menu-badge badge hot"></span>
+                                </a>
+                            </li>
+                            <li data-id="utilities-container" data-page="utilities-container">
+                                <a href="#" onclick="loadPage('utilities-container')">
+                                    <span>工具类组件</span> <span class="menu-badge badge new"></span>
+                                </a>
                             </li>
                         </ul>
                     </li>
@@ -278,12 +276,14 @@
                 'basic-layout': 'pages/basic-layout/index.html',
                 'card-container': 'pages/basic-layout/card-container/index.html',
                 'general-container': 'pages/basic-layout/general-container/index.html',
+                'layout-container': 'pages/basic-layout/layout-container/index.html',
                 'interaction-controls': 'pages/interaction-controls/index.html',
                 'button-container': 'pages/interaction-controls/button-container/index.html',
                 'input-container': 'pages/interaction-controls/input-container/index.html',
                 'select-container': 'pages/interaction-controls/select-container/index.html',
                 'md-container': 'pages/interaction-controls/md-container/index.html',
                 'menu-container': 'pages/interaction-controls/menu-container/index.html',
+                'core-functions': 'pages/interaction-controls/core-functions/index.html',
                 'feedback-components': 'pages/feedback-components/index.html',
                 'modal-container-1': 'pages/feedback-components/modal-container-1/index.html',
                 'toast-container': 'pages/feedback-components/toast-container/index.html',
@@ -299,7 +299,8 @@
                 'text-container': 'pages/general-ui/text-container/index.html',
                 'icon-container': 'pages/general-ui/icon-container/index.html',
                 'divider-container': 'pages/general-ui/divider-container/index.html',
-                'theme-selector': 'pages/general-ui/theme-selector/index.html'
+                'theme-selector': 'pages/general-ui/theme-selector/index.html',
+                'utilities-container': 'pages/general-ui/utilities-container/index.html'
             };
 
             const filePath = pageMap[pageId];

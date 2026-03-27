@@ -1,5 +1,53 @@
 # 版本更新日志
 
+## v0.2.2 (2026-03-28)
+
+### 组件审计与手册完善
+
+#### 新增手册页面
+- **布局容器手册页** (pages/basic-layout/layout-container/)
+  - 基础布局容器（侧边栏+内容区）
+  - 顶部+左小右大布局
+  - 完整布局（含底部）
+  - Header元素位置控制
+  - Header搜索框
+  - 响应式设计说明
+
+- **通用容器手册页** (pages/basic-layout/general-container/)
+  - 基础容器（container/container-fluid）
+  - 固定宽度容器（sm/md/lg）
+  - 网格容器（2/3/4/12列）
+  - 透明背景容器
+  - 响应式行为
+  - 容器嵌套
+
+- **工具类组件手册页** (pages/general-ui/utilities-container/)
+  - 间距占位符（spacer-xs/sm/md/lg/xl）
+  - 文本样式（text-muted/text-serif）
+  - 占位符（placeholder）
+  - 折叠面板（collapse-panel）
+  - 使用建议
+
+- **核心JS功能手册页** (pages/interaction-controls/core-functions/)
+  - 调试功能（debug）
+  - 遮罩层组件（createOverlay/showOverlay/hideOverlay）
+  - PopupBase弹窗基类
+  - 图片放大功能（zoomImage）
+  - 初始化函数列表
+  - 使用建议
+
+#### 菜单结构优化
+- 简化基础布局组件菜单层级
+- 新增布局容器、通用容器、工具类组件、核心JS功能菜单项
+- 更新页面映射（pageMap）
+
+#### 文档质量提升
+- 所有手册页包含：UI示例、参数说明、使用说明、代码示例、JS动态渲染说明
+- 代码示例使用Prism语法高亮
+- 统一文档结构和样式
+
+---
+
 ## v0.2.1 (2026-03-28)
 
 ### 新增功能
