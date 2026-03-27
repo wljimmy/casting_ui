@@ -1,28 +1,348 @@
 <section class="section">
     <h2>文本</h2>
-    
-    <div class="text-container">
-        <h1>一级标题</h1>
-        <h2>二级标题</h2>
-        <h3>三级标题</h3>
-        <h4>四级标题</h4>
-        <h5>五级标题</h5>
-        <h6>六级标题</h6>
-        
-        <p>普通文本：这是一段普通文本，用于展示文本的基本样式。</p>
-        <p class="text-primary">主要文本：这是一段主要文本，使用主题色。</p>
-        <p class="text-secondary">次要文本：这是一段次要文本，使用次要颜色。</p>
-        <p class="text-light">浅色文本：这是一段浅色文本，用于背景较深的场景。</p>
-        <p class="text-success">成功文本：这是一段成功文本，使用绿色。</p>
-        <p class="text-warning">警告文本：这是一段警告文本，使用黄色。</p>
-        <p class="text-error">错误文本：这是一段错误文本，使用红色。</p>
-        
-        <p class="text-sm">小文本：这是一段小尺寸文本。</p>
-        <p class="text-md">中文本：这是一段中等尺寸文本。</p>
-        <p class="text-lg">大文本：这是一段大尺寸文本。</p>
-        
-        <p class="text-bold">粗体文本：这是一段粗体文本。</p>
-        <p class="text-italic">斜体文本：这是一段斜体文本。</p>
-        <p class="text-underline">下划线文本：这是一段下划线文本。</p>
+    <p>文本组件提供丰富的文本样式，包括标题、段落、颜色、大小和装饰等。</p>
+
+    <div class="section-subtitle">
+        <h3>1. 标题</h3>
+        <p>框架提供六级标题样式，从 h1 到 h6。</p>
+
+        <div class="text-container" style="margin-bottom: 24px;">
+            <h1>一级标题 (h1)</h1>
+            <h2>二级标题 (h2)</h2>
+            <h3>三级标题 (h3)</h3>
+            <h4>四级标题 (h4)</h4>
+            <h5>五级标题 (h5)</h5>
+            <h6>六级标题 (h6)</h6>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>标签</th>
+                    <th>字体大小</th>
+                    <th>字重</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>h1</code></td>
+                    <td>32px</td>
+                    <td>600</td>
+                    <td>页面主标题</td>
+                </tr>
+                <tr>
+                    <td><code>h2</code></td>
+                    <td>24px</td>
+                    <td>600</td>
+                    <td>章节标题</td>
+                </tr>
+                <tr>
+                    <td><code>h3</code></td>
+                    <td>20px</td>
+                    <td>600</td>
+                    <td>小节标题</td>
+                </tr>
+                <tr>
+                    <td><code>h4</code></td>
+                    <td>18px</td>
+                    <td>600</td>
+                    <td>子节标题</td>
+                </tr>
+                <tr>
+                    <td><code>h5</code></td>
+                    <td>16px</td>
+                    <td>600</td>
+                    <td>小标题</td>
+                </tr>
+                <tr>
+                    <td><code>h6</code></td>
+                    <td>14px</td>
+                    <td>600</td>
+                    <td>最小标题</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;h1&gt;页面主标题&lt;/h1&gt;
+&lt;h2&gt;章节标题&lt;/h2&gt;
+&lt;h3&gt;小节标题&lt;/h3&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>2. 文本颜色</h3>
+        <p>提供多种文本颜色，用于不同场景。</p>
+
+        <div class="text-container" style="margin-bottom: 24px;">
+            <p class="text-primary">主要文本 (text-primary)：使用主题色</p>
+            <p class="text-secondary">次要文本 (text-secondary)：使用次要颜色</p>
+            <p class="text-muted">灰色文本 (text-muted)：用于提示信息</p>
+            <p class="text-success">成功文本 (text-success)：使用绿色</p>
+            <p class="text-warning">警告文本 (text-warning)：使用黄色</p>
+            <p class="text-error">错误文本 (text-error)：使用红色</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>颜色</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-primary</code></td>
+                    <td>主题色</td>
+                    <td>主要文本、链接</td>
+                </tr>
+                <tr>
+                    <td><code>.text-secondary</code></td>
+                    <td>次要色</td>
+                    <td>描述文本</td>
+                </tr>
+                <tr>
+                    <td><code>.text-muted</code></td>
+                    <td>灰色</td>
+                    <td>提示信息、禁用状态</td>
+                </tr>
+                <tr>
+                    <td><code>.text-success</code></td>
+                    <td>绿色</td>
+                    <td>成功状态</td>
+                </tr>
+                <tr>
+                    <td><code>.text-warning</code></td>
+                    <td>黄色</td>
+                    <td>警告状态</td>
+                </tr>
+                <tr>
+                    <td><code>.text-error</code></td>
+                    <td>红色</td>
+                    <td>错误状态</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;p class="text-primary"&gt;主要文本&lt;/p&gt;
+&lt;p class="text-muted"&gt;提示信息&lt;/p&gt;
+&lt;p class="text-success"&gt;操作成功&lt;/p&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>3. 文本大小</h3>
+        <p>提供三种文本大小。</p>
+
+        <div class="text-container" style="margin-bottom: 24px;">
+            <p class="text-sm">小文本 (text-sm)：12px，用于辅助信息</p>
+            <p class="text-md">中文本 (text-md)：14px，默认文本大小</p>
+            <p class="text-lg">大文本 (text-lg)：16px，用于强调内容</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>字体大小</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-sm</code></td>
+                    <td>12px</td>
+                    <td>辅助信息、标签</td>
+                </tr>
+                <tr>
+                    <td><code>.text-md</code></td>
+                    <td>14px</td>
+                    <td>默认正文</td>
+                </tr>
+                <tr>
+                    <td><code>.text-lg</code></td>
+                    <td>16px</td>
+                    <td>强调内容</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;p class="text-sm"&gt;小文本&lt;/p&gt;
+&lt;p class="text-md"&gt;中文本（默认）&lt;/p&gt;
+&lt;p class="text-lg"&gt;大文本&lt;/p&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>4. 文本装饰</h3>
+        <p>提供粗体、斜体、下划线等文本装饰样式。</p>
+
+        <div class="text-container" style="margin-bottom: 24px;">
+            <p class="text-bold">粗体文本 (text-bold)：font-weight: 600</p>
+            <p class="text-italic">斜体文本 (text-italic)：font-style: italic</p>
+            <p class="text-underline">下划线文本 (text-underline)：text-decoration: underline</p>
+            <p class="text-strike">删除线文本 (text-strike)：text-decoration: line-through</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>样式</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-bold</code></td>
+                    <td>font-weight: 600</td>
+                    <td>强调文本</td>
+                </tr>
+                <tr>
+                    <td><code>.text-italic</code></td>
+                    <td>font-style: italic</td>
+                    <td>引用、特殊说明</td>
+                </tr>
+                <tr>
+                    <td><code>.text-underline</code></td>
+                    <td>text-decoration: underline</td>
+                    <td>链接、强调</td>
+                </tr>
+                <tr>
+                    <td><code>.text-strike</code></td>
+                    <td>text-decoration: line-through</td>
+                    <td>已删除内容</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;p class="text-bold"&gt;粗体文本&lt;/p&gt;
+&lt;p class="text-italic"&gt;斜体文本&lt;/p&gt;
+&lt;p class="text-underline"&gt;下划线文本&lt;/p&gt;
+&lt;p class="text-strike"&gt;删除线文本&lt;/p&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>5. 字体族</h3>
+        <p>支持不同的字体族。</p>
+
+        <div class="text-container" style="margin-bottom: 24px;">
+            <p class="text-sans">无衬线字体 (text-sans)：系统默认无衬线字体</p>
+            <p class="text-serif">衬线字体 (text-serif)：宋体，适合中文排版</p>
+            <p class="text-mono">等宽字体 (text-mono)：Consolas，适合代码</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>字体</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-sans</code></td>
+                    <td>系统无衬线字体</td>
+                    <td>默认正文</td>
+                </tr>
+                <tr>
+                    <td><code>.text-serif</code></td>
+                    <td>宋体</td>
+                    <td>中文排版、引用</td>
+                </tr>
+                <tr>
+                    <td><code>.text-mono</code></td>
+                    <td>Consolas</td>
+                    <td>代码、数据</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;p class="text-sans"&gt;无衬线字体（默认）&lt;/p&gt;
+&lt;p class="text-serif"&gt;衬线字体（宋体）&lt;/p&gt;
+&lt;code class="text-mono"&gt;等宽字体（代码）&lt;/code&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>6. 文本对齐</h3>
+        <p>提供文本对齐方式。</p>
+
+        <div class="text-container" style="margin-bottom: 24px; border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md);">
+            <p class="text-left">左对齐文本 (text-left)</p>
+            <p class="text-center">居中对齐文本 (text-center)</p>
+            <p class="text-right">右对齐文本 (text-right)</p>
+            <p class="text-justify">两端对齐文本 (text-justify)：这是一段很长的文本，用于展示两端对齐效果。文本会自动调整字间距，使左右两端都对齐。</p>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>对齐方式</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.text-left</code></td>
+                    <td>左对齐（默认）</td>
+                </tr>
+                <tr>
+                    <td><code>.text-center</code></td>
+                    <td>居中对齐</td>
+                </tr>
+                <tr>
+                    <td><code>.text-right</code></td>
+                    <td>右对齐</td>
+                </tr>
+                <tr>
+                    <td><code>.text-justify</code></td>
+                    <td>两端对齐</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;p class="text-left"&gt;左对齐（默认）&lt;/p&gt;
+&lt;p class="text-center"&gt;居中对齐&lt;/p&gt;
+&lt;p class="text-right"&gt;右对齐&lt;/p&gt;
+&lt;p class="text-justify"&gt;两端对齐的长文本...&lt;/p&gt;</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>7. 使用建议</h3>
+        <div class="message message-info">
+            <div>
+                <strong>最佳实践：</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>使用语义化标题标签 (h1-h6)，不要仅依赖样式</li>
+                    <li>文本颜色应与状态对应：success(成功)、warning(警告)、error(错误)</li>
+                    <li>不要过度使用文本装饰，保持页面简洁</li>
+                    <li>中文正文推荐使用默认无衬线字体，特殊场景使用宋体</li>
+                    <li>代码和数据使用等宽字体，确保对齐</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
