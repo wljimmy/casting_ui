@@ -14,7 +14,7 @@ version: "3.5"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M20.884 10.554a9 9 0 1 0 -10.337 10.328" />
   <path d="M3.6 9h16.8" />
   <path d="M3.6 15h6.9" />

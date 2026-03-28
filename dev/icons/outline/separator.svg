@@ -14,7 +14,7 @@ unicode: "ebda"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M3 12l0 .01" />
   <path d="M7 12l10 0" />
   <path d="M21 12l0 .01" />

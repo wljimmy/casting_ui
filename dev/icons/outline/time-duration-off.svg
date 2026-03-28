@@ -14,7 +14,7 @@ unicode: "fadc"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M3 12v.01" />
   <path d="M7.5 19.8v.01" />
   <path d="M4.2 16.5v.01" />

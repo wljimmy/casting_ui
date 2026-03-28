@@ -14,7 +14,7 @@ unicode: "ef64"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M5 21h14" />
   <path d="M6 18h2" />
   <path d="M7 18v3" />

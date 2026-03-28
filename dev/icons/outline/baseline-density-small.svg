@@ -14,7 +14,7 @@ category: Text
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M4 3h16" />
   <path d="M4 9h16" />
   <path d="M4 15h16" />

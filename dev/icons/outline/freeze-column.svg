@@ -14,7 +14,7 @@ unicode: "fa63"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M9 9.5l-6 6" />
   <path d="M9 4l-6 6" />
   <path d="M9 15l-5 5" />

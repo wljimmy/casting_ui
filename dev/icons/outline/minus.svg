@@ -14,6 +14,6 @@ unicode: "eaf2"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M5 12l14 0" />
 </svg>

@@ -14,7 +14,7 @@ unicode: "eb3d"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M15 5l0 2" />
   <path d="M15 11l0 2" />
   <path d="M15 17l0 2" />

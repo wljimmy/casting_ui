@@ -14,7 +14,7 @@ unicode: "fc1e"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M10 4v16l-6 -5.5" />
   <path d="M14 20v-16l6 5.5" />
 </svg>

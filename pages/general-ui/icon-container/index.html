@@ -6,18 +6,24 @@
         <h3>1. 使用方法</h3>
         <p>图标使用SVG格式，可直接嵌入HTML或作为背景图使用。</p>
 
-        <h4>1.1 直接嵌入SVG</h4>
-        <pre class="language-html"><code class="language-html">&lt;!-- 使用填充风格图标 --&gt;
-&lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;
-  &lt;path d="M12 2l-9 9h3v9h6v-6h4v6h6v-9h3l-9-9z"/&gt;
+        <h4>1.1 使用 &lt;use&gt; 标签引用（推荐）</h4>
+        <pre class="language-html"><code class="language-html">&lt;!-- 使用线性风格图标（推荐） --&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+  &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
 &lt;/svg&gt;
 
-&lt;!-- 使用线性风格图标 --&gt;
-&lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+&lt;!-- 使用填充风格图标 --&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;
+  &lt;use href="dev/icons/filled/home.svg#icon"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code></pre>
+
+        <h4>1.2 直接嵌入SVG</h4>
+        <pre class="language-html"><code class="language-html">&lt;!-- 直接嵌入SVG代码 --&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;
   &lt;path d="M12 2l-9 9h3v9h6v-6h4v6h6v-9h3l-9-9z"/&gt;
 &lt;/svg&gt;</code></pre>
 
-        <h4>1.2 通过CSS使用</h4>
+        <h4>1.3 通过CSS使用</h4>
         <pre class="language-css"><code class="language-css">.icon {
   width: 24px;
   height: 24px;
@@ -36,27 +42,39 @@
         <h4>2.1 导航类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l-9 9h3v9h6v-6h4v6h6v-9h3l-9-9z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/home.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">home<br>首页</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/menu.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">menu<br>菜单</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/search.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">search<br>搜索</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M15 19l-7-7 7-7"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/arrow-left.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">arrow-left<br>返回</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 5l7 7-7 7"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/arrow-right.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">arrow-right<br>前进</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9l-7 7-7-7"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/chevron-down.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">chevron-down<br>展开</div>
             </div>
         </div>
@@ -64,27 +82,39 @@
         <h4>2.2 操作类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4v16m8-8H4"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/plus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">plus<br>添加</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 12h16"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/minus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">minus<br>删除</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/menu-2.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">menu-2<br>更多</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/edit.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">edit<br>编辑</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/trash.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">trash<br>删除</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/copy.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">copy<br>复制</div>
             </div>
         </div>
@@ -92,27 +122,39 @@
         <h4>2.3 状态类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/check.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">check-circle<br>成功</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/info-circle.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">info-circle<br>信息</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/alert-triangle.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">alert-triangle<br>警告</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/x.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">error-circle<br>错误</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/plus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">add-circle<br>添加</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/minus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">remove-circle<br>移除</div>
             </div>
         </div>
@@ -120,27 +162,39 @@
         <h4>2.4 文件类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/file.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">file<br>文件</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/folder.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">folder<br>文件夹</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/download.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">download<br>下载</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16v-6H5l7-7 7 7h-4v6H9zM5 20v2h14v-2H5z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/upload.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">upload<br>上传</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10v6m0 0l-3-3m3 3l3-3m-9-3h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/device-floppy.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">save<br>保存</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/photo.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">image<br>图片</div>
             </div>
         </div>
@@ -148,27 +202,39 @@
         <h4>2.5 用户类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/user.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">user<br>用户</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/users.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">users<br>用户组</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/bell.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">bell<br>通知</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/message.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">message<br>消息</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/heart.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">heart<br>收藏</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/star.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">star<br>收藏</div>
             </div>
         </div>
@@ -176,27 +242,39 @@
         <h4>2.6 设置类图标</h4>
         <div class="icon-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; margin-bottom: 24px;">
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 00.12-.61l-1.92-3.32a.488.488 0 00-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 00-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 00-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/settings.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">settings<br>设置</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/target.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">target<br>目标</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 00-9 9c0 4.97 4.03 9 9 9s9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v6l5.25 3.15.75-1.23-4-2.42V8z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/clock.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">clock<br>时钟</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/help-circle.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">help-circle<br>帮助</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/plus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">add-circle<br>添加</div>
             </div>
             <div class="icon-item" style="text-align: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../../dev/icons/outline/minus.svg#icon"></use>
+                </svg>
                 <div style="font-size: 12px; margin-top: 8px;">remove-circle<br>移除</div>
             </div>
         </div>
@@ -255,13 +333,19 @@
 
         <h4>使用说明</h4>
         <pre class="language-html"><code class="language-html">&lt;!-- 小图标 --&gt;
-&lt;svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"&gt;...&lt;/svg&gt;
+&lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+  &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
+&lt;/svg&gt;
 
 &lt;!-- 默认图标 --&gt;
-&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;...&lt;/svg&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+  &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
+&lt;/svg&gt;
 
 &lt;!-- 大图标 --&gt;
-&lt;svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"&gt;...&lt;/svg&gt;</code></pre>
+&lt;svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+  &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code></pre>
 
         <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
     </div>
@@ -292,11 +376,15 @@
         <h4>使用说明</h4>
         <pre class="language-html"><code class="language-html">&lt;!-- 通过父元素颜色控制 --&gt;
 &lt;span style="color: var(--primary-color);"&gt;
-    &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"&gt;...&lt;/svg&gt;
+    &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+        &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
+    &lt;/svg&gt;
 &lt;/span&gt;
 
 &lt;!-- 直接设置颜色 --&gt;
-&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="var(--success-color)"&gt;...&lt;/svg&gt;</code></pre>
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success-color)" stroke-width="2"&gt;
+    &lt;use href="dev/icons/outline/home.svg#icon"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code></pre>
 
         <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
     </div>
@@ -338,6 +426,7 @@
             <div>
                 <strong>最佳实践：</strong>
                 <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>使用 &lt;use href="文件.svg#icon"&gt; 方式引用图标（推荐）</li>
                     <li>保持图标尺寸一致，同一界面中尽量使用相同尺寸</li>
                     <li>使用currentColor让图标继承父元素颜色，便于主题切换</li>
                     <li>按钮中的图标与文字保持适当间距（8px）</li>

@@ -14,7 +14,7 @@ unicode: "eadc"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M9.5 11l.01 0" />
   <path d="M14.5 11l.01 0" />
   <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />

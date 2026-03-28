@@ -14,7 +14,7 @@ unicode: "fd9b"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M10 14h.01" />
   <path d="M14 14h.01" />
   <path d="M10 17a3.5 3.5 0 0 0 4 0" />

@@ -14,7 +14,7 @@ version: "3.0"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M4 20h16" />
   <path d="M4 16v-.01" />
   <path d="M20 16v-.01" />

@@ -14,7 +14,7 @@ unicode: "ea15"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M7 7l10 10" />
   <path d="M17 8l0 9l-9 0" />
 </svg>

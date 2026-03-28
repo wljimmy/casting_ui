@@ -14,7 +14,7 @@ unicode: "eb42"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M3 7l6 6l4 -4l8 8" />
   <path d="M21 10l0 7l-7 0" />
 </svg>

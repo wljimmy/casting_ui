@@ -14,6 +14,6 @@ unicode: "eb60"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M18 14l-6 -6l-6 6h12" />
 </svg>

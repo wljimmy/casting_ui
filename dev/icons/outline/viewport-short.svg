@@ -14,7 +14,7 @@ version: "3.5"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M12 3v7l3 -3" />
   <path d="M9 7l3 3" />
   <path d="M12 21v-7l3 3" />

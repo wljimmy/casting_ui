@@ -14,7 +14,7 @@ unicode: "eaaf"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M4 7l16 0" />
   <path d="M4 17l16 0" />
   <path d="M7 4l0 16" />

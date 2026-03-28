@@ -14,7 +14,7 @@ unicode: "fca7"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M10 8v8" />
   <path d="M14 8v8" />
   <path d="M8 10h8" />

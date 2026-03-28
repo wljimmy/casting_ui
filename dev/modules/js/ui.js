@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.2.0
+ * Version: 0.2.1
  * Module: ui.js
  * Description: UI框架模块，提供UI组件管理
  * Copyright (c) 2026 Bingo工作室
@@ -122,17 +122,28 @@ class UI {
 
     // 菜单相关
     initMenus() {
+        // 菜单对象集合
+        this.menus = new Map();
+        
         // 初始化菜单交互
         this.menu = {
             init: () => {
                 // 初始化所有菜单
                 this.initMenuEvents();
+                // 启动实时监听
+                this.startMenuObserver();
             },
             toggle: (menuId) => {
                 // 切换菜单显示/隐藏
                 const menu = document.getElementById(menuId);
                 if (menu) {
-                    menu.classList.toggle('menu-visible');
+                    if (menu.classList.contains('menu-hidden')) {
+                        menu.classList.remove('menu-hidden');
+                        menu.classList.add('menu-visible');
+                    } else {
+                        menu.classList.remove('menu-visible');
+                        menu.classList.add('menu-hidden');
+                    }
                 }
             },
             setActive: (menuItem) => {
@@ -210,61 +221,195 @@ class UI {
         
         // 初始化菜单事件
         this.initMenuEvents();
+        // 启动实时监听
+        this.startMenuObserver();
     }
 
-    // 初始化菜单事件
-    initMenuEvents() {
-        // 处理菜单项点击事件
-        const menuItems = document.querySelectorAll('menu li');
-        menuItems.forEach(item => {
-            const link = item.querySelector('a');
-            if (link) {
-                link.addEventListener('click', (e) => {
-                    // 阻止事件冒泡
+    // 启动菜单观察者
+    startMenuObserver() {
+        // 创建MutationObserver来监听DOM变化
+        this.menuObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                // 检查添加的节点
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        // 检查是否是menu元素
+                        if (node.tagName === 'MENU') {
+                            this.initMenu(node);
+                        }
+                        // 检查是否包含menu元素
+                        const menus = node.querySelectorAll('menu');
+                        menus.forEach(menu => {
+                            this.initMenu(menu);
+                        });
+                    }
+                });
+                
+                // 检查移除的节点
+                mutation.removedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        // 检查是否是menu元素
+                        if (node.tagName === 'MENU') {
+                            this.destroyMenu(node);
+                        }
+                        // 检查是否包含menu元素
+                        const menus = node.querySelectorAll('menu');
+                        menus.forEach(menu => {
+                            this.destroyMenu(menu);
+                        });
+                    }
+                });
+            });
+        });
+        
+        // 开始观察整个文档
+        this.menuObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    // 初始化单个菜单
+    initMenu(menu) {
+        // 为菜单生成唯一ID
+        const menuId = menu.id || `menu-${Date.now()}`;
+        if (!menu.id) {
+            menu.id = menuId;
+        }
+        
+        // 初始化子菜单为收起状态
+        menu.querySelectorAll('ul ul').forEach(submenu => {
+            submenu.classList.add('collapsed');
+        });
+        
+        // 创建菜单对象
+        const menuObj = {
+            element: menu,
+            id: menuId,
+            // 菜单项点击处理
+            handleClick: (e) => {
+                // 找到被点击的菜单项li
+                const item = e.target.closest('menu li');
+                if (item && item.closest('menu') === menu) {
                     e.stopPropagation();
                     
                     // 设置当前菜单项为激活状态
                     this.menu.setActive(item);
                     
+                    // 关闭当前菜单中所有展开的子菜单
+                    const allExpandedItems = menu.querySelectorAll('li.expanded');
+                    allExpandedItems.forEach(expandedItem => {
+                        const expandedSubmenu = expandedItem.querySelector(':scope > ul');
+                        if (expandedSubmenu) {
+                            expandedSubmenu.classList.add('collapsed');
+                            expandedItem.classList.remove('expanded');
+                        }
+                    });
+                    
                     // 处理子菜单
-                    const submenu = item.querySelector('ul');
+                    const submenu = item.querySelector(':scope > ul');
                     if (submenu) {
-                        // 切换子菜单显示
-                        submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                        e.preventDefault();
+                        // 展开当前子菜单
+                        submenu.classList.remove('collapsed');
+                        item.classList.add('expanded');
                     }
                     
-                    // 处理data属性
-                    const dataHref = link.getAttribute('data-href');
-                    const dataAction = link.getAttribute('data-action');
-                    
-                    if (dataHref) {
-                        e.preventDefault();
-                        // 处理链接跳转
-                        window.location.href = dataHref;
-                    }
-                    
-                    if (dataAction) {
-                        e.preventDefault();
-                        // 处理自定义动作
-                        try {
-                            const action = eval(dataAction);
-                            if (typeof action === 'function') {
-                                action();
+                    // 查找菜单项内的链接（如果有）
+                    const link = item.querySelector('a');
+                    if (link) {
+                        // 处理onclick属性
+                        if (link.hasAttribute('onclick')) {
+                            e.preventDefault();
+                            // 移除onclick属性，执行它，然后重新添加
+                            const onclick = link.getAttribute('onclick');
+                            link.removeAttribute('onclick');
+                            setTimeout(() => {
+                                try {
+                                    eval(onclick);
+                                } catch (error) {
+                                    console.error('Menu onclick error:', error);
+                                }
+                                link.setAttribute('onclick', onclick);
+                            }, 0);
+                        } else {
+                            // 处理data属性
+                            const dataHref = link.getAttribute('data-href');
+                            const dataAction = link.getAttribute('data-action');
+                            
+                            if (dataHref) {
+                                e.preventDefault();
+                                // 处理链接跳转
+                                window.location.href = dataHref;
                             }
-                        } catch (error) {
-                            console.error('Menu action error:', error);
+                            
+                            if (dataAction) {
+                                e.preventDefault();
+                                // 处理自定义动作
+                                try {
+                                    const action = eval(dataAction);
+                                    if (typeof action === 'function') {
+                                        action();
+                                    }
+                                } catch (error) {
+                                    console.error('Menu action error:', error);
+                                }
+                            }
+                        }
+                    } else {
+                        // 没有链接的菜单项，直接处理data属性
+                        const dataHref = item.getAttribute('data-href');
+                        const dataAction = item.getAttribute('data-action');
+                        
+                        if (dataHref) {
+                            // 处理链接跳转
+                            window.location.href = dataHref;
+                        }
+                        
+                        if (dataAction) {
+                            // 处理自定义动作
+                            try {
+                                const action = eval(dataAction);
+                                if (typeof action === 'function') {
+                                    action();
+                                }
+                            } catch (error) {
+                                console.error('Menu action error:', error);
+                            }
                         }
                     }
-                });
+                }
             }
-        });
+        };
         
-        // 点击其他地方关闭所有子菜单
-        document.addEventListener('click', () => {
-            document.querySelectorAll('menu ul ul').forEach(submenu => {
-                submenu.style.display = 'none';
-            });
+        // 添加点击事件监听器
+        menu.addEventListener('click', menuObj.handleClick);
+        
+        // 存储菜单对象
+        this.menus.set(menuId, menuObj);
+    }
+
+    // 销毁菜单
+    destroyMenu(menu) {
+        const menuId = menu.id;
+        if (this.menus.has(menuId)) {
+            const menuObj = this.menus.get(menuId);
+            // 移除事件监听器
+            menu.removeEventListener('click', menuObj.handleClick);
+            // 从集合中移除
+            this.menus.delete(menuId);
+        }
+    }
+
+    // 初始化菜单事件
+    initMenuEvents() {
+        // 初始化所有菜单
+        const menus = document.querySelectorAll('menu');
+        menus.forEach(menu => {
+            // 检查菜单是否已经初始化
+            const menuId = menu.id || `menu-${Date.now()}`;
+            if (!this.menus.has(menuId)) {
+                this.initMenu(menu);
+            }
         });
     }
 }

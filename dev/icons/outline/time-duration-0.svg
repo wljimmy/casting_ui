@@ -14,7 +14,7 @@ unicode: "fad4"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M3 12v.01" />
   <path d="M21 12v.01" />
   <path d="M12 21v.01" />

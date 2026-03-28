@@ -14,7 +14,7 @@ unicode: "efaa"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M3 12h1" />
   <path d="M12 3v1" />
   <path d="M20 12h1" />

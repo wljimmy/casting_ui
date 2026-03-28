@@ -14,7 +14,7 @@ unicode: "f21a"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M16 21l-4 -7l6.5 -11" />
   <path d="M7 7l2 3.5l-3 4.5" />
 </svg>

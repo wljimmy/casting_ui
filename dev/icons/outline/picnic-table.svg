@@ -14,6 +14,6 @@ unicode: "fed6"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M16 7l2 9m-10 -9l-2 9m-1 -9h14m2 5h-18" />
 </svg>

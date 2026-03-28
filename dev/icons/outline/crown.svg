@@ -14,6 +14,6 @@ unicode: "ed12"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4l4 -6" />
 </svg>

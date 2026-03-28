@@ -14,7 +14,7 @@ unicode: "faf9"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M4 6v13" />
   <path d="M20 6v13" />
 </svg>

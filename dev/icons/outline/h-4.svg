@@ -14,7 +14,7 @@ unicode: "ec97"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M20 18v-8l-4 6h5" />
   <path d="M4 6v12" />
   <path d="M12 6v12" />

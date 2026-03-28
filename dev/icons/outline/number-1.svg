@@ -14,6 +14,6 @@ unicode: "edf1"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M13 20v-16l-5 5" />
 </svg>

@@ -14,6 +14,6 @@ unicode: "ec58"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M12 4l0 16" />
 </svg>

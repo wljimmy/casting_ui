@@ -14,7 +14,7 @@ unicode: "eb92"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M20 6l-11 0" />
   <path d="M20 12l-7 0" />
   <path d="M20 18l-11 0" />

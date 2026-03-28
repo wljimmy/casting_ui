@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.2.0
+ * Version: 0.2.1
  * Module: components.css
  * Description: 组件样式，包含所有UI组件的样式
  * Copyright (c) 2026 Bingo工作室
@@ -1294,12 +1294,42 @@ menu li {
     transition: all var(--transition-normal);
 }
 
+/* 主菜单项添加下边框 */
+menu > ul > li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 最后一个主菜单项不显示下边框 */
+menu > ul > li:last-child {
+    border-bottom: none;
+}
+
+/* 最后一个菜单项的子菜单容器不显示上边框 */
+menu > ul > li:last-child > ul {
+    border-top: none;
+}
+
 menu li a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: var(--size-sm) var(--size-md);
     color: var(--text-primary);
     text-decoration: none;
     transition: all var(--transition-normal);
+    font-family: 'Noto Serif SC', serif;
+}
+
+menu li a .menu-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+menu li a .menu-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 menu li:hover {
@@ -1312,7 +1342,6 @@ menu li.active {
 
 menu li.active a {
     color: var(--primary-color);
-    font-weight: 500;
 }
 
 /* 菜单缩进 */
@@ -1334,9 +1363,16 @@ menu > ul > li > ul > li > ul > li > ul > li > a {
 
 /* 子菜单 */
 menu ul ul {
-    display: none;
+    display: block;
     background-color: var(--bg-color);
-    border-top: 1px solid var(--border-color);
+    border-top: none;
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.5s ease;
+}
+
+menu ul ul.collapsed {
+    max-height: 0;
 }
 
 menu ul ul ul {
@@ -1351,16 +1387,48 @@ menu .menu-divider {
     margin: var(--size-xs) 0;
 }
 
-/* 菜单图标 */
-menu .menu-icon {
-    margin-right: var(--size-sm);
+/* 菜单图标 - 仅在一级菜单显示 */
+menu > ul > li > a .menu-right .menu-icon {
     font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    transition: transform var(--transition-normal);
+    margin-left: var(--size-sm);
+}
+
+menu > ul > li.expanded .menu-right .menu-icon {
+    transform: rotate(90deg);
+}
+
+/* 子菜单不显示箭头 */
+menu ul ul .menu-icon {
+    display: none;
 }
 
 /* 菜单徽章 */
 menu .menu-badge {
-    margin-left: var(--size-sm);
     font-size: 12px;
+    margin-left: var(--size-sm);
+}
+
+/* 子菜单徽章样式 */
+menu ul ul .menu-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 50%;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    padding: 0 0 0 0.5em;
+    border-radius: 0 0 0 0.8em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
 /* 响应式菜单 */
@@ -1368,6 +1436,19 @@ menu .menu-badge {
     menu {
         width: 100%;
     }
+}
+
+/* 菜单显示/隐藏控制 */
+menu {
+    display: block;
+}
+
+menu.menu-hidden {
+    display: none;
+}
+
+menu.menu-visible {
+    display: block;
 }
 
 /* 代码块样式 */

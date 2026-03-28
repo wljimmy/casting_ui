@@ -8,7 +8,7 @@ version: "3.28"
   height="24"
   viewBox="0 0 24 24"
   fill="currentColor"
->
+ id="icon">
   <path d="M4 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" />
   <path d="M21 16a1 1 0 0 1 0 2h-1a1 1 0 0 1 0 -2z" />
   <path d="M6.307 9.893l.7 .7a1 1 0 0 1 -1.414 1.414l-.7 -.7a1 1 0 0 1 1.414 -1.414" />

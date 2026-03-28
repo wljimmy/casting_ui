@@ -14,7 +14,7 @@ unicode: "edb3"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M21 17l-18 0" />
   <path d="M18 4l3 3l-3 3" />
   <path d="M18 20l3 -3l-3 -3" />

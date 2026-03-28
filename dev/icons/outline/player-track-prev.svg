@@ -14,7 +14,7 @@ unicode: "ed4c"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M21 5v14l-8 -7l8 -7" />
   <path d="M10 5v14l-8 -7l8 -7" />
 </svg>

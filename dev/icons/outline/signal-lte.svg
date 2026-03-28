@@ -14,7 +14,7 @@ category: Devices
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M21 8h-4v8h4" />
   <path d="M17 12h2.5" />
   <path d="M4 8v8h4" />

@@ -14,7 +14,7 @@ unicode: "efb4"
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
->
+ id="icon">
   <path d="M12 19v.01" />
   <path d="M12 15v-10" />
 </svg>

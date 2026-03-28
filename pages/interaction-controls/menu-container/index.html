@@ -18,42 +18,91 @@
     <div class="container">
         <div class="header">
             <h1>菜单组件</h1>
-            <p>提供水平菜单、垂直菜单和下拉菜单等多种菜单形式</p>
+            <p>提供垂直菜单、水平菜单等多种菜单形式，支持多级嵌套和动画效果</p>
         </div>
 
         <div class="section">
-            <h2>垂直菜单</h2>
+            <h2>基础垂直菜单</h2>
             <div class="container-fluid">
-                <menu id="main-menu">
+                <menu id="basic-menu">
                     <ul>
                         <li class="active" data-id="home">
-                            <a href="#">首页</a>
+                            <a href="#">
+                                <div class="menu-content">首页</div>
+                            </a>
                         </li>
                         <li data-id="products">
-                            <a href="#">产品</a>
+                            <a href="#">
+                                <div class="menu-content">产品</div>
+                                <div class="menu-right">
+                                    <span class="menu-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
+                            <ul>
+                                <li data-id="product1">
+                                    <a href="#">
+                                        <div class="menu-content">产品1</div>
+                                    </a>
+                                </li>
+                                <li data-id="product2">
+                                    <a href="#">
+                                        <div class="menu-content">产品2</div>
+                                    </a>
+                                </li>
+                                <li data-id="product3">
+                                    <a href="#">
+                                        <div class="menu-content">产品3</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li data-id="services">
-                            <a href="#">服务</a>
+                            <a href="#">
+                                <div class="menu-content">服务</div>
+                                <div class="menu-right">
+                                    <span class="menu-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
                             <ul>
                                 <li data-id="consulting">
-                                    <a href="#">咨询服务</a>
+                                    <a href="#">
+                                        <div class="menu-content">咨询服务</div>
+                                    </a>
                                 </li>
                                 <li data-id="support">
-                                    <a href="#">技术支持</a>
+                                    <a href="#">
+                                        <div class="menu-content">技术支持</div>
+                                    </a>
                                 </li>
                                 <li data-id="training">
-                                    <a href="#">培训服务</a>
+                                    <a href="#">
+                                        <div class="menu-content">培训服务</div>
+                                        <div class="menu-right">
+                                            <span class="menu-icon">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </a>
                                     <ul>
                                         <li data-id="beginner">
-                                            <a href="#">初级培训</a>
+                                            <a href="#">
+                                                <div class="menu-content">初级培训</div>
+                                            </a>
                                         </li>
                                         <li data-id="advanced">
-                                            <a href="#">高级培训</a>
-                                            <ul>
-                                                <li data-id="expert">
-                                                    <a href="#">专家培训</a>
-                                                </li>
-                                            </ul>
+                                            <a href="#">
+                                                <div class="menu-content">高级培训</div>
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -61,10 +110,17 @@
                         </li>
                         <li class="menu-divider"></li>
                         <li data-id="about">
-                            <a href="#">关于我们</a>
+                            <a href="#">
+                                <div class="menu-content">关于我们</div>
+                            </a>
                         </li>
                         <li data-id="contact">
-                            <a href="#">联系我们 <span class="menu-badge badge badge-primary">新</span></a>
+                            <a href="#">
+                                <div class="menu-content">联系我们</div>
+                                <div class="menu-right">
+                                    <span class="menu-badge badge new"></span>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </menu>
@@ -77,38 +133,71 @@
                 <menu id="icon-menu">
                     <ul>
                         <li class="active" data-id="home-icon">
-                            <a href="#"><span class="menu-icon">🏠</span> 首页</a>
+                            <a href="#">
+                                <div class="menu-content">
+                                    <span class="menu-icon">🏠</span> 首页
+                                </div>
+                            </a>
                         </li>
                         <li data-id="products-icon">
-                            <a href="#"><span class="menu-icon">📦</span> 产品</a>
-                        </li>
-                        <li data-id="services-icon">
-                            <a href="#"><span class="menu-icon">🔧</span> 服务</a>
+                            <a href="#">
+                                <div class="menu-content">
+                                    <span class="menu-icon">📦</span> 产品
+                                </div>
+                                <div class="menu-right">
+                                    <span class="menu-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
                             <ul>
-                                <li data-id="consulting-icon">
-                                    <a href="#"><span class="menu-icon">💬</span> 咨询服务</a>
+                                <li data-id="product1-icon">
+                                    <a href="#">
+                                        <div class="menu-content">
+                                            <span class="menu-icon">📱</span> 手机
+                                        </div>
+                                    </a>
                                 </li>
-                                <li data-id="support-icon">
-                                    <a href="#"><span class="menu-icon">🛠️</span> 技术支持</a>
-                                </li>
-                                <li data-id="training-icon">
-                                    <a href="#"><span class="menu-icon">📚</span> 培训服务</a>
-                                    <ul>
-                                        <li data-id="beginner-icon">
-                                            <a href="#"><span class="menu-icon">🎓</span> 初级培训</a>
-                                        </li>
-                                        <li data-id="advanced-icon">
-                                            <a href="#"><span class="menu-icon">🚀</span> 高级培训</a>
-                                        </li>
-                                    </ul>
+                                <li data-id="product2-icon">
+                                    <a href="#">
+                                        <div class="menu-content">
+                                            <span class="menu-icon">💻</span> 电脑
+                                        </div>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
-                        <li data-id="about-icon">
-                            <a href="#"><span class="menu-icon">👥</span> 关于我们</a>
-                        </li>
-                        <li data-id="contact-icon">
-                            <a href="#"><span class="menu-icon">📞</span> 联系我们</a>
+                        <li data-id="services-icon">
+                            <a href="#">
+                                <div class="menu-content">
+                                    <span class="menu-icon">🔧</span> 服务
+                                </div>
+                                <div class="menu-right">
+                                    <span class="menu-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
+                            <ul>
+                                <li data-id="consulting-icon">
+                                    <a href="#">
+                                        <div class="menu-content">
+                                            <span class="menu-icon">💬</span> 咨询服务
+                                        </div>
+                                    </a>
+                                </li>
+                                <li data-id="support-icon">
+                                    <a href="#">
+                                        <div class="menu-content">
+                                            <span class="menu-icon">🛠️</span> 技术支持
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </menu>
@@ -116,29 +205,79 @@
         </div>
 
         <div class="section">
-            <h2>带Data属性的菜单</h2>
+            <h2>多个菜单组</h2>
             <div class="container-fluid">
-                <menu id="data-menu">
-                    <ul>
-                        <li data-id="home-data">
-                            <a href="#" data-href="/home">首页</a>
-                        </li>
-                        <li data-id="products-data">
-                            <a href="#" data-action="showProducts()">产品</a>
-                        </li>
-                        <li data-id="services-data">
-                            <a href="#">服务</a>
-                            <ul>
-                                <li data-id="consulting-data">
-                                    <a href="#" data-href="/services/consulting">咨询服务</a>
-                                </li>
-                                <li data-id="support-data">
-                                    <a href="#" data-action="showSupport()">技术支持</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </menu>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <!-- 菜单组1 -->
+                    <menu id="menu-group-1">
+                        <ul>
+                            <li data-id="group1-item1">
+                                <a href="#">
+                                    <div class="menu-content">菜单组1 - 项目1</div>
+                                </a>
+                            </li>
+                            <li data-id="group1-item2">
+                                <a href="#">
+                                    <div class="menu-content">菜单组1 - 项目2</div>
+                                    <div class="menu-right">
+                                        <span class="menu-icon">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul>
+                                    <li data-id="group1-subitem1">
+                                        <a href="#">
+                                            <div class="menu-content">子项目1</div>
+                                        </a>
+                                    </li>
+                                    <li data-id="group1-subitem2">
+                                        <a href="#">
+                                            <div class="menu-content">子项目2</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </menu>
+
+                    <!-- 菜单组2 -->
+                    <menu id="menu-group-2">
+                        <ul>
+                            <li data-id="group2-item1">
+                                <a href="#">
+                                    <div class="menu-content">菜单组2 - 项目1</div>
+                                </a>
+                            </li>
+                            <li data-id="group2-item2">
+                                <a href="#">
+                                    <div class="menu-content">菜单组2 - 项目2</div>
+                                </a>
+                            </li>
+                            <li data-id="group2-item3">
+                                <a href="#">
+                                    <div class="menu-content">菜单组2 - 项目3</div>
+                                    <div class="menu-right">
+                                        <span class="menu-icon">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul>
+                                    <li data-id="group2-subitem1">
+                                        <a href="#">
+                                            <div class="menu-content">子项目1</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </menu>
+                </div>
             </div>
         </div>
 
@@ -147,19 +286,42 @@
             <div class="container-fluid">
                 <menu id="dynamic-menu">
                     <ul>
-                        <li data-id="home-dynamic">
-                            <a href="#">首页</a>
+                        <li data-id="dynamic-home">
+                            <a href="#">
+                                <div class="menu-content">首页</div>
+                            </a>
                         </li>
-                        <li data-id="products-dynamic">
-                            <a href="#">产品</a>
+                        <li data-id="dynamic-products">
+                            <a href="#">
+                                <div class="menu-content">产品</div>
+                                <div class="menu-right">
+                                    <span class="menu-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
+                            <ul>
+                                <li data-id="dynamic-product1">
+                                    <a href="#">
+                                        <div class="menu-content">产品1</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </menu>
                 <div style="margin-top: 16px;">
                     <button class="btn btn-primary" onclick="addMenuItem()">添加菜单项</button>
                     <button class="btn btn-secondary" onclick="addSubMenuItem()">添加子菜单项</button>
+                    <button class="btn btn-text" onclick="addNewMenu()">添加新菜单</button>
                 </div>
             </div>
+        </div>
+
+        <div class="section" id="dynamic-menu-container">
+            <!-- 动态添加的菜单将显示在这里 -->
         </div>
 
         <script>
@@ -193,7 +355,7 @@
             // 动态添加子菜单项
             function addSubMenuItem() {
                 if (window.ui && window.ui.menu) {
-                    window.ui.menu.addItem('dynamic-menu', 'products-dynamic', {
+                    window.ui.menu.addItem('dynamic-menu', 'dynamic-products', {
                         id: 'new-subitem-' + Date.now(),
                         text: '新产品子项',
                         icon: '📦',
@@ -201,13 +363,53 @@
                     });
                 }
             }
+
+            // 动态添加新菜单
+            function addNewMenu() {
+                const container = document.getElementById('dynamic-menu-container');
+                const menuId = 'menu-' + Date.now();
+                
+                const menuHTML = `
+                    <h3>动态菜单 ${menuId}</h3>
+                    <menu id="${menuId}">
+                        <ul>
+                            <li data-id="${menuId}-item1">
+                                <a href="#">
+                                    <div class="menu-content">菜单项1</div>
+                                </a>
+                            </li>
+                            <li data-id="${menuId}-item2">
+                                <a href="#">
+                                    <div class="menu-content">菜单项2</div>
+                                    <div class="menu-right">
+                                        <span class="menu-icon">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <use href="../../../dev/icons/outline/chevron-right.svg#icon"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul>
+                                    <li data-id="${menuId}-subitem1">
+                                        <a href="#">
+                                            <div class="menu-content">子菜单项1</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </menu>
+                `;
+                
+                container.innerHTML += menuHTML;
+            }
         </script>
 
         <div class="section">
             <h2>菜单API</h2>
             <div class="section-subtitle">
                 <h3>初始化菜单</h3>
-                <p>菜单组件会在页面加载时自动初始化，无需手动调用。</p>
+                <p>菜单组件会在页面加载时自动初始化，无需手动调用。同时会实时监听DOM变化，自动初始化新添加的菜单。</p>
             </div>
             <div class="section-subtitle">
                 <h3>菜单方法</h3>
@@ -241,13 +443,26 @@
 &lt;menu id="menu-id"&gt;
     &lt;ul&gt;
         &lt;li data-id="item1"&gt;
-            &lt;a href="#"&gt;菜单项1&lt;/a&gt;
+            &lt;a href="#"&gt;
+                &lt;div class="menu-content"&gt;菜单项1&lt;/div&gt;
+            &lt;/a&gt;
         &lt;/li&gt;
         &lt;li data-id="item2"&gt;
-            &lt;a href="#"&gt;菜单项2&lt;/a&gt;
+            &lt;a href="#"&gt;
+                &lt;div class="menu-content"&gt;菜单项2&lt;/div&gt;
+                &lt;div class="menu-right"&gt;
+                    &lt;span class="menu-icon"&gt;
+                        &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                            &lt;use href="path/to/icon.svg#icon"&gt;&lt;/use&gt;
+                        &lt;/svg&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/a&gt;
             &lt;ul&gt;
                 &lt;li data-id="subitem1"&gt;
-                    &lt;a href="#"&gt;子菜单项1&lt;/a&gt;
+                    &lt;a href="#"&gt;
+                        &lt;div class="menu-content"&gt;子菜单项1&lt;/div&gt;
+                    &lt;/a&gt;
                 &lt;/li&gt;
             &lt;/ul&gt;
         &lt;/li&gt;
@@ -261,6 +476,17 @@
                     <li><code>data-id</code> - 菜单项唯一标识</li>
                     <li><code>data-href</code> - 菜单项跳转链接</li>
                     <li><code>data-action</code> - 菜单项点击执行的JavaScript代码</li>
+                </ul>
+            </div>
+            <div class="section-subtitle">
+                <h3>特点</h3>
+                <ul>
+                    <li>支持多级嵌套菜单</li>
+                    <li>自动动画效果</li>
+                    <li>同一级菜单只能展开一个</li>
+                    <li>支持动态添加菜单项</li>
+                    <li>实时监听DOM变化，自动初始化新菜单</li>
+                    <li>支持多个菜单组独立工作</li>
                 </ul>
             </div>
         </div>
