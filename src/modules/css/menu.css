@@ -1,0 +1,217 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.5.1
+ * Module: menu.css
+ * Description: 菜单组件样式
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
+/* 菜单组件 */
+menu {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+/* 菜单列表 */
+menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 菜单项 */
+menu li {
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+/* 主菜单项添加下边框 */
+menu > ul > li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 最后一个主菜单项不显示下边框 */
+menu > ul > li:last-child {
+    border-bottom: none;
+}
+
+menu li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--size-sm) var(--size-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    font-family: 'Noto Serif SC', serif;
+    min-height: 40px;
+}
+
+menu li a .menu-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+menu li a .menu-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.menu-icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--size-sm);
+}
+
+.menu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon svg {
+    display: block;
+}
+
+menu li:hover {
+    background-color: var(--gray-100);
+}
+
+menu li.active,
+menu li.menu-active {
+    background-color: rgba(22, 93, 255, 0.1);
+}
+
+menu li.active a,
+menu li.menu-active a {
+    color: var(--primary-color);
+}
+
+/* 菜单缩进 */
+menu > ul > li > a {
+    padding-left: var(--size-md);
+}
+
+menu > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 1em);
+}
+
+menu > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 2em);
+}
+
+menu > ul > li > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 3em);
+}
+
+/* ========== 核心类：关闭类 ========== */
+/* 关闭状态：显示箭头朝右，子菜单高度为0 */
+menu li.menu-closed > a .menu-right .menu-icon {
+    display: inline-flex;
+    font-size: 14px;
+    align-items: center;
+    vertical-align: middle;
+    transition: transform var(--transition-normal);
+    margin-left: var(--size-sm);
+    transform: rotate(0deg);
+}
+
+menu li.menu-closed > ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* ========== 核心类：展开类 ========== */
+/* 展开状态：显示箭头朝下，子菜单自动撑开 */
+menu li.menu-opened > a .menu-right .menu-icon {
+    display: inline-flex;
+    font-size: 14px;
+    align-items: center;
+    vertical-align: middle;
+    transition: transform var(--transition-normal);
+    margin-left: var(--size-sm);
+    transform: rotate(90deg);
+}
+
+menu li.menu-opened > ul {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* ========== 子菜单通用样式 ========== */
+menu ul ul {
+    background-color: var(--bg-color);
+    border-top: none;
+}
+
+menu ul ul ul {
+    border-top: none;
+    border-left: 1px solid var(--border-color);
+}
+
+/* 菜单分隔线 */
+menu .menu-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--size-xs) 0;
+}
+
+/* 菜单徽章 */
+menu .menu-badge {
+    font-size: 12px;
+    margin-left: var(--size-sm);
+}
+
+menu .menu-badge-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* 响应式菜单 */
+@media (max-width: 768px) {
+    menu {
+        width: 100%;
+    }
+}
+
+/* 菜单显示/隐藏控制 */
+menu {
+    display: block;
+}
+
+menu.menu-hidden {
+    display: none;
+}
+
+menu.menu-visible {
+    display: block;
+}
+
+/* 菜单动画 */
+menu.menu-animate li {
+    transition: all var(--transition-normal);
+}
+
+menu.menu-animate-fade li {
+    transition: opacity var(--transition-normal);
+}
+
+menu.menu-animate-slide li {
+    transition: transform var(--transition-normal);
+}

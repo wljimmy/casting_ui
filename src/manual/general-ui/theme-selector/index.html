@@ -1,0 +1,132 @@
+<section class="section">
+    <h2>主题选择器</h2>
+    <p>主题选择器允许用户切换不同的配色方案，即时生效，并且会自动保存到本地存储。</p>
+    
+    <div class="section-subtitle">
+        <h3>1. UI示例</h3>
+        <div class="theme-selector-container">
+            <div class="theme-selector-demo">
+                <div class="theme-selector-buttons">
+                    <button class="btn btn-primary" onclick="openThemeSelector({ mode: 'modal' })">弹窗打开主题选择器</button>
+                    <button class="btn btn-default" onclick="openThemeSelector({ mode: 'inline', container: '#inlineThemeContainer' })">内联打开主题选择器</button>
+                </div>
+                
+                <div id="inlineThemeContainer" class="inline-theme-container">
+                    <!-- 内联主题选择器将在这里显示 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section-subtitle">
+        <h3>2. 参数说明</h3>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>方法</td>
+                    <td><code>openThemeSelector(options)</code></td>
+                    <td>打开主题选择器</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">选项</td>
+                    <td><code>mode</code></td>
+                    <td>打开模式（modal/inline）</td>
+                </tr>
+                <tr>
+                    <td><code>container</code></td>
+                    <td>内联模式下的容器选择器</td>
+                </tr>
+                <tr>
+                    <td>方法</td>
+                    <td><code>ThemeManager</code></td>
+                    <td>主题管理类</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">方法</td>
+                    <td><code>init()</code></td>
+                    <td>初始化主题管理器</td>
+                </tr>
+                <tr>
+                    <td><code>getThemes()</code></td>
+                    <td>获取所有主题</td>
+                </tr>
+                <tr>
+                    <td><code>applyTheme(theme)</code></td>
+                    <td>应用主题</td>
+                </tr>
+                <tr>
+                    <td><code>addTheme(theme)</code></td>
+                    <td>添加自定义主题</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="section-subtitle">
+        <h3>3. 使用说明</h3>
+        <p><strong>适用内容：</strong>主题选择器适用于需要支持主题切换的应用，如管理后台、仪表盘等。</p>
+        <p><strong>引用方法：</strong>使用 <code>openThemeSelector()</code> 方法打开主题选择器，或使用 <code>ThemeManager</code> 类管理主题。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 打开主题选择器 --&gt;
+&lt;button class="btn btn-primary" onclick="openThemeSelector({ mode: 'modal' })"&gt;打开主题选择器&lt;/button&gt;
+
+&lt;!-- 内联主题选择器 --&gt;
+&lt;div id="themeContainer"&gt;&lt;/div&gt;
+&lt;button class="btn btn-default" onclick="openThemeSelector({ mode: 'inline', container: '#themeContainer' })"&gt;内联打开主题选择器&lt;/button&gt;
+
+&lt;script&gt;
+// 初始化主题管理器
+document.addEventListener('DOMContentLoaded', async function() {
+    const themeManager = new ThemeManager();
+    await themeManager.init();
+    
+    // 应用默认主题
+    themeManager.applyTheme(themeManager.getThemes()[0]);
+    
+    // 添加自定义主题
+    themeManager.addTheme({
+        name: '自定义主题',
+        colors: {
+            primary: '#FF6B6B',
+            secondary: '#4ECDC4',
+            success: '#4CAF50',
+            warning: '#FFC107',
+            error: '#F44336',
+            text: {
+                primary: '#333333',
+                secondary: '#666666'
+            },
+            background: {
+                primary: '#FFFFFF',
+                secondary: '#F5F5F5'
+            }
+        }
+    });
+});
+&lt;/script&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>是，通过JavaScript管理主题切换和存储。</p>
+    </div>
+    
+    <div class="section-subtitle">
+        <h3>4. 功能特点</h3>
+        <ul>
+            <li>支持多种主题切换</li>
+            <li>即时生效，无需刷新页面</li>
+            <li>自动保存到本地存储</li>
+            <li>支持自定义主题</li>
+            <li>提供弹窗和内联两种打开模式</li>
+        </ul>
+    </div>
+    
+
+</section>

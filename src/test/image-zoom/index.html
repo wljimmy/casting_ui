@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片放大模块测试</title>
+    <link rel="stylesheet" href="../../modules/css/core.css">
+    <link rel="stylesheet" href="../../modules/css/components.css">
+
+</head>
+<body>
+    <div class="test-container">
+        <h1>图片放大模块测试</h1>
+        
+        <div class="section">
+            <h2>图片放大测试</h2>
+            <p>点击图片测试放大功能。</p>
+            
+            <div class="image-container">
+                <img src="https://picsum.photos/id/237/400/300" alt="测试图片1" class="test-image" onclick="testImageZoom(this)">
+                <p>点击上方图片放大</p>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://picsum.photos/id/10/400/300" alt="测试图片2" class="test-image" onclick="testImageZoom(this)">
+                <p>点击上方图片放大</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>批量图片放大测试</h2>
+            <p>测试为多个图片添加放大功能。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testBatchImageZoom()">为所有图片添加放大功能</button>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://picsum.photos/id/1/300/200" alt="批量测试图片1" class="test-image batch-image">
+                <img src="https://picsum.photos/id/2/300/200" alt="批量测试图片2" class="test-image batch-image">
+                <img src="https://picsum.photos/id/3/300/200" alt="批量测试图片3" class="test-image batch-image">
+                <p>点击上方任意图片放大</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../modules/js/core.js"></script>
+    <script src="../../modules/js/image-zoom.js"></script>
+    <script>
+        // 测试单个图片放大
+        function testImageZoom(img) {
+            imageZoom(img);
+        }
+        
+        // 测试批量图片放大
+        function testBatchImageZoom() {
+            const images = document.querySelectorAll('.batch-image');
+            images.forEach(img => {
+                img.onclick = function() {
+                    imageZoom(this);
+                };
+            });
+            alert('已为所有批量测试图片添加放大功能');
+        }
+    </script>
+</body>
+</html>

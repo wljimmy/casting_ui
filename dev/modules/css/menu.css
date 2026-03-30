@@ -1,0 +1,213 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.2.1
+ * Module: menu.css
+ * Description: 菜单组件样式
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
+/* 菜单组件 */
+menu {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+/* 菜单列表 */
+menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 菜单项 */
+menu li {
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+/* 主菜单项添加下边框 */
+menu > ul > li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* 最后一个主菜单项不显示下边框 */
+menu > ul > li:last-child {
+    border-bottom: none;
+}
+
+/* 最后一个菜单项的子菜单容器不显示上边框 */
+menu > ul > li:last-child > ul {
+    border-top: none;
+}
+
+menu li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--size-sm) var(--size-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    font-family: 'Noto Serif SC', serif;
+}
+
+menu li a .menu-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+menu li a .menu-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+menu li:hover {
+    background-color: var(--gray-100);
+}
+
+menu li.active,
+menu li.menu-active {
+    background-color: rgba(22, 93, 255, 0.1);
+}
+
+menu li.active a,
+menu li.menu-active a {
+    color: var(--primary-color);
+}
+
+/* 菜单缩进 */
+menu > ul > li > a {
+    padding-left: var(--size-md);
+}
+
+menu > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 1em);
+}
+
+menu > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 2em);
+}
+
+menu > ul > li > ul > li > ul > li > ul > li > a {
+    padding-left: calc(var(--size-md) + 3em);
+}
+
+/* 子菜单 */
+menu ul ul {
+    display: block;
+    background-color: var(--bg-color);
+    border-top: none;
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.5s ease;
+}
+
+menu ul ul.collapsed,
+menu ul ul.menu-close {
+    max-height: 0;
+}
+
+menu ul ul.menu-open {
+    max-height: 500px;
+}
+
+menu ul ul ul {
+    border-top: none;
+    border-left: 1px solid var(--border-color);
+}
+
+/* 菜单分隔线 */
+menu .menu-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--size-xs) 0;
+}
+
+/* 菜单图标 - 仅在一级菜单显示 */
+menu > ul > li > a .menu-right .menu-icon {
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    transition: transform var(--transition-normal);
+    margin-left: var(--size-sm);
+}
+
+menu > ul > li.expanded .menu-right .menu-icon {
+    transform: rotate(90deg);
+}
+
+/* 子菜单不显示箭头 */
+menu ul ul .menu-icon {
+    display: none;
+}
+
+/* 菜单徽章 */
+menu .menu-badge {
+    font-size: 12px;
+    margin-left: var(--size-sm);
+}
+
+/* 子菜单徽章样式 */
+menu ul ul .menu-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 50%;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: var(--font-sans);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    padding: 0 0 0 0.5em;
+    border-radius: 0 0 0 0.8em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* 响应式菜单 */
+@media (max-width: 768px) {
+    menu {
+        width: 100%;
+    }
+}
+
+/* 菜单显示/隐藏控制 */
+menu {
+    display: block;
+}
+
+menu.menu-hidden {
+    display: none;
+}
+
+menu.menu-visible {
+    display: block;
+}
+
+/* 菜单动画 */
+menu.menu-animate li {
+    transition: all var(--transition-normal);
+}
+
+menu.menu-animate-fade li {
+    transition: opacity var(--transition-normal);
+}
+
+menu.menu-animate-slide li {
+    transition: transform var(--transition-normal);
+}

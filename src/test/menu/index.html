@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜单组件测试 - Casting UI</title>
+    <link rel="stylesheet" href="../../modules/css/core.css">
+    <link rel="stylesheet" href="../../modules/css/components.css">
+    <link rel="stylesheet" href="../../modules/css/menu.css">
+    <script type="module" src="../../modules/js/index.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>菜单组件测试</h1>
+            <p>测试菜单组件的各种功能和交互</p>
+        </div>
+
+        <div class="section">
+            <h2>测试1：基本菜单功能</h2>
+            <div class="container-fluid">
+                <menu id="test-menu-1" class="menu-sidebar">
+                    <ul>
+                        <li class="menu-active" data-id="home" data-action="handleMenuClick">首页</li>
+                        <li data-id="products" data-action="handleMenuClick">产品</li>
+                        <li data-id="services" data-action="handleMenuClick">服务
+                            <ul>
+                                <li data-id="consulting" data-action="handleMenuClick">咨询服务</li>
+                                <li data-id="support" data-action="handleMenuClick">技术支持</li>
+                                <li data-id="training" data-action="handleMenuClick">培训服务
+                                    <ul>
+                                        <li data-id="beginner" data-action="handleMenuClick">初级培训</li>
+                                        <li data-id="advanced" data-action="handleMenuClick">高级培训
+                                            <ul>
+                                                <li data-id="expert" data-action="handleMenuClick">专家培训</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    
+                        <li data-id="about" data-action="handleMenuClick">关于我们</li>
+                        <li data-id="contact" data-badge="new" data-action="handleMenuClick">联系我们</li>
+                    </ul>
+                </menu>
+            </div>
+            <div class="container-fluid" id="test-result-1">
+                <p>点击菜单项测试激活状态切换和子菜单展开/收起</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>测试2：Data属性功能</h2>
+            <div class="container-fluid">
+                <menu id="test-menu-2" class="menu-sidebar">
+                    <ul>
+                        <li data-id="home-data" data-icon="outline/home.svg" data-action='{"callback":"handleMenuClick"}'>首页</li>
+                        <li data-id="products-data" data-icon="outline/package.svg" data-action="testAction">产品</li>
+                        <li data-id="services-data" data-action="handleMenuClick">服务
+                            <ul>
+                                <li data-id="consulting-data" data-action='{"callback":"handleMenuClick"}'>咨询服务</li>
+                                <li data-id="support-data" data-action="testSupportAction">技术支持</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+            <div class="container-fluid" id="test-result-2">
+                <p>点击菜单项测试Data属性功能</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>测试3：API测试</h2>
+            <div class="container-fluid">
+                <menu id="test-menu-3" class="menu-sidebar">
+                    <ul>
+                        <li data-id="item1">菜单项1</li>
+                        <li data-id="item2">菜单项2</li>
+                        <li data-id="item3">菜单项3</li>
+                    </ul>
+                </menu>
+            </div>
+            <div class="container-fluid">
+                <button class="btn btn-primary" onclick="testSetActive()">设置第二项为激活</button>
+                <button class="btn btn-secondary" onclick="testAddItem()">添加菜单项</button>
+                <button class="btn btn-secondary" onclick="testAddSubItem()">添加子菜单项</button>
+            </div>
+            <div class="container-fluid" id="test-result-3">
+                <p>点击按钮测试API功能</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let lastClickedMenuId = 'test-menu-1';
+        
+        function handleMenuClick() {
+            const menu = document.querySelector('menu:has(li.menu-active)');
+            const menuId = menu ? menu.id : lastClickedMenuId;
+            lastClickedMenuId = menuId;
+            const resultId = menuId.replace('test-menu', 'test-result');
+            const resultElement = document.getElementById(resultId);
+            
+            const activeItem = menu ? menu.querySelector('li.menu-active') : null;
+            const menuText = activeItem ? activeItem.textContent.trim() : '未知';
+            
+            resultElement.innerHTML = `<p style="color: var(--success-color);">点击了菜单项: ${menuText}</p>`;
+        }
+
+        function testSetActive() {
+            const menu = document.getElementById('test-menu-3');
+            const menuItems = menu.querySelectorAll('li');
+            const secondItem = menuItems[1];
+            
+            if (window.CastingMenuManager) {
+                const instance = window.CastingMenuManager.getInstance('test-menu-3');
+                if (instance) {
+                    instance.setActive(secondItem);
+                    document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已设置第二项为激活状态</p>`;
+                }
+            } else {
+                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--error-color);">菜单管理器未初始化</p>`;
+            }
+        }
+
+        function testAddItem() {
+            if (window.CastingMenu) {
+                const menu = document.getElementById('test-menu-3');
+                const ul = menu.querySelector('ul');
+                const li = document.createElement('li');
+                li.setAttribute('data-id', 'new-item-' + Date.now());
+                li.setAttribute('data-action', 'handleMenuClick');
+                li.textContent = '新菜单项';
+                ul.appendChild(li);
+                
+                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已添加新菜单项</p>`;
+            } else {
+                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--error-color);">CastingMenu未初始化</p>`;
+            }
+        }
+
+        function testAddSubItem() {
+            const menu = document.getElementById('test-menu-3');
+            const item2 = menu.querySelector('li[data-id="item2"]');
+            
+            if (item2) {
+                let subUl = item2.querySelector('ul');
+                if (!subUl) {
+                    subUl = document.createElement('ul');
+                    item2.appendChild(subUl);
+                }
+                
+                const li = document.createElement('li');
+                li.setAttribute('data-id', 'new-subitem-' + Date.now());
+                li.setAttribute('data-action', 'handleMenuClick');
+                li.textContent = '新子菜单项';
+                subUl.appendChild(li);
+                
+                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已添加新子菜单项</p>`;
+            }
+        }
+
+        function testAction() {
+            alert('测试Action函数执行');
+            handleMenuClick();
+        }
+
+        function testSupportAction() {
+            alert('测试Support Action函数执行');
+            handleMenuClick();
+        }
+
+        window.addEventListener('load', function() {
+            if (window.CastingMenu) {
+                console.log('菜单组件初始化成功');
+            } else {
+                console.log('菜单组件初始化失败');
+            }
+        });
+    </script>
+</body>
+</html>

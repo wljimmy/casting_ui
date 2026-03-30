@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜单组件演示 - Casting UI</title>
+    <link rel="stylesheet" href="../modules/css/core.css">
+    <link rel="stylesheet" href="../modules/css/components.css">
+    <link rel="stylesheet" href="../modules/css/menu.css">
+</head>
+<body style="padding: 40px; max-width: 1200px; margin: 0 auto;">
+    <h1>菜单组件演示</h1>
+    <p style="margin-bottom: 40px;">本页面展示 Casting UI 菜单组件的各种功能和使用方式</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+        <div>
+            <h2>1. 侧边栏菜单 (menu-sidebar)</h2>
+            <menu id="menu-sidebar-demo" class="menu-sidebar menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+                <ul>
+                    <li data-icon="outline/home.svg" data-badge="new">首页</li>
+                    <li data-icon="outline/package.svg">产品
+                        <ul>
+                            <li data-icon="outline/smartphone.svg">手机</li>
+                            <li data-icon="outline/laptop.svg" data-badge="hot">电脑
+                                <ul>
+                                    <li>笔记本</li>
+                                    <li data-badge="beta">台式机
+                                        <ul>
+                                            <li>游戏主机</li>
+                                            <li>工作站</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-divider"></li>
+                    <li data-icon="outline/settings.svg" data-action='{"url":"init-guide/index.html","container":"#content-demo","callback":"onPageLoaded"}'>设置</li>
+                </ul>
+            </menu>
+        </div>
+
+        <div>
+            <h2>2. 内容区域加载</h2>
+            <div id="content-demo" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; min-height: 300px;">
+                <p>点击左侧菜单的"设置"项，内容将加载到这里</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 40px;">
+        <h2>3. 多个独立菜单实例</h2>
+        <div style="display: flex; gap: 40px;">
+            <menu id="menu-inline-1" class="menu-inline menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                <ul>
+                    <li class="menu-active">菜单1 - 选项1</li>
+                    <li>菜单1 - 选项2
+                        <ul>
+                            <li>子选项A</li>
+                            <li>子选项B</li>
+                        </ul>
+                    </li>
+                </ul>
+            </menu>
+
+            <menu id="menu-inline-2" class="menu-inline menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                <ul>
+                    <li>菜单2 - 选项1</li>
+                    <li class="menu-active">菜单2 - 选项2
+                        <ul>
+                            <li>子选项X</li>
+                            <li>子选项Y</li>
+                        </ul>
+                    </li>
+                </ul>
+            </menu>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 40px;">
+        <h2>4. 动画类演示</h2>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div>
+                <h3>基础动画 (menu-animate)</h3>
+                <menu class="menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                    <ul>
+                        <li>选项1
+                            <ul>
+                                <li>子项1</li>
+                                <li>子项2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+            <div>
+                <h3>淡入淡出 (menu-animate-fade)</h3>
+                <menu class="menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                    <ul>
+                        <li>选项1
+                            <ul>
+                                <li>子项1</li>
+                                <li>子项2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+            <div>
+                <h3>滑入滑出 (menu-animate-slide)</h3>
+                <menu class="menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                    <ul>
+                        <li>选项1
+                            <ul>
+                                <li>子项1</li>
+                                <li>子项2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 40px;">
+        <h2>5. 徽标呼吸动画 (badge-pulse)</h2>
+        <menu style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+            <ul>
+                <li data-badge="new">新功能</li>
+                <li data-badge="hot">热门</li>
+                <li data-badge="update">更新</li>
+            </ul>
+        </menu>
+    </div>
+
+    <div style="margin-bottom: 40px;">
+        <h2>6. JS API 调用模式</h2>
+        <div style="margin-bottom: 20px;">
+            <button class="btn btn-primary" onclick="createDynamicMenu()">动态创建菜单</button>
+            <button class="btn btn-secondary" onclick="destroyDynamicMenu()">销毁菜单</button>
+        </div>
+        <div id="dynamic-menu-container" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; min-height: 200px;">
+            <p>点击上方按钮，通过 JS API 动态创建菜单</p>
+        </div>
+    </div>
+
+    <div>
+        <h2>API 说明</h2>
+        <h3>菜单类型</h3>
+        <ul>
+            <li><code>menu-sidebar</code> - 侧边栏菜单</li>
+            <li><code>menu-popup</code> - 弹出式菜单</li>
+            <li><code>menu-inline</code> - 内联菜单</li>
+        </ul>
+
+        <h3>动画类</h3>
+        <ul>
+            <li><code>menu-animate</code> - 基础过渡动画</li>
+            <li><code>menu-animate-fade</code> - 淡入淡出</li>
+            <li><code>menu-animate-slide</code> - 滑入滑出</li>
+            <li><code>menu-open</code> - 子菜单展开</li>
+            <li><code>menu-close</code> - 子菜单折叠</li>
+            <li><code>badge-pulse</code> - 徽标呼吸</li>
+        </ul>
+
+        <h3>data-* 属性</h3>
+        <ul>
+            <li><code>data-icon</code> - 菜单图标，格式：outline/home.svg 或 filled/home.svg</li>
+            <li><code>data-badge</code> - 菜单徽标 (new/hot/update/beta)</li>
+            <li><code>data-action</code> - 点击动作 JSON (url, container, callback)</li>
+        </ul>
+
+        <h3>标准写法示例</h3>
+        <pre><code>&lt;menu id="*" class="menu-sidebar"&gt;
+  &lt;ul&gt;
+    &lt;li data-icon="*" data-badge="*" data-action="*"&gt;主菜单内容&lt;/li&gt;
+    &lt;li&gt;
+      &lt;ul&gt;
+        &lt;li data-icon="*" data-badge="*" data-action="*"&gt;
+          子菜单内容
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/menu&gt;</code></pre>
+
+        <h3>JS API 调用示例</h3>
+        <pre><code>// 动态创建菜单
+CastingMenu.create({
+    id: 'dynamic-menu',
+    className: 'menu-sidebar menu-animate',
+    container: '#menu-container',
+    items: [
+        {
+            text: '首页',
+            icon: 'outline/home.svg',
+            badge: 'new'
+        },
+        {
+            text: '产品',
+            icon: 'outline/package.svg',
+            children: [
+                { text: '手机', icon: 'outline/smartphone.svg' },
+                { text: '电脑', icon: 'outline/laptop.svg' }
+            ]
+        }
+    ]
+});
+
+// 获取菜单实例
+const instance = CastingMenu.getInstance('dynamic-menu');
+
+// 获取所有实例
+const allInstances = CastingMenu.getAllInstances();
+
+// 销毁菜单
+CastingMenu.destroy('dynamic-menu');</code></pre>
+    </div>
+
+    <script>
+        function onPageLoaded() {
+            console.log('页面加载完成回调执行');
+        }
+        
+        function createDynamicMenu() {
+            CastingMenu.create({
+                id: 'dynamic-menu-demo',
+                className: 'menu-sidebar menu-animate',
+                container: '#dynamic-menu-container',
+                items: [
+                    {
+                        text: '动态首页',
+                        icon: 'outline/home.svg',
+                        badge: 'new'
+                    },
+                    {
+                        text: '动态产品',
+                        icon: 'outline/package.svg',
+                        children: [
+                            { text: '动态手机', icon: 'outline/smartphone.svg' },
+                            { text: '动态电脑', icon: 'outline/laptop.svg', badge: 'hot' }
+                        ]
+                    }
+                ]
+            });
+        }
+        
+        function destroyDynamicMenu() {
+            CastingMenu.destroy('dynamic-menu-demo');
+            document.getElementById('dynamic-menu-container').innerHTML = '<p>菜单已销毁</p>';
+        }
+    </script>
+
+    <script type="module" src="../modules/js/index.js"></script>
+</body>
+</html>

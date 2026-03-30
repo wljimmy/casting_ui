@@ -1,0 +1,272 @@
+<section class="section">
+    <h2>核心JS功能</h2>
+    <p>核心JS功能提供框架的基础能力，包括调试、遮罩层和弹窗基类等。</p>
+
+    <div class="section-subtitle">
+        <h3>1. 调试功能</h3>
+        <p>调试功能用于在开发环境中输出调试信息。</p>
+
+        <h4>1.1 debug函数</h4>
+        <p><code>debug()</code> 函数用于输出调试信息，仅在开发模式下生效。</p>
+
+        <div class="message message-info">
+            <div>提示：debug 函数只在 <code>localStorage.getItem('casting_debug')</code> 为 'true' 时才会输出信息到控制台。</div>
+        </div>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>必填</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>message</code></td>
+                    <td>String</td>
+                    <td>是</td>
+                    <td>调试信息内容</td>
+                </tr>
+                <tr>
+                    <td><code>data</code></td>
+                    <td>Any</td>
+                    <td>否</td>
+                    <td>附加数据，会一并输出</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-javascript"><code class="language-javascript">// 启用调试模式
+localStorage.setItem('casting_debug', 'true');
+
+// 输出调试信息
+debug('初始化完成');
+debug('用户数据', { name: '张三', age: 25 });</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，纯 JavaScript 功能。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>2. 遮罩层组件</h3>
+        <p>遮罩层组件用于创建全屏遮罩，常用于弹窗、加载等场景。</p>
+
+        <h4>2.1 创建遮罩</h4>
+        <p><code>createOverlay()</code> 函数用于创建遮罩层元素。</p>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>函数</th>
+                    <th>返回值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>createOverlay()</code></td>
+                    <td>HTMLElement</td>
+                    <td>创建并返回遮罩层元素</td>
+                </tr>
+                <tr>
+                    <td><code>showOverlay()</code></td>
+                    <td>HTMLElement</td>
+                    <td>显示遮罩层，返回遮罩元素</td>
+                </tr>
+                <tr>
+                    <td><code>hideOverlay()</code></td>
+                    <td>void</td>
+                    <td>隐藏遮罩层</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-javascript"><code class="language-javascript">// 显示遮罩层
+const overlay = showOverlay();
+
+// 在遮罩上显示内容
+const modal = document.createElement('div');
+modal.innerHTML = '<h2>弹窗内容</h2>';
+overlay.appendChild(modal);
+
+// 隐藏遮罩层
+hideOverlay();</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，纯 JavaScript 功能。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>3. PopupBase 弹窗基类</h3>
+        <p>PopupBase 是所有弹窗组件的基类，提供基础的弹窗功能。</p>
+
+        <h4>3.1 基础用法</h4>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>方法</th>
+                    <th>参数</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>show()</code></td>
+                    <td>无</td>
+                    <td>显示弹窗</td>
+                </tr>
+                <tr>
+                    <td><code>hide()</code></td>
+                    <td>无</td>
+                    <td>隐藏弹窗</td>
+                </tr>
+                <tr>
+                    <td><code>destroy()</code></td>
+                    <td>无</td>
+                    <td>销毁弹窗实例</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-javascript"><code class="language-javascript">// 继承 PopupBase 创建自定义弹窗
+class MyPopup extends PopupBase {
+    constructor(options) {
+        super(options);
+        // 自定义初始化
+    }
+    
+    show() {
+        super.show();
+        // 自定义显示逻辑
+    }
+}
+
+// 使用自定义弹窗
+const popup = new MyPopup({
+    content: '自定义内容'
+});
+popup.show();</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，纯 JavaScript 功能。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>4. 图片放大功能</h3>
+        <p>图片放大功能用于点击图片后全屏查看。</p>
+
+        <h4>4.1 zoomImage 函数</h4>
+
+        <h4>参数说明</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>必填</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>src</code></td>
+                    <td>String</td>
+                    <td>是</td>
+                    <td>图片地址</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-html"><code class="language-html">&lt;!-- HTML --&gt;
+&lt;img src="image.jpg" class="image" onclick="zoomImage(this.src)"&gt;</code></pre>
+
+        <pre class="language-javascript"><code class="language-javascript">// JavaScript
+zoomImage('https://example.com/image.jpg');
+
+// 关闭图片放大
+closeImageZoom();</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，纯 JavaScript 功能。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>5. 初始化函数</h3>
+        <p>UI 模块提供多种初始化函数，用于自动绑定组件行为。</p>
+
+        <h4>5.1 初始化函数列表</h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>函数</th>
+                    <th>描述</th>
+                    <th>自动调用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>initCollapsePanels()</code></td>
+                    <td>初始化折叠面板</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td><code>initModals()</code></td>
+                    <td>初始化弹窗</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td><code>initToasts()</code></td>
+                    <td>初始化 Toast</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td><code>initImageZoom()</code></td>
+                    <td>初始化图片放大</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td><code>initFormValidation()</code></td>
+                    <td>初始化表单验证</td>
+                    <td>是</td>
+                </tr>
+                <tr>
+                    <td><code>initMenus()</code></td>
+                    <td>初始化菜单</td>
+                    <td>是</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>使用说明</h4>
+        <pre class="language-javascript"><code class="language-javascript">// 创建 UI 实例时会自动初始化所有组件
+const ui = new UI();
+
+// 手动初始化特定组件
+ui.initMenus();
+ui.initImageZoom();</code></pre>
+
+        <p><strong>是否涉及 JS 动态渲染：</strong>是，纯 JavaScript 功能。</p>
+    </div>
+
+    <div class="section-subtitle">
+        <h3>6. 使用建议</h3>
+        <div class="message message-info">
+            <div>
+                <strong>最佳实践：</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li>使用 debug 函数替代 console.log，便于生产环境关闭调试</li>
+                    <li>遮罩层会自动管理 z-index，无需手动设置</li>
+                    <li>继承 PopupBase 时记得调用 super 方法</li>
+                    <li>图片放大功能会自动绑定到带有 .image 类的元素</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

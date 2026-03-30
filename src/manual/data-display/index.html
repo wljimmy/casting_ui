@@ -1,0 +1,659 @@
+<!-- 数据展示组件 -->
+<section id="data-display" class="section">
+    <h2>数据展示组件</h2>
+    <p>数据展示组件用于展示各种类型的数据，包括图片、列表、表格、徽章和进度条等。</p>
+    
+    <!-- 图片控件 -->
+    <div class="section-subtitle">
+        <h3>1. 图片控件</h3>
+        <p>图片控件用于展示图片，支持多种尺寸和样式。</p>
+        
+        <h4>1.1 UI示例</h4>
+        <div id="image-container" class="image-container container-grid-3 container-height-auto">
+            <!-- 带标题图片 -->
+            <div id="image-with-title" class="image image-md image-with-title" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/400/400?random=1" alt="图片1" loading="lazy">
+                <div class="image-title">带标题图片</div>
+            </div>
+            
+            <!-- 无标题图片 -->
+            <div id="image-sm" class="image image-sm" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/200/200?random=2" alt="图片2" loading="lazy">
+            </div>
+            <div id="image-md" class="image image-md" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/400/400?random=3" alt="图片3" loading="lazy">
+            </div>
+            <div id="image-lg" class="image image-lg" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/600/600?random=4" alt="图片4" loading="lazy">
+            </div>
+            
+            <!-- 圆角图片 -->
+            <div id="image-rounded" class="image image-md image-rounded" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/400/400?random=5" alt="图片5" loading="lazy">
+            </div>
+            
+            <!-- 方形图片 -->
+            <div id="image-square" class="image image-md image-square" onclick="zoomImage(this.querySelector('img').src)">
+                <img src="https://picsum.photos/400/400?random=6" alt="图片6" loading="lazy">
+            </div>
+        </div>
+        
+        <h4>1.2 参数说明</h4>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类名</td>
+                    <td><code>.image</code></td>
+                    <td>基础图片容器类</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">尺寸</td>
+                    <td><code>.image-sm</code></td>
+                    <td>小图片 (200x200)</td>
+                </tr>
+                <tr>
+                    <td><code>.image-md</code></td>
+                    <td>中图片 (400x400)</td>
+                </tr>
+                <tr>
+                    <td><code>.image-lg</code></td>
+                    <td>大图片 (600x600)</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">样式</td>
+                    <td><code>.image-with-title</code></td>
+                    <td>带标题的图片</td>
+                </tr>
+                <tr>
+                    <td><code>.image-rounded</code></td>
+                    <td>圆角图片</td>
+                </tr>
+                <tr>
+                    <td><code>.image-square</code></td>
+                    <td>方形图片</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>1.3 使用说明</h4>
+        <p><strong>适用内容：</strong>图片控件适用于展示产品图片、用户头像、文章配图等场景。</p>
+        <p><strong>引用方法：</strong>直接在HTML中使用相应的类名，点击图片可放大查看。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 带标题图片 --&gt;
+&lt;div class="image image-md image-with-title" onclick="zoomImage(this.querySelector('img').src)"&gt;
+    &lt;img src="图片地址" alt="图片描述" loading="lazy"&gt;
+    &lt;div class="image-title"&gt;图片标题&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 圆角图片 --&gt;
+&lt;div class="image image-md image-rounded" onclick="zoomImage(this.querySelector('img').src)"&gt;
+    &lt;img src="图片地址" alt="图片描述" loading="lazy"&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>是，点击图片会触发图片放大功能。</p>
+    </div>
+
+    <!-- 列表 -->
+    <div class="section-subtitle">
+        <h3>2. 列表</h3>
+        <p>列表用于展示一系列相关的项目。</p>
+        
+        <h4>2.1 UI示例</h4>
+        <div id="list-container" class="list-container container-height-auto">
+            <!-- 普通列表 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">普通列表</div>
+                <ul id="list-1" class="list">
+                    <li class="list-item">列表项1</li>
+                    <li class="list-item active">列表项2（激活状态）</li>
+                    <li class="list-item">列表项3</li>
+                </ul>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 图文列表 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">图文列表</div>
+                <ul id="list-2" class="list">
+                    <li class="list-item list-with-image">
+                        <div class="list-image">
+                            <img src="https://picsum.photos/100/100?random=7" alt="图片">
+                        </div>
+                        <div class="list-content">
+                            <h5>列表标题</h5>
+                            <p>列表内容描述</p>
+                        </div>
+                    </li>
+                    <li class="list-item list-with-image">
+                        <div class="list-image">
+                            <img src="https://picsum.photos/100/100?random=8" alt="图片">
+                        </div>
+                        <div class="list-content">
+                            <h5>列表标题</h5>
+                            <p>列表内容描述</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 可滑动列表 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">可滑动列表</div>
+                <div id="list-scrollable" class="list-scrollable">
+                    <div class="list-item">滑动项1</div>
+                    <div class="list-item">滑动项2</div>
+                    <div class="list-item">滑动项3</div>
+                    <div class="list-item">滑动项4</div>
+                    <div class="list-item">滑动项5</div>
+                </div>
+            </div>
+        </div>
+        
+        <h4>2.2 参数说明</h4>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类名</td>
+                    <td><code>.list</code></td>
+                    <td>基础列表类</td>
+                </tr>
+                <tr>
+                    <td><code>.list-item</code></td>
+                    <td>列表项</td>
+                </tr>
+                <tr>
+                    <td><code>.list-with-image</code></td>
+                    <td>带图片的列表项</td>
+                </tr>
+                <tr>
+                    <td><code>.list-with-actions</code></td>
+                    <td>带操作按钮的列表项</td>
+                </tr>
+                <tr>
+                    <td><code>.list-scrollable</code></td>
+                    <td>可滑动列表</td>
+                </tr>
+                <tr>
+                    <td><code>.active</code></td>
+                    <td>激活状态</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>2.3 使用说明</h4>
+        <p><strong>适用内容：</strong>列表适用于展示导航菜单、产品列表、用户列表等场景。</p>
+        <p><strong>引用方法：</strong>直接在HTML中使用相应的类名。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 普通列表 --&gt;
+&lt;ul class="list"&gt;
+    &lt;li class="list-item"&gt;列表项1&lt;/li&gt;
+    &lt;li class="list-item active"&gt;列表项2（激活状态）&lt;/li&gt;
+    &lt;li class="list-item"&gt;列表项3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 图文列表 --&gt;
+&lt;ul class="list"&gt;
+    &lt;li class="list-item list-with-image"&gt;
+        &lt;div class="list-image"&gt;
+            &lt;img src="图片地址" alt="图片描述"&gt;
+        &lt;/div&gt;
+        &lt;div class="list-content"&gt;
+            &lt;h5&gt;列表标题&lt;/h5&gt;
+            &lt;p&gt;列表内容描述&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>否，纯CSS组件。</p>
+    </div>
+
+    <!-- 表格 -->
+    <div class="section-subtitle">
+        <h3>3. 表格</h3>
+        <p>表格用于展示结构化数据。</p>
+        
+        <h4>3.1 UI示例</h4>
+        <div id="table-container" class="table-container container-height-auto">
+            <!-- 基础表格 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">基础表格</div>
+                <div class="table-responsive">
+                    <table id="table-1" class="table">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>职业</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>25</td>
+                                <td>工程师</td>
+                            </tr>
+                            <tr>
+                                <td>李四</td>
+                                <td>30</td>
+                                <td>设计师</td>
+                            </tr>
+                            <tr>
+                                <td>王五</td>
+                                <td>28</td>
+                                <td>产品经理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 斑马纹表格 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">斑马纹表格</div>
+                <div class="table-responsive">
+                    <table id="table-2" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>年龄</th>
+                                <th>职业</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>张三</td>
+                                <td>25</td>
+                                <td>工程师</td>
+                            </tr>
+                            <tr>
+                                <td>李四</td>
+                                <td>30</td>
+                                <td>设计师</td>
+                            </tr>
+                            <tr>
+                                <td>王五</td>
+                                <td>28</td>
+                                <td>产品经理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <h4>3.2 参数说明</h4>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类名</td>
+                    <td><code>.table</code></td>
+                    <td>基础表格类</td>
+                </tr>
+                <tr>
+                    <td><code>.table-striped</code></td>
+                    <td>斑马纹表格</td>
+                </tr>
+                <tr>
+                    <td><code>.table-collapse</code></td>
+                    <td>移动端折叠表格</td>
+                </tr>
+                <tr>
+                    <td><code>.table-responsive</code></td>
+                    <td>响应式表格容器</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>3.3 使用说明</h4>
+        <p><strong>适用内容：</strong>表格适用于展示结构化数据，如用户信息、订单数据、财务报表等。</p>
+        <p><strong>引用方法：</strong>直接在HTML中使用相应的类名。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 基础表格 --&gt;
+&lt;div class="table-responsive"&gt;
+    &lt;table class="table"&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;姓名&lt;/th&gt;
+                &lt;th&gt;年龄&lt;/th&gt;
+                &lt;th&gt;职业&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;张三&lt;/td&gt;
+                &lt;td&gt;25&lt;/td&gt;
+                &lt;td&gt;工程师&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- 斑马纹表格 --&gt;
+&lt;div class="table-responsive"&gt;
+    &lt;table class="table table-striped"&gt;
+        &lt;!-- 表格内容 --&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>否，纯CSS组件。</p>
+    </div>
+
+    <!-- 标签/徽章 -->
+    <div class="section-subtitle">
+        <h3>4. 标签/徽章</h3>
+        <p>标签/徽章用于展示分类、状态或计数信息。</p>
+        
+        <h4>4.1 UI示例</h4>
+        <div id="badge-container" class="badge-container container-grid-3 container-height-auto">
+            <!-- 尺寸 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">徽章尺寸</div>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <span>尺寸：</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-sm" class="badge badge-sm badge-primary">小徽章</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-md" class="badge badge-md badge-primary">中徽章</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-lg" class="badge badge-lg badge-primary">大徽章</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 样式 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">填充样式</div>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <span>填充样式：</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-primary" class="badge badge-primary">主要</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-success" class="badge badge-success">成功</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-warning" class="badge badge-warning">警告</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-error" class="badge badge-error">错误</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 描边样式 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">描边样式</div>
+                <div id="transparent-bg-container-3" class="transparent-bg-container">
+                    <div class="transparent-bg-content">
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <span>描边样式：</span>
+                            </div>
+                            <div class="radio-item">
+                                <span id="badge-outline-primary" class="badge badge-outline badge-primary">主要</span>
+                            </div>
+                            <div class="radio-item">
+                                <span id="badge-outline-success" class="badge badge-outline badge-success">成功</span>
+                            </div>
+                            <div class="radio-item">
+                                <span id="badge-outline-warning" class="badge badge-outline badge-warning">警告</span>
+                            </div>
+                            <div class="radio-item">
+                                <span id="badge-outline-error" class="badge badge-outline badge-error">错误</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 带数字角标 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">带数字角标</div>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <span>带数字角标：</span>
+                    </div>
+                    <div class="radio-item">
+                        <span id="badge-with-count" class="badge badge-primary badge-with-count">
+                            消息
+                            <span class="badge-count">99+</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h4>4.2 参数说明</h4>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类名</td>
+                    <td><code>.badge</code></td>
+                    <td>基础徽章类</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">尺寸</td>
+                    <td><code>.badge-sm</code></td>
+                    <td>小徽章</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-md</code></td>
+                    <td>中徽章（默认）</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-lg</code></td>
+                    <td>大徽章</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">样式</td>
+                    <td><code>.badge-primary</code></td>
+                    <td>主要颜色</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-success</code></td>
+                    <td>成功颜色</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-warning</code></td>
+                    <td>警告颜色</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-error</code></td>
+                    <td>错误颜色</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-outline</code></td>
+                    <td>描边样式</td>
+                </tr>
+                <tr>
+                    <td>功能</td>
+                    <td><code>.badge-with-count</code></td>
+                    <td>带数字角标</td>
+                </tr>
+                <tr>
+                    <td><code>.badge-closeable</code></td>
+                    <td>可关闭徽章</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>4.3 使用说明</h4>
+        <p><strong>适用内容：</strong>标签/徽章适用于展示分类、状态、计数等信息，如产品标签、用户状态、消息数量等。</p>
+        <p><strong>引用方法：</strong>直接在HTML中使用相应的类名。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 基础徽章 --&gt;
+&lt;span class="badge badge-primary"&gt;主要&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;成功&lt;/span&gt;
+
+&lt;!-- 带数字角标 --&gt;
+&lt;span class="badge badge-primary badge-with-count"&gt;
+    消息
+    &lt;span class="badge-count"&gt;99+&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- 可关闭徽章 --&gt;
+&lt;span class="badge badge-closeable badge-primary"&gt;
+    标签
+    &lt;button class="badge-close"&gt;&times;&lt;/button&gt;
+&lt;/span&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>否，纯CSS组件。</p>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="section-subtitle">
+        <h3>5. 进度条</h3>
+        <p>进度条用于展示任务完成进度或加载状态。</p>
+        
+        <h4>5.1 UI示例</h4>
+        <div id="progress-container" class="progress-container container-height-auto">
+            <!-- 线性进度条 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">线性进度条</div>
+                <div id="progress-sm" class="progress progress-sm">
+                    <div class="progress-bar" style="width: 30%;"></div>
+                </div>
+                <div id="progress-md" class="progress">
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
+                <div id="progress-lg" class="progress progress-lg">
+                    <div class="progress-bar" style="width: 90%;"></div>
+                </div>
+            </div>
+            
+            <div class="spacer-md"></div>
+            
+            <!-- 环形进度条 -->
+            <div class="magazine-component-showcase">
+                <div class="magazine-component-showcase-title">环形进度条</div>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <div id="progress-circle" class="progress-circle">
+                            <svg>
+                                <circle class="progress-circle-bg" cx="50" cy="50" r="40"></circle>
+                                <circle class="progress-circle-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="125.6"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="radio-item">
+                        <span>50%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h4>5.2 参数说明</h4>
+        <table class="doc-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>类名</td>
+                    <td><code>.progress</code></td>
+                    <td>线性进度条容器</td>
+                </tr>
+                <tr>
+                    <td><code>.progress-bar</code></td>
+                    <td>线性进度条填充</td>
+                </tr>
+                <tr>
+                    <td><code>.progress-sm</code></td>
+                    <td>小尺寸线性进度条</td>
+                </tr>
+                <tr>
+                    <td><code>.progress-lg</code></td>
+                    <td>大尺寸线性进度条</td>
+                </tr>
+                <tr>
+                    <td><code>.progress-circle</code></td>
+                    <td>环形进度条</td>
+                </tr>
+                <tr>
+                    <td><code>.progress-segmented</code></td>
+                    <td>分段进度条</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h4>5.3 使用说明</h4>
+        <p><strong>适用内容：</strong>进度条适用于展示任务完成进度、文件上传进度、加载状态等场景。</p>
+        <p><strong>引用方法：</strong>直接在HTML中使用相应的类名，通过CSS设置进度条宽度。</p>
+        
+        <div class="code-block">
+            <pre><code>&lt;!-- 线性进度条 --&gt;
+&lt;div class="progress"&gt;
+    &lt;div class="progress-bar" style="width: 60%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 环形进度条 --&gt;
+&lt;div class="progress-circle"&gt;
+    &lt;svg&gt;
+        &lt;circle class="progress-circle-bg" cx="50" cy="50" r="40"&gt;&lt;/circle&gt;
+        &lt;circle class="progress-circle-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="125.6"&gt;&lt;/circle&gt;
+    &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        
+        <p><strong>是否涉及JS动态渲染：</strong>否，纯CSS组件。</p>
+    </div>
+    
+
+</section>

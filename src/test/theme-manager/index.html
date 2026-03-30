@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题管理模块测试</title>
+    <link rel="stylesheet" href="../../modules/css/core.css">
+    <link rel="stylesheet" href="../../modules/css/components.css">
+
+</head>
+<body>
+    <div class="test-container">
+        <h1>主题管理模块测试</h1>
+        
+        <div class="section">
+            <h2>主题管理功能测试</h2>
+            <p>测试主题管理模块的核心功能。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testInitThemeManager()">初始化主题管理器</button>
+                <button class="btn btn-default" onclick="testOpenThemeSelector()">打开主题选择器</button>
+                <button class="btn btn-default" onclick="testGetCurrentTheme()">获取当前主题</button>
+                <button class="btn btn-default" onclick="testGetThemes()">获取所有主题</button>
+            </div>
+            
+            <div class="theme-preview">
+                <h3>主题预览</h3>
+                <p>这是主题预览区域，展示当前主题的样式效果。</p>
+                <button class="btn btn-primary">主要按钮</button>
+                <button class="btn btn-default">默认按钮</button>
+                <div class="tag tag-success">成功</div>
+                <div class="tag tag-warning">警告</div>
+                <div class="tag tag-error">错误</div>
+                <div class="tag tag-info">信息</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>主题信息</h2>
+            <p>显示当前主题的详细信息。</p>
+            
+            <div class="theme-info" id="themeInfo">
+                <p>点击上方按钮获取主题信息</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>测试结果</h2>
+            <div class="result-container">
+                <h3>操作结果：</h3>
+                <div id="testResult"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../modules/js/core.js"></script>
+    <script src="../../modules/js/color-picker.js"></script>
+    <script src="../../modules/js/theme-manager.js"></script>
+    <script>
+        let themeManager = null;
+        
+        // 测试初始化主题管理器
+        async function testInitThemeManager() {
+            try {
+                themeManager = new ThemeManager();
+                await themeManager.init();
+                document.getElementById('testResult').textContent = '主题管理器初始化成功';
+                updateThemeInfo();
+            } catch (error) {
+                document.getElementById('testResult').textContent = '主题管理器初始化失败: ' + error.message;
+            }
+        }
+        
+        // 测试打开主题选择器
+        function testOpenThemeSelector() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
+            
+            themeManager.openThemeSelector();
+            document.getElementById('testResult').textContent = '主题选择器已打开';
+        }
+        
+        // 测试获取当前主题
+        function testGetCurrentTheme() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
+            
+            const currentTheme = themeManager.getCurrentTheme();
+            if (currentTheme) {
+                document.getElementById('testResult').textContent = '当前主题: ' + currentTheme.name;
+                updateThemeInfo();
+            } else {
+                document.getElementById('testResult').textContent = '未设置当前主题';
+            }
+        }
+        
+        // 测试获取所有主题
+        function testGetThemes() {
+            if (!themeManager) {
+                document.getElementById('testResult').textContent = '请先初始化主题管理器';
+                return;
+            }
+            
+            const themes = themeManager.getThemes();
+            if (themes && themes.length > 0) {
+                document.getElementById('testResult').textContent = '主题数量: ' + themes.length;
+                updateThemeInfo();
+            } else {
+                document.getElementById('testResult').textContent = '未加载到主题';
+            }
+        }
+        
+        // 更新主题信息显示
+        function updateThemeInfo() {
+            if (!themeManager) return;
+            
+            const currentTheme = themeManager.getCurrentTheme();
+            const themes = themeManager.getThemes();
+            
+            let infoHTML = '';
+            
+            if (currentTheme) {
+                infoHTML += `<h4>当前主题</h4>`;
+                infoHTML += `<p><strong>名称:</strong> ${currentTheme.name}</p>`;
+                if (currentTheme.description) {
+                    infoHTML += `<p><strong>描述:</strong> ${currentTheme.description}</p>`;
+                }
+                infoHTML += `<p><strong>主色调:</strong> <span style="display: inline-block; width: 20px; height: 20px; background-color: ${currentTheme.colors['primary-color']}; border-radius: 50%; margin-left: 10px;"></span> ${currentTheme.colors['primary-color']}</p>`;
+            }
+            
+            if (themes && themes.length > 0) {
+                infoHTML += `<h4>所有主题</h4>`;
+                themes.forEach(theme => {
+                    infoHTML += `<p>${theme.name} ${theme.name === currentTheme?.name ? '(当前)' : ''}${theme.description ? ': ' + theme.description : ''}</p>`;
+                });
+            }
+            
+            document.getElementById('themeInfo').innerHTML = infoHTML;
+        }
+        
+        // 页面加载时自动初始化
+        window.onload = async function() {
+            try {
+                themeManager = new ThemeManager();
+                await themeManager.init();
+                document.getElementById('testResult').textContent = '页面加载时自动初始化主题管理器成功';
+                updateThemeInfo();
+            } catch (error) {
+                document.getElementById('testResult').textContent = '页面加载时自动初始化主题管理器失败: ' + error.message;
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹窗模块测试</title>
+    <link rel="stylesheet" href="../../modules/css/core.css">
+    <link rel="stylesheet" href="../../modules/css/components.css">
+
+</head>
+<body>
+    <div class="test-container">
+        <h1>弹窗模块测试</h1>
+        
+        <div class="section">
+            <h2>基本弹窗测试</h2>
+            <p>测试基本弹窗的显示和交互功能。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testBasicModal()">显示基本弹窗</button>
+                <button class="btn btn-default" onclick="testConfirmModal()">显示确认弹窗</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>操作结果：</h3>
+                <div id="modalResult"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>自定义弹窗测试</h2>
+            <p>测试带有自定义内容和样式的弹窗。</p>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="testCustomModal()">显示自定义弹窗</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../modules/js/core.js"></script>
+    <script src="../../modules/js/modal.js"></script>
+    <script>
+        // 测试基本弹窗
+        function testBasicModal() {
+            showModal({
+                title: '提示',
+                content: '这是一个基本弹窗',
+                buttons: [
+                    {
+                        text: '确定',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '用户点击了确定';
+                        }
+                    },
+                    {
+                        text: '取消',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '用户点击了取消';
+                        }
+                    }
+                ]
+            });
+        }
+        
+        // 测试确认弹窗
+        function testConfirmModal() {
+            showModal({
+                title: '确认操作',
+                content: '你确定要执行这个操作吗？',
+                buttons: [
+                    {
+                        text: '确定',
+                        style: 'primary',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '用户确认了操作';
+                        }
+                    },
+                    {
+                        text: '取消',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '用户取消了操作';
+                        }
+                    }
+                ]
+            });
+        }
+        
+        // 测试自定义弹窗
+        function testCustomModal() {
+            showModal({
+                title: '自定义弹窗',
+                content: `
+                    <div>
+                        <h3>自定义内容</h3>
+                        <p>这是一个带有自定义HTML内容的弹窗</p>
+                        <input type="text" placeholder="请输入内容" class="input">
+                    </div>
+                `,
+                width: '400px',
+                buttons: [
+                    {
+                        text: '确定',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '自定义弹窗确定';
+                        }
+                    },
+                    {
+                        text: '取消',
+                        action: () => {
+                            document.getElementById('modalResult').textContent = '自定义弹窗取消';
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+</body>
+</html>
