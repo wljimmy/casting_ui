@@ -1141,6 +1141,10 @@ input:checked + .switch-slider:before {
 .badge.beta,
 .badge.fixed {
     font-size: 0.85em;
+    font-family: var(--font-sans);
+     font-weight: 600;
+    text-transform: uppercase;
+    color: white;
 }
 
 /* 标签颜色 */

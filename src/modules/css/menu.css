@@ -1,38 +1,26 @@
-/* 
- * Casting UI Framework
- * Version: 0.5.1
- * Module: menu.css
- * Description: 菜单组件样式
- * Copyright (c) 2026 Bingo工作室
- * Email: wljimmy@hotmail.com
- */
-
-/* 菜单组件 */
+/* ========== 基础菜单样式 ========== */
 menu {
     display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+    padding: var(--size-xs);
+    margin: 0;
     overflow: hidden;
 }
 
-/* 菜单列表 */
 menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+
+
 /* 菜单项 */
 menu li {
     position: relative;
-    transition: all var(--transition-normal);
+    margin-bottom: 0;
 }
 
 /* 主菜单项添加下边框 */
@@ -48,153 +36,198 @@ menu > ul > li:last-child {
 menu li a {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: var(--size-sm) var(--size-md);
-    color: var(--text-primary);
+    color: var(--text-color);
     text-decoration: none;
-    transition: all var(--transition-normal);
-    font-family: 'Noto Serif SC', serif;
+    border-radius: var(--radius-sm);
     min-height: 40px;
+    position: relative;
 }
 
-menu li a .menu-content {
+menu li a:hover {
+    background-color: var(--gray-200);
+    color: var(--primary-color);
+}
+
+menu li.menu-active a {
+    background-color: rgba(22, 93, 255, 0.1);
+    color: var(--primary-color);
+}
+
+/* 菜单图标容器 */
+menu li a .menu-icon-container {
+    display: inline-flex;
+    align-items: center;
+    margin-right: var(--size-sm);
+    flex-shrink: 0;
+}
+
+/* 菜单图标 */
+menu li a .menu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+menu li a .menu-icon svg {
+    display: block;
+}
+
+/* 菜单文本 */
+menu li a .menu-text {
     display: flex;
     align-items: center;
     flex: 1;
 }
 
-menu li a .menu-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.menu-icon-container {
+/* 菜单展开图标 */
+menu li a .menu-expand-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-right: var(--size-sm);
-}
-
-.menu-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-icon svg {
-    display: block;
-}
-
-menu li:hover {
-    background-color: var(--gray-100);
-}
-
-menu li.active,
-menu li.menu-active {
-    background-color: rgba(22, 93, 255, 0.1);
-}
-
-menu li.active a,
-menu li.menu-active a {
-    color: var(--primary-color);
-}
-
-/* 菜单缩进 */
-menu > ul > li > a {
-    padding-left: var(--size-md);
-}
-
-menu > ul > li > ul > li > a {
-    padding-left: calc(var(--size-md) + 1em);
-}
-
-menu > ul > li > ul > li > ul > li > a {
-    padding-left: calc(var(--size-md) + 2em);
-}
-
-menu > ul > li > ul > li > ul > li > ul > li > a {
-    padding-left: calc(var(--size-md) + 3em);
-}
-
-/* ========== 核心类：关闭类 ========== */
-/* 关闭状态：显示箭头朝右，子菜单高度为0 */
-menu li.menu-closed > a .menu-right .menu-icon {
-    display: inline-flex;
-    font-size: 14px;
-    align-items: center;
-    vertical-align: middle;
-    transition: transform var(--transition-normal);
     margin-left: var(--size-sm);
+    flex-shrink: 0;
+    transition: transform var(--transition-normal);
     transform: rotate(0deg);
 }
 
-menu li.menu-closed > ul {
+/* ========== 核心类：关闭类 ========== */
+menu li.menu-closed > ul,
+menu li.menu-closed > menu {
     max-height: 0;
+    height: 0;
+    border-width: 0 !important;
     overflow: hidden;
-    transition: max-height 0.3s ease;
 }
 
 /* ========== 核心类：展开类 ========== */
-/* 展开状态：显示箭头朝下，子菜单自动撑开 */
-menu li.menu-opened > a .menu-right .menu-icon {
-    display: inline-flex;
-    font-size: 14px;
-    align-items: center;
-    vertical-align: middle;
-    transition: transform var(--transition-normal);
-    margin-left: var(--size-sm);
+menu li.menu-opened > a .menu-expand-icon {
     transform: rotate(90deg);
 }
 
-menu li.menu-opened > ul {
+menu li.menu-opened > ul,
+menu li.menu-opened > menu {
     max-height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
-    transition: max-height 0.3s ease;
 }
 
 /* ========== 子菜单通用样式 ========== */
 menu ul ul {
+    background-color: var(--gray-100);
+    border-top: none;
+}
+menu ul ul li {
+    border-bottom: 1px solid var(--border-color);
+}
+menu ul ul li:last-child {
+    border-bottom: none;
+}
+
+/* ========== 侧边栏菜单 ========== */
+menu.menu-sidebar {
+    min-width: 100px;
+    min-height: 40px;
+}
+
+/* ========== 弹出式菜单 ========== */
+menu.menu-popup {
+    position: absolute;
     background-color: var(--bg-color);
-    border-top: none;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    min-width: 100px;
+    width: max-content;
+    max-width: 300px;
+    z-index: 9999;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-menu ul ul ul {
-    border-top: none;
-    border-left: 1px solid var(--border-color);
+menu.menu-popup ul {
+    overflow: scroll;
+    overflow-x: auto;
+}
+menu.menu-popup li {
+    white-space: nowrap;
+    
+    
+}
+menu.menu-popup li a {
+    padding: var(--size-xs) var(--size-sm);
+    border-radius: var(--radius-sm);
+    margin: 0 var(--size-xs);
+    min-height: 32px;
+    
 }
 
-/* 菜单分隔线 */
-menu .menu-divider {
-    height: 1px;
-    background-color: var(--border-color);
-    margin: var(--size-xs) 0;
-}
-
-/* 菜单徽章 */
-menu .menu-badge {
-    font-size: 12px;
-    margin-left: var(--size-sm);
-}
-
-menu .menu-badge-container {
+/* ========== 内联菜单 ========== */
+menu.menu-inline {
     display: inline-flex;
-    align-items: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+    width: auto;
 }
 
-/* 响应式菜单 */
-@media (max-width: 768px) {
-    menu {
-        width: 100%;
-    }
+menu.menu-inline > ul {
+    display: flex;
+    gap: 10px;
 }
 
-/* 菜单显示/隐藏控制 */
-menu {
-    display: block;
+menu.menu-inline > ul > li {
+    position: relative;
+    margin: 0;
+    border: none;
 }
 
+menu.menu-inline > ul > li:last-child >a::after {
+    display: none;
+}
+menu.menu-inline > ul > li:hover > a {
+    color: var(--primary-text-color);
+}
+menu.menu-inline > ul > li > a {
+    padding: var(--size-xs) var(--size-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    gap: 5px;
+}
+
+
+
+menu.menu-inline > ul > li .menu-expand-icon {
+    display: none;
+}
+
+/* 内联菜单的子菜单 - 复用弹出菜单样式 */
+menu.menu-inline li menu.menu-popup {
+    top: 100%;
+    left: 0;
+    margin-top: var(--size-xs);
+}
+
+/* 内联菜单2级及以上子菜单 */
+menu.menu-inline li ul li ul,
+menu.menu-inline li menu.menu-popup li ul,
+menu.menu-inline li menu.menu-popup li menu {
+    top: 0;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+/* 内联菜单子菜单的展开图标 */
+menu.menu-inline li menu.menu-popup li a .menu-expand-icon {
+    margin-left: auto;
+}
+
+/* ========== 菜单显示/隐藏控制 ========== */
 menu.menu-hidden {
     display: none;
 }
@@ -203,15 +236,52 @@ menu.menu-visible {
     display: block;
 }
 
-/* 菜单动画 */
-menu.menu-animate li {
-    transition: all var(--transition-normal);
+/* ========== 菜单分隔线 ========== */
+menu .menu-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--size-xs) 0;
 }
 
-menu.menu-animate-fade li {
-    transition: opacity var(--transition-normal);
+/* ========== 菜单徽章 ========== */
+menu .badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1em;
+    font-size: 0.5em;
+   
+    padding: 0 0.5em 0 1em;
+    border-radius: 0 0 0 0.8em;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-menu.menu-animate-slide li {
-    transition: transform var(--transition-normal);
+/* ========== 响应式菜单 ========== */
+@media (max-width: 768px) {
+    menu {
+        width: 100%;
+    }
+    
+    menu.menu-inline {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    menu.menu-inline ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    menu.menu-inline li {
+        width: 100%;
+    }
+    
+    menu.menu-inline li a {
+        margin: 0;
+        border-radius: 0;
+    }
 }

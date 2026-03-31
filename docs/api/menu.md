@@ -1,9 +1,9 @@
 # 菜单组件 (Menu Component)
 
 ## 版本信息
-- **版本**: 0.5.0
+- **版本**: 0.5.2
 - **模块文件**: `src/modules/js/menu.js`
-- **样式文件**: `src/modules/css/components.css`
+- **样式文件**: `src/modules/css/menu.css`
 
 ## 概述
 
@@ -13,19 +13,20 @@ Casting UI 菜单组件提供了一个灵活、高性能的菜单系统，支持
 
 - ✅ 多种菜单类型（侧边栏、弹出式、内联）
 - ✅ 支持4级嵌套菜单
-- ✅ 自动初始化与DOM监听
+- ✅ 自动初始化与DOM监听（使用统一的DOM观察器）
 - ✅ 多菜单实例隔离
 - ✅ 自动垃圾回收
-- ✅ 丰富的动画类
+- ✅ 简化的动画类（menu-closed/menu-opened）
 - ✅ 图标与徽标自动渲染
 - ✅ data-action 页面加载与回调
 - ✅ HTML预定义模式 + JS API调用模式双支持
 - ✅ 标准菜单类识别（menu-sidebar/menu-popup/menu-inline）
 - ✅ 构建状态标记，避免重复构建
+- ✅ 响应式设计
 
 ## 菜单结构
 
-### 基础结构（简化写法）
+### 基础结构（最新简化写法）
 
 框架自动处理完整的菜单结构，用户只需写最基础的HTML：
 
@@ -48,6 +49,44 @@ Casting UI 菜单组件提供了一个灵活、高性能的菜单系统，支持
 </menu>
 ```
 
+### 生成后的结构
+
+框架会自动生成以下结构：
+
+```html
+<menu id="my-menu" class="menu-sidebar" data-menu-built="true">
+    <ul>
+        <li data-icon="outline/home.svg" data-badge="new">
+            <a href="#">
+                <span class="menu-icon-container">
+                    <span class="menu-icon">
+                        <svg>...</svg>
+                    </span>
+                </span>
+                <div class="menu-text">首页</div>
+                <span class="badge new">NEW</span>
+            </a>
+        </li>
+        <li data-icon="outline/package.svg" class="menu-closed">
+            <a href="#">
+                <span class="menu-icon-container">
+                    <span class="menu-icon">
+                        <svg>...</svg>
+                    </span>
+                </span>
+                <div class="menu-text">产品</div>
+                <span class="menu-expand-icon menu-icon">
+                    <svg>...</svg>
+                </span>
+            </a>
+            <ul>
+                <!-- 子菜单内容 -->
+            </ul>
+        </li>
+    </ul>
+</menu>
+```
+
 ### 菜单类型
 
 | 类名 | 说明 |
@@ -58,35 +97,23 @@ Casting UI 菜单组件提供了一个灵活、高性能的菜单系统，支持
 
 ## 动画类
 
-### 基础动画类
+### 核心动画类
+
+| 类名 | 说明 |
+|------|------|
+| `menu-closed` | 子菜单关闭状态（箭头朝右，子菜单高度为0） |
+| `menu-opened` | 子菜单展开状态（箭头朝下，子菜单高度自动） |
+| `menu-active` | 菜单项激活状态 |
+
+### 其他动画类
 
 | 类名 | 说明 |
 |------|------|
 | `menu-animate` | 启用基础过渡动画 |
 | `menu-animate-fade` | 淡入淡出效果 |
 | `menu-animate-slide` | 滑入滑出效果 |
-
-### 子菜单层级动画类
-
-| 类名 | 说明 |
-|------|------|
-| `menu-open` | 子菜单展开状态 |
-| `menu-close` | 子菜单折叠状态 |
-
-### 交互状态动画类
-
-| 类名 | 说明 |
-|------|------|
 | `menu-hover` | 悬停动效 |
-| `menu-active` | 选中高亮 |
 | `menu-disabled` | 禁用状态 |
-
-### 图标/徽标动画类
-
-| 类名 | 说明 |
-|------|------|
-| `badge-pulse` | 徽标呼吸闪烁 |
-| `icon-rotate` | 图标旋转 |
 
 ## Data 属性
 
@@ -100,30 +127,67 @@ Casting UI 菜单组件提供了一个灵活、高性能的菜单系统，支持
 
 ### data-badge
 
-控制菜单项右侧的提示徽标。
+控制菜单项右上角的提示徽标。
 
 ```html
 <li data-badge="new">新功能</li>
 ```
 
 支持的徽标类型：
-- `new` - 蓝色
-- `hot` - 红色
-- `update` - 橙色
-- `beta` - 青色
+- `new` - 蓝色（#165DFF）
+- `hot` - 红色（#F53F3F）
+- `beta` - 黄色（#FF7D00）
+- `update` - 绿色（#00B42A）
 
 ### data-action
 
 定义菜单项点击后的核心跳转/加载行为。
 
+#### ⚠️ 安全使用说明
+
+为了防止XSS攻击，`data-action` 有以下安全限制：
+
+1. **不能直接写代码**：只允许引用已定义的函数名，不允许写代码字符串
+2. **函数名验证**：函数名必须符合标识符规范，使用正则表达式验证
+3. **JSON参数限制**：JSON对象中只能包含数据，不能包含函数
+
+#### 使用方式
+
 ```html
+<!-- 执行函数（最简单的方式） -->
+<li data-action="handleMenuClick">首页</li>
+
+<!-- 执行函数并传参数 -->
+<li data-action='{"callback":"handleMenuClick","page":"home","id":123}'>首页</li>
+
+<!-- 加载页面 -->
+<li data-action='{"url":"path/to/page.html","container":"#content"}'>设置</li>
+
+<!-- 加载页面并执行回调 -->
 <li data-action='{"url":"path/to/page.html","container":"#content","callback":"onPageLoaded"}'>设置</li>
 ```
 
 JSON 字段说明：
+- `callback` - 回调函数名（仅引用，不能直接写代码）
 - `url` - 需要加载的页面地址
 - `container` - 页面内容要刷新渲染的目标容器选择器
-- `callback` - 页面加载完成后立即执行的回调函数名
+- `[其他字段]` - 自定义参数，会完整传递给回调函数
+
+#### 完整示例
+
+```html
+<!-- HTML -->
+<li data-action='{"callback":"showProduct","id":123,"name":"iPhone"}'>iPhone</li>
+
+<!-- JavaScript -->
+<script>
+function showProduct(action) {
+    console.log('产品ID:', action.id);      // 123
+    console.log('产品名称:', action.name);  // iPhone
+    // 处理业务逻辑...
+}
+</script>
+```
 
 ## JavaScript API
 
@@ -211,6 +275,9 @@ CastingMenu.destroy('my-menu');
 ```javascript
 // 访问全局菜单管理器
 const menuManager = window.CastingMenuManager;
+
+// 访问全局DOM观察器
+const domObserver = window.CastingDOMObserver;
 ```
 
 ### MenuManager 方法
@@ -310,7 +377,7 @@ CastingMenu.create({
 
 ### 自动初始化
 
-菜单模块会自动监听页面DOM变化，一旦检测到新增的标准 `<menu>` 标签（menu-sidebar/menu-popup/menu-inline），立即对其进行初始化。
+菜单模块通过统一的DOM观察器（dom-observer.js）监听页面DOM变化，一旦检测到新增的标准 `<menu>` 标签（menu-sidebar/menu-popup/menu-inline），立即对其进行初始化。
 
 ### 垃圾回收
 
@@ -394,6 +461,19 @@ setTimeout(() => {
 }, 3000);
 ```
 
+## 激活状态规则
+
+### 侧边栏菜单
+- 整个菜单仅有一个菜单项可以为激活项
+- 使用 `menu-active` 类标记激活状态
+- 点击菜单项会清除整个菜单的激活状态，只保留当前项
+- 保持视觉反馈清晰，只在侧边栏菜单中有效
+
+### 其他菜单（内联菜单、弹出菜单）
+- 不保留菜单项激活状态
+- 点击后不会设置 `menu-active` 类
+- 无视觉选中反馈
+
 ## 注意事项
 
 1. **菜单标签**: 必须使用 `<menu>` 标签作为根容器
@@ -404,8 +484,40 @@ setTimeout(() => {
 6. **标准菜单类**: 只处理 `menu-sidebar`/`menu-popup`/`menu-inline`
 7. **构建标记**: 已构建菜单会标记 `data-menu-built="true"`
 8. **图标路径**: 格式为 `outline/图标名.svg` 或 `filled/图标名.svg`
+9. **图标目录**: 图标文件位于 `public/icons/` 目录，使用绝对路径 `/icons/` 引用
+10. **徽章位置**: 徽章显示在菜单项的右上角，使用绝对定位
+11. **data-action安全**: 只允许引用函数名，禁止直接写代码，防止XSS攻击
+12. **激活状态**: 仅侧边栏菜单保留激活状态，其他菜单不保留
 
 ## 更新记录
+
+### v0.5.2 (2026-04-01)
+- 修复XSS安全漏洞，添加函数名格式验证
+- 使用正则表达式验证函数名，确保安全执行
+- 移除危险的alert()调用，改为只输出到控制台
+- 添加事件监听器跟踪机制，防止内存泄漏
+- 新增addEventListener辅助方法，安全添加和跟踪监听器
+- 完善destroy方法，清理所有跟踪的事件监听器
+- 重新设计内联菜单结构，一级菜单作为按钮点击弹出标准弹出菜单
+- 采用递归初始化模式：先处理弹出菜单，再渲染主菜单
+- 为构建方法增加嵌套menu标签规避逻辑，保留ul和menu标签格式
+- 除侧边菜单外，所有菜单均不保留菜单项激活状态
+- 侧边菜单整个菜单仅有一个菜单项可以为激活项
+- 修改setActive方法，清除整个菜单的激活状态而非仅同级
+- 修复徽章重复渲染问题，在renderBadge方法中添加已存在检查
+- 按照框架标准语法重写菜单手册页和主入口菜单
+- 为关键方法添加JSDoc注释和详细步骤说明
+
+### v0.5.1 (2026-03-31)
+- 集成统一DOM观察器（dom-observer.js）
+- 移除自有的MutationObserver，使用统一监听
+- 简化动画类，使用menu-closed和menu-opened两个核心类
+- 优化菜单结构，A标签内直接包含文字，不使用额外容器
+- 调整箭头位置，放到menu-text容器外面
+- 优化徽章样式，使用绝对定位显示在右上角
+- 增强data-action处理，支持直接执行函数
+- 更新菜单CSS，优化垂直居中对齐
+- 子菜单达到最大高度后支持滚动
 
 ### v0.5.0 (2026-03-30)
 - 更新动画类名，使用 `menu-close` 替代 `menu-collapsed`

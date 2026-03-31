@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./modules/css/components.css">
     <link rel="stylesheet" href="./modules/css/md.css">
     <link rel="stylesheet" href="./modules/css/prism/prism.css">
+    <link rel="stylesheet" href="./modules/css/menu.css">
 
 </head>
 <body>
@@ -43,358 +44,93 @@
                 <div style="font-size: 13px; color: var(--text-secondary);">共 6 大类 24 个组件</div>
             </div>
 
-            <menu id="magazineMenu">
+            <menu id="magazineMenu" class="menu-sidebar">
                 <ul>
                     <!-- 初始化指南 -->
-                    <li class="active" data-id="init-guide" data-page="init-guide">
-                        <a href="#" onclick="loadPage('init-guide')">
-                            <div class="menu-content">初始化指南</div>
-                        </a>
-                    </li>
+                    <li class="menu-active" data-id="init-guide" data-action="loadPage('init-guide')">初始化指南</li>
 
                     <!-- 基础布局组件 -->
-                    <li data-id="basic-layout" data-page="basic-layout">
-                        <a href="#">
-                            <div class="menu-content">基础布局组件</div>
-                            <div class="menu-right">
-                                <span class="menu-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
+                    <li data-id="basic-layout">基础布局组件
                         <ul>
-                            <li data-id="card-container" data-page="card-container">
-                                <a href="#" onclick="loadPage('card-container')">
-                                    <div class="menu-content">卡片容器</div>
-                                </a>
-                            </li>
-                            <li data-id="general-container" data-page="general-container">
-                                <a href="#" onclick="loadPage('general-container')">
-                                    <div class="menu-content">通用容器</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="layout-container" data-page="layout-container">
-                                <a href="#" onclick="loadPage('layout-container')">
-                                    <div class="menu-content">布局容器</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
+                            <li data-id="card-container" data-action="loadPage('card-container')">卡片容器</li>
+                            <li data-id="general-container" data-badge="new" data-action="loadPage('general-container')">通用容器</li>
+                            <li data-id="layout-container" data-badge="new" data-action="loadPage('layout-container')">布局容器</li>
                         </ul>
                     </li>
 
                     <!-- 交互控件 -->
-                    <li data-id="interaction-controls" data-page="interaction-controls">
-                        <a href="#">
-                            <div class="menu-content">交互控件</div>
-                            <div class="menu-right">
-                                <span class="menu-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
+                    <li data-id="interaction-controls">交互控件
                         <ul>
-                            <li data-id="button-container" data-page="button-container">
-                                <a href="#" onclick="loadPage('button-container')">
-                                    <div class="menu-content">按钮</div>
-                                    <div class="menu-right">
-                                        <span class="menu-icon">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
+                            <li data-id="button-container">按钮
                                 <ul>
-                                    <li data-id="button-basic" data-page="button-basic">
-                                        <a href="#" onclick="loadPage('button-basic')">
-                                            <div class="menu-content">基础按钮</div>
-                                        </a>
-                                    </li>
-                                    <li data-id="button-icon" data-page="button-icon">
-                                        <a href="#">
-                                            <div class="menu-content">图标按钮</div>
-                                            <div class="menu-right">
-                                                <span class="menu-icon">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </a>
+                                    <li data-id="button-basic" data-action="loadPage('button-basic')">基础按钮</li>
+                                    <li data-id="button-icon">图标按钮
                                         <ul>
-                                            <li data-id="button-icon-circle" data-page="button-icon-circle">
-                                                <a href="#" onclick="loadPage('button-icon-circle')">
-                                                    <div class="menu-content">圆形图标</div>
-                                                </a>
-                                            </li>
-                                            <li data-id="button-icon-square" data-page="button-icon-square">
-                                                <a href="#" onclick="loadPage('button-icon-square')">
-                                                    <div class="menu-content">方形图标</div>
-                                                </a>
-                                            </li>
+                                            <li data-id="button-icon-circle" data-action="loadPage('button-icon-circle')">圆形图标</li>
+                                            <li data-id="button-icon-square" data-action="loadPage('button-icon-square')">方形图标</li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <li data-id="input-container" data-page="input-container">
-                                <a href="#" onclick="loadPage('input-container')">
-                                    <div class="menu-content">表单控件</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge update"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="select-container" data-page="select-container">
-                                <a href="#" onclick="loadPage('select-container')">
-                                    <div class="menu-content">选择控件</div>
-                                </a>
-                            </li>
-                            <li data-id="md-container" data-page="md-container">
-                                <a href="#" onclick="loadPage('md-container')">
-                                    <div class="menu-content">MD编辑器</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge beta"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="menu-container" data-page="menu-container">
-                                <a href="#" onclick="loadPage('menu-container')">
-                                    <div class="menu-content">菜单组件</div>
-                                </a>
-                            </li>
-                            <li data-id="core-functions" data-page="core-functions">
-                                <a href="#" onclick="loadPage('core-functions')">
-                                    <div class="menu-content">核心JS功能</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="multi-level-test" data-page="menu-container">
-                                <a href="#">
-                                    <div class="menu-content">四级菜单测试</div>
-                                    <div class="menu-right">
-                                        <span class="menu-icon">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
+                            <li data-id="input-container" data-badge="update" data-action="loadPage('input-container')">表单控件</li>
+                            <li data-id="select-container" data-action="loadPage('select-container')">选择控件</li>
+                            <li data-id="md-container" data-badge="beta" data-action="loadPage('md-container')">MD编辑器</li>
+                            <li data-id="menu-container" data-action="loadPage('menu-container')">菜单组件</li>
+                            <li data-id="core-functions" data-badge="new" data-action="loadPage('core-functions')">核心JS功能</li>
+                            <li data-id="multi-level-test">四级菜单测试
                                 <ul>
-                                    <li data-id="level-1">
-                                        <a href="#">
-                                            <div class="menu-content">一级菜单</div>
-                                            <div class="menu-right">
-                                                <span class="menu-icon">
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                                    </svg>
-                                                </span>
-                                            </div>
-                                        </a>
+                                    <li data-id="level-1">一级菜单
                                         <ul>
-                                            <li data-id="level-2">
-                                                <a href="#">
-                                                    <div class="menu-content">二级菜单</div>
-                                                    <div class="menu-right">
-                                                        <span class="menu-icon">
-                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </a>
+                                            <li data-id="level-2">二级菜单
                                                 <ul>
-                                                    <li data-id="level-3">
-                                                        <a href="#">
-                                                            <div class="menu-content">三级菜单</div>
-                                                            <div class="menu-right">
-                                                                <span class="menu-icon">
-                                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                                                    </svg>
-                                                                </span>
-                                                            </div>
-                                                        </a>
+                                                    <li data-id="level-3">三级菜单
                                                         <ul>
-                                                            <li data-id="level-4-1">
-                                                                <a href="#" onclick="loadPage('menu-container')">
-                                                                    <div class="menu-content">四级菜单-1</div>
-                                                                </a>
-                                                            </li>
-                                                            <li data-id="level-4-2">
-                                                                <a href="#" onclick="loadPage('menu-container')">
-                                                                    <div class="menu-content">四级菜单-2</div>
-                                                                </a>
-                                                            </li>
+                                                            <li data-id="level-4-1" data-action="loadPage('menu-container')">四级菜单-1</li>
+                                                            <li data-id="level-4-2" data-action="loadPage('menu-container')">四级菜单-2</li>
                                                         </ul>
                                                     </li>
-                                                    <li data-id="level-3-2">
-                                                        <a href="#" onclick="loadPage('menu-container')">
-                                                            <div class="menu-content">三级菜单-2</div>
-                                                        </a>
-                                                    </li>
+                                                    <li data-id="level-3-2" data-action="loadPage('menu-container')">三级菜单-2</li>
                                                 </ul>
                                             </li>
-                                            <li data-id="level-2-2">
-                                                <a href="#" onclick="loadPage('menu-container')">
-                                                    <div class="menu-content">二级菜单-2</div>
-                                                </a>
-                                            </li>
+                                            <li data-id="level-2-2" data-action="loadPage('menu-container')">二级菜单-2</li>
                                         </ul>
                                     </li>
-                                    <li data-id="level-1-2">
-                                        <a href="#" onclick="loadPage('menu-container')">
-                                            <div class="menu-content">一级菜单-2</div>
-                                        </a>
-                                    </li>
+                                    <li data-id="level-1-2" data-action="loadPage('menu-container')">一级菜单-2</li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
 
                     <!-- 反馈组件 -->
-                    <li data-id="feedback-components" data-page="feedback-components">
-                        <a href="#">
-                            <div class="menu-content">反馈组件</div>
-                            <div class="menu-right">
-                                <span class="menu-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
+                    <li data-id="feedback-components">反馈组件
                         <ul>
-                            <li data-id="modal-container-1" data-page="modal-container-1">
-                                <a href="#" onclick="loadPage('modal-container-1')">
-                                    <div class="menu-content">弹窗</div>
-                                </a>
-                            </li>
-                            <li data-id="toast-container" data-page="toast-container">
-                                <a href="#" onclick="loadPage('toast-container')">
-                                    <div class="menu-content">Toast</div>
-                                </a>
-                            </li>
-                            <li data-id="loading-container" data-page="loading-container">
-                                <a href="#" onclick="loadPage('loading-container')">
-                                    <div class="menu-content">加载类</div>
-                                </a>
-                            </li>
-                            <li data-id="message-container" data-page="message-container">
-                                <a href="#" onclick="loadPage('message-container')">
-                                    <div class="menu-content">信息提示</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
+                            <li data-id="modal-container-1" data-action="loadPage('modal-container-1')">弹窗</li>
+                            <li data-id="toast-container" data-action="loadPage('toast-container')">Toast</li>
+                            <li data-id="loading-container" data-action="loadPage('loading-container')">加载类</li>
+                            <li data-id="message-container" data-badge="new" data-action="loadPage('message-container')">信息提示</li>
                         </ul>
                     </li>
 
                     <!-- 数据展示组件 -->
-                    <li data-id="data-display" data-page="data-display">
-                        <a href="#">
-                            <div class="menu-content">数据展示组件</div>
-                            <div class="menu-right">
-                                <span class="menu-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
+                    <li data-id="data-display">数据展示组件
                         <ul>
-                            <li data-id="image-container" data-page="image-container">
-                                <a href="#" onclick="loadPage('image-container')">
-                                    <div class="menu-content">图片控件</div>
-                                </a>
-                            </li>
-                            <li data-id="list-container" data-page="list-container">
-                                <a href="#" onclick="loadPage('list-container')">
-                                    <div class="menu-content">列表</div>
-                                </a>
-                            </li>
-                            <li data-id="table-container" data-page="table-container">
-                                <a href="#" onclick="loadPage('table-container')">
-                                    <div class="menu-content">表格</div>
-                                </a>
-                            </li>
-                            <li data-id="badge-container" data-page="badge-container">
-                                <a href="#" onclick="loadPage('badge-container')">
-                                    <div class="menu-content">标签/徽章</div>
-                                </a>
-                            </li>
-                            <li data-id="progress-container" data-page="progress-container">
-                                <a href="#" onclick="loadPage('progress-container')">
-                                    <div class="menu-content">进度条</div>
-                                </a>
-                            </li>
+                            <li data-id="image-container" data-action="loadPage('image-container')">图片控件</li>
+                            <li data-id="list-container" data-action="loadPage('list-container')">列表</li>
+                            <li data-id="table-container" data-action="loadPage('table-container')">表格</li>
+                            <li data-id="badge-container" data-action="loadPage('badge-container')">标签/徽章</li>
+                            <li data-id="progress-container" data-action="loadPage('progress-container')">进度条</li>
                         </ul>
                     </li>
 
                     <!-- 通用UI元素 -->
-                    <li data-id="general-ui" data-page="general-ui">
-                        <a href="#">
-                            <div class="menu-content">通用UI元素</div>
-                            <div class="menu-right">
-                                <span class="menu-icon">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <use href="./icons/outline/chevron-right.svg#icon"></use>
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
+                    <li data-id="general-ui">通用UI元素
                         <ul>
-                            <li data-id="text-container" data-page="text-container">
-                                <a href="#" onclick="loadPage('text-container')">
-                                    <div class="menu-content">文本</div>
-                                </a>
-                            </li>
-                            <li data-id="icon-container" data-page="icon-container">
-                                <a href="#" onclick="loadPage('icon-container')">
-                                    <div class="menu-content">图标</div>
-                                </a>
-                            </li>
-                            <li data-id="divider-container" data-page="divider-container">
-                                <a href="#" onclick="loadPage('divider-container')">
-                                    <div class="menu-content">分隔组件</div>
-                                </a>
-                            </li>
-                            <li data-id="theme-selector" data-page="theme-selector">
-                                <a href="#" onclick="loadPage('theme-selector')">
-                                    <div class="menu-content">主题选择器</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge hot"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="utilities-container" data-page="utilities-container">
-                                <a href="#" onclick="loadPage('utilities-container')">
-                                    <div class="menu-content">工具类组件</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li data-id="icon-showcase" data-page="icon-showcase">
-                                <a href="#" onclick="loadPage('icon-showcase')">
-                                    <div class="menu-content">图标展示</div>
-                                    <div class="menu-right">
-                                        <span class="menu-badge badge new"></span>
-                                    </div>
-                                </a>
-                            </li>
+                            <li data-id="text-container" data-action="loadPage('text-container')">文本</li>
+                            <li data-id="icon-container" data-action="loadPage('icon-container')">图标</li>
+                            <li data-id="divider-container" data-action="loadPage('divider-container')">分隔组件</li>
+                            <li data-id="theme-selector" data-badge="hot" data-action="loadPage('theme-selector')">主题选择器</li>
+                            <li data-id="utilities-container" data-badge="new" data-action="loadPage('utilities-container')">工具类组件</li>
+                            <li data-id="icon-showcase" data-badge="new" data-action="loadPage('icon-showcase')">图标展示</li>
                         </ul>
                     </li>
                 </ul>

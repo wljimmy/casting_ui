@@ -3,40 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>菜单组件测试 - Casting UI</title>
+    <title>Casting UI - 菜单组件测试</title>
     <link rel="stylesheet" href="../../modules/css/core.css">
     <link rel="stylesheet" href="../../modules/css/components.css">
     <link rel="stylesheet" href="../../modules/css/menu.css">
-    <script type="module" src="../../modules/js/index.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>菜单组件测试</h1>
-            <p>测试菜单组件的各种功能和交互</p>
-        </div>
+        <h1>菜单组件测试</h1>
 
         <div class="section">
-            <h2>测试1：基本菜单功能</h2>
+            <h2>测试1：基本菜单功能（侧边栏菜单）</h2>
             <div class="container-fluid">
                 <menu id="test-menu-1" class="menu-sidebar">
                     <ul>
                         <li class="menu-active" data-id="home" data-action="handleMenuClick">首页</li>
-                        <li data-id="products" data-action="handleMenuClick">产品</li>
+                        <li data-id="products" data-action="handleMenuClick">产品
+                            <ul>
+                                <li data-id="phone" data-action="handleMenuClick">手机</li>
+                                <li data-id="laptop" data-badge="hot" data-action="handleMenuClick">电脑</li>
+                                <li data-id="tablet" data-action="handleMenuClick">平板</li>
+                            </ul>
+                        </li>
                         <li data-id="services" data-action="handleMenuClick">服务
                             <ul>
                                 <li data-id="consulting" data-action="handleMenuClick">咨询服务</li>
                                 <li data-id="support" data-action="handleMenuClick">技术支持</li>
-                                <li data-id="training" data-action="handleMenuClick">培训服务
-                                    <ul>
-                                        <li data-id="beginner" data-action="handleMenuClick">初级培训</li>
-                                        <li data-id="advanced" data-action="handleMenuClick">高级培训
-                                            <ul>
-                                                <li data-id="expert" data-action="handleMenuClick">专家培训</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                     
@@ -51,7 +43,7 @@
         </div>
 
         <div class="section">
-            <h2>测试2：Data属性功能</h2>
+            <h2>测试2：Data属性功能（侧边栏菜单）</h2>
             <div class="container-fluid">
                 <menu id="test-menu-2" class="menu-sidebar">
                     <ul>
@@ -72,7 +64,7 @@
         </div>
 
         <div class="section">
-            <h2>测试3：API测试</h2>
+            <h2>测试3：API测试（侧边栏菜单）</h2>
             <div class="container-fluid">
                 <menu id="test-menu-3" class="menu-sidebar">
                     <ul>
@@ -91,6 +83,148 @@
                 <p>点击按钮测试API功能</p>
             </div>
         </div>
+
+        <div class="section">
+            <h2>测试4：内联菜单</h2>
+            <div class="container-fluid">
+                <menu id="test-menu-4" class="menu-inline">
+                    <ul>
+                        <li data-id="inline-home">首页
+                            <ul>
+                                <li data-id="inline-home-1" data-action="handleMenuClick">首页介绍</li>
+                                <li data-id="inline-home-2" data-action="handleMenuClick">最新动态</li>
+                            </ul>
+                        </li>
+                        
+                        <li data-id="inline-products">产品
+                            <ul>
+                                <li data-id="inline-phone" data-action="handleMenuClick">手机</li>
+                                <li data-id="inline-laptop" data-badge="hot" data-action="handleMenuClick">电脑</li>
+                                <li data-id="inline-tablet" data-action="handleMenuClick">平板</li>
+                            </ul>
+                        </li>
+                        
+                        <li data-id="inline-services">服务
+                            <ul>
+                                <li data-id="inline-consulting" data-action="handleMenuClick">咨询服务</li>
+                                <li data-id="inline-support" data-action="handleMenuClick">技术支持</li>
+                                <li data-id="inline-training" data-action="handleMenuClick">培训服务</li>
+                                <li data-id="inline-maintenance" data-action="handleMenuClick">维护服务</li>
+                                <li data-id="inline-upgrade" data-action="handleMenuClick">升级服务</li>
+                                <li data-id="inline-migration" data-action="handleMenuClick">迁移服务</li>
+                                <li data-id="inline-custom" data-action="handleMenuClick">定制服务</li>
+                                <li data-id="inline-247" data-badge="hot" data-action="handleMenuClick">24/7支持</li>
+                            </ul>
+                        </li>
+                        
+                        <li data-id="inline-about">关于我们
+                            <ul>
+                                <li data-id="inline-about-1" data-action="handleMenuClick">公司简介</li>
+                                <li data-id="inline-about-2" data-action="handleMenuClick">团队介绍</li>
+                                <li data-id="inline-about-3" data-action="handleMenuClick">发展历程</li>
+                            </ul>
+                        </li>
+                        
+                        <li data-id="inline-contact" data-badge="new">联系我们
+                            <ul>
+                                <li data-id="inline-contact-1" data-action="handleMenuClick">电话</li>
+                                <li data-id="inline-contact-2" data-action="handleMenuClick">邮箱</li>
+                                <li data-id="inline-contact-3" data-action="handleMenuClick">地址</li>
+                            </ul>
+                        </li>
+                        
+                        <li data-id="inline-multilevel">多级菜单
+                            <ul>
+                                <li data-id="inline-level1-1" data-action="handleMenuClick">一级菜单1
+                                    <ul>
+                                        <li data-id="inline-level2-1" data-action="handleMenuClick">二级菜单1
+                                            <ul>
+                                                <li data-id="inline-level3-1" data-action="handleMenuClick">三级菜单1</li>
+                                                <li data-id="inline-level3-2" data-action="handleMenuClick">三级菜单2</li>
+                                                <li data-id="inline-level3-3" data-badge="hot" data-action="handleMenuClick">三级菜单3</li>
+                                            </ul>
+                                        </li>
+                                        <li data-id="inline-level2-2" data-action="handleMenuClick">二级菜单2</li>
+                                    </ul>
+                                </li>
+                                <li data-id="inline-level1-2" data-action="handleMenuClick">一级菜单2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+            <div class="container-fluid" id="test-result-4">
+                <p>测试内联菜单的功能和样式</p>
+                <p>测试内容1：点击按钮展开弹出菜单</p>
+                <p>测试内容2：点击其他按钮自动关闭之前的弹出菜单</p>
+                <p>测试内容3：点击页面其他地方自动关闭所有弹出菜单</p>
+                <p>测试内容4：弹出菜单超过高度时会显示滚动条</p>
+                <p>测试内容5：多级子菜单的展开和收起</p>
+                <p>测试内容6：菜单项的激活状态切换</p>
+                <p>测试内容7：徽章的显示效果</p>
+                <p>测试内容8：图标和文字的对齐</p>
+                <p>测试内容9：响应式布局效果</p>
+                <p>测试内容10：动画过渡效果</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>测试5：弹出式菜单</h2>
+            <div class="container-fluid">
+                <button id="popup-trigger-button" class="btn btn-primary">显示弹出菜单</button>
+                <menu id="test-menu-5" class="menu-popup menu-hidden" data-trigger="popup-trigger-button">
+                    <ul>
+                        <li class="menu-active" data-id="popup-home" data-action="handleMenuClick">首页</li>
+                        <li data-id="popup-products" data-action="handleMenuClick">产品
+                            <ul>
+                                <li data-id="popup-phone" data-action="handleMenuClick">手机</li>
+                                <li data-id="popup-laptop" data-badge="hot" data-action="handleMenuClick">电脑</li>
+                            </ul>
+                        </li>
+                        <li data-id="popup-services" data-action="handleMenuClick">服务</li>
+                        <li data-id="popup-about" data-action="handleMenuClick">关于我们</li>
+                        <li data-id="popup-contact" data-badge="new" data-action="handleMenuClick">联系我们</li>
+                        <li data-id="popup-feature1" data-action="handleMenuClick">功能1</li>
+                        <li data-id="popup-feature2" data-action="handleMenuClick">功能2</li>
+                        <li data-id="popup-feature3" data-action="handleMenuClick">功能3</li>
+                        <li data-id="popup-feature4" data-action="handleMenuClick">功能4</li>
+                        <li data-id="popup-feature5" data-action="handleMenuClick">功能5</li>
+                        <li data-id="popup-feature6" data-action="handleMenuClick">功能6</li>
+                        <li data-id="popup-feature7" data-action="handleMenuClick">功能7</li>
+                        <li data-id="popup-multilevel" data-action="handleMenuClick">多级菜单测试
+                            <ul>
+                                <li data-id="popup-level1-1" data-action="handleMenuClick">一级菜单1
+                                    <ul>
+                                        <li data-id="popup-level2-1" data-action="handleMenuClick">二级菜单1
+                                            <ul>
+                                                <li data-id="popup-level3-1" data-action="handleMenuClick">三级菜单1</li>
+                                                <li data-id="popup-level3-2" data-action="handleMenuClick">三级菜单2</li>
+                                                <li data-id="popup-level3-3" data-badge="hot" data-action="handleMenuClick">三级菜单3</li>
+                                            </ul>
+                                        </li>
+                                        <li data-id="popup-level2-2" data-action="handleMenuClick">二级菜单2</li>
+                                    </ul>
+                                </li>
+                                <li data-id="popup-level1-2" data-action="handleMenuClick">一级菜单2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </menu>
+            </div>
+            <div class="container-fluid" id="test-result-5">
+                <p>点击按钮测试弹出式菜单</p>
+                <p>测试内容1：点击按钮显示/隐藏弹出菜单</p>
+                <p>测试内容2：点击页面其他地方自动关闭弹出菜单</p>
+                <p>测试内容3：弹出菜单超过高度时会显示滚动条</p>
+                <p>测试内容4：多级子菜单的展开和收起</p>
+                <p>测试内容5：菜单项的激活状态切换</p>
+                <p>测试内容6：徽章的显示效果</p>
+                <p>测试内容7：图标和文字的对齐</p>
+                <p>测试内容8：弹出菜单在所有元素之上</p>
+                <p>测试内容9：响应式布局效果</p>
+                <p>测试内容10：动画过渡效果</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -100,13 +234,12 @@
             const menu = document.querySelector('menu:has(li.menu-active)');
             const menuId = menu ? menu.id : lastClickedMenuId;
             lastClickedMenuId = menuId;
-            const resultId = menuId.replace('test-menu', 'test-result');
-            const resultElement = document.getElementById(resultId);
             
             const activeItem = menu ? menu.querySelector('li.menu-active') : null;
             const menuText = activeItem ? activeItem.textContent.trim() : '未知';
+            const menuType = menuId.includes('popup') ? '弹出菜单' : menuId.includes('inline') ? '内联菜单' : '侧边栏菜单';
             
-            resultElement.innerHTML = `<p style="color: var(--success-color);">点击了菜单项: ${menuText}</p>`;
+            console.log(`[菜单点击] ${menuType} - 菜单项: ${menuText}`);
         }
 
         function testSetActive() {
@@ -118,10 +251,10 @@
                 const instance = window.CastingMenuManager.getInstance('test-menu-3');
                 if (instance) {
                     instance.setActive(secondItem);
-                    document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已设置第二项为激活状态</p>`;
+                    console.log('[菜单测试] 已设置第二项为激活状态');
                 }
             } else {
-                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--error-color);">菜单管理器未初始化</p>`;
+                console.log('[菜单测试] 菜单管理器未初始化');
             }
         }
 
@@ -135,9 +268,9 @@
                 li.textContent = '新菜单项';
                 ul.appendChild(li);
                 
-                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已添加新菜单项</p>`;
+                console.log('[菜单测试] 已添加新菜单项');
             } else {
-                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--error-color);">CastingMenu未初始化</p>`;
+                console.log('[菜单测试] CastingMenu未初始化');
             }
         }
 
@@ -158,17 +291,17 @@
                 li.textContent = '新子菜单项';
                 subUl.appendChild(li);
                 
-                document.getElementById('test-result-3').innerHTML = `<p style="color: var(--success-color);">已添加新子菜单项</p>`;
+                console.log('[菜单测试] 已添加新子菜单项');
             }
         }
 
         function testAction() {
-            alert('测试Action函数执行');
+            console.log('[菜单测试] 测试Action函数执行');
             handleMenuClick();
         }
 
         function testSupportAction() {
-            alert('测试Support Action函数执行');
+            console.log('[菜单测试] 测试Support Action函数执行');
             handleMenuClick();
         }
 
@@ -180,5 +313,7 @@
             }
         });
     </script>
+
+    <script type="module" src="../../modules/js/index.js"></script>
 </body>
 </html>
