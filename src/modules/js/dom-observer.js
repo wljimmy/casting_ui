@@ -63,11 +63,11 @@ class DOMObserver {
           }
         }
       }
-
-      // 触发增加事件处理函数
-      this.#trigger(added, this.addHandlers);
       // 触发移除事件处理函数
       this.#trigger(removed, this.removeHandlers);
+      // 触发增加事件处理函数
+      this.#trigger(added, this.addHandlers);
+
     });
 
     // 开始观察document.body

@@ -17,7 +17,7 @@
             <div class="container-fluid">
                 <menu id="test-menu-1" class="menu-sidebar">
                     <ul>
-                        <li class="menu-active" data-id="home" data-action="handleMenuClick">首页</li>
+                        <li data-id="home" data-action="handleMenuClick">首页</li>
                         <li data-id="products" data-action="handleMenuClick">产品
                             <ul>
                                 <li data-id="phone" data-action="handleMenuClick">手机</li>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <!-- <div class="section">
             <h2>测试2：Data属性功能（侧边栏菜单）</h2>
             <div class="container-fluid">
                 <menu id="test-menu-2" class="menu-sidebar">
@@ -76,13 +76,17 @@
             </div>
             <div class="container-fluid">
                 <button class="btn btn-primary" onclick="testSetActive()">设置第二项为激活</button>
-                <button class="btn btn-secondary" onclick="testAddItem()">添加菜单项</button>
-                <button class="btn btn-secondary" onclick="testAddSubItem()">添加子菜单项</button>
+                <button class="btn btn-secondary" onclick="testAddItem()">添加菜单项（旧方式）</button>
+                <button class="btn btn-secondary" onclick="testAddSubItem()">添加子菜单项（旧方式）</button>
+            </div>
+            <div class="container-fluid" style="margin-top: 15px;">
+                <button class="btn btn-primary" onclick="testAddItemsNew()">添加同级菜单项（新方式）</button>
+                <button class="btn btn-secondary" onclick="testAddSubItemsNew()">添加子菜单项（新方式）</button>
             </div>
             <div class="container-fluid" id="test-result-3">
                 <p>点击按钮测试API功能</p>
             </div>
-        </div>
+        </div> -->
 
         <div class="section">
             <h2>测试4：内联菜单</h2>
@@ -303,6 +307,63 @@
         function testSupportAction() {
             console.log('[菜单测试] 测试Support Action函数执行');
             handleMenuClick();
+        }
+
+        function testAddItemsNew() {
+            if (window.CastingMenu) {
+                const result = window.CastingMenu.addItems({
+                    target: 'li[data-id="item2"]',
+                    isSubmenu: false,
+                    items: [
+                        { 
+                            text: '新菜单项A', 
+                            icon: 'outline/star.svg',
+                            action: { callback: 'handleMenuClick' }
+                        },
+                        { 
+                            text: '新菜单项B', 
+                            badge: 'new',
+                            action: { callback: 'handleMenuClick' }
+                        }
+                    ]
+                });
+                
+                if (result) {
+                    console.log('[菜单测试] 新方式添加同级菜单项成功');
+                } else {
+                    console.log('[菜单测试] 新方式添加同级菜单项失败');
+                }
+            }
+        }
+
+        function testAddSubItemsNew() {
+            if (window.CastingMenu) {
+                const result = window.CastingMenu.addItems({
+                    target: 'li[data-id="item2"]',
+                    isSubmenu: true,
+                    items: [
+                        { 
+                            text: '子菜单项1', 
+                            action: { callback: 'handleMenuClick' }
+                        },
+                        { 
+                            text: '子菜单项2', 
+                            badge: 'hot',
+                            action: { callback: 'handleMenuClick' },
+                            children: [
+                                { text: '三级菜单1', action: { callback: 'handleMenuClick' } },
+                                { text: '三级菜单2', action: { callback: 'handleMenuClick' } }
+                            ]
+                        }
+                    ]
+                });
+                
+                if (result) {
+                    console.log('[菜单测试] 新方式添加子菜单项成功');
+                } else {
+                    console.log('[菜单测试] 新方式添加子菜单项失败');
+                }
+            }
         }
 
         window.addEventListener('load', function() {

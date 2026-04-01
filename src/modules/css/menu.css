@@ -262,26 +262,114 @@ menu .badge {
 
 /* ========== 响应式菜单 ========== */
 @media (max-width: 768px) {
+    * {
+        font-size: calc(var(--font-size-body)*1.5);
+    }
     menu {
         width: 100%;
     }
     
     menu.menu-inline {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+        white-space: nowrap;
     }
     
     menu.menu-inline ul {
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
+        flex-wrap: nowrap;
     }
     
     menu.menu-inline li {
-        width: 100%;
+        width: auto;
+        flex-shrink: 0;
     }
     
     menu.menu-inline li a {
-        margin: 0;
+        margin: 0 var(--size-xs);
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+    }
+  /* 调整内联菜单子菜单的显示方式 */
+    menu.menu-inline li menu.menu-popup {
+        position: relative; /* 使用固定定位，避免被滚动容器影响 */
+        top: 0; /* 调整位置，确保在可视区域内 */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /* height: 100%; */
+        width: 100%;
+
+    }
+
+    menu.menu-sidebar{
+        width: 100%;
+        height: 60px;
+        position:fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 10002;
+        border-radius: 0 !important;
+        transition: none;
+
+        
+    }
+    menu.menu-sidebar>ul::before{
+        content:  "MENU";
+        font-size: 1.2em;
+        position: absolute;
+        font-weight: 900;
+        top: 0px;
+        left: 70vw;
+        width: 100%;
+        height: 60px;
+        padding-left: 50px;
+        background-color: var(--bg-primary);
+        z-index: 10001;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        cursor: pointer;
+        background-image: url("/icons/outline/menu.svg");
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-size: 40px 60px;
+    }
+    menu.menu-sidebar>ul{
+        position: absolute;
+        top:0;
+        left:-70vw;
+        display: block;
+        width: 70vw;
+        height: 100vh;
+        overflow: visible;
+
+    }
+    menu.menu-sidebar.head-menu-opened{
+        height: 100vh;
+        max-height: none;
+        overflow-y: auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: none;
         border-radius: 0;
+        box-shadow: none;
+
+    }
+    menu.menu-sidebar.head-menu-opened>ul{
+        background-color: var(--bg-color);
+        box-shadow: var(--shadow-lg);
+        /* height: 100vh;
+        width: 70vw; */
+        left: 0;
+        /* right: 0; */
+        top: 0;
+        overflow-y: scroll;
     }
 }

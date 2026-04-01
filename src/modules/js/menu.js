@@ -17,13 +17,103 @@ const STANDARD_MENU_CLASSES = ['menu-sidebar', 'menu-popup', 'menu-inline'];
 class MenuManager {
     constructor() {
         this.instances = new Map();
+        this.sidebarMenu = null; // 存储侧边栏菜单引用
+        this.originalPosition = null; // 存储菜单原始位置信息
         this.init();
     }
 
     init() {
         debug('菜单管理器初始化');
+        this.setupResponsiveSidebar();
         this.scanAndInitMenus();
         this.registerObserver();
+        this.addBodySidebarClickListener();
+    }
+
+    // 添加body下侧边栏菜单点击事件监听
+    addBodySidebarClickListener() {
+        // 监听body下的menu.menu-sidebar点击事件
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('menu.menu-sidebar');
+            if (target && target.parentElement === document.body) {
+                // 阻止事件冒泡，只激活菜单自己的行为
+                e.stopPropagation();
+                // 切换.head-menu-opened类到menu元素上
+                target.classList.toggle('head-menu-opened');
+            }
+        });
+    }
+
+    // 设置响应式侧边栏
+    setupResponsiveSidebar() {
+        // 读取页面中的第一个侧边栏菜单
+        this.sidebarMenu = document.querySelector('menu.menu-sidebar');
+        if (this.sidebarMenu) {
+            // 保存原始位置信息
+            this.originalPosition = {
+                parent: this.sidebarMenu.parentElement,
+                nextSibling: this.sidebarMenu.nextSibling
+            };
+            // 输出原始代码
+            const originalCode = this.sidebarMenu.outerHTML;
+            debug('找到侧边栏菜单', this.sidebarMenu, { id: this.sidebarMenu.id, originalCode });
+            
+            // 监听页面大小变化
+            this.addResizeListener();
+            // 初始检查
+            this.checkAndAdjustSidebar();
+        } else {
+            debug('未找到侧边栏菜单');
+        }
+    }
+
+    // 添加窗口大小变化监听器
+    addResizeListener() {
+        const resizeHandler = () => {
+            this.checkAndAdjustSidebar();
+        };
+        window.addEventListener('resize', resizeHandler);
+        // 存储监听器以便后续清理
+        this.resizeHandler = resizeHandler;
+    }
+
+    // 检查并调整侧边栏位置
+    checkAndAdjustSidebar() {
+        if (!this.sidebarMenu) return;
+        
+        // 检查是否为手机端
+        const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches;
+        
+        if (isMobile) {
+            // 移动到body顶部
+            this.moveSidebarToTop();
+        } else {
+            // 还原到原始位置
+            this.restoreSidebarPosition();
+        }
+    }
+
+    // 将侧边栏移动到body顶部
+    moveSidebarToTop() {
+        if (!this.sidebarMenu || this.sidebarMenu.parentElement === document.body) return;
+        
+        // 直接移动到body顶部
+        document.body.insertBefore(this.sidebarMenu, document.body.firstChild);
+    }
+
+    // 还原侧边栏到原始位置
+    restoreSidebarPosition() {
+        if (!this.sidebarMenu || !this.originalPosition) return;
+        
+        const { parent, nextSibling } = this.originalPosition;
+        if (this.sidebarMenu.parentElement !== parent) {
+            // 直接移动到原始位置
+            if (nextSibling) {
+                parent.insertBefore(this.sidebarMenu, nextSibling);
+            } else {
+                parent.appendChild(this.sidebarMenu);
+            }
+        }
     }
 
     // 检查是否为标准菜单
@@ -156,20 +246,8 @@ class MenuManager {
         }
     }
 
-    // JS API：从JSON配置创建菜单
-    createMenu(config) {
-        const { id, className, items, container } = config;
-        
-        // 创建menu元素
-        const menuElement = document.createElement('menu');
-        if (id) menuElement.id = id;
-        if (className) menuElement.className = className;
-        
-        // 创建ul
-        const ul = document.createElement('ul');
-        
-        // 递归创建菜单项
-        const createItem = (itemData) => {
+    // 递归创建菜单项（通用方法）
+        createItem(itemData) {
             const li = document.createElement('li');
             if (itemData.icon) li.setAttribute('data-icon', itemData.icon);
             if (itemData.badge) li.setAttribute('data-badge', itemData.badge);
@@ -183,31 +261,130 @@ class MenuManager {
             if (itemData.children && itemData.children.length > 0) {
                 const subUl = document.createElement('ul');
                 itemData.children.forEach(child => {
-                    subUl.appendChild(createItem(child));
+                    subUl.appendChild(this.createItem(child));
                 });
                 li.appendChild(subUl);
             }
             
             return li;
-        };
-        
-        items.forEach(item => {
-            ul.appendChild(createItem(item));
-        });
-        
-        menuElement.appendChild(ul);
-        
-        // 如果指定了容器，插入到容器中
-        if (container) {
-            const containerElement = document.querySelector(container);
-            if (containerElement) {
-                containerElement.appendChild(menuElement);
-            }
         }
-        
-        // 初始化菜单
-        return this.initMenu(menuElement);
-    }
+
+        // JS API：从JSON配置创建菜单
+        createMenu(config) {
+            const { id, className, items, container } = config;
+            
+            // 创建menu元素
+            const menuElement = document.createElement('menu');
+            if (id) menuElement.id = id;
+            if (className) menuElement.className = className;
+            
+            // 创建ul
+            const ul = document.createElement('ul');
+            
+            // 添加菜单项
+            items.forEach(item => {
+                ul.appendChild(this.createItem(item));
+            });
+            
+            menuElement.appendChild(ul);
+            
+            // 如果指定了容器，插入到容器中
+            if (container) {
+                const containerElement = document.querySelector(container);
+                if (containerElement) {
+                    containerElement.appendChild(menuElement);
+                }
+            }
+            
+            // 初始化菜单
+            return this.initMenu(menuElement);
+        }
+
+        // JS API：添加菜单项/子菜单项
+        addItems(config) {
+            const { target, isSubmenu = false, items } = config;
+            
+            // 获取目标元素
+            let targetElement;
+            if (typeof target === 'string') {
+                targetElement = document.querySelector(target);
+            } else if (target instanceof HTMLElement) {
+                targetElement = target;
+            }
+            
+            if (!targetElement) {
+                debug('添加菜单项失败：未找到目标元素', null, config);
+                return null;
+            }
+
+            // 查找菜单实例
+            const menuElement = targetElement.closest('menu');
+            if (!menuElement) {
+                debug('添加菜单项失败：未找到菜单容器', null, config);
+                return null;
+            }
+
+            const menuId = menuElement.id;
+            const menuInstance = this.instances.get(menuId);
+            
+            if (!menuInstance) {
+                debug('添加菜单项失败：未找到菜单实例', null, { menuId });
+                return null;
+            }
+
+            if (isSubmenu) {
+                // 添加为子菜单
+                let subUl = targetElement.querySelector(':scope > ul');
+                
+                if (!subUl) {
+                    // 没有子菜单，创建新的
+                    subUl = document.createElement('ul');
+                    targetElement.appendChild(subUl);
+                    // 初始化为关闭状态
+                    targetElement.classList.add('menu-closed');
+                }
+                
+                // 添加子菜单项
+                items.forEach(item => {
+                    subUl.appendChild(this.createItem(item));
+                });
+                
+                // 重新渲染图标和徽标
+                menuInstance.renderIconsAndBadges();
+                debug('添加子菜单项成功', null, { menuId, target: targetElement });
+                
+            } else {
+                // 添加为同级菜单项
+                let parentUl = targetElement.parentElement;
+                
+                // 如果目标不在 ul 中，查找最近的 ul
+                if (!parentUl || parentUl.tagName !== 'UL') {
+                    parentUl = targetElement.querySelector(':scope > ul');
+                }
+                
+                if (!parentUl || parentUl.tagName !== 'UL') {
+                    debug('添加菜单项失败：未找到合适的父级ul', null, config);
+                    return null;
+                }
+                
+                // 在目标后面添加
+                const nextSibling = targetElement.nextSibling;
+                items.forEach(item => {
+                    const newItem = this.createItem(item);
+                    if (nextSibling) {
+                        parentUl.insertBefore(newItem, nextSibling);
+                    } else {
+                        parentUl.appendChild(newItem);
+                    }
+                });
+                
+                // 重新渲染图标和徽标
+                menuInstance.renderIconsAndBadges();
+                debug('添加菜单项成功', null, { menuId, target: targetElement });
+            }
+            
+            return menuInstance;
+        }
 }
 
 // 单个菜单实例类
@@ -770,7 +947,12 @@ export { menuManager, MenuManager, MenuInstance, STANDARD_MENU_CLASSES };
 window.CastingMenuManager = menuManager;
 window.CastingMenu = {
     create: (config) => menuManager.createMenu(config),
+    addItems: (config) => menuManager.addItems(config),
     getInstance: (id) => menuManager.getInstance(id),
     getAllInstances: () => menuManager.getAllInstances(),
-    destroy: (id) => menuManager.destroyMenu(id)
+    destroy: (id) => menuManager.destroyMenu(id),
+    // 响应式侧边栏相关方法
+    moveSidebarToTop: () => menuManager.moveSidebarToTop(),
+    restoreSidebarPosition: () => menuManager.restoreSidebarPosition(),
+    checkAndAdjustSidebar: () => menuManager.checkAndAdjustSidebar()
 };
