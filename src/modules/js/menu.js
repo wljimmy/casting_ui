@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.5.1
+ * Version: 0.5.3
  * Module: menu.js
  * Description: 菜单模块，支持多种菜单类型、多级嵌套、自动初始化、实例隔离与垃圾回收
  * Copyright (c) 2026 Bingo工作室

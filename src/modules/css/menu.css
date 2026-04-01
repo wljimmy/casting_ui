@@ -1,3 +1,12 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.5.3
+ * Module: menu.css
+ * Description: 菜单组件样式，支持多种菜单类型、响应式设计
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
 /* ========== 基础菜单样式 ========== */
 menu {
     display: block;
