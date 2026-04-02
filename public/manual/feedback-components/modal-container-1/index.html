@@ -1,0 +1,21 @@
+<section class="CUI-section">
+    <h2>弹窗</h2>
+    
+    <div class="CUI-grid CUI-grid-4c">
+        <!-- 弹窗触发按钮 -->
+        <button id="btn-modal1" class="btn btn-primary" onclick="showModal({title: '信息弹窗', content: '这是一个信息弹窗示例', buttons: [{ text: '关闭', type: 'secondary' }]}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">信息弹窗</button>
+        <button id="btn-modal2" class="btn btn-primary" onclick="showModal({title: '确认弹窗', content: '确定要执行此操作吗？', buttons: [{ text: '取消', type: 'secondary' }, { text: '确定', type: 'primary' }]}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">确认弹窗</button>
+        <button id="btn-modal3" class="btn btn-primary" onclick="showModal({title: '顶部弹窗', content: '这是一个顶部弹窗示例', buttons: [{ text: '关闭', type: 'primary' }], position: 'top'}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">顶部弹窗</button>
+        <button id="btn-modal4" class="btn btn-primary" onclick="showModal({title: '底部弹窗', content: '这是一个底部弹窗示例', buttons: [{ text: '关闭', type: 'primary' }], position: 'bottom'}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">底部弹窗</button>
+        <button id="btn-modal7" class="btn btn-primary" onclick="showModal({title: '左侧弹窗', content: '这是一个左侧弹窗示例', buttons: [{ text: '关闭', type: 'primary' }], position: 'left'}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">左侧弹窗</button>
+        <button id="btn-modal8" class="btn btn-primary" onclick="showModal({title: '右侧弹窗', content: '这是一个右侧弹窗示例', buttons: [{ text: '关闭', type: 'primary' }], position: 'right'}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">右侧弹窗</button>
+        <div id="transparent-bg-container-2" class="transparent-bg-container">
+            <div class="transparent-bg-content">
+                <button id="btn-modal5" class="btn btn-primary" onclick="showModal({title: '毛玻璃弹窗', content: '这是一个毛玻璃样式弹窗示例', buttons: [{ text: '关闭', type: 'primary' }], glass: true}).then(result => createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p>', type: 'info', container: this.parentNode, duration: 3000}))">毛玻璃弹窗</button>
+            </div>
+        </div>
+        <button id="btn-modal6" class="btn btn-primary" onclick="showModal({title: '带输入框的弹窗', content: '请输入以下信息：', buttons: [{ text: '取消', type: 'secondary' }, { text: '提交', type: 'primary' }], inputs: [{ label: '姓名', name: 'name', placeholder: '请输入姓名' }, { label: '邮箱', name: 'email', type: 'email', placeholder: '请输入邮箱' }]}).then(result => {let inputsStr = ''; Object.entries(result.inputs).forEach(([key, value]) => {inputsStr += '<li>' + key + ': ' + value + '</li>';}); createMessage({title: '弹窗结果', content: '<p>操作状态: ' + result.status + '</p><p>点击按钮: ' + (result.button ? result.button.text : '无') + '</p><p>输入内容：</p><ul>' + inputsStr + '</ul>', type: 'info', container: this.parentNode, duration: 3000});})">带输入框的弹窗</button>
+    </div>
+    
+
+</section>

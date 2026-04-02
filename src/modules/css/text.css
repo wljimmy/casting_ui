@@ -1,0 +1,63 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.2.1
+ * Module: text.css
+ * Description: 文本相关样式
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
+/* 系统组件样式 */
+.sys-component {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 正文宋体样式 */
+.text-serif {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: 1.8;
+    letter-spacing: 0.8px;
+    color: #333;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
+}
+
+/* 标题宋体样式 */
+.text-serif.title {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    line-height: 1.4;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
+}
+
+/* 区块样式 */
+
+
+.CUI-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: var(--size-md);
+    color: var(--text-primary);
+    padding-bottom: var(--size-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-subtitle {
+    margin: var(--size-md) 0;
+}
+
+.section-subtitle h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--size-sm);
+}

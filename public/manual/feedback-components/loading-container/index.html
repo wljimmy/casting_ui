@@ -1,0 +1,38 @@
+<section class="CUI-section">
+    <h2>加载类</h2>
+    
+    <div class="CUI-box">
+        <!-- 加载动画 -->
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+            <span>小加载动画：</span>
+            <div id="loading-sm" class="loading loading-sm"></div>
+            <span>中加载动画：</span>
+            <div id="loading-md" class="loading"></div>
+            <span>大加载动画：</span>
+            <div id="loading-lg" class="loading loading-lg"></div>
+        </div>
+        
+        <!-- 骨架屏 -->
+        <div style="margin-bottom: 16px;">
+            <h4>卡片骨架屏：</h4>
+            <div id="skeleton-card" class="skeleton skeleton-card"></div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <h4>列表骨架屏：</h4>
+            <div id="skeleton-list-1" class="skeleton skeleton-list"></div>
+            <div id="skeleton-list-2" class="skeleton skeleton-list"></div>
+            <div id="skeleton-list-3" class="skeleton skeleton-list"></div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <h4>表格骨架屏：</h4>
+            <div id="skeleton-table-1" class="skeleton skeleton-table"></div>
+            <div id="skeleton-table-2" class="skeleton skeleton-table"></div>
+            <div id="skeleton-table-3" class="skeleton skeleton-table"></div>
+        </div>
+        
+        <!-- 加载遮罩触发按钮 -->
+        <button id="btn-loading-overlay" class="btn btn-primary" onclick="showLoading()">显示加载遮罩</button>
+    </div>
+</section>

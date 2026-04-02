@@ -1,0 +1,134 @@
+/* 网页布局 */
+.CUI-layout-web {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows:
+    minmax(var(--web-header-height),auto)
+    1fr
+    minmax(var(--web-footer-height),auto);
+
+  grid-template-columns:
+    1fr
+    var(--web-sidebar-left-width)
+    minmax(0, var(--web-main-max-width))
+    var(--web-sidebar-right-width)
+    1fr;
+
+  grid-template-areas:
+    "header  header  header  header  header"
+    ".       left    main    right   ."
+    "footer  footer  footer  footer  footer";
+}
+
+.CUI-layout-web header         { grid-area: header; }
+.CUI-layout-web .CUI-sidebar-left  { grid-area: left; }
+.CUI-layout-web main           { grid-area: main; }
+.CUI-layout-web .CUI-sidebar-right { grid-area: right; }
+.CUI-layout-web footer         { grid-area: footer; }
+
+/* 网页版 header / footer：和主体 5 列完全对齐，左右.占位 */
+.CUI-layout-web header,
+.CUI-layout-web footer {
+  /* 关键：只继承 5 列的宽度规则，不继承多行区域 */ 
+  padding-inline: calc((100vw - var(--web-sidebar-left-width) - var(--web-sidebar-right-width) - var(--web-main-max-width)) / 2); 
+}
+header, footer {
+  display: grid;
+}
+
+
+
+
+/* 应用壳布局 */
+.CUI-layout-shell {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  overflow: hidden;
+
+  grid-template-rows:
+    var(--shell-header-height)
+    1fr
+    var(--shell-footer-height);
+
+  grid-template-columns:
+    var(--shell-sidebar-left-width)
+    1fr
+    var(--shell-sidebar-right-width);
+
+  grid-template-areas:
+    "header  header  header"
+    "left    main    right"
+    "footer  footer  footer";
+}
+
+.CUI-layout-shell header         { grid-area: header; }
+.CUI-layout-shell .CUI-sidebar-left  { grid-area: left; }
+.CUI-layout-shell main           { grid-area: main; }
+.CUI-layout-shell .CUI-sidebar-right { grid-area: right; }
+.CUI-layout-shell footer         { grid-area: footer; }
+
+/* main 主内容区完整样式 */
+main {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.CUI-sidebar-left,
+.CUI-sidebar-right,
+.CUI-layout-shell header,
+.CUI-layout-shell footer {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* 应用壳中 main 独立滚动 */
+.CUI-layout-shell main {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* 网页布局中 main 随页面正常滚动 */
+.CUI-layout-web main {
+  overflow: visible;
+}
+
+/* 隐藏控制（你这套变量写法非常完美，不动） */
+body.CUI-hidden-header {
+  --web-header-height: 0px;
+  --shell-header-height: 0px;
+}
+
+/* 正常状态：main 只占自己的区域 */
+.CUI-layout-web main {
+  grid-column: main;
+}
+
+/* 隐藏左侧边栏 → main 从 left 区域开始，跨到 main 区域 */
+body.CUI-hidden-sidebar-left main {
+  /* 从 left 区域开头 → main 区域结尾，直接吞并左边栏位置 */
+  grid-column: left / main;
+}
+
+/* 隐藏右侧边栏 → main 从 main 区域 → right 区域结尾 */
+body.CUI-hidden-sidebar-right main {
+  grid-column: main / right;
+}
+
+/* 左右边栏都隐藏 → main 从 left 开头 → right 结尾，占满中间整行 */
+body.CUI-hidden-sidebar-left.CUI-hidden-sidebar-right main {
+  grid-column: left / right;
+}
+
+body.CUI-hidden-sidebar-left .CUI-sidebar-left  { display: none; }
+body.CUI-hidden-sidebar-right .CUI-sidebar-right{ display: none; }
+
+body.CUI-hidden-footer {
+  --web-footer-height: 0px;
+  --shell-footer-height: 0px;
+}
+
+body.CUI-hidden-header header               { display: none; }
+body.CUI-hidden-sidebar-left .CUI-sidebar-left  { display: none; }
+body.CUI-hidden-sidebar-right .CUI-sidebar-right{ display: none; }
+body.CUI-hidden-footer footer               { display: none; }

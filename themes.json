@@ -3,7 +3,6 @@
     {
       "name": "极简高级蓝",
       "description": "风格特点：极简克制，科技感与高级感兼具，中性灰层次柔和。适用场景：科技杂志、财经杂志、高端商业杂志。",
-      "isDefault": true,
       "colors": {
         "primary-color": "#165DFF",
         "primary-hover": "#0E48D3",
@@ -312,6 +311,7 @@
     {
       "name": "墨黑酒红",
       "description": "风格特点：主色为墨黑色（带轻微紫调，非纯黑），搭配低饱和酒红辅助色，复古高级，氛围感拉满。适用场景：复古时尚杂志、高端美妆杂志、复古穿搭杂志。",
+      "isDefault": true,
       "colors": {
         "primary-color": "#222021",
         "primary-hover": "#171617",

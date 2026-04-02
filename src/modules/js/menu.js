@@ -411,6 +411,27 @@ class MenuInstance {
         
         // 为内联菜单和弹出菜单添加自动触发功能
         this.initAutoTrigger();
+        
+        // 激活具有data-default="true"属性的菜单项
+        this.activateDefaultItem();
+    }
+    
+    // 激活具有data-default="true"属性的菜单项
+    activateDefaultItem() {
+        // 查找第一个具有data-default="true"属性的菜单项
+        const defaultItem = this.element.querySelector('li[data-default="true"]');
+        if (defaultItem) {
+            // 激活该菜单项
+            this.setActive(defaultItem);
+            
+            // 处理data-action回调
+            const actionData = defaultItem.getAttribute('data-action');
+            if (actionData) {
+                this.handleAction(actionData);
+            }
+            
+            debug('激活默认菜单项', defaultItem, { id: this.id });
+        }
     }
 
     /**

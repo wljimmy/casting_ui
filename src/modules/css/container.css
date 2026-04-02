@@ -1,0 +1,409 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.2.1
+ * Module: container.css
+ * Description: 容器样式，包含视觉容器类和间距类
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
+/* ==========================================
+   视觉容器类 - 通用基础容器
+   ========================================== */
+.CUI-box {
+    padding: var(--size-md);
+    margin: var(--size-sm);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    border-radius: var(--radius-md);
+}
+
+.CUI-card {
+    background-color: var(--bg-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--size-md);
+    transition: all var(--transition-normal);
+}
+
+.CUI-fluid {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+.CUI-panel {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* ==========================================
+   视觉容器类 - 语义功能型容器
+   ========================================== */
+.CUI-section {
+    margin: 0 var(--size-sm) var(--size-xl) var(--size-sm);
+    background-color: var(--bg-color);
+    border-radius: var(--radius-lg);
+    padding: var(--size-lg);
+    box-shadow: var(--shadow-sm);
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
+}
+
+
+.CUI-header {
+    min-height: 60px;
+    padding: var(--size-md);
+    background-color: var(--gray-100);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.CUI-footer {
+    min-height: 60px;
+    padding: var(--size-md);
+    background-color: var(--gray-100);
+    border-top: 1px solid var(--border-color);
+}
+
+.CUI-main {
+    flex: 1;
+    padding: var(--size-md);
+}
+
+.CUI-aside {
+    width: 200px;
+    padding: var(--size-md);
+    background-color: var(--gray-100);
+    border-right: 1px solid var(--border-color);
+}
+
+.CUI-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.CUI-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--size-md);
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 基础网格
+   ========================================== */
+.CUI-grid {
+    display: grid;
+    gap: var(--size-md);
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 内部列划分类
+   ========================================== */
+.CUI-grid-1c {
+    grid-template-columns: 1fr;
+}
+
+.CUI-grid-2c {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.CUI-grid-3c {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.CUI-grid-4c {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.CUI-grid-5c {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.CUI-grid-6c {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.CUI-grid-7c {
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.CUI-grid-8c {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.CUI-grid-9c {
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.CUI-grid-10c {
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.CUI-grid-11c {
+    grid-template-columns: repeat(11, 1fr);
+}
+
+.CUI-grid-12c {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 特殊布局类
+   ========================================== */
+.CUI-grid-middle {
+    grid-template-columns: 1fr auto 1fr;
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 水平对齐类
+   ========================================== */
+.CUI-grid-left {
+    justify-content: start;
+    justify-items: start;
+}
+
+.CUI-grid-h-center {
+    justify-content: center;
+    justify-items: center;
+}
+
+.CUI-grid-right {
+    justify-content: end;
+    justify-items: end;
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 垂直对齐类
+   ========================================== */
+.CUI-grid-top {
+    align-content: start;
+    align-items: start;
+}
+
+.CUI-grid-v-center {
+    align-content: center;
+    align-items: center;
+}
+
+.CUI-grid-bottom {
+    align-content: end;
+    align-items: end;
+}
+
+/* ==========================================
+   内部 Grid 布局类 - 组合式对齐类
+   ========================================== */
+.CUI-grid-center {
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+.CUI-grid-between {
+    justify-content: space-between;
+}
+
+.CUI-grid-around {
+    justify-content: space-around;
+}
+
+.CUI-grid-stretch {
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+/* ==========================================
+   外部 Grid 占位类 - 自身尺寸与对齐
+   ========================================== */
+.CUI-full {
+    width: 100%;
+    height: 100%;
+}
+
+.CUI-auto {
+    width: auto;
+    height: auto;
+}
+
+.CUI-half {
+    width: 50%;
+}
+
+.CUI-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========================================
+   外部 Grid 占位类 - 跨列类
+   ========================================== */
+.CUI-span-1c {
+    grid-column: span 1;
+}
+
+.CUI-span-2c {
+    grid-column: span 2;
+}
+
+.CUI-span-3c {
+    grid-column: span 3;
+}
+
+.CUI-span-4c {
+    grid-column: span 4;
+}
+
+.CUI-span-5c {
+    grid-column: span 5;
+}
+
+.CUI-span-6c {
+    grid-column: span 6;
+}
+
+.CUI-span-7c {
+    grid-column: span 7;
+}
+
+.CUI-span-8c {
+    grid-column: span 8;
+}
+
+.CUI-span-9c {
+    grid-column: span 9;
+}
+
+.CUI-span-10c {
+    grid-column: span 10;
+}
+
+.CUI-span-11c {
+    grid-column: span 11;
+}
+
+.CUI-span-12c {
+    grid-column: span 12;
+}
+
+/* ==========================================
+   外部 Grid 占位类 - 跨行类
+   ========================================== */
+.CUI-span-1r {
+    grid-row: span 1;
+}
+
+.CUI-span-2r {
+    grid-row: span 2;
+}
+
+.CUI-span-3r {
+    grid-row: span 3;
+}
+
+.CUI-span-4r {
+    grid-row: span 4;
+}
+
+.CUI-span-5r {
+    grid-row: span 5;
+}
+
+.CUI-span-6r {
+    grid-row: span 6;
+}
+
+.CUI-span-7r {
+    grid-row: span 7;
+}
+
+.CUI-span-8r {
+    grid-row: span 8;
+}
+
+.CUI-span-9r {
+    grid-row: span 9;
+}
+
+.CUI-span-10r {
+    grid-row: span 10;
+}
+
+.CUI-span-11r {
+    grid-row: span 11;
+}
+
+.CUI-span-12r {
+    grid-row: span 12;
+}
+
+/* ==========================================
+   间距类 - 外边距
+   ========================================== */
+.CUI-m-xs {
+    margin: var(--size-xs);
+}
+
+.CUI-m-sm {
+    margin: var(--size-sm);
+}
+
+.CUI-m-md {
+    margin: var(--size-md);
+}
+
+.CUI-m-lg {
+    margin: var(--size-lg);
+}
+
+.CUI-m-xl {
+    margin: var(--size-xl);
+}
+
+/* ==========================================
+   间距类 - 内边距
+   ========================================== */
+.CUI-p-xs {
+    padding: var(--size-xs);
+}
+
+.CUI-p-sm {
+    padding: var(--size-sm);
+}
+
+.CUI-p-md {
+    padding: var(--size-md);
+}
+
+.CUI-p-lg {
+    padding: var(--size-lg);
+}
+
+.CUI-p-xl {
+    padding: var(--size-xl);
+}
+
+/* ==========================================
+   内容层吸顶
+   ========================================== */
+.CUI-sticky {
+    overflow: visible;
+    height: 1000px;
+    min-height: 100vh;
+
+}
+
+.CUI-sticky:first-child {
+    position: sticky;
+    top: 0;
+    align-items: start;
+}
+
+.CUI-visible {
+    overflow: visible !important;
+    overflow-y: visible !important;
+}
