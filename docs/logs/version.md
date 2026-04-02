@@ -1,5 +1,121 @@
 # 版本更新日志
 
+## v0.3.0 (2026-04-03)
+
+### 重构布局系统和容器类
+
+#### 新增布局系统 (layout.css)
+- **v0.3.0** - 新增网页布局 (CUI-layout-web)
+  - 流式自适应设计
+  - 超宽屏时主内容区限宽居中
+  - Header和Footer通屏显示
+  - 支持左右侧边栏
+  
+- **v0.3.0** - 新增应用壳布局 (CUI-layout-shell)
+  - 上下左右固定区域
+  - 中间主内容区独立滚动
+  - 适合管理后台类应用
+  - 100vw x 100vh固定尺寸
+
+#### 布局控制类
+- **v0.3.0** - 新增布局元素显示/隐藏控制
+  - CUI-hidden-header: 隐藏头部
+  - CUI-hidden-sidebar-left: 隐藏左侧边栏
+  - CUI-hidden-sidebar-right: 隐藏右侧边栏
+  - CUI-hidden-footer: 隐藏底部
+  - 通过CSS变量自动调整布局
+
+#### 容器样式重构 (container.css)
+- **v0.3.0** - 新增视觉容器类
+  - CUI-box: 基础通用容器
+  - CUI-card: 卡片容器
+  - CUI-fluid: 透明无样式布局容器
+  - CUI-panel: 功能面板容器
+
+- **v0.3.0** - 新增语义功能型容器
+  - CUI-section: 页面章节/区块容器
+  - CUI-header: 页面头部容器
+  - CUI-footer: 页面底部容器
+  - CUI-main: 主内容容器
+  - CUI-aside: 侧边栏容器
+  - CUI-page: 页面根容器
+  - CUI-wrap: 内容宽度约束包裹容器
+
+#### Grid布局系统
+- **v0.3.0** - 新增完整Grid布局类
+  - CUI-grid: 启用Grid布局
+  - CUI-grid-1c 到 CUI-grid-12c: 1-12列等宽布局
+  - CUI-grid-middle: 三列结构（1fr auto 1fr）
+  
+- **v0.3.0** - 新增对齐类
+  - 水平对齐: CUI-grid-left、CUI-grid-h-center、CUI-grid-right
+  - 垂直对齐: CUI-grid-top、CUI-grid-v-center、CUI-grid-bottom
+  - 组合对齐: CUI-grid-center、CUI-grid-between、CUI-grid-around、CUI-grid-stretch
+
+- **v0.3.0** - 新增跨列/跨行类
+  - CUI-span-1c 到 CUI-span-12c: 跨1-12列
+  - CUI-span-1r 到 CUI-span-12r: 跨1-12行
+
+#### 间距系统
+- **v0.3.0** - 新增间距类
+  - 外边距: CUI-m-xs、CUI-m-sm、CUI-m-md、CUI-m-lg、CUI-m-xl
+  - 内边距: CUI-p-xs、CUI-p-sm、CUI-p-md、CUI-p-lg、CUI-p-xl
+
+### 统一命名规范
+
+#### CSS类名统一添加CUI前缀
+- **v0.3.0** - 所有布局类统一添加CUI前缀
+  - layout-web → CUI-layout-web
+  - layout-shell → CUI-layout-shell
+  - sidebar-left → CUI-sidebar-left
+  - sidebar-right → CUI-sidebar-right
+  - hidden-header → CUI-hidden-header
+  - hidden-sidebar-left → CUI-hidden-sidebar-left
+  - hidden-sidebar-right → CUI-hidden-sidebar-right
+  - hidden-footer → CUI-hidden-footer
+
+### 主题更新
+
+#### 默认主题更换
+- **v0.3.0** - 更新默认主题为墨黑酒红
+  - 主色: #222021（墨黑色，带轻微紫调）
+  - 功能色: #C2185B（酒红色）
+  - 适用场景: 复古时尚、高端美妆、复古穿搭
+
+### 项目结构优化
+
+#### 手册页面迁移
+- **v0.3.0** - 手册页面从src/manual迁移到public/manual
+  - 符合Vite标准目录结构
+  - public目录存放静态资源
+  - 手册页面作为静态资源直接访问
+
+#### 新增设计文档
+- **v0.3.0** - 新增设计规范文档
+  - css-layout-design.md: 布局模块设计规范
+  - css-container-design.md: 容器模块设计规范
+  - search-design.md: 搜索功能设计规范
+
+### 新增示例页面
+- **v0.3.0** - 新增布局示例页面 (src/examples/layout-examples.html)
+  - 展示网页布局和应用壳布局
+  - 支持切换布局模式
+  - 支持显示/隐藏各个布局元素
+
+### 模块版本汇总
+
+| 模块 | 文件 | 版本 | 描述 |
+|------|------|------|------|
+| core-css | src/modules/css/core.css | 0.3.0 | 核心样式，更新默认主题为墨黑酒红 |
+| container-css | src/modules/css/container.css | 0.3.0 | 容器样式，新增完整CUI容器类系统 |
+| layout-css | src/modules/css/layout.css | 0.3.0 | 布局样式，新增网页布局和应用壳布局 |
+| text-css | src/modules/css/text.css | 0.3.0 | 文本样式 |
+| header-css | src/modules/css/header.css | 0.3.0 | 头部样式 |
+| animation-css | src/modules/css/animation.css | 0.3.0 | 动画样式 |
+| responsive-css | src/modules/css/responsive.css | 0.3.0 | 响应式样式 |
+
+---
+
 ## v0.5.3 (2026-04-01)
 
 ### 响应式菜单优化

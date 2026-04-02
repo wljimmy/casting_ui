@@ -1,3 +1,12 @@
+/* 
+ * Casting UI Framework
+ * Version: 0.3.0
+ * Module: layout.css
+ * Description: 布局样式，包含网页布局和应用壳布局
+ * Copyright (c) 2026 Bingo工作室
+ * Email: wljimmy@hotmail.com
+ */
+
 /* 网页布局 */
 .CUI-layout-web {
   min-height: 100vh;

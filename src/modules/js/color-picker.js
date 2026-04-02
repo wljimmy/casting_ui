@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.2.0
+ * Version: 0.3.0
  * Module: color-picker.js
  * Description: 颜色选择器模块，支持多种颜色格式
  * Copyright (c) 2026 Bingo工作室

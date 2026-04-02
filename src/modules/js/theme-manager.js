@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.2.0
+ * Version: 0.3.0
  * Module: theme-manager.js
  * Description: 主题管理模块，支持主题切换和自定义主题
  * Copyright (c) 2026 Bingo工作室

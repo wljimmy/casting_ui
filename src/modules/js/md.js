@@ -1,5 +1,5 @@
 // MD Module - 极简MD富文本输入与渲染模块
-// 版本: 1.0.0
+// 版本: 0.3.0
 
 // Store editors
 const editors = new Map();
