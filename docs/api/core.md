@@ -1,8 +1,8 @@
 # 核心模块 API 文档
 
 ## 模块版本
-- 版本: v0.1.0
-- 更新日期: 2024-01-01
+- 版本: v0.3.0
+- 更新日期: 2026-04-03
 
 ## 模块功能
 核心模块提供框架的基础功能，包括调试工具、遮罩组件和弹窗基类。
@@ -21,7 +21,7 @@
 debug('调试信息', { test: 'data' });
 ```
 
-### 2. showMask()
+### 2. showOverlay()
 **功能**: 显示遮罩层
 
 **返回值**:
@@ -29,15 +29,15 @@ debug('调试信息', { test: 'data' });
 
 **使用示例**:
 ```javascript
-const mask = showMask();
+const overlay = showOverlay();
 ```
 
-### 3. hideMask()
+### 3. hideOverlay()
 **功能**: 隐藏遮罩层
 
 **使用示例**:
 ```javascript
-hideMask();
+hideOverlay();
 ```
 
 ### 4. PopupBase 类

@@ -1,15 +1,15 @@
 # 消息提示模块 API 文档
 
 ## 模块版本
-- 版本: v0.1.0
-- 更新日期: 2024-01-01
+- 版本: v0.3.0
+- 更新日期: 2026-04-03
 
 ## 模块功能
 消息提示模块提供 Toast 消息、加载遮罩和消息提示功能。
 
 ## API 方法
 
-### 1. toast()
+### 1. showToast()
 **功能**: 显示 Toast 消息
 
 **参数**:
@@ -19,10 +19,10 @@
 
 **使用示例**:
 ```javascript
-toast('操作成功', 'success', 2000);
+showToast('操作成功', 'success', 2000);
 ```
 
-### 2. message()
+### 2. createMessage()
 **功能**: 显示消息提示
 
 **参数**:
@@ -32,7 +32,7 @@ toast('操作成功', 'success', 2000);
 
 **使用示例**:
 ```javascript
-message('操作成功', 'success');
+createMessage('操作成功', 'success');
 ```
 
 ### 3. showLoading()

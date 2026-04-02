@@ -6,8 +6,8 @@
 在HTML文件中引入Casting.css和Casting.js文件：
 
 ```html
-<link rel="stylesheet" href="dist/v0.5.1/Casting.css">
-<script src="dist/v0.5.1/Casting.js"></script>
+<link rel="stylesheet" href="dist/v0.3.0/Casting.css">
+<script src="dist/v0.3.0/Casting.js"></script>
 ```
 
 ### 2. 基本使用
@@ -171,12 +171,13 @@ Casting_UI/
 │   ├── modules/        # 模块目录
 │   │   ├── css/        # CSS模块
 │   │   └── js/         # JavaScript模块
-│   ├── test/           # 测试目录
-│   └── manual/         # 手册页面
+│   └── examples/       # 示例页面
 ├── public/             # 静态资源目录
-│   └── icons/          # 图标资源
+│   ├── icons/          # 图标资源
+│   ├── manual/         # 手册页面
+│   └── test/           # 测试目录
 ├── dist/               # 发布目录
-│   └── v0.5.1/         # 版本目录
+│   └── v0.3.0/         # 版本目录
 ├── docs/               # 文档目录
 ├── vite.config.js      # Vite配置文件
 ├── package.json        # 项目配置文件
@@ -187,8 +188,8 @@ Casting_UI/
 1. 安装依赖：`npm install`
 2. 启动开发服务器：`npm run dev`
 3. 在 `src/modules` 目录下修改或添加模块
-4. 在 `src/test` 目录下测试模块功能
-5. 手动打包生成 `dist/v0.5.1/Casting.css` 和 `dist/v0.5.1/Casting.js`
+4. 在 `public/test` 目录下测试模块功能
+5. 手动打包生成 `dist/v0.3.0/Casting.css` 和 `dist/v0.3.0/Casting.js`
 6. 更新文档
 
 ### 打包方法

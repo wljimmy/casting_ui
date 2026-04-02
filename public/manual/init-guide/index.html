@@ -14,25 +14,27 @@
 
         <h4>方式一：使用合并文件（推荐）</h4>
         <pre class="language-html"><code class="language-html">&lt;!-- 引入 CSS 文件 --&gt;
-&lt;link rel="stylesheet" href="dist/v0.2.0/Casting.css"&gt;
+&lt;link rel="stylesheet" href="dist/v0.3.0/Casting.css"&gt;
 
 &lt;!-- 引入 JavaScript 文件 --&gt;
-&lt;script src="dist/v0.2.0/Casting.js"&gt;&lt;/script&gt;</code></pre>
+&lt;script src="dist/v0.3.0/Casting.js"&gt;&lt;/script&gt;</code></pre>
         
         <h4>方式二：使用模块化文件</h4>
         <pre class="language-html"><code class="language-html">&lt;!-- 引入 CSS 文件 --&gt;
-&lt;link rel="stylesheet" href="dev/modules/css/core.css"&gt;
-&lt;link rel="stylesheet" href="dev/modules/css/components.css"&gt;
+&lt;link rel="stylesheet" href="src/modules/css/core.css"&gt;
+&lt;link rel="stylesheet" href="src/modules/css/container.css"&gt;
+&lt;link rel="stylesheet" href="src/modules/css/layout.css"&gt;
+&lt;link rel="stylesheet" href="src/modules/css/components.css"&gt;
 
 &lt;!-- 引入 JavaScript 文件 --&gt;
-&lt;script src="dev/modules/js/core.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/modal.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/message.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/image-zoom.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/theme-manager.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/color-picker.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/ui.js"&gt;&lt;/script&gt;
-&lt;script src="dev/modules/js/md.js"&gt;&lt;/script&gt;</code></pre>
+&lt;script src="src/modules/js/core.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/modal.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/message.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/image-zoom.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/theme-manager.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/color-picker.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/ui.js"&gt;&lt;/script&gt;
+&lt;script src="src/modules/js/md.js"&gt;&lt;/script&gt;</code></pre>
     </div>
 
     <!-- 第2节：框架初始化 -->
@@ -147,7 +149,7 @@ themeManager.applyTheme(themeManager.getThemes()[0]);</code></pre>
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;title&gt;Casting UI 示例&lt;/title&gt;
-    &lt;link rel="stylesheet" href="dist/v0.2.0/Casting.css"&gt;
+    &lt;link rel="stylesheet" href="dist/v0.3.0/Casting.css"&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="CUI-wrap"&gt;
@@ -163,7 +165,7 @@ themeManager.applyTheme(themeManager.getThemes()[0]);</code></pre>
         &lt;img src="https://picsum.photos/400/300" class="image" onclick="zoomImage(this.src)"&gt;
     &lt;/div&gt;
     
-    &lt;script src="dist/v0.2.0/Casting.js"&gt;&lt;/script&gt;
+    &lt;script src="dist/v0.3.0/Casting.js"&gt;&lt;/script&gt;
     &lt;script&gt;
         // 初始化框架
         document.addEventListener('DOMContentLoaded', async function() {
@@ -212,8 +214,8 @@ themeManager.applyTheme(themeManager.getThemes()[0]);</code></pre>
         <h3>6. 版本信息</h3>
         <div class="CUI-grid CUI-grid-2c">
             <div>
-                <p><strong>当前版本：</strong> <span class="badge primary">v0.2.0</span></p>
-                <p><strong>发布日期：</strong> 2026-03-25</p>
+                <p><strong>当前版本：</strong> <span class="badge primary">v0.3.0</span></p>
+                <p><strong>发布日期：</strong> 2026-04-03</p>
             </div>
             <div>
                 <p><strong>技术栈：</strong> 原生HTML5、CSS3、JavaScript (ES6+)</p>
