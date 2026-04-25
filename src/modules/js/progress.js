@@ -1,8 +1,9 @@
-/**
- * Progress 进度条模块
- * 提供进度条的动态渲染和更新功能
- * 基于data属性驱动：用户通过修改元素的data-value属性来控制进度条
- * 支持自动初始化：<div id="id" class="CUI-progress" data-value="60" data-type="label striped"></div>
+/* 
+ * Casting UI Framework
+ * Version: 0.3.0
+ * Module: progress.js
+ * Description: 进度条模块，基于data属性驱动
+ * Copyright (c) 2026 Bingo工作室
  */
 
 import { domObserver } from './dom-observer.js';

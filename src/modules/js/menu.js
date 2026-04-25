@@ -1,6 +1,6 @@
 /* 
  * Casting UI Framework
- * Version: 0.5.3
+ * Version: 0.5.4
  * Module: menu.js
  * Description: 菜单模块，支持多种菜单类型、多级嵌套、自动初始化、实例隔离与垃圾回收
  * Copyright (c) 2026 Bingo工作室
@@ -899,6 +899,7 @@ class MenuInstance {
             return;
         }
 
+
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -917,70 +918,171 @@ class MenuInstance {
                     let headContent = headMatch ? headMatch[1] : '';
                     let bodyContent = bodyMatch ? bodyMatch[1] : responseText;
                     
-                    // 提取所有CSS和JS引用
-                    const cssLinks = [];
-                    const jsScripts = [];
+                    // ========== 收集fetch内容中的所有CSS和JS引用 ==========
+                    const fetchCssLinks = [];
+                    const fetchJsScripts = [];
                     
-                    // 提取head中的CSS和JS
-                    const headLinkRegex = /<link[^>]*href="([^"]+)"[^>]*>/gi;
-                    const headScriptRegex = /<script[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/script>/gi;
-                    
+                    // 提取所有CSS链接（来自head）
+                    const cssRegex = /<link[^>]*href="([^"]+)"[^>]*>/gi;
                     let match;
-                    while ((match = headLinkRegex.exec(headContent)) !== null) {
-                        cssLinks.push(match[1]);
+                    while ((match = cssRegex.exec(headContent)) !== null) {
+                        fetchCssLinks.push(match[1]);
                     }
                     
-                    while ((match = headScriptRegex.exec(headContent)) !== null) {
-                        jsScripts.push(match[1]);
+                    // 提取所有外部JS引用（来自head和body）
+                    const jsRegex = /<script[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/script>/gi;
+                    while ((match = jsRegex.exec(headContent)) !== null) {
+                        fetchJsScripts.push(match[1]);
+                    }
+                    while ((match = jsRegex.exec(bodyContent)) !== null) {
+                        fetchJsScripts.push(match[1]);
                     }
                     
-                    // 提取body中的JS
-                    const bodyScriptRegex = /<script[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/script>/gi;
-                    while ((match = bodyScriptRegex.exec(bodyContent)) !== null) {
-                        jsScripts.push(match[1]);
-                    }
+                    console.log('[页面加载] fetch内容分析:', {
+                        'CSS引用数量': fetchCssLinks.length,
+                        'JS引用数量': fetchJsScripts.length,
+                        'CSS列表': fetchCssLinks,
+                        'JS列表': fetchJsScripts
+                    });
                     
-                    // 获取当前页面已加载的CSS和JS
+                    // ========== 获取当前页面已加载的CSS和JS ==========
                     const loadedCss = new Set();
                     const loadedJs = new Set();
                     
-                    // 收集已加载的CSS
                     document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
                         loadedCss.add(self.getFileName(link.href));
                     });
                     
-                    // 收集已加载的JS
                     document.querySelectorAll('script[src]').forEach(script => {
                         loadedJs.add(self.getFileName(script.src));
                     });
                     
-                    // 过滤出未加载的CSS和JS
-                    const newCssLinks = cssLinks.filter(link => !loadedCss.has(self.getFileName(link)));
-                    const newJsScripts = jsScripts.filter(script => !loadedJs.has(self.getFileName(script)));
+                    console.log('[页面加载] 当前已加载资源:', {
+                        '已加载CSS': Array.from(loadedCss),
+                        '已加载JS': Array.from(loadedJs)
+                    });
                     
-                    // 构建新的CSS链接
+                    // ========== 对比并过滤出需要加载的资源 ==========
+                    let duplicateCssCount = 0;
+                    let duplicateJsCount = 0;
+                    
+                    const newCssLinks = fetchCssLinks.filter(link => {
+                        const fileName = self.getFileName(link);
+                        if (loadedCss.has(fileName)) {
+                            console.log('  [跳过] 重复CSS:', fileName);
+                            duplicateCssCount++;
+                            return false;
+                        }
+                        loadedCss.add(fileName);
+                        return true;
+                    });
+                    
+                    const newJsScripts = fetchJsScripts.filter(script => {
+                        const fileName = self.getFileName(script);
+                        if (loadedJs.has(fileName)) {
+                            console.log('  [跳过] 重复JS:', fileName);
+                            duplicateJsCount++;
+                            return false;
+                        }
+                        loadedJs.add(fileName);
+                        return true;
+                    });
+                    
+                    console.log('[页面加载] 资源过滤结果:', {
+                        '新增CSS数量': newCssLinks.length,
+                        '新增JS数量': newJsScripts.length,
+                        '重复CSS数量': duplicateCssCount,
+                        '重复JS数量': duplicateJsCount,
+                        '新增CSS列表': newCssLinks,
+                        '新增JS列表': newJsScripts
+                    });
+                    
+                    // ========== 构建最终内容 ==========
+                    let finalContent = bodyContent;
+                    
+                    // ========== 处理外部JS引用 ==========
+                    // 收集所有外部JS引用的完整标签，用于后续处理
+                    const externalJsTags = [];
+                    const externalJsRegex = /<script([^>]*)src=["']([^"']+)["']([^>]*)>[\s\S]*?<\/script>/gi;
+                    let jsMatch;
+                    while ((jsMatch = externalJsRegex.exec(bodyContent)) !== null) {
+                        externalJsTags.push({
+                            fullTag: jsMatch[0],
+                            src: jsMatch[2]
+                        });
+                    }
+                    
+                    let removedDuplicateJsCount = 0;
+                    let keptExternalJsCount = 0;
+                    
+                    // 只移除重复引用的外部JS标签，保留新的引用
+                    externalJsTags.forEach(jsInfo => {
+                        const fileName = self.getFileName(jsInfo.src);
+                        if (loadedJs.has(fileName)) {
+                            // 重复引用，移除
+                            finalContent = finalContent.replace(jsInfo.fullTag, '');
+                            removedDuplicateJsCount++;
+                            console.log('  [移除] 重复JS标签:', fileName);
+                        } else {
+                            keptExternalJsCount++;
+                            console.log('  [保留] 外部JS引用:', fileName);
+                        }
+                    });
+                    
+                    console.log('[页面加载] 外部JS处理结果:', {
+                        '发现外部JS数量': externalJsTags.length,
+                        '移除重复JS数量': removedDuplicateJsCount,
+                        '保留外部JS数量': keptExternalJsCount
+                    });
+                    
+                    // ========== 处理内联脚本 ==========
+                    const inlineScripts = [];
+                    const inlineScriptRegex = /<script(?![^>]*src)[^>]*>([\s\S]*?)<\/script>/gi;
+                    let scriptMatch;
+                    while ((scriptMatch = inlineScriptRegex.exec(finalContent)) !== null) {
+                        inlineScripts.push(scriptMatch[1]);
+                    }
+                    // 移除已提取的内联脚本（稍后会执行）
+                    finalContent = finalContent.replace(/<script(?![^>]*src)[^>]*>[\s\S]*?<\/script>/gi, '');
+                    
+                    // ========== 添加新的CSS ==========
                     let newCssHtml = '';
                     newCssLinks.forEach(link => {
                         newCssHtml += `<link rel="stylesheet" href="${link}">`;
                     });
                     
-                    // 移除body中的所有script标签
-                    bodyContent = bodyContent.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
-                    
-                    // 构建最终内容
-                    let finalContent = bodyContent;
-                    
-                    // 如果有新的CSS，添加到body开头
                     if (newCssHtml) {
                         finalContent = newCssHtml + finalContent;
                     }
                     
-                    // 如果有新的JS，添加到body末尾
-                    newJsScripts.forEach(script => {
-                        finalContent += `<script src="${script}"></script>`;
+                    // ========== 插入内容 ==========
+                    containerElement.innerHTML = finalContent;
+                    
+                    // ========== 加载新的外部JS ==========
+                    // 对于非重复引用的JS，需要重新创建并加载
+                    externalJsTags.forEach(jsInfo => {
+                        const fileName = self.getFileName(jsInfo.src);
+                        if (!loadedJs.has(fileName)) {
+                            const scriptEl = document.createElement('script');
+                            scriptEl.src = jsInfo.src;
+                            scriptEl.async = false;
+                            document.body.appendChild(scriptEl);
+                            console.log('  [加载] 外部JS:', fileName, '->', jsInfo.src);
+                        }
                     });
                     
-                    containerElement.innerHTML = finalContent;
+                    // ========== 执行内联脚本 ==========
+                    console.log('[页面加载] 发现内联脚本数量:', inlineScripts.length);
+                    inlineScripts.forEach((scriptCode, index) => {
+                        if (scriptCode.trim()) {
+                            const scriptEl = document.createElement('script');
+                            scriptEl.textContent = scriptCode;
+                            document.body.appendChild(scriptEl);
+                            console.log('  [执行] 内联脚本 #' + (index + 1));
+                        }
+                    });
+                    
+                    console.log('[页面加载] 完成! 目标容器:', container);
                     
                     // 执行回调
                     if (callback && typeof window[callback] === 'function') {

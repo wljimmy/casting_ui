@@ -1,6 +1,9 @@
-/**
- * Status 状态栏模块
- * 提供状态栏的动态渲染功能
+/* 
+ * Casting UI Framework
+ * Version: 0.3.0
+ * Module: status.js
+ * Description: 状态栏模块
+ * Copyright (c) 2026 Bingo工作室
  */
 
 class StatusBar {

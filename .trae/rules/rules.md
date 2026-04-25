@@ -20,7 +20,8 @@
     - 不使用任何Vite插件、import.meta、路径别名等非原生语法；
     - 源码保持原生浏览器可直接运行标准，不做任何适配Vite的语法修改；
     - node_modules、vite.config.js、package.json等文件仅用于开发环境，绝不进入src、test、dist、docs目录；
-    - Vite不参与框架最终打包与发布流程，发布包完全脱离Vite可独立运行。
+    - Vite不参与框架最终打包与发布流程，发布包完全脱离Vite可独立运行；
+    - **Vite开发环境路径规则**：src目录和public目录都是根目录，访问这些目录下的文件不需要加路径前缀；例如访问src/index.html只需写/index.html，访问public/manual/progress-container/index.html只需写/manual/progress-container/index.html；预览页面时不需要加src路径。
 
 12. 命名空间管理规范：
     - 所有框架模块的全局变量必须使用 `window.CUI` 命名空间，避免全局变量冲突；
