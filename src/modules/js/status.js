@@ -71,4 +71,9 @@ class StatusBar {
     }
 }
 
-window.StatusBar = StatusBar;
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
+window.CUI.StatusBar = StatusBar;

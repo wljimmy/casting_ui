@@ -178,8 +178,13 @@ function hideLoading() {
 // 导出
 export { createMessage, showToast, showLoading, hideLoading };
 
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
 // 暴露到全局
-window.createMessage = createMessage;
-window.showToast = showToast;
-window.showLoading = showLoading;
-window.hideLoading = hideLoading;
+window.CUI.createMessage = createMessage;
+window.CUI.showToast = showToast;
+window.CUI.showLoading = showLoading;
+window.CUI.hideLoading = hideLoading;

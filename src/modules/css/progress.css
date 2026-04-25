@@ -1,113 +1,137 @@
-/* ========== 进度条样式 ========== */
+/* CUI 进度条样式 */
 
-.progress {
+/* 进度条容器（轨道） */
+.CUI-progress-box {
+    position: relative;
     width: 100%;
-    height: 8px;
+    min-width: 50px;
+    margin: 12px 0;
     background-color: var(--gray-200);
-    border-radius: var(--radius-full);
-    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    overflow: visible;
 }
 
-.progress-bar {
-    height: 100%;
-    border-radius: var(--radius-full);
-    transition: width var(--transition-normal);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 4px;
-    font-size: 10px;
-    color: white;
-    min-width: 30px;
-}
-
-.progress-bar.success {
-    background-color: var(--success-color);
-}
-
-.progress-bar.warning {
-    background-color: var(--warning-color);
-}
-
-.progress-bar.error {
-    background-color: var(--error-color);
-}
-
-.progress-bar.info {
-    background-color: var(--info-color);
-}
-
-.progress-bar.primary {
-    background-color: var(--primary-color);
-}
-
-.progress-bar.secondary {
-    background-color: var(--gray-500);
+/* 进度条默认高度 */
+.CUI-progress-box {
+    height: 14px;
 }
 
 /* 进度条尺寸 */
-.progress-sm {
-    height: 4px;
+.CUI-progress-sm {
+    height: 10px;
 }
 
-.progress-lg {
-    height: 12px;
+.CUI-progress-md {
+    height: 14px;
 }
 
-.progress-xl {
-    height: 16px;
+.CUI-progress-lg {
+    height: 20px;
 }
 
-/* 进度条带标签 */
-.progress-labeled {
-    position: relative;
+.CUI-progress-xl {
+    height: 28px;
 }
 
-.progress-label {
+/* 进度条（浮块） */
+.CUI-progress-bar {
     position: absolute;
-    right: 0;
-    top: -20px;
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-/* 进度条组 */
-.progress-group {
+    top: 50%;
+    left: 0;
+    height: 20px;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: width 0.3s ease;
     display: flex;
-    flex-direction: column;
-    gap: var(--size-md);
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
-/* 条形进度条 */
-.progress-stripes {
+/* 尺寸调整 */
+.CUI-progress-sm .CUI-progress-bar {
+    height: 16px;
+    border-radius: 8px;
+}
+
+.CUI-progress-md .CUI-progress-bar {
+    height: 20px;
+    border-radius: 10px;
+}
+
+.CUI-progress-lg .CUI-progress-bar {
+    height: 28px;
+    border-radius: 14px;
+}
+
+.CUI-progress-xl .CUI-progress-bar {
+    height: 36px;
+    border-radius: 18px;
+}
+
+/* 进度条颜色 */
+.CUI-progress-bar.success {
+    background-color: var(--success-color);
+}
+
+.CUI-progress-bar.warning {
+    background-color: var(--warning-color);
+}
+
+.CUI-progress-bar.error {
+    background-color: var(--error-color);
+}
+
+.CUI-progress-bar.info {
+    background-color: var(--info-color);
+}
+
+/* 条纹效果 */
+.CUI-progress-stripes {
     background-image: linear-gradient(
         45deg,
-        rgba(255, 255, 255, 0.15) 25%,
+        var(--primary-active) 25%,
         transparent 25%,
         transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
+        var(--primary-active) 50%,
+        var(--primary-active) 75%,
         transparent 75%,
         transparent
     );
-    background-size: 1rem 1rem;
+    background-size: 1.5rem 1.5rem;
 }
 
-.progress-animated {
-    animation: progress-stripes 1s linear infinite;
+/* 动画效果 */
+.CUI-progress-animated {
+    animation: progress-stripes 0.8s linear infinite;
 }
 
 @keyframes progress-stripes {
-    from {
-        background-position: 1rem 0;
+    0% {
+        background-position: 1.5rem 0;
     }
-    to {
+    100% {
         background-position: 0 0;
     }
 }
 
-/* 进度条毛玻璃效果 */
-.progress-glass .progress-bar {
+/* 毛玻璃效果 */
+.CUI-progress-glass {
+    background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.5);
 }

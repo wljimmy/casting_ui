@@ -1,0 +1,259 @@
+<section class="CUI-section">
+    <h2>进度条</h2>
+    <p>进度条组件用于显示任务完成的百分比。基于data属性驱动：通过修改元素的data-value属性来控制进度条。</p>
+
+    <h3>基础进度条（默认：标签+条纹+动画）</h3>
+    <p>不设置data-type时，默认启用标签、条纹和动画效果。进度条默认高度14px，圆角为高度的一半。</p>
+    <div class="CUI-box">
+        <div id="progress1" class="CUI-progress" data-value="60"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress1" class="CUI-progress" data-value="60"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>简洁模式（plain）</h3>
+    <p>使用 plain 参数关闭所有默认装饰效果，变为纯进度条。</p>
+    <div class="CUI-box">
+        <div id="progress2" class="CUI-progress" data-value="60" data-type="plain"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress2" class="CUI-progress" data-value="60" data-type="plain"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>单独控制各项效果</h3>
+    <p>可以单独启用或关闭某项效果。</p>
+    <div class="CUI-box">
+        <div id="progress3" class="CUI-progress" data-value="75" data-type="label"></div>
+        <div id="progress4" class="CUI-progress" data-value="50" data-type="striped"></div>
+        <div id="progress5" class="CUI-progress" data-value="50" data-type="striped animated"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress3" class="CUI-progress" data-value="75" data-type="label"&gt;&lt;/div&gt;
+&lt;div id="progress4" class="CUI-progress" data-value="50" data-type="striped"&gt;&lt;/div&gt;
+&lt;div id="progress5" class="CUI-progress" data-value="50" data-type="striped animated"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>毛玻璃效果进度条</h3>
+    <p>glass参数不包含在默认效果中，需要单独设置。</p>
+    <div class="CUI-box">
+        <div id="progress6" class="CUI-progress" data-value="80" data-type="glass"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress6" class="CUI-progress" data-value="80" data-type="glass"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>组合效果</h3>
+    <div class="CUI-box">
+        <div id="progress7" class="CUI-progress" data-value="90" data-type="label striped"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress7" class="CUI-progress" data-value="90" data-type="label striped"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>彩色进度条</h3>
+    <div class="CUI-box">
+        <div id="progress-success" class="CUI-progress" data-value="85" data-type="success label"></div>
+        <div id="progress-warning" class="CUI-progress" data-value="65" data-type="warning label"></div>
+        <div id="progress-error" class="CUI-progress" data-value="35" data-type="error label"></div>
+        <div id="progress-info" class="CUI-progress" data-value="55" data-type="info label"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress-success" class="CUI-progress" data-value="85" data-type="success label"&gt;&lt;/div&gt;
+&lt;div id="progress-warning" class="CUI-progress" data-value="65" data-type="warning label"&gt;&lt;/div&gt;
+&lt;div id="progress-error" class="CUI-progress" data-value="35" data-type="error label"&gt;&lt;/div&gt;
+&lt;div id="progress-info" class="CUI-progress" data-value="55" data-type="info label"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>自定义颜色进度条</h3>
+    <p>使用data-color属性设置自定义颜色（十六进制格式）。data-color优先于data-type中的颜色。</p>
+    <div class="CUI-box">
+        <div id="progress-custom1" class="CUI-progress" data-value="70" data-type="label" data-color="#ff6b6b"></div>
+        <div id="progress-custom2" class="CUI-progress" data-value="60" data-type="label" data-color="#4ecdc4"></div>
+        <div id="progress-custom3" class="CUI-progress" data-value="80" data-type="label" data-color="#45b7d1"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress-custom1" class="CUI-progress" data-value="70" data-type="label" data-color="#ff6b6b"&gt;&lt;/div&gt;
+&lt;div id="progress-custom2" class="CUI-progress" data-value="60" data-type="label" data-color="#4ecdc4"&gt;&lt;/div&gt;
+&lt;div id="progress-custom3" class="CUI-progress" data-value="80" data-type="label" data-color="#45b7d1"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>自定义尺寸进度条</h3>
+    <p>使用W和H参数自定义宽度和高度。W参数设置宽度（最小50px），H参数设置bar高度（最小14px）。W/H参数优先于预定义的data-size。</p>
+    <div class="CUI-box">
+        <div id="progress-size1" class="CUI-progress" data-value="75" data-type="label W300 H20"></div>
+        <div id="progress-size2" class="CUI-progress" data-value="60" data-type="label W200 H28"></div>
+        <div id="progress-size3" class="CUI-progress" data-value="85" data-type="label W400 H14"></div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress-size1" class="CUI-progress" data-value="75" data-type="label W300 H20"&gt;&lt;/div&gt;
+&lt;div id="progress-size2" class="CUI-progress" data-value="60" data-type="label W200 H28"&gt;&lt;/div&gt;
+&lt;div id="progress-size3" class="CUI-progress" data-value="85" data-type="label W400 H14"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>预定义尺寸</h3>
+    <p>使用data-size属性设置预定义尺寸（sm/md/lg/xl）。</p>
+    <div class="CUI-box">
+        <div class="CUI-progress" data-value="60" data-size="sm"></div>
+        <div class="CUI-progress" data-value="70" data-size="md"></div>
+        <div class="CUI-progress" data-value="80" data-size="lg"></div>
+        <div class="CUI-progress" data-value="90" data-size="xl"></div>
+    </div>
+    <pre><code class="language-html">&lt;div class="CUI-progress" data-value="60" data-size="sm"&gt;&lt;/div&gt;
+&lt;div class="CUI-progress" data-value="70" data-size="md"&gt;&lt;/div&gt;
+&lt;div class="CUI-progress" data-value="80" data-size="lg"&gt;&lt;/div&gt;
+&lt;div class="CUI-progress" data-value="90" data-size="xl"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>动态控制（data属性驱动）</h3>
+    <p>进度条默认启用标签、条纹和动画效果。无需任何API调用，只需修改data-value属性即可控制进度条。</p>
+    <div class="CUI-box">
+        <div id="progress8" class="CUI-progress" data-value="0"></div>
+        <div class="CUI-btn-group">
+            <button class="btn btn-primary" onclick="startProgress()">开始</button>
+            <button class="btn btn-secondary" onclick="pauseProgress()">暂停</button>
+            <button class="btn btn-warning" onclick="resetProgress()">重置</button>
+            <button class="btn btn-success" onclick="completeProgress()">完成</button>
+        </div>
+    </div>
+    <pre><code class="language-html">&lt;div id="progress8" class="CUI-progress" data-value="0"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>使用方式</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>代码</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>获取进度值</td>
+                    <td><code>document.getElementById('progress8').dataset.value</code></td>
+                    <td>读取data-value属性</td>
+                </tr>
+                <tr>
+                    <td>设置进度值</td>
+                    <td><code>document.getElementById('progress8').dataset.value = 75</code></td>
+                    <td>修改data-value属性自动更新UI</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre><code class="language-javascript">// 获取进度条值
+const value = document.getElementById('progress8').dataset.value;
+
+// 设置进度条值（自动更新UI）
+document.getElementById('progress8').dataset.value = 75;</code></pre>
+
+    <h3>参数说明</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>说明</th>
+                    <th>优先级</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>data-value</td>
+                    <td>0-100</td>
+                    <td>进度值</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>plain</td>
+                    <td>关闭所有默认装饰</td>
+                    <td>最高</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>label</td>
+                    <td>显示百分比标签</td>
+                    <td>默认启用</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>striped</td>
+                    <td>条纹样式</td>
+                    <td>默认启用</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>animated</td>
+                    <td>条纹动画</td>
+                    <td>默认启用</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>glass</td>
+                    <td>毛玻璃效果</td>
+                    <td>不包含在默认效果中</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>success/warning/error/info</td>
+                    <td>预设颜色</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>data-color</td>
+                    <td>#hex</td>
+                    <td>自定义颜色</td>
+                    <td>优先于data-type颜色</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>W数字</td>
+                    <td>自定义宽度（最小50px）</td>
+                    <td>优先于data-size</td>
+                </tr>
+                <tr>
+                    <td>data-type</td>
+                    <td>H数字</td>
+                    <td>自定义bar高度（最小14px）</td>
+                    <td>优先于data-size</td>
+                </tr>
+                <tr>
+                    <td>data-size</td>
+                    <td>sm/md/lg/xl</td>
+                    <td>预定义尺寸</td>
+                    <td>W/H参数存在时忽略</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>冲突处理规则</h3>
+    <div class="CUI-box">
+        <ul>
+            <li><strong>plain vs 其他装饰</strong>：plain优先，一旦设置关闭所有装饰效果</li>
+            <li><strong>data-color vs data-type颜色</strong>：data-color优先，因为更具体</li>
+            <li><strong>W/H参数 vs data-size</strong>：W/H参数优先，因为更精确</li>
+        </ul>
+    </div>
+
+    <script>
+        let timer = null;
+
+        function startProgress() {
+            if (timer) return;
+            const progressEl = document.getElementById('progress8');
+            if (!progressEl) return;
+            timer = setInterval(() => {
+                let current = parseInt(progressEl.dataset.value) || 0;
+                if (current >= 100) {
+                    clearInterval(timer);
+                    timer = null;
+                    return;
+                }
+                progressEl.dataset.value = current + 1;
+            }, 100);
+        }
+
+        function pauseProgress() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function resetProgress() {
+            pauseProgress();
+            const progressEl = document.getElementById('progress8');
+            if (progressEl) progressEl.dataset.value = 0;
+        }
+
+        function completeProgress() {
+            pauseProgress();
+            const progressEl = document.getElementById('progress8');
+            if (progressEl) progressEl.dataset.value = 100;
+        }
+    </script>
+</section>

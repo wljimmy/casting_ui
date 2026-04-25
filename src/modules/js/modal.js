@@ -155,6 +155,11 @@ function showModal(options) {
 // 导出
 export { showModal };
 
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
 // 暴露到全局
-window.showModal = showModal;
+window.CUI.showModal = showModal;
 

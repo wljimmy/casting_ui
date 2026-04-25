@@ -617,6 +617,11 @@ function openColorPicker(options = {}) {
 // 导出
 export { ColorPicker, openColorPicker };
 
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
 // 暴露到全局
-window.ColorPicker = ColorPicker;
-window.openColorPicker = openColorPicker;
+window.CUI.ColorPicker = ColorPicker;
+window.CUI.openColorPicker = openColorPicker;

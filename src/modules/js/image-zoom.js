@@ -8,6 +8,7 @@
  */
 
 import { debug } from './core.js';
+import { domObserver } from './dom-observer.js';
 
 // 图片放大全局函数
 function zoomImage(src) {
@@ -21,19 +22,12 @@ function zoomImage(src) {
         overlay.id = 'imageZoomOverlay';
         overlay.className = 'image-zoom-overlay';
         overlay.innerHTML = `
-            <button class="image-zoom-close" onclick="closeImageZoom()">&times;</button>
+            <button class="image-zoom-close" data-action="closeImageZoom">&times;</button>
             <img id="imageZoomContent" class="image-zoom-content" src="" alt="放大图片">
         `;
         
         // 添加到body
         document.body.appendChild(overlay);
-        
-        // 点击遮罩关闭图片放大
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                closeImageZoom();
-            }
-        });
     }
     
     // 设置图片源并显示遮罩
@@ -45,6 +39,22 @@ function zoomImage(src) {
         }, 10);
     }
 }
+
+// 通过DOMObserver绑定关闭事件
+domObserver.onAdd('image-zoom-close', '.image-zoom-close', (el) => {
+    el.addEventListener('click', () => {
+        closeImageZoom();
+    });
+});
+
+// 通过DOMObserver绑定点击遮罩关闭事件
+domObserver.onAdd('image-zoom-overlay', '.image-zoom-overlay', (el) => {
+    el.addEventListener('click', (e) => {
+        if (e.target === el) {
+            closeImageZoom();
+        }
+    });
+});
 
 function closeImageZoom() {
     debug('关闭图片放大', 'imageZoomOverlay');
@@ -63,6 +73,11 @@ function closeImageZoom() {
 // 导出
 export { zoomImage, closeImageZoom };
 
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
 // 暴露到全局
-window.zoomImage = zoomImage;
-window.closeImageZoom = closeImageZoom;
+window.CUI.zoomImage = zoomImage;
+window.CUI.closeImageZoom = closeImageZoom;

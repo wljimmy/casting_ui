@@ -1,220 +1,266 @@
 /**
  * Progress 进度条模块
  * 提供进度条的动态渲染和更新功能
- * 使用 dom.go() 接口控制进度
- * 支持自动初始化：<div class="progress" data-value="0" data-type="error"></div>
+ * 基于data属性驱动：用户通过修改元素的data-value属性来控制进度条
+ * 支持自动初始化：<div id="id" class="CUI-progress" data-value="60" data-type="label striped"></div>
  */
 
 import { domObserver } from './dom-observer.js';
 
 class Progress {
-    constructor(options = {}) {
-        this.options = {
-            value: options.value || 0,
-            max: options.max || 100,
-            type: options.type || 'primary',
-            size: options.size || 'md',
-            showLabel: options.showLabel || false,
-            striped: options.striped || false,
-            animated: options.animated || false,
-            glass: options.glass || false,
-            ...options
-        };
-        this.container = null;
-        this.progressBar = null;
-    }
-
-    render(container) {
+    constructor(container) {
         this.container = typeof container === 'string'
             ? document.querySelector(container)
             : container;
-
+        
         if (!this.container) {
-            console.error('Progress: 容器未找到');
-            return this;
+            console.warn('Progress: 容器未找到');
+            return;
         }
-
-        const percentage = Math.min(100, Math.max(0, (this.options.value / this.options.max) * 100));
-
+        
+        this.progressBar = null;
+        this.max = parseInt(this.container.dataset.max) || 100;
+        this.value = parseInt(this.container.dataset.value) || 0;
+        this.type = this.container.dataset.type || '';
+        this.size = this.container.dataset.size || 'md';
+        this.color = this.container.dataset.color || null;
+        
+        this.init();
+    }
+    
+    init() {
+        // 解析type参数
+        // 默认启用 label、striped、animated
+        // 使用 plain 参数可关闭所有默认效果
+        const typeStr = this.type.trim();
+        const types = typeStr ? typeStr.split(' ') : [];
+        const isPlain = types.includes('plain');
+        
+        if (isPlain) {
+            // plain模式：关闭所有装饰
+            this.showLabel = false;
+            this.striped = false;
+            this.animated = false;
+        } else if (types.length === 0) {
+            // 无任何参数：启用所有默认效果
+            this.showLabel = true;
+            this.striped = true;
+            this.animated = true;
+        } else {
+            // 自定义配置：根据参数决定
+            this.showLabel = types.includes('label');
+            this.striped = types.includes('striped');
+            this.animated = types.includes('animated');
+        }
+        
+        this.glass = types.includes('glass');
+        
+        // 颜色处理：data-color 自定义颜色优先于 data-type 中的颜色类型
+        const colorTypes = ['primary', 'success', 'warning', 'error', 'info'];
+        const foundColor = types.find(t => colorTypes.includes(t));
+        if (this.color && this.color.startsWith('#')) {
+            // 已有 data-color 自定义颜色，保持不变
+        } else if (foundColor) {
+            // 使用 data-type 中的颜色
+            this.color = foundColor;
+        }
+        
+        // 尺寸处理：W/H 参数优先于 data-size
+        const hasCustomSize = types.some(t => t.startsWith('W') || t.startsWith('H'));
+        
+        if (hasCustomSize) {
+            // 使用 W/H 参数
+            const widthMatch = types.find(t => t.startsWith('W'));
+            const heightMatch = types.find(t => t.startsWith('H'));
+            if (widthMatch) {
+                this.width = Math.max(50, parseInt(widthMatch.slice(1)) || null);
+            }
+            if (heightMatch) {
+                this.height = Math.max(14, parseInt(heightMatch.slice(1)) || null);
+            }
+            // 忽略 data-size
+            this.size = null;
+        } else {
+            // 使用 data-size 或默认尺寸
+            this.width = null;
+            this.height = null;
+        }
+        
+        this.render();
+    }
+    
+    render() {
+        const percentage = Math.min(100, Math.max(0, (this.value / this.max) * 100));
+        
         const classes = [
-            'progress',
-            `progress-${this.options.size}`,
-            this.options.glass ? 'progress-glass' : ''
+            'CUI-progress-box',
+            `CUI-progress-${this.size}`,
+            this.glass ? 'CUI-progress-glass' : ''
         ].filter(Boolean).join(' ');
-
+        
         const barClasses = [
-            'progress-bar',
-            this.options.type,
-            this.options.striped ? 'progress-stripes' : '',
-            this.options.animated ? 'progress-animated' : ''
+            'CUI-progress-bar',
+            this.striped ? 'CUI-progress-stripes' : '',
+            this.animated ? 'CUI-progress-animated' : ''
         ].filter(Boolean).join(' ');
-
+        
+        // 应用自定义宽度
+        let widthStyle = '';
+        if (this.width) {
+            widthStyle = `width: ${this.width}px;`;
+        }
+        
+        // 应用自定义高度
+        let heightStyle = '';
+        let barHeightStyle = '';
+        if (this.height) {
+            heightStyle = `height: ${this.height - 6}px;`;
+            barHeightStyle = `height: ${this.height}px;`;
+        }
+        
         this.container.className = classes;
+        this.container.style.cssText = `${widthStyle} ${heightStyle}`;
         this.container.innerHTML = `
-            <div class="${barClasses}" style="width: ${percentage}%">
-                ${this.options.showLabel ? `${Math.round(percentage)}%` : ''}
+            <div class="${barClasses}" style="width: ${percentage}%; ${barHeightStyle}">
+                ${this.showLabel ? `${Math.round(percentage)}%` : ''}
             </div>
         `;
-
-        this.progressBar = this.container.querySelector('.progress-bar');
-        return this;
+        
+        this.progressBar = this.container.querySelector('.CUI-progress-bar');
+        
+        // 应用颜色
+        if (this.color) {
+            if (['success', 'warning', 'error', 'info'].includes(this.color)) {
+                this.progressBar.classList.add(this.color);
+            } else if (this.color.startsWith('#')) {
+                this.progressBar.style.backgroundColor = this.color;
+            }
+        }
     }
-
-    setValue(value) {
-        this.options.value = Math.min(this.options.max, Math.max(0, value));
+    
+    update(value) {
+        if (typeof value !== 'number' || isNaN(value)) {
+            return;
+        }
+        
+        this.value = Math.min(this.max, Math.max(0, value));
+        const percentage = (this.value / this.max) * 100;
+        
         if (this.progressBar) {
-            const percentage = (this.options.value / this.options.max) * 100;
             this.progressBar.style.width = `${percentage}%`;
-            if (this.options.showLabel) {
+            if (this.showLabel) {
                 this.progressBar.textContent = `${Math.round(percentage)}%`;
             }
         }
-        return this;
-    }
-
-    getValue() {
-        return this.options.value;
-    }
-
-    increment(delta = 1) {
-        this.setValue(this.options.value + delta);
-        return this;
-    }
-
-    decrement(delta = 1) {
-        this.setValue(this.options.value - delta);
-        return this;
-    }
-
-    reset() {
-        this.setValue(0);
-        return this;
-    }
-
-    complete() {
-        this.setValue(this.options.max);
-        return this;
     }
 }
 
-window.Progress = Progress;
-
-/**
- * DOM 助手对象
- * 用于通过 dom.go() 接口控制进度条
- */
-class DOMHelper {
-    constructor() {
-        this.progressInstances = new Map();
-    }
-
-    /**
-     * 初始化进度条并返回控制接口
-     * @param {string|HTMLElement} container - 容器选择器或元素
-     * @param {Object} options - 进度条配置选项
-     * @returns {Object} 进度条控制接口 { go, increment, decrement, reset, complete, getValue }
-     */
-    init(container, options = {}) {
-        const progress = new Progress(options);
-        progress.render(container);
-
-        const instanceId = typeof container === 'string'
-            ? container
-            : container.id || `progress-${Date.now()}`;
-
-        const controlInterface = {
-            go: (value) => {
-                progress.setValue(value);
-                return controlInterface;
-            },
-            increment: (delta = 1) => {
-                progress.increment(delta);
-                return controlInterface;
-            },
-            decrement: (delta = 1) => {
-                progress.decrement(delta);
-                return controlInterface;
-            },
-            reset: () => {
-                progress.reset();
-                return controlInterface;
-            },
-            complete: () => {
-                progress.complete();
-                return controlInterface;
-            },
-            getValue: () => progress.getValue(),
-            getProgress: () => progress
-        };
-
-        this.progressInstances.set(instanceId, {
-            progress,
-            control: controlInterface
-        });
-
-        return controlInterface;
-    }
-
-    /**
-     * 获取已存在的进度条控制接口
-     * @param {string} instanceId - 实例ID（容器选择器或ID）
-     * @returns {Object|null} 进度条控制接口
-     */
-    get(instanceId) {
-        const instance = this.progressInstances.get(instanceId);
-        return instance ? instance.control : null;
-    }
-
-    /**
-     * 移除进度条实例
-     * @param {string} instanceId - 实例ID
-     */
-    remove(instanceId) {
-        this.progressInstances.delete(instanceId);
-    }
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
 }
 
-const dom = new DOMHelper();
-window.dom = dom;
+window.CUI.Progress = Progress;
 
 /**
  * ProgressAutoInit 自动初始化类
- * 监听DOM变化，自动初始化带有 progress 类的元素
+ * 使用框架的 domObserver 监听DOM变化，自动初始化带有 CUI-progress 类的元素
+ * 并监听data-value变化，自动更新进度条
  */
 class ProgressAutoInit {
     constructor() {
+        this.instances = new Map();
         this.init();
     }
-
+    
     init() {
-        domObserver.onAdd('progress-auto', '.progress', (el) => {
-            this.autoRender(el);
-        });
-
-        domObserver.onRemove('progress-auto', '.progress', (el) => {
-            const id = el.id || `#${el.className.split(' ').join('.')}`;
-            dom.remove(id);
-        });
-
-        document.querySelectorAll('.progress').forEach(el => {
+        if (typeof CastingDOMObserver !== 'undefined') {
+            this.registerObserver();
+        } else if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.registerObserver();
+            });
+        } else {
+            this.registerObserver();
+        }
+    }
+    
+    registerObserver() {
+        if (typeof CastingDOMObserver !== 'undefined') {
+            // 监听元素添加
+            CastingDOMObserver.onAdd('progress-auto', '.CUI-progress', (el) => {
+                this.autoRender(el);
+            });
+            
+            // 监听元素移除
+            CastingDOMObserver.onRemove('progress-auto', '.CUI-progress', (el) => {
+                const instanceId = this.getInstanceId(el);
+                if (instanceId) {
+                    this.instances.delete(instanceId);
+                }
+            });
+        }
+        
+        // 初始化已存在的进度条
+        document.querySelectorAll('.CUI-progress').forEach(el => {
             this.autoRender(el);
         });
     }
-
+    
+    getInstanceId(el) {
+        return el.id ? `#${el.id}` : `progress-${el.dataset.value || Math.floor(Math.random() * 10000)}`;
+    }
+    
     autoRender(el) {
-        const options = {
-            value: parseInt(el.dataset.value) || 0,
-            type: el.dataset.type || 'primary',
-            size: el.dataset.size || 'md',
-            showLabel: el.dataset.showLabel === 'true',
-            striped: el.dataset.striped === 'true',
-            animated: el.dataset.animated === 'true',
-            glass: el.dataset.glass === 'true'
-        };
-
-        const id = el.id || `#${el.className.split(' ').join('.')}`;
-        dom.init(el, options);
+        // 跳过 pre/code 标签内的代码示例元素
+        if (el.closest('pre, code')) {
+            return;
+        }
+        
+        const instanceId = this.getInstanceId(el);
+        
+        // 如果已存在实例，先移除
+        if (this.instances.has(instanceId)) {
+            return;
+        }
+        
+        // 创建进度条实例
+        const progress = new Progress(el);
+        
+        // 如果容器无效，直接返回
+        if (!progress.container) {
+            return;
+        }
+        
+        // 存储实例
+        this.instances.set(instanceId, progress);
+        
+        // 监听data-value属性变化
+        this.observeValueChange(el, progress);
+    }
+    
+    observeValueChange(el, progress) {
+        // 使用MutationObserver监听data-value属性变化
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'data-value') {
+                    const newValue = parseInt(el.dataset.value) || 0;
+                    progress.update(newValue);
+                }
+            });
+        });
+        
+        observer.observe(el, {
+            attributes: true,
+            attributeFilter: ['data-value']
+        });
+        
+        // 存储observer引用，以便后续清理
+        el._progressObserver = observer;
     }
 }
 
-new ProgressAutoInit();
+// 仅在框架环境中初始化
+if (typeof CastingDOMObserver !== 'undefined' || document.readyState !== 'loading') {
+    new ProgressAutoInit();
+}

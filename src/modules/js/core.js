@@ -251,10 +251,15 @@ class PopupBase {
 // 导出
 export { DEBUG_MODE, debug, createOverlay, showOverlay, hideOverlay, PopupBase };
 
+// 避免全局变量冲突，使用更安全的命名空间
+if (!window.CUI) {
+    window.CUI = {};
+}
+
 // 暴露到全局
-window.DEBUG_MODE = DEBUG_MODE;
-window.debug = debug;
-window.createOverlay = createOverlay;
-window.showOverlay = showOverlay;
-window.hideOverlay = hideOverlay;
-window.PopupBase = PopupBase;
+window.CUI.DEBUG_MODE = DEBUG_MODE;
+window.CUI.debug = debug;
+window.CUI.createOverlay = createOverlay;
+window.CUI.showOverlay = showOverlay;
+window.CUI.hideOverlay = hideOverlay;
+window.CUI.PopupBase = PopupBase;
