@@ -27,6 +27,7 @@ Casting_UI/
 │   │   │   ├── layout.css    # 布局样式（CUI-layout-web、CUI-layout-shell）
 │   │   │   ├── components.css# 组件样式
 │   │   │   ├── progress.css  # 进度条样式
+│   │   │   ├── status.css    # 状态栏样式
 │   │   │   ├── text.css      # 文本样式
 │   │   │   ├── header.css    # 头部样式
 │   │   │   ├── menu.css      # 菜单组件样式

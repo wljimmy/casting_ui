@@ -10,7 +10,7 @@
 // 优先加载DOM观察器模块
 import('./dom-observer.js').then(() => {
     console.log('DOM观察器模块加载完成');
-    
+
     // 加载核心模块
     return import('./core.js');
 }).then(module => {
@@ -22,14 +22,12 @@ import('./dom-observer.js').then(() => {
         import('./color-picker.js'),
         import('./theme-manager.js'),
         import('./menu.js'),
-        import('./ui.js')
+        import('./ui.js'),
+        import('./progress.js'),
+        import('./status.js')
     ]);
 }).then(() => {
     console.log('所有模块加载完成');
 }).catch(error => {
     console.error('模块加载失败:', error);
 });
-
-// 导出 StatusBar 和 Progress 类到全局
-import('./status.js');
-import('./progress.js');

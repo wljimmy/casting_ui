@@ -1,5 +1,71 @@
 # 版本更新日志
 
+## v0.5.4 (2026-04-26)
+
+### 进度条模块重构 (progress.js / progress.css)
+
+#### 核心重构
+- **v0.5.4** - 重构为data属性驱动模式
+  - 移除dom.go()等API接口
+  - 使用MutationObserver监听data-value变化自动更新UI
+  - 用户只需修改元素的data-value属性即可控制进度条
+
+#### 新增功能
+- **v0.5.4** - 默认启用label、striped、animated效果
+- **v0.5.4** - 添加plain模式关闭所有默认装饰
+- **v0.5.4** - 添加W/H参数支持自定义尺寸
+- **v0.5.4** - 添加data-color支持自定义颜色
+- **v0.5.4** - 条纹效果改用主色和激活色
+- **v0.5.4** - 圆角改为高度的一半
+
+#### 防呆设计
+- **v0.5.4** - 参数冲突按优先级处理
+  - plain优先级最高
+  - data-color优先于data-type颜色
+  - W/H参数优先于data-size
+
+### 菜单加载逻辑优化 (menu.js)
+
+#### 功能增强
+- **v0.5.4** - 添加详细日志输出，便于调试
+- **v0.5.4** - 重复CSS/JS引用自动屏蔽
+- **v0.5.4** - 非重复的外部JS引用保留并加载
+- **v0.5.4** - 提取并动态执行内联脚本
+- **v0.5.4** - 支持用户自定义外部脚本引用（防呆设计）
+
+### 框架规范完善
+
+#### 命名空间管理
+- **v0.5.4** - 所有JS模块添加window.CUI命名空间
+- 避免全局变量冲突
+- 框架内部函数与用户函数隔离
+
+#### 事件监听规范
+- **v0.5.4** - 框架内部改用DOMObserver管理事件
+- 防止监听队列过长
+- 自动清理无需的监听器
+
+### 模块版本汇总
+
+| 模块 | 文件 | 版本 | 描述 |
+|------|------|------|------|
+| progress | src/modules/js/progress.js | 0.3.0 | 进度条模块，data属性驱动 |
+| progress-css | src/modules/css/progress.css | 0.3.0 | 进度条样式 |
+| status | src/modules/js/status.js | 0.3.0 | 状态栏模块 |
+| status-css | src/modules/css/status.css | 0.3.0 | 状态栏样式 |
+| menu | src/modules/js/menu.js | 0.5.4 | 菜单模块，支持fetch加载子页面 |
+| menu-css | src/modules/css/menu.css | 0.5.3 | 菜单组件样式 |
+| image-zoom | src/modules/js/image-zoom.js | 0.3.0 | 图片放大模块 |
+| core | src/modules/js/core.js | 0.3.0 | 核心模块 |
+| modal | src/modules/js/modal.js | 0.3.0 | 弹窗模块 |
+| message | src/modules/js/message.js | 0.3.0 | 消息提示模块 |
+| theme-manager | src/modules/js/theme-manager.js | 0.3.0 | 主题管理模块 |
+| color-picker | src/modules/js/color-picker.js | 0.3.0 | 颜色选择器模块 |
+| index | src/modules/js/index.js | 0.5.1 | 模块加载器 |
+| dom-observer | src/modules/js/dom-observer.js | 0.5.0 | DOM观察器模块 |
+
+---
+
 ## v0.3.0 (2026-04-03)
 
 ### 重构布局系统和容器类

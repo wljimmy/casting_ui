@@ -1,0 +1,163 @@
+<section class="CUI-section">
+    <h2>状态栏</h2>
+    <p>状态栏组件用于显示系统状态、指示器等信息。支持多种样式变体。</p>
+
+    <h3>基础状态栏</h3>
+    <div class="CUI-box">
+        <div class="status-bar" id="status-bar-basic">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>系统正常</span>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="status-bar" id="status-bar-basic"&gt;
+    &lt;div class="status-bar-item"&gt;
+        &lt;span class="status-indicator success"&gt;&lt;/span&gt;
+        &lt;span&gt;系统正常&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>带多个状态指示器</h3>
+    <div class="CUI-box">
+        <div class="status-bar" id="status-bar-multi">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>CPU: 正常</span>
+            </div>
+            <div class="status-bar-item">
+                <span class="status-indicator warning"></span>
+                <span>内存: 警告</span>
+            </div>
+            <div class="status-bar-item">
+                <span class="status-indicator error"></span>
+                <span>磁盘: 错误</span>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="status-bar"&gt;
+    &lt;div class="status-bar-item"&gt;
+        &lt;span class="status-indicator success"&gt;&lt;/span&gt;
+        &lt;span&gt;CPU: 正常&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="status-bar-item"&gt;
+        &lt;span class="status-indicator warning"&gt;&lt;/span&gt;
+        &lt;span&gt;内存: 警告&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="status-bar-item"&gt;
+        &lt;span class="status-indicator error"&gt;&lt;/span&gt;
+        &lt;span&gt;磁盘: 错误&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>状态栏尺寸</h3>
+    <div class="CUI-box">
+        <div class="status-bar status-bar-sm" style="margin-bottom: 12px;">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>小型状态栏</span>
+            </div>
+        </div>
+        <div class="status-bar status-bar-lg">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>大型状态栏</span>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="status-bar status-bar-sm"&gt;...&lt;/div&gt;
+&lt;div class="status-bar status-bar-lg"&gt;...&lt;/div&gt;</code></pre>
+
+    <h3>状态栏样式变体</h3>
+    <div class="CUI-box">
+        <div class="status-bar status-bar-glass" style="margin-bottom: 12px;">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>毛玻璃效果</span>
+            </div>
+        </div>
+        <div class="status-bar status-bar-dark" style="margin-bottom: 12px;">
+            <div class="status-bar-item">
+                <span class="status-indicator warning"></span>
+                <span>深色背景</span>
+            </div>
+        </div>
+        <div class="status-bar status-bar-primary">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>主题色背景</span>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="status-bar status-bar-glass"&gt;...&lt;/div&gt;
+&lt;div class="status-bar status-bar-dark"&gt;...&lt;/div&gt;
+&lt;div class="status-bar status-bar-primary"&gt;...&lt;/div&gt;</code></pre>
+
+    <h3>状态指示器类型</h3>
+    <div class="CUI-box">
+        <div class="status-bar">
+            <div class="status-bar-item">
+                <span class="status-indicator success"></span>
+                <span>成功 (success)</span>
+            </div>
+            <div class="status-bar-item">
+                <span class="status-indicator warning"></span>
+                <span>警告 (warning)</span>
+            </div>
+            <div class="status-bar-item">
+                <span class="status-indicator error"></span>
+                <span>错误 (error)</span>
+            </div>
+            <div class="status-bar-item">
+                <span class="status-indicator info"></span>
+                <span>信息 (info)</span>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;span class="status-indicator success"&gt;&lt;/span&gt;
+&lt;span class="status-indicator warning"&gt;&lt;/span&gt;
+&lt;span class="status-indicator error"&gt;&lt;/span&gt;
+&lt;span class="status-indicator info"&gt;&lt;/span&gt;</code></pre>
+
+    <h3>状态栏速查表</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.status-bar</code></td>
+                    <td>基础状态栏容器</td>
+                </tr>
+                <tr>
+                    <td><code>.status-bar-sm</code></td>
+                    <td>小型状态栏</td>
+                </tr>
+                <tr>
+                    <td><code>.status-bar-lg</code></td>
+                    <td>大型状态栏</td>
+                </tr>
+                <tr>
+                    <td><code>.status-bar-glass</code></td>
+                    <td>毛玻璃效果</td>
+                </tr>
+                <tr>
+                    <td><code>.status-bar-dark</code></td>
+                    <td>深色背景</td>
+                </tr>
+                <tr>
+                    <td><code>.status-bar-primary</code></td>
+                    <td>主题色背景</td>
+                </tr>
+                <tr>
+                    <td><code>.status-indicator</code></td>
+                    <td>状态指示器</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
