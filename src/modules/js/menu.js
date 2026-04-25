@@ -903,10 +903,84 @@ class MenuInstance {
         xhr.open('GET', url, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         
-        xhr.onreadystatechange = () => {
+        const self = this;
+        
+        xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    containerElement.innerHTML = xhr.responseText;
+                    let responseText = xhr.responseText;
+                    
+                    // 提取head和body内容
+                    const headMatch = responseText.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                    const bodyMatch = responseText.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    
+                    let headContent = headMatch ? headMatch[1] : '';
+                    let bodyContent = bodyMatch ? bodyMatch[1] : responseText;
+                    
+                    // 提取所有CSS和JS引用
+                    const cssLinks = [];
+                    const jsScripts = [];
+                    
+                    // 提取head中的CSS和JS
+                    const headLinkRegex = /<link[^>]*href="([^"]+)"[^>]*>/gi;
+                    const headScriptRegex = /<script[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/script>/gi;
+                    
+                    let match;
+                    while ((match = headLinkRegex.exec(headContent)) !== null) {
+                        cssLinks.push(match[1]);
+                    }
+                    
+                    while ((match = headScriptRegex.exec(headContent)) !== null) {
+                        jsScripts.push(match[1]);
+                    }
+                    
+                    // 提取body中的JS
+                    const bodyScriptRegex = /<script[^>]*src="([^"]+)"[^>]*>[\s\S]*?<\/script>/gi;
+                    while ((match = bodyScriptRegex.exec(bodyContent)) !== null) {
+                        jsScripts.push(match[1]);
+                    }
+                    
+                    // 获取当前页面已加载的CSS和JS
+                    const loadedCss = new Set();
+                    const loadedJs = new Set();
+                    
+                    // 收集已加载的CSS
+                    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+                        loadedCss.add(self.getFileName(link.href));
+                    });
+                    
+                    // 收集已加载的JS
+                    document.querySelectorAll('script[src]').forEach(script => {
+                        loadedJs.add(self.getFileName(script.src));
+                    });
+                    
+                    // 过滤出未加载的CSS和JS
+                    const newCssLinks = cssLinks.filter(link => !loadedCss.has(self.getFileName(link)));
+                    const newJsScripts = jsScripts.filter(script => !loadedJs.has(self.getFileName(script)));
+                    
+                    // 构建新的CSS链接
+                    let newCssHtml = '';
+                    newCssLinks.forEach(link => {
+                        newCssHtml += `<link rel="stylesheet" href="${link}">`;
+                    });
+                    
+                    // 移除body中的所有script标签
+                    bodyContent = bodyContent.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+                    
+                    // 构建最终内容
+                    let finalContent = bodyContent;
+                    
+                    // 如果有新的CSS，添加到body开头
+                    if (newCssHtml) {
+                        finalContent = newCssHtml + finalContent;
+                    }
+                    
+                    // 如果有新的JS，添加到body末尾
+                    newJsScripts.forEach(script => {
+                        finalContent += `<script src="${script}"></script>`;
+                    });
+                    
+                    containerElement.innerHTML = finalContent;
                     
                     // 执行回调
                     if (callback && typeof window[callback] === 'function') {
@@ -924,6 +998,11 @@ class MenuInstance {
         };
         
         xhr.send();
+    }
+    
+    // 获取文件名（用于去重）
+    getFileName(url) {
+        return url.split('/').pop();
     }
 
     // 设置激活状态

@@ -1,0 +1,161 @@
+<section class="CUI-section">
+    <h2>按钮</h2>
+    <p>按钮是用于触发操作的交互组件，框架提供多种按钮类型和状态。</p>
+
+    <h3>按钮类型</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-4c">
+            <button class="btn btn-primary">主要按钮</button>
+            <button class="btn btn-secondary">次要按钮</button>
+            <button class="btn btn-text">文字按钮</button>
+            <button class="btn btn-icon">🔍</button>
+        </div>
+    </div>
+    <pre><code>&lt;button class="btn btn-primary"&gt;主要按钮&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;次要按钮&lt;/button&gt;
+&lt;button class="btn btn-text"&gt;文字按钮&lt;/button&gt;
+&lt;button class="btn btn-icon"&gt;🔍&lt;/button&gt;</code></pre>
+
+    <h3>警告/危险按钮</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-4c">
+            <button class="btn btn-warning">警告按钮</button>
+            <button class="btn btn-error">危险按钮</button>
+            <button class="btn btn-success">成功按钮</button>
+            <button class="btn btn-info">信息按钮</button>
+        </div>
+    </div>
+    <pre><code>&lt;button class="btn btn-warning"&gt;警告按钮&lt;/button&gt;
+&lt;button class="btn btn-error"&gt;危险按钮&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;成功按钮&lt;/button&gt;
+&lt;button class="btn btn-info"&gt;信息按钮&lt;/button&gt;</code></pre>
+
+    <h3>按钮尺寸</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-3c CUI-grid-v-center" style="min-height: 80px;">
+            <button class="btn btn-primary btn-sm">小按钮</button>
+            <button class="btn btn-primary btn-md">中按钮</button>
+            <button class="btn btn-primary btn-lg">大按钮</button>
+        </div>
+    </div>
+    <pre><code>&lt;button class="btn btn-primary btn-sm"&gt;小按钮&lt;/button&gt;
+&lt;button class="btn btn-primary btn-md"&gt;中按钮&lt;/button&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;大按钮&lt;/button&gt;</code></pre>
+
+    <h3>按钮状态</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-4c">
+            <button class="btn btn-primary">正常状态</button>
+            <button class="btn btn-primary" disabled>不可用</button>
+            <button class="btn btn-primary btn-loading">加载中</button>
+            <button class="btn btn-primary btn-icon-only">❤️</button>
+        </div>
+    </div>
+    <pre><code>&lt;button class="btn btn-primary"&gt;正常状态&lt;/button&gt;
+&lt;button class="btn btn-primary" disabled&gt;不可用&lt;/button&gt;
+&lt;button class="btn btn-primary btn-loading"&gt;加载中&lt;/button&gt;
+&lt;button class="btn btn-primary btn-icon-only"&gt;❤️&lt;/button&gt;</code></pre>
+
+    <h3>按钮组</h3>
+    <div class="CUI-box">
+        <div class="btn-group">
+            <button class="btn btn-primary">左</button>
+            <button class="btn btn-primary">中</button>
+            <button class="btn btn-primary">右</button>
+        </div>
+    </div>
+    <pre><code>&lt;div class="btn-group"&gt;
+    &lt;button class="btn btn-primary"&gt;左&lt;/button&gt;
+    &lt;button class="btn btn-primary"&gt;中&lt;/button&gt;
+    &lt;button class="btn btn-primary"&gt;右&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>按钮类型速查表</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>类名</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>主要</td>
+                    <td>btn-primary</td>
+                    <td>主操作按钮，带毛玻璃效果</td>
+                </tr>
+                <tr>
+                    <td>次要</td>
+                    <td>btn-secondary</td>
+                    <td>次要操作按钮</td>
+                </tr>
+                <tr>
+                    <td>文字</td>
+                    <td>btn-text</td>
+                    <td>文字按钮，无背景</td>
+                </tr>
+                <tr>
+                    <td>图标</td>
+                    <td>btn-icon</td>
+                    <td>圆形图标按钮</td>
+                </tr>
+                <tr>
+                    <td>警告</td>
+                    <td>btn-warning</td>
+                    <td>警告操作</td>
+                </tr>
+                <tr>
+                    <td>危险</td>
+                    <td>btn-error</td>
+                    <td>危险/删除操作</td>
+                </tr>
+                <tr>
+                    <td>成功</td>
+                    <td>btn-success</td>
+                    <td>成功操作</td>
+                </tr>
+                <tr>
+                    <td>信息</td>
+                    <td>btn-info</td>
+                    <td>信息提示</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>按钮尺寸速查表</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>尺寸</th>
+                    <th>类名</th>
+                    <th>内边距</th>
+                    <th>字号</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>小</td>
+                    <td>btn-sm</td>
+                    <td>xs md</td>
+                    <td>12px</td>
+                </tr>
+                <tr>
+                    <td>中</td>
+                    <td>btn-md</td>
+                    <td>sm md</td>
+                    <td>14px</td>
+                </tr>
+                <tr>
+                    <td>大</td>
+                    <td>btn-lg</td>
+                    <td>md lg</td>
+                    <td>16px</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casting UI Framework - 杂志风格UI手册</title>
-    <link rel="icon" type="image/svg+xml" href="./icons/filled/apps.svg">
+    <link rel="icon" type="image/svg+xml" href="/icons/filled/apps.svg">
     <!-- 引入思源宋体CDN -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap">
@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="./modules/css/animation.css">
     <link rel="stylesheet" href="./modules/css/responsive.css">
     <link rel="stylesheet" href="./modules/css/components.css">
-    <link rel="stylesheet" href="./modules/css/md.css">
+    <link rel="stylesheet" href="./modules/css/status.css">
+    <link rel="stylesheet" href="./modules/css/progress.css">
     <link rel="stylesheet" href="./modules/css/prism/prism.css">
     <link rel="stylesheet" href="./modules/css/menu.css">
 
@@ -37,7 +38,7 @@
                     <span class="header-search-icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
-                            <use href="./icons/outline/search.svg#icon"></use>
+                            <use href="/icons/outline/search.svg#icon"></use>
                         </svg>
                     </span>
                 </div>
@@ -64,78 +65,24 @@
                             <li data-id="general-container" data-badge="new"
                                 data-action='{"url":"manual/basic-layout/general-container/index.html","container":"#content-container"}'>
                                 通用容器</li>
+                            <li data-id="button-container"
+                                data-action='{"url":"manual/basic-layout/button-container/index.html","container":"#content-container"}'>
+                                按钮</li>
                             <li data-id="layout-container" data-badge="new"
                                 data-action='{"url":"manual/basic-layout/layout-container/index.html","container":"#content-container"}'>
                                 布局容器</li>
                         </ul>
                     </li>
 
-                    <!-- 交互控件 -->
-                    <li data-id="interaction-controls">交互控件
+                    <!-- 数据展示组件 -->
+                    <li data-id="data-display">数据展示组件
                         <ul>
-                            <li data-id="button-container">按钮
-                                <ul>
-                                    <li data-id="button-basic"
-                                        data-action='{"url":"manual/basic-layout/button-container/index.html","container":"#content-container"}'>
-                                        基础按钮</li>
-                                    <li data-id="button-icon">图标按钮
-                                        <ul>
-                                            <li data-id="button-icon-circle"
-                                                data-action='{"url":"manual/basic-layout/button-container/index.html","container":"#content-container"}'>
-                                                圆形图标</li>
-                                            <li data-id="button-icon-square"
-                                                data-action='{"url":"manual/basic-layout/button-container/index.html","container":"#content-container"}'>
-                                                方形图标</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li data-id="input-container" data-badge="update"
-                                data-action='{"url":"manual/interaction-controls/input-container/index.html","container":"#content-container"}'>
-                                表单控件</li>
-                            <li data-id="select-container"
-                                data-action='{"url":"manual/interaction-controls/select-container/index.html","container":"#content-container"}'>
-                                选择控件</li>
-                            <li data-id="md-container" data-badge="beta"
-                                data-action='{"url":"manual/interaction-controls/md-container/index.html","container":"#content-container"}'>
-                                MD编辑器</li>
-                            <li data-id="menu-container"
-                                data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                菜单组件</li>
-                            <li data-id="core-functions" data-badge="new"
-                                data-action='{"url":"manual/interaction-controls/core-functions/index.html","container":"#content-container"}'>
-                                核心JS功能</li>
-                            <li data-id="multi-level-test">四级菜单测试
-                                <ul>
-                                    <li data-id="level-1">一级菜单
-                                        <ul>
-                                            <li data-id="level-2">二级菜单
-                                                <ul>
-                                                    <li data-id="level-3">三级菜单
-                                                        <ul>
-                                                            <li data-id="level-4-1"
-                                                                data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                                                四级菜单-1</li>
-                                                            <li data-id="level-4-2"
-                                                                data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                                                四级菜单-2</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li data-id="level-3-2"
-                                                        data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                                        三级菜单-2</li>
-                                                </ul>
-                                            </li>
-                                            <li data-id="level-2-2"
-                                                data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                                二级菜单-2</li>
-                                        </ul>
-                                    </li>
-                                    <li data-id="level-1-2"
-                                        data-action='{"url":"manual/interaction-controls/menu-container/index.html","container":"#content-container"}'>
-                                        一级菜单-2</li>
-                                </ul>
-                            </li>
+                            <li data-id="badge-container" data-badge="new"
+                                data-action='{"url":"manual/data-display/badge-container/index.html","container":"#content-container"}'>
+                                徽章</li>
+                            <li data-id="info-container" data-badge="new"
+                                data-action='{"url":"manual/data-display/info-container/index.html","container":"#content-container"}'>
+                                信息展示</li>
                         </ul>
                     </li>
 
@@ -145,36 +92,12 @@
                             <li data-id="modal-container-1"
                                 data-action='{"url":"manual/feedback-components/modal-container-1/index.html","container":"#content-container"}'>
                                 弹窗</li>
-                            <li data-id="toast-container"
-                                data-action='{"url":"manual/feedback-components/toast-container/index.html","container":"#content-container"}'>
-                                Toast</li>
-                            <li data-id="loading-container"
-                                data-action='{"url":"manual/feedback-components/loading-container/index.html","container":"#content-container"}'>
-                                加载类</li>
                             <li data-id="message-container" data-badge="new"
                                 data-action='{"url":"manual/feedback-components/message-container/index.html","container":"#content-container"}'>
                                 信息提示</li>
-                        </ul>
-                    </li>
-
-                    <!-- 数据展示组件 -->
-                    <li data-id="data-display">数据展示组件
-                        <ul>
-                            <li data-id="image-container"
-                                data-action='{"url":"manual/data-display/image-container/index.html","container":"#content-container"}'>
-                                图片控件</li>
-                            <li data-id="list-container"
-                                data-action='{"url":"manual/data-display/list-container/index.html","container":"#content-container"}'>
-                                列表</li>
-                            <li data-id="table-container"
-                                data-action='{"url":"manual/data-display/table-container/index.html","container":"#content-container"}'>
-                                表格</li>
-                            <li data-id="badge-container"
-                                data-action='{"url":"manual/data-display/badge-container/index.html","container":"#content-container"}'>
-                                标签/徽章</li>
-                            <li data-id="progress-container"
-                                data-action='{"url":"manual/data-display/progress-container/index.html","container":"#content-container"}'>
-                                进度条</li>
+                            <li data-id="toast-container"
+                                data-action='{"url":"manual/feedback-components/toast-container/index.html","container":"#content-container"}'>
+                                Toast</li>
                         </ul>
                     </li>
 
@@ -184,21 +107,6 @@
                             <li data-id="text-container"
                                 data-action='{"url":"manual/general-ui/text-container/index.html","container":"#content-container"}'>
                                 文本</li>
-                            <li data-id="icon-container"
-                                data-action='{"url":"manual/general-ui/icon-container/index.html","container":"#content-container"}'>
-                                图标</li>
-                            <li data-id="divider-container"
-                                data-action='{"url":"manual/general-ui/divider-container/index.html","container":"#content-container"}'>
-                                分隔组件</li>
-                            <li data-id="theme-selector" data-badge="hot"
-                                data-action='{"url":"manual/general-ui/theme-selector/index.html","container":"#content-container"}'>
-                                主题选择器</li>
-                            <li data-id="utilities-container" data-badge="new"
-                                data-action='{"url":"manual/general-ui/utilities-container/index.html","container":"#content-container"}'>
-                                工具类组件</li>
-                            <li data-id="icon-showcase" data-badge="new"
-                                data-action='{"url":"manual/general-ui/icon-showcase/index.html","container":"#content-container"}'>
-                                图标展示</li>
                         </ul>
                     </li>
                 </ul>

@@ -29,3 +29,7 @@ import('./dom-observer.js').then(() => {
 }).catch(error => {
     console.error('模块加载失败:', error);
 });
+
+// 导出 StatusBar 和 Progress 类到全局
+import('./status.js');
+import('./progress.js');

@@ -1,0 +1,73 @@
+/* ========== 状态栏样式 ========== */
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--size-xs) var(--size-md);
+    background-color: var(--gray-100);
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    gap: var(--size-md);
+}
+
+.status-bar-item {
+    display: flex;
+    align-items: center;
+    gap: var(--size-xs);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.success {
+    background-color: var(--success-color);
+}
+
+.status-indicator.warning {
+    background-color: var(--warning-color);
+}
+
+.status-indicator.error {
+    background-color: var(--error-color);
+}
+
+.status-indicator.info {
+    background-color: var(--info-color);
+}
+
+.status-indicator.default {
+    background-color: var(--gray-400);
+}
+
+/* 状态栏尺寸 */
+.status-bar-sm {
+    padding: var(--size-xs) var(--size-sm);
+    font-size: 11px;
+}
+
+.status-bar-lg {
+    padding: var(--size-sm) var(--size-lg);
+    font-size: 14px;
+}
+
+/* 状态栏类型 */
+.status-bar-glass {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.status-bar-dark {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.status-bar-primary {
+    background-color: var(--primary-color);
+    color: white;
+}

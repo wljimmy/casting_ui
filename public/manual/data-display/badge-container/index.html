@@ -1,53 +1,128 @@
 <section class="CUI-section">
-    <h2>标签/徽章</h2>
-    
-    <div class="CUI-grid CUI-grid-3c">
-        <!-- 尺寸 -->
-        <div>
-            <span>尺寸：</span>
-            <span id="badge-sm" class="badge badge-sm badge-primary">小徽章</span>
-            <span id="badge-md" class="badge badge-md badge-primary">中徽章</span>
-            <span id="badge-lg" class="badge badge-lg badge-primary">大徽章</span>
-        </div>
-        
-        <!-- 样式 -->
-        <div>
-            <span>填充样式：</span>
-            <span id="badge-primary" class="badge badge-primary">主要</span>
-            <span id="badge-success" class="badge badge-success">成功</span>
-            <span id="badge-warning" class="badge badge-warning">警告</span>
-            <span id="badge-error" class="badge badge-error">错误</span>
-        </div>
-        
-        <!-- 描边样式 -->
-        <div id="transparent-bg-container-3" class="transparent-bg-container">
-            <div class="transparent-bg-content">
-                <div>
-                    <span>描边样式：</span>
-                    <span id="badge-outline-primary" class="badge badge-outline badge-primary">主要</span>
-                    <span id="badge-outline-success" class="badge badge-outline badge-success">成功</span>
-                    <span id="badge-outline-warning" class="badge badge-outline badge-warning">警告</span>
-                    <span id="badge-outline-error" class="badge badge-outline badge-error">错误</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 带数字角标 -->
-        <div>
-            <span>带数字角标：</span>
-            <span id="badge-with-count" class="badge badge-primary badge-with-count">
-                消息
-                <span class="badge-count">99+</span>
-            </span>
-        </div>
-        
-        <!-- 可关闭徽章 -->
-        <div>
-            <span>可关闭徽章：</span>
-            <span id="badge-closeable" class="badge badge-closeable badge-primary">
-                标签
-                <button class="badge-close">&times;</button>
-            </span>
-        </div>
+    <h2>徽章</h2>
+    <p>徽章（badge）用于在页面中显示标签、标记或状态信息。</p>
+
+    <h3>尺寸</h3>
+    <div class="CUI-box">
+        <span class="badge badge-sm badge-primary">小徽章</span>
+        <span class="badge badge-md badge-primary">中徽章</span>
+        <span class="badge badge-lg badge-primary">大徽章</span>
+    </div>
+    <pre><code>&lt;span class="badge badge-sm badge-primary"&gt;小徽章&lt;/span&gt;
+&lt;span class="badge badge-md badge-primary"&gt;中徽章&lt;/span&gt;
+&lt;span class="badge badge-lg badge-primary"&gt;大徽章&lt;/span&gt;</code></pre>
+
+    <h3>填充样式</h3>
+    <div class="CUI-box">
+        <span class="badge badge-primary">主要</span>
+        <span class="badge badge-secondary">次要</span>
+        <span class="badge badge-success">成功</span>
+        <span class="badge badge-warning">警告</span>
+        <span class="badge badge-error">错误</span>
+    </div>
+    <pre><code>&lt;span class="badge badge-primary"&gt;主要&lt;/span&gt;
+&lt;span class="badge badge-secondary"&gt;次要&lt;/span&gt;
+&lt;span class="badge badge-success"&gt;成功&lt;/span&gt;
+&lt;span class="badge badge-warning"&gt;警告&lt;/span&gt;
+&lt;span class="badge badge-error"&gt;错误&lt;/span&gt;</code></pre>
+
+    <h3>描边样式</h3>
+    <div class="CUI-box">
+        <span class="badge badge-outline badge-primary">主要</span>
+        <span class="badge badge-outline badge-secondary">次要</span>
+        <span class="badge badge-outline badge-success">成功</span>
+        <span class="badge badge-outline badge-warning">警告</span>
+        <span class="badge badge-outline badge-error">错误</span>
+    </div>
+    <pre><code>&lt;span class="badge badge-outline badge-primary"&gt;主要&lt;/span&gt;</code></pre>
+
+    <h3>特殊徽章（自动文字）</h3>
+    <div class="CUI-box">
+        <span class="badge badge-hot"></span>
+        <span class="badge badge-new"></span>
+        <span class="badge badge-recommend"></span>
+        <span class="badge badge-update"></span>
+        <span class="badge badge-demo"></span>
+        <span class="badge badge-tip"></span>
+        <span class="badge badge-official"></span>
+        <span class="badge badge-pro"></span>
+        <span class="badge badge-beta"></span>
+        <span class="badge badge-fixed"></span>
+    </div>
+    <pre><code>&lt;span class="badge badge-hot"&gt;&lt;/span&gt;
+&lt;span class="badge badge-new"&gt;&lt;/span&gt;
+&lt;span class="badge badge-recommend"&gt;&lt;/span&gt;
+&lt;span class="badge badge-update"&gt;&lt;/span&gt;
+&lt;span class="badge badge-beta"&gt;&lt;/span&gt;</code></pre>
+
+    <h3>带数字角标</h3>
+    <div class="CUI-box">
+        <span class="badge badge-primary badge-with-count">
+            消息
+            <span class="badge-count">99+</span>
+        </span>
+    </div>
+    <pre><code>&lt;span class="badge badge-primary badge-with-count"&gt;
+    消息
+    &lt;span class="badge-count"&gt;99+&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+
+    <h3>徽章类型速查表</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>类名</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">尺寸</td>
+                    <td>badge-sm</td>
+                    <td>小尺寸</td>
+                </tr>
+                <tr>
+                    <td>badge-md</td>
+                    <td>中尺寸（默认）</td>
+                </tr>
+                <tr>
+                    <td>badge-lg</td>
+                    <td>大尺寸</td>
+                </tr>
+                <tr>
+                    <td rowspan="5">颜色</td>
+                    <td>badge-primary</td>
+                    <td>主要（蓝色）</td>
+                </tr>
+                <tr>
+                    <td>badge-secondary</td>
+                    <td>次要（灰色）</td>
+                </tr>
+                <tr>
+                    <td>badge-success</td>
+                    <td>成功（绿色）</td>
+                </tr>
+                <tr>
+                    <td>badge-warning</td>
+                    <td>警告（橙色）</td>
+                </tr>
+                <tr>
+                    <td>badge-error</td>
+                    <td>错误（红色）</td>
+                </tr>
+                <tr>
+                    <td>描边</td>
+                    <td>badge-outline</td>
+                    <td>描边样式</td>
+                </tr>
+                <tr>
+                    <td>带数字</td>
+                    <td>badge-with-count</td>
+                    <td>带数字角标</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>

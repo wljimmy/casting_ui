@@ -1,293 +1,193 @@
 <section class="CUI-section">
     <h2>通用容器</h2>
-    <p>通用容器组件提供多种页面内容容器，用于控制内容宽度和布局。</p>
+    <p>通用容器是框架中最基础的视觉容器组件，提供统一的内边距、边框和背景样式。</p>
 
+    <h3>CUI-box 通用盒子</h3>
     <div class="CUI-box">
-        <h3>1. 基础容器</h3>
-        <p>基础容器限制最大宽度并居中显示。</p>
+        <h4>默认样式</h4>
+        <p>这是 CUI-box 的默认样式，包含内边距、边框、背景色和圆角。</p>
+    </div>
+    <pre><code>&lt;div class="CUI-box"&gt;
+    &lt;h4&gt;默认样式&lt;/h4&gt;
+    &lt;p&gt;这是 CUI-box 的默认样式，包含内边距、边框、背景色和圆角。&lt;/p&gt;
+&lt;/div&gt;</code></pre>
 
-        <div class="container" style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md); margin-bottom: 16px;">
-            <strong>.container</strong>
-            <p style="font-size: 12px; margin-top: 8px;">最大宽度 1200px，自动居中</p>
-        </div>
-
-        <h4>参数说明</h4>
+    <h3>视觉容器类说明</h3>
+    <div class="CUI-box">
         <table class="CUI-table">
             <thead>
                 <tr>
                     <th>类名</th>
-                    <th>最大宽度</th>
-                    <th>描述</th>
+                    <th>核心用途</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><code>.container</code></td>
-                    <td>1200px</td>
-                    <td>基础容器，响应式内边距</td>
+                    <td>CUI-box</td>
+                    <td>基础通用容器，带边框、背景、圆角</td>
                 </tr>
                 <tr>
-                    <td><code>.container-fluid</code></td>
-                    <td>100%</td>
-                    <td>全宽容器</td>
+                    <td>CUI-card</td>
+                    <td>卡片容器，带阴影效果</td>
+                </tr>
+                <tr>
+                    <td>CUI-fluid</td>
+                    <td>透明无样式布局容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-panel</td>
+                    <td>功能面板容器，超出部分隐藏</td>
                 </tr>
             </tbody>
         </table>
-
-        <h4>使用说明</h4>
-        <pre class="language-html"><code class="language-html">&lt;div class="container"&gt;
-    &lt;!-- 内容区域，最大宽度 1200px --&gt;
-&lt;/div&gt;
-
-&lt;div class="container-fluid"&gt;
-    &lt;!-- 全宽内容区域 --&gt;
-&lt;/div&gt;</code></pre>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
     </div>
 
+    <h3>语义功能型容器</h3>
     <div class="CUI-box">
-        <h3>2. 固定宽度容器</h3>
-        <p>固定宽度容器提供预设的宽度尺寸。</p>
-
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
-            <div class="container-fixed-sm" style="background: var(--primary-color); color: white; padding: 12px; border-radius: var(--radius-md);">
-                <strong>.container-fixed-sm</strong> - 500px
-            </div>
-            <div class="container-fixed-md" style="background: var(--success-color); color: white; padding: 12px; border-radius: var(--radius-md);">
-                <strong>.container-fixed-md</strong> - 800px
-            </div>
-            <div class="container-fixed-lg" style="background: var(--warning-color); color: white; padding: 12px; border-radius: var(--radius-md);">
-                <strong>.container-fixed-lg</strong> - 1200px
-            </div>
-        </div>
-
-        <h4>参数说明</h4>
         <table class="CUI-table">
             <thead>
                 <tr>
                     <th>类名</th>
-                    <th>宽度</th>
+                    <th>核心用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CUI-section</td>
+                    <td>页面章节/区块容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-header</td>
+                    <td>页面头部容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-footer</td>
+                    <td>页面底部容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-main</td>
+                    <td>主内容容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-aside</td>
+                    <td>侧边栏容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-page</td>
+                    <td>页面根容器</td>
+                </tr>
+                <tr>
+                    <td>CUI-wrap</td>
+                    <td>内容宽度约束包裹容器</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>间距类</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-2c">
+            <div class="CUI-m-md CUI-box">
+                <h4>CUI-m-md</h4>
+                <p>外边距 medium</p>
+            </div>
+            <div class="CUI-p-md CUI-box">
+                <h4>CUI-p-md</h4>
+                <p>内边距 medium</p>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="CUI-m-md"&gt;外边距&lt;/div&gt;
+&lt;div class="CUI-p-md"&gt;内边距&lt;/div&gt;</code></pre>
+
+    <h3>尺寸与占位类</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-3c">
+            <div class="CUI-full CUI-box">
+                <h4>CUI-full</h4>
+                <p>宽高100%</p>
+            </div>
+            <div class="CUI-auto CUI-box">
+                <h4>CUI-auto</h4>
+                <p>由内容自适应</p>
+            </div>
+            <div class="CUI-half CUI-box">
+                <h4>CUI-half</h4>
+                <p>宽度50%</p>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;div class="CUI-full"&gt;宽高100%&lt;/div&gt;
+&lt;div class="CUI-auto"&gt;由内容自适应&lt;/div&gt;
+&lt;div class="CUI-half"&gt;宽度50%&lt;/div&gt;</code></pre>
+
+    <h3>毛玻璃效果</h3>
+    <div class="CUI-box">
+        <p>框架提供两种标准的毛玻璃效果样式：</p>
+        
+        <h4>背景毛玻璃效果 (.glass-bg)</h4>
+        <div class="glass-bg" style="padding: 16px; margin-bottom: 16px; border-radius: var(--radius-md);">
+            <p>这是背景毛玻璃效果，适用于容器、遮罩等背景。模糊程度适中，透明度为50%。</p>
+        </div>
+        
+        <h4>前景毛玻璃效果 (.glass-fg)</h4>
+        <div class="glass-fg" style="padding: 16px; margin-bottom: 16px; border-radius: var(--radius-md);">
+            <p>这是前景毛玻璃效果，适用于按钮等前景元素。模糊程度较高，透明度为60%。</p>
+        </div>
+        
+        <h4>深色背景毛玻璃效果 (.glass-bg-dark)</h4>
+        <div style="background-color: #1a1a2e; padding: 16px; border-radius: var(--radius-md);">
+            <div class="glass-bg-dark" style="padding: 16px; border-radius: var(--radius-md);">
+                <p style="color: white;">这是深色背景毛玻璃效果，适用于深色背景的遮罩。模糊程度较低，透明度为30%。</p>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;!-- 背景毛玻璃效果 - 用于容器、遮罩等背景 --&gt;
+&lt;div class="glass-bg"&gt;
+    &lt;p&gt;背景毛玻璃效果&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- 前景毛玻璃效果 - 用于按钮等前景元素 --&gt;
+&lt;div class="glass-fg"&gt;
+    &lt;p&gt;前景毛玻璃效果&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- 深色背景毛玻璃效果 - 用于深色背景的遮罩 --&gt;
+&lt;div class="glass-bg-dark"&gt;
+    &lt;p&gt;深色背景毛玻璃效果&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>毛玻璃效果速查表</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>类名</th>
+                    <th>模糊程度</th>
+                    <th>透明度</th>
                     <th>适用场景</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><code>.container-fixed-sm</code></td>
-                    <td>500px</td>
-                    <td>登录框、小表单</td>
+                    <td>.glass-bg</td>
+                    <td>blur(6px)</td>
+                    <td>50%</td>
+                    <td>容器、遮罩等背景</td>
                 </tr>
                 <tr>
-                    <td><code>.container-fixed-md</code></td>
-                    <td>800px</td>
-                    <td>文章详情、中等表单</td>
+                    <td>.glass-bg-dark</td>
+                    <td>blur(2px)</td>
+                    <td>30%</td>
+                    <td>深色背景的遮罩</td>
                 </tr>
                 <tr>
-                    <td><code>.container-fixed-lg</code></td>
-                    <td>1200px</td>
-                    <td>数据展示、复杂页面</td>
+                    <td>.glass-fg</td>
+                    <td>blur(10px)</td>
+                    <td>60%</td>
+                    <td>按钮等前景元素</td>
                 </tr>
             </tbody>
         </table>
-
-        <h4>使用说明</h4>
-        <pre class="language-html"><code class="language-html">&lt;!-- 登录框容器 --&gt;
-&lt;div class="container-fixed-sm"&gt;
-    &lt;form&gt;...&lt;/form&gt;
-&lt;/div&gt;
-
-&lt;!-- 文章详情容器 --&gt;
-&lt;div class="container-fixed-md"&gt;
-    &lt;article&gt;...&lt;/article&gt;
-&lt;/div&gt;</code></pre>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
-    </div>
-
-    <div class="CUI-box">
-        <h3>3. 网格容器</h3>
-        <p>网格容器提供多列布局方案。</p>
-
-        <h4>3.1 等分列网格</h4>
-        <div class="container-grid-2" style="margin-bottom: 16px;">
-            <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md);">列 1</div>
-            <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md);">列 2</div>
-        </div>
-
-        <div class="container-grid-3" style="margin-bottom: 16px;">
-            <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md);">列 1</div>
-            <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md);">列 2</div>
-            <div style="background: var(--gray-100); padding: 16px; border-radius: var(--radius-md);">列 3</div>
-        </div>
-
-        <div class="container-grid-4" style="margin-bottom: 16px;">
-            <div style="background: var(--gray-100); padding: 12px; border-radius: var(--radius-md); font-size: 12px;">列 1</div>
-            <div style="background: var(--gray-100); padding: 12px; border-radius: var(--radius-md); font-size: 12px;">列 2</div>
-            <div style="background: var(--gray-100); padding: 12px; border-radius: var(--radius-md); font-size: 12px;">列 3</div>
-            <div style="background: var(--gray-100); padding: 12px; border-radius: var(--radius-md); font-size: 12px;">列 4</div>
-        </div>
-
-        <h4>参数说明</h4>
-        <table class="CUI-table">
-            <thead>
-                <tr>
-                    <th>类名</th>
-                    <th>列数</th>
-                    <th>间距</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>.container-grid-2</code></td>
-                    <td>2列</td>
-                    <td>24px</td>
-                </tr>
-                <tr>
-                    <td><code>.container-grid-3</code></td>
-                    <td>3列</td>
-                    <td>24px</td>
-                </tr>
-                <tr>
-                    <td><code>.container-grid-4</code></td>
-                    <td>4列</td>
-                    <td>24px</td>
-                </tr>
-                <tr>
-                    <td><code>.container-grid-12</code></td>
-                    <td>12列</td>
-                    <td>24px</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h4>使用说明</h4>
-        <pre class="language-html"><code class="language-html">&lt;!-- 两列布局 --&gt;
-&lt;div class="container-grid-2"&gt;
-    &lt;div&gt;左侧内容&lt;/div&gt;
-    &lt;div&gt;右侧内容&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- 三列布局 --&gt;
-&lt;div class="container-grid-3"&gt;
-    &lt;div&gt;内容 1&lt;/div&gt;
-    &lt;div&gt;内容 2&lt;/div&gt;
-    &lt;div&gt;内容 3&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
-    </div>
-
-    <div class="CUI-box">
-        <h3>4. 透明背景容器</h3>
-        <p>透明背景容器用于特殊场景，如深色背景上的内容展示。</p>
-
-        <div style="background: linear-gradient(135deg, var(--primary-color), var(--info-color)); padding: 24px; border-radius: var(--radius-md); margin-bottom: 16px;">
-            <div class="transparent-bg-container" style="padding: 16px; border-radius: var(--radius-md);">
-                <strong style="color: white;">透明背景容器</strong>
-                <p style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 8px;">背景色: rgba(255, 255, 255, 0.1)</p>
-            </div>
-        </div>
-
-        <h4>参数说明</h4>
-        <table class="CUI-table">
-            <thead>
-                <tr>
-                    <th>类名</th>
-                    <th>背景色</th>
-                    <th>描述</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>.transparent-bg-container</code></td>
-                    <td>rgba(255,255,255,0.1)</td>
-                    <td>透明背景容器，毛玻璃效果</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h4>使用说明</h4>
-        <pre class="language-html"><code class="language-html">&lt;div style="background: linear-gradient(...);"&gt;
-    &lt;div class="transparent-bg-container"&gt;
-        &lt;!-- 内容 --&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
-    </div>
-
-    <div class="CUI-box">
-        <h3>5. 响应式行为</h3>
-        <p>所有容器都支持响应式设计。</p>
-
-        <table class="CUI-table">
-            <thead>
-                <tr>
-                    <th>容器类型</th>
-                    <th>桌面端</th>
-                    <th>平板端(&lt;1024px)</th>
-                    <th>移动端(&lt;768px)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>.container</td>
-                    <td>1200px</td>
-                    <td>100% - 48px</td>
-                    <td>100% - 32px</td>
-                </tr>
-                <tr>
-                    <td>.container-grid-4</td>
-                    <td>4列</td>
-                    <td>2列</td>
-                    <td>1列</td>
-                </tr>
-                <tr>
-                    <td>.container-grid-3</td>
-                    <td>3列</td>
-                    <td>2列</td>
-                    <td>1列</td>
-                </tr>
-                <tr>
-                    <td>.container-grid-2</td>
-                    <td>2列</td>
-                    <td>2列</td>
-                    <td>1列</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="message message-info">
-            <div>提示：网格容器在移动端会自动调整为单列布局，确保内容可读性。</div>
-        </div>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否，纯 CSS 媒体查询实现。</p>
-    </div>
-
-    <div class="CUI-box">
-        <h3>6. 容器嵌套</h3>
-        <p>容器可以嵌套使用，实现复杂的布局结构。</p>
-
-        <div class="container" style="background: var(--gray-100); padding: 24px; border-radius: var(--radius-md); margin-bottom: 16px;">
-            <p style="margin-bottom: 16px;"><strong>外层 .container</strong></p>
-            <div class="container-grid-2">
-                <div style="background: white; padding: 16px; border-radius: var(--radius-sm);">
-                    <p>内层网格列 1</p>
-                </div>
-                <div style="background: white; padding: 16px; border-radius: var(--radius-sm);">
-                    <p>内层网格列 2</p>
-                </div>
-            </div>
-        </div>
-
-        <h4>使用说明</h4>
-        <pre class="language-html"><code class="language-html">&lt;div class="container"&gt;
-    &lt;div class="container-grid-2"&gt;
-        &lt;div&gt;内容 1&lt;/div&gt;
-        &lt;div&gt;内容 2&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-        <p><strong>是否涉及 JS 动态渲染：</strong>否。</p>
     </div>
 </section>

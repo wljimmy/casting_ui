@@ -1,68 +1,67 @@
-<!-- 初始化指南 -->
 <section class="CUI-section">
     <h2>初始化指南</h2>
-    <p>欢迎使用 Casting UI 框架！本指南将帮助您快速开始使用我们的极简UI组件库。</p>
-    
-    <!-- 第1节：基础引用 -->
-    <div class="CUI-box">
-        <h3>1. 基础引用</h3>
-        <p>要使用 Casting UI 框架，您需要在 HTML 页面中引入以下文件。我们提供了两种引用方式：</p>
-        
-        <div class="message message-info">
-            <div>提示：生产环境推荐使用合并后的文件，可以减少HTTP请求，提高加载速度。</div>
-        </div>
+    <p>欢迎使用 Casting UI 框架！这是一个极简UI组件库，让用户专注内容，做到除了业务内容，其他内容都由框架自动处理。</p>
 
+    <h3>设计理念</h3>
+    <div class="CUI-box">
+        <ul>
+            <li>用户向使用 md 一样使用 Casting 框架，无需学习新的语法或工具</li>
+            <li>仅用 HTML 基础标签划定容器、搭建原生层级</li>
+            <li>扩展配置仅用 data-* 属性</li>
+            <li>所有复杂样式、组件DOM结构、事件监听、交互逻辑，全部收敛至框架 JS 与 CSS</li>
+            <li>用户 HTML 保持极简</li>
+        </ul>
+    </div>
+
+    <h3>基础引用</h3>
+    <div class="CUI-box">
         <h4>方式一：使用合并文件（推荐）</h4>
-        <pre class="language-html"><code class="language-html">&lt;!-- 引入 CSS 文件 --&gt;
+        <pre><code>&lt;!-- 引入 CSS 文件 --&gt;
 &lt;link rel="stylesheet" href="dist/v0.3.0/Casting.css"&gt;
 
 &lt;!-- 引入 JavaScript 文件 --&gt;
 &lt;script src="dist/v0.3.0/Casting.js"&gt;&lt;/script&gt;</code></pre>
-        
+
         <h4>方式二：使用模块化文件</h4>
-        <pre class="language-html"><code class="language-html">&lt;!-- 引入 CSS 文件 --&gt;
+        <pre><code>&lt;!-- 引入 CSS 文件 --&gt;
 &lt;link rel="stylesheet" href="src/modules/css/core.css"&gt;
 &lt;link rel="stylesheet" href="src/modules/css/container.css"&gt;
 &lt;link rel="stylesheet" href="src/modules/css/layout.css"&gt;
 &lt;link rel="stylesheet" href="src/modules/css/components.css"&gt;
 
 &lt;!-- 引入 JavaScript 文件 --&gt;
-&lt;script src="src/modules/js/core.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/modal.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/message.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/image-zoom.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/theme-manager.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/color-picker.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/ui.js"&gt;&lt;/script&gt;
-&lt;script src="src/modules/js/md.js"&gt;&lt;/script&gt;</code></pre>
+&lt;script type="module" src="src/modules/js/index.js"&gt;&lt;/script&gt;</code></pre>
     </div>
 
-    <!-- 第2节：框架初始化 -->
+    <h3>基本使用</h3>
     <div class="CUI-box">
-        <h3>2. 框架初始化</h3>
-        <p>在引入框架文件后，您可以通过以下方式初始化框架：</p>
-        
-        <pre class="language-javascript"><code class="language-javascript">// 初始化 UI 框架
-const ui = new UI();
+        <h4>1. 定义基础容器</h4>
+        <pre><code>&lt;menu&gt;
+    &lt;ul&gt;
+        &lt;li&gt;菜单项 1&lt;/li&gt;
+        &lt;li&gt;菜单项 2&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/menu&gt;</code></pre>
 
-// 初始化主题管理器
-const themeManager = new ThemeManager();
-await themeManager.init();
+        <h4>2. 使用容器组件</h4>
+        <pre><code>&lt;div class="CUI-box"&gt;
+    &lt;!-- 内容 --&gt;
+&lt;/div&gt;
 
-// 应用默认主题
-themeManager.applyTheme(themeManager.getThemes()[0]);</code></pre>
-        
-        <div class="message message-success">
-            <div>成功：如果您使用的是合并后的 Casting.js 文件，所有模块会自动初始化，无需手动调用。</div>
-        </div>
+&lt;div class="CUI-card"&gt;
+    &lt;!-- 内容 --&gt;
+&lt;/div&gt;</code></pre>
+
+        <h4>3. Grid 布局</h4>
+        <pre><code>&lt;div class="CUI-grid CUI-grid-2c"&gt;
+    &lt;div&gt;第一列&lt;/div&gt;
+    &lt;div&gt;第二列&lt;/div&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
-    <!-- 第3节：框架架构 -->
+    <h3>框架架构</h3>
     <div class="CUI-box">
-        <h3>3. 框架架构</h3>
-        <p>Casting UI 框架采用模块化设计，主要包含以下模块：</p>
-        
-        <table class="table">
+        <table class="CUI-table">
             <thead>
                 <tr>
                     <th>模块</th>
@@ -72,159 +71,54 @@ themeManager.applyTheme(themeManager.getThemes()[0]);</code></pre>
             </thead>
             <tbody>
                 <tr>
-                    <td><code>core</code></td>
+                    <td>core</td>
                     <td>core.js</td>
                     <td>核心模块，提供调试、遮罩、弹窗基类</td>
                 </tr>
                 <tr>
-                    <td><code>modal</code></td>
+                    <td>modal</td>
                     <td>modal.js</td>
                     <td>弹窗模块，提供模态框功能</td>
                 </tr>
                 <tr>
-                    <td><code>message</code></td>
+                    <td>message</td>
                     <td>message.js</td>
-                    <td>消息提示模块，提供Toast、Loading等功能</td>
+                    <td>消息提示模块</td>
                 </tr>
                 <tr>
-                    <td><code>image-zoom</code></td>
-                    <td>image-zoom.js</td>
-                    <td>图片放大模块，支持点击图片放大查看</td>
+                    <td>menu</td>
+                    <td>menu.js</td>
+                    <td>菜单模块，支持多级嵌套</td>
                 </tr>
                 <tr>
-                    <td><code>theme-manager</code></td>
+                    <td>theme-manager</td>
                     <td>theme-manager.js</td>
-                    <td>主题管理模块，支持主题切换和自定义主题</td>
+                    <td>主题管理模块</td>
                 </tr>
                 <tr>
-                    <td><code>color-picker</code></td>
+                    <td>image-zoom</td>
+                    <td>image-zoom.js</td>
+                    <td>图片放大模块</td>
+                </tr>
+                <tr>
+                    <td>color-picker</td>
                     <td>color-picker.js</td>
-                    <td>颜色选择器模块，支持多种颜色格式</td>
-                </tr>
-                <tr>
-                    <td><code>ui</code></td>
-                    <td>ui.js</td>
-                    <td>UI框架模块，提供UI组件管理</td>
-                </tr>
-                <tr>
-                    <td><code>md</code></td>
-                    <td>md.js</td>
-                    <td>Markdown编辑器模块</td>
+                    <td>颜色选择器模块</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- 第4节：基本使用流程 -->
+    <h3>版本信息</h3>
     <div class="CUI-box">
-        <h3>4. 基本使用流程</h3>
         <div class="CUI-grid CUI-grid-2c">
             <div>
-                <h4>步骤 1</h4>
-                <p>在HTML页面中引入CSS和JavaScript文件</p>
-            </div>
-            <div>
-                <h4>步骤 2</h4>
-                <p>创建UI实例和主题管理器实例</p>
-            </div>
-            <div>
-                <h4>步骤 3</h4>
-                <p>选择并应用适合您项目的主题</p>
-            </div>
-            <div>
-                <h4>步骤 4</h4>
-                <p>根据需要使用框架提供的各种组件</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 第5节：示例代码 -->
-    <div class="CUI-box">
-        <h3>5. 示例代码</h3>
-        <p>以下是一个完整的示例，展示如何使用 Casting UI 框架：</p>
-        
-        <pre class="language-html"><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Casting UI 示例&lt;/title&gt;
-    &lt;link rel="stylesheet" href="dist/v0.3.0/Casting.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="CUI-wrap"&gt;
-        &lt;h1&gt;Welcome to Casting UI&lt;/h1&gt;
-        
-        &lt;!-- 按钮示例 --&gt;
-        &lt;button class="btn btn-primary" onclick="showModalExample()"&gt;显示弹窗&lt;/button&gt;
-        &lt;button class="btn btn-secondary" onclick="showToastExample()"&gt;显示Toast&lt;/button&gt;
-        
-        &lt;div class="CUI-m-md"&gt;&lt;/div&gt;
-        
-        &lt;!-- 图片示例 --&gt;
-        &lt;img src="https://picsum.photos/400/300" class="image" onclick="zoomImage(this.src)"&gt;
-    &lt;/div&gt;
-    
-    &lt;script src="dist/v0.3.0/Casting.js"&gt;&lt;/script&gt;
-    &lt;script&gt;
-        // 初始化框架
-        document.addEventListener('DOMContentLoaded', async function() {
-            // 初始化主题管理器
-            const themeManager = new ThemeManager();
-            await themeManager.init();
-            
-            // 应用默认主题
-            themeManager.applyTheme(themeManager.getThemes()[0]);
-        });
-        
-        // 显示弹窗示例
-        function showModalExample() {
-            showModal({
-                title: '示例弹窗',
-                content: '这是一个使用 Casting UI 框架创建的弹窗',
-                buttons: [
-                    {
-                        text: '确定',
-                        style: 'primary',
-                        action: () => {
-                            showToast('您点击了确定', 'success');
-                        }
-                    },
-                    {
-                        text: '取消',
-                        action: () => {
-                            showToast('您点击了取消', 'info');
-                        }
-                    }
-                ]
-            });
-        }
-        
-        // 显示Toast示例
-        function showToastExample() {
-            showToast('这是一个 Toast 消息', 'info');
-        }
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-    </div>
-
-    <!-- 第6节：版本信息 -->
-    <div class="CUI-box">
-        <h3>6. 版本信息</h3>
-        <div class="CUI-grid CUI-grid-2c">
-            <div>
-                <p><strong>当前版本：</strong> <span class="badge primary">v0.3.0</span></p>
-                <p><strong>发布日期：</strong> 2026-04-03</p>
-            </div>
-            <div>
+                <p><strong>当前版本：</strong> v0.5.3</p>
                 <p><strong>技术栈：</strong> 原生HTML5、CSS3、JavaScript (ES6+)</p>
+            </div>
+            <div>
                 <p><strong>浏览器兼容性：</strong> Chrome 80+, Firefox 75+, Safari 13+, Edge 80+</p>
             </div>
-        </div>
-        
-        <div class="message message-warning">
-            <div>注意：本框架使用原生ES6+语法，请确保您的目标浏览器支持这些特性。如需支持旧版浏览器，请使用Babel进行转译。</div>
         </div>
     </div>
 </section>
