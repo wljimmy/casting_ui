@@ -1,14 +1,14 @@
-/* 
+/*
  * Casting UI Framework
  * Version: 0.3.0
  * Module: status.css
- * Description: 状态栏样式
+ * Description: 状态栏样式，纯CSS属性选择器驱动
  * Copyright (c) 2026 Bingo工作室
  */
 
 /* ========== 状态栏样式 ========== */
 
-.status-bar {
+.CUI-status-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,65 +17,127 @@
     border-radius: var(--radius-md);
     font-size: 12px;
     gap: var(--size-md);
+    margin: 8px 0;
+    font-weight: normal;
+    color: var(--gray-700);
 }
 
-.status-bar-item {
+/* 状态项 - 通用样式 */
+.CUI-status-bar > [data-text],
+.CUI-status-bar > [data-type] {
     display: flex;
     align-items: center;
     gap: var(--size-xs);
+    position: relative;
+    font-weight: normal;
+    --status-color: var(--info-color);
 }
 
-.status-indicator {
+/* 状态圆点 - 伪元素基础样式 */
+.CUI-status-bar > [data-text]::before,
+.CUI-status-bar > [data-type]::before {
+    content: '';
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    background-color: var(--status-color);
+    flex-shrink: 0;
 }
 
-.status-indicator.success {
-    background-color: var(--success-color);
+/* 状态文本 - 伪元素 */
+.CUI-status-bar > [data-text]::after {
+    content: attr(data-text);
+    margin-left: 4px;
 }
 
-.status-indicator.warning {
-    background-color: var(--warning-color);
+/* 状态类型颜色 */
+.CUI-status-bar > [data-type="success"] {
+    --status-color: var(--success-color);
 }
 
-.status-indicator.error {
-    background-color: var(--error-color);
+.CUI-status-bar > [data-type="warning"] {
+    --status-color: var(--warning-color);
 }
 
-.status-indicator.info {
-    background-color: var(--info-color);
+.CUI-status-bar > [data-type="error"] {
+    --status-color: var(--error-color);
 }
 
-.status-indicator.default {
-    background-color: var(--gray-400);
+.CUI-status-bar > [data-type="info"] {
+    --status-color: var(--info-color);
+}
+
+/* 闪动效果 - 从有到无 */
+.CUI-status-bar > [data-flash="true"]::before {
+    animation: flash 0.5s ease-in-out infinite;
+}
+
+@keyframes flash {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 深色状态栏文字颜色 */
+.CUI-status-dark > [data-text]::after,
+.CUI-status-dark > [data-type]::after {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 主色状态栏文字颜色 */
+.CUI-status-primary > [data-text]::after,
+.CUI-status-primary > [data-type]::after {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* 状态栏尺寸 */
-.status-bar-sm {
+.CUI-status-sm {
     padding: var(--size-xs) var(--size-sm);
     font-size: 11px;
 }
 
-.status-bar-lg {
+.CUI-status-lg {
     padding: var(--size-sm) var(--size-lg);
     font-size: 14px;
 }
 
 /* 状态栏类型 */
-.status-bar-glass {
+.CUI-status-glass {
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.status-bar-dark {
+.CUI-status-dark {
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
 }
 
-.status-bar-primary {
+.CUI-status-primary {
     background-color: var(--primary-color);
     color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .CUI-status-bar {
+        flex-wrap: wrap;
+        gap: var(--size-sm);
+    }
+
+    .CUI-status-bar > [data-text],
+    .CUI-status-bar > [data-type] {
+        margin-right: var(--size-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .CUI-status-bar {
+        padding: var(--size-xs);
+        font-size: 11px;
+    }
 }

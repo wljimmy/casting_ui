@@ -23,8 +23,7 @@ import('./dom-observer.js').then(() => {
         import('./theme-manager.js'),
         import('./menu.js'),
         import('./ui.js'),
-        import('./progress.js'),
-        import('./status.js')
+        import('./progress.js')
     ]);
 }).then(() => {
     console.log('所有模块加载完成');
