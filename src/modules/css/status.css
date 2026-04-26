@@ -1,6 +1,6 @@
 /*
  * Casting UI Framework
- * Version: 0.3.0
+ * Version: 0.4.0
  * Module: status.css
  * Description: 状态栏样式，纯CSS属性选择器驱动，支持SVG图标和颜文字符号
  * Copyright (c) 2026 Bingo工作室
@@ -47,6 +47,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
+    background-color: transparent;
     -webkit-mask-image: var(--svg-mask);
     mask-image: var(--svg-mask);
     -webkit-mask-size: contain;
@@ -62,7 +63,6 @@
     font-size: 14px;
     background-color: transparent;
     color: var(--status-color);
-    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="success"] {
@@ -145,13 +145,13 @@
     --status-color: #17a2b8;
 }
 
-.CUI-status-bar > [data-type="progress"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="progress"][data-symbol="emoji"]::before {
     content: '⏳';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-type="progress"]:not([data-symbol="emoji"])::after {
+.CUI-status-bar > [data-type="progress"]:not([data-symbol="emoji"])::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -164,6 +164,7 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    border-radius: 50%;
     animation: rotate 1s linear infinite;
 }
 
@@ -176,13 +177,13 @@
     --status-color: #ffc107;
 }
 
-.CUI-status-bar > [data-type="memory"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="memory"][data-symbol="emoji"]::before {
     content: '📊';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-type="memory"]:not([data-symbol="emoji"])::after {
+.CUI-status-bar > [data-type="memory"]:not([data-symbol="emoji"])::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -195,19 +196,20 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="disk"] {
     --status-color: #28a745;
 }
 
-.CUI-status-bar > [data-type="disk"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="disk"][data-symbol="emoji"]::before {
     content: '💾';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-type="disk"]:not([data-symbol="emoji"])::after {
+.CUI-status-bar > [data-type="disk"]:not([data-symbol="emoji"])::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -220,19 +222,20 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="queue"] {
     --status-color: #6f42c1;
 }
 
-.CUI-status-bar > [data-type="queue"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="queue"][data-symbol="emoji"]::before {
     content: '📋';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-type="queue"]:not([data-symbol="emoji"])::after {
+.CUI-status-bar > [data-type="queue"]:not([data-symbol="emoji"])::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -245,39 +248,56 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="offline"] {
     --status-color: #dc3545;
 }
 
-.CUI-status-bar > [data-type="offline"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="offline"][data-symbol="emoji"]::before {
     content: '🔴';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
+}
+
+.CUI-status-bar > [data-type="offline"]:not([data-symbol="emoji"])::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="online"] {
     --status-color: #28a745;
 }
 
-.CUI-status-bar > [data-type="online"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="online"][data-symbol="emoji"]::before {
     content: '🟢';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
+}
+
+.CUI-status-bar > [data-type="online"]:not([data-symbol="emoji"])::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="network"] {
     --status-color: #6f42c1;
 }
 
-.CUI-status-bar > [data-type="network"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="network"][data-symbol="emoji"]::before {
     content: '🌐';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-type="network"]:not([data-symbol="emoji"])::after {
+.CUI-status-bar > [data-type="network"]:not([data-symbol="emoji"])::before {
     content: '';
     width: 16px;
     height: 16px;
@@ -290,30 +310,62 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="language"] {
     --status-color: #6f42c1;
 }
 
-.CUI-status-bar > [data-type="language"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="language"][data-symbol="emoji"]::before {
     content: '🌐';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
+}
+
+.CUI-status-bar > [data-type="language"]:not([data-symbol="emoji"])::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/globe.svg');
+    mask-image: url('/icons/outline/globe.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    border-radius: 50%;
 }
 
 .CUI-status-bar > [data-type="theme"] {
     --status-color: #28a745;
 }
 
-.CUI-status-bar > [data-type="theme"][data-symbol="emoji"]::after {
+.CUI-status-bar > [data-type="theme"][data-symbol="emoji"]::before {
     content: '🎨';
     font-size: 14px;
-    margin-left: -4px;
+    color: var(--status-color);
 }
 
-.CUI-status-bar > [data-flash="true"]::before,
-.CUI-status-bar > [data-flash="true"]::after {
+.CUI-status-bar > [data-type="theme"]:not([data-symbol="emoji"])::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/palette.svg');
+    mask-image: url('/icons/outline/palette.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    border-radius: 50%;
+}
+
+.CUI-status-bar > [data-flash="true"]::before {
     animation: flash 0.5s ease-in-out infinite;
 }
 
