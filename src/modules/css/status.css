@@ -2,7 +2,7 @@
  * Casting UI Framework
  * Version: 0.3.0
  * Module: status.css
- * Description: 状态栏样式，纯CSS属性选择器驱动
+ * Description: 状态栏样式，纯CSS属性选择器驱动，支持SVG图标和颜文字符号
  * Copyright (c) 2026 Bingo工作室
  */
 
@@ -22,7 +22,10 @@
     color: var(--gray-700);
 }
 
-/* 状态项 - 通用样式 */
+.CUI-status-bar > [title]:hover {
+    cursor: pointer;
+}
+
 .CUI-status-bar > [data-type] {
     display: flex;
     align-items: center;
@@ -31,7 +34,6 @@
     --status-color: var(--info-color);
 }
 
-/* 状态圆点 - 伪元素 */
 .CUI-status-bar > [data-type]::before {
     content: '';
     width: 8px;
@@ -41,7 +43,28 @@
     flex-shrink: 0;
 }
 
-/* 状态类型颜色 */
+.CUI-status-bar > [data-type]:not([data-symbol="emoji"])::before {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    -webkit-mask-image: var(--svg-mask);
+    mask-image: var(--svg-mask);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    border-radius: 0;
+}
+
+.CUI-status-bar > [data-type][data-symbol="emoji"]::before {
+    font-size: 14px;
+    background-color: transparent;
+    color: var(--status-color);
+    border-radius: 50%;
+}
+
 .CUI-status-bar > [data-type="success"] {
     --status-color: var(--success-color);
 }
@@ -58,8 +81,239 @@
     --status-color: var(--info-color);
 }
 
-/* 闪动效果 - 从有到无 */
-.CUI-status-bar > [data-flash="true"]::before {
+.CUI-status-bar > [data-type="wifi"] {
+    --status-color: #17a2b8;
+    --svg-mask: url('/icons/outline/wifi-2.svg');
+}
+
+.CUI-status-bar > [data-type="upload"] {
+    --status-color: #20c997;
+    --svg-mask: url('/icons/outline/upload.svg');
+}
+
+.CUI-status-bar > [data-type="download"] {
+    --status-color: #17a2b8;
+    --svg-mask: url('/icons/outline/cloud-download.svg');
+}
+
+.CUI-status-bar > [data-type="cpu"] {
+    --status-color: #fd7e14;
+    --svg-mask: url('/icons/outline/cpu.svg');
+}
+
+.CUI-status-bar > [data-type="battery"] {
+    --status-color: #17a2b8;
+    --svg-mask: url('/icons/outline/battery-charging-2.svg');
+}
+
+.CUI-status-bar > [data-type="notification"] {
+    --status-color: #ffc107;
+    --svg-mask: url('/icons/outline/bell-ringing-2.svg');
+}
+
+.CUI-status-bar > [data-type="time"] {
+    --status-color: #6c757d;
+    --svg-mask: url('/icons/outline/clock-12.svg');
+}
+
+.CUI-status-bar > [data-type="date"] {
+    --status-color: #6c757d;
+    --svg-mask: url('/icons/outline/calendar.svg');
+}
+
+.CUI-status-bar > [data-type="weather"] {
+    --status-color: #17a2b8;
+    --svg-mask: url('/icons/outline/cloud.svg');
+}
+
+.CUI-status-bar > [data-type="location"] {
+    --status-color: #fd7e14;
+    --svg-mask: url('/icons/outline/map-pin-check.svg');
+}
+
+.CUI-status-bar > [data-type="system"] {
+    --status-color: #6c757d;
+    --svg-mask: url('/icons/outline/settings-2.svg');
+}
+
+.CUI-status-bar > [data-type="maintenance"] {
+    --status-color: #fd7e14;
+    --svg-mask: url('/icons/outline/tool.svg');
+}
+
+.CUI-status-bar > [data-type="progress"] {
+    --status-color: #17a2b8;
+}
+
+.CUI-status-bar > [data-type="progress"][data-symbol="emoji"]::after {
+    content: '⏳';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="progress"]:not([data-symbol="emoji"])::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/loader-quarter.svg');
+    mask-image: url('/icons/outline/loader-quarter.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.CUI-status-bar > [data-type="memory"] {
+    --status-color: #ffc107;
+}
+
+.CUI-status-bar > [data-type="memory"][data-symbol="emoji"]::after {
+    content: '📊';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="memory"]:not([data-symbol="emoji"])::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/chart-line.svg');
+    mask-image: url('/icons/outline/chart-line.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.CUI-status-bar > [data-type="disk"] {
+    --status-color: #28a745;
+}
+
+.CUI-status-bar > [data-type="disk"][data-symbol="emoji"]::after {
+    content: '💾';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="disk"]:not([data-symbol="emoji"])::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/database.svg');
+    mask-image: url('/icons/outline/database.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.CUI-status-bar > [data-type="queue"] {
+    --status-color: #6f42c1;
+}
+
+.CUI-status-bar > [data-type="queue"][data-symbol="emoji"]::after {
+    content: '📋';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="queue"]:not([data-symbol="emoji"])::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/list.svg');
+    mask-image: url('/icons/outline/list.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.CUI-status-bar > [data-type="offline"] {
+    --status-color: #dc3545;
+}
+
+.CUI-status-bar > [data-type="offline"][data-symbol="emoji"]::after {
+    content: '🔴';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="online"] {
+    --status-color: #28a745;
+}
+
+.CUI-status-bar > [data-type="online"][data-symbol="emoji"]::after {
+    content: '🟢';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="network"] {
+    --status-color: #6f42c1;
+}
+
+.CUI-status-bar > [data-type="network"][data-symbol="emoji"]::after {
+    content: '🌐';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="network"]:not([data-symbol="emoji"])::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: var(--status-color);
+    -webkit-mask-image: url('/icons/outline/globe.svg');
+    mask-image: url('/icons/outline/globe.svg');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.CUI-status-bar > [data-type="language"] {
+    --status-color: #6f42c1;
+}
+
+.CUI-status-bar > [data-type="language"][data-symbol="emoji"]::after {
+    content: '🌐';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-type="theme"] {
+    --status-color: #28a745;
+}
+
+.CUI-status-bar > [data-type="theme"][data-symbol="emoji"]::after {
+    content: '🎨';
+    font-size: 14px;
+    margin-left: -4px;
+}
+
+.CUI-status-bar > [data-flash="true"]::before,
+.CUI-status-bar > [data-flash="true"]::after {
     animation: flash 0.5s ease-in-out infinite;
 }
 
@@ -72,19 +326,16 @@
     }
 }
 
-/* 深色状态栏文字颜色 */
 .CUI-status-dark,
 .CUI-status-dark + * {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* 主色状态栏文字颜色 */
 .CUI-status-primary,
 .CUI-status-primary + * {
     color: rgba(255, 255, 255, 0.9);
 }
 
-/* 状态栏尺寸 */
 .CUI-status-sm {
     padding: var(--size-xs) var(--size-sm);
     font-size: 11px;
@@ -95,7 +346,6 @@
     font-size: 14px;
 }
 
-/* 状态栏类型 */
 .CUI-status-glass {
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
@@ -113,7 +363,6 @@
     color: white;
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
     .CUI-status-bar {
         flex-wrap: wrap;

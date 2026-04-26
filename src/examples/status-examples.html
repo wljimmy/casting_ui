@@ -60,34 +60,106 @@
         </div>
 
         <div class="CUI-section">
-            <h2>主色状态栏</h2>
+            <h2>系统状态图标</h2>
             <div class="CUI-card">
-                <div class="CUI-status-bar CUI-status-primary">
-                    <div data-type="info">同步中</div>
-                    <div data-type="warning">50%</div>
+                <div class="CUI-status-bar">
+                    <div data-type="system">系统状态</div>
+                    <div data-type="maintenance">维护模式</div>
+                    <div data-type="online">在线</div>
+                    <div data-type="offline">离线</div>
                 </div>
             </div>
-            <pre><code class="language-html">&lt;div class="CUI-status-bar CUI-status-primary"&gt;
-    &lt;div data-type="info"&gt;同步中&lt;/div&gt;
-    &lt;div data-type="warning"&gt;50%&lt;/div&gt;
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="system"&gt;系统状态&lt;/div&gt;
+    &lt;div data-type="maintenance"&gt;维护模式&lt;/div&gt;
+    &lt;div data-type="online"&gt;在线&lt;/div&gt;
+    &lt;div data-type="offline"&gt;离线&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
 
         <div class="CUI-section">
-            <h2>状态项类型</h2>
+            <h2>网络状态图标</h2>
             <div class="CUI-card">
                 <div class="CUI-status-bar">
-                    <div data-type="info">信息</div>
-                    <div data-type="success">成功</div>
-                    <div data-type="warning">警告</div>
+                    <div data-type="wifi">Wi-Fi: 满格</div>
+                    <div data-type="network">网络已连接</div>
+                    <div data-type="upload">上传中</div>
+                    <div data-type="download">下载中</div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="wifi"&gt;Wi-Fi: 满格&lt;/div&gt;
+    &lt;div data-type="network"&gt;网络已连接&lt;/div&gt;
+    &lt;div data-type="upload"&gt;上传中&lt;/div&gt;
+    &lt;div data-type="download"&gt;下载中&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="CUI-section">
+            <h2>硬件状态图标</h2>
+            <div class="CUI-card">
+                <div class="CUI-status-bar">
+                    <div data-type="cpu">CPU: 25%</div>
+                    <div data-type="memory">内存: 1.2GB</div>
+                    <div data-type="disk">磁盘: 256GB</div>
+                    <div data-type="battery">电池: 80%</div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="cpu"&gt;CPU: 25%&lt;/div&gt;
+    &lt;div data-type="memory"&gt;内存: 1.2GB&lt;/div&gt;
+    &lt;div data-type="disk"&gt;磁盘: 256GB&lt;/div&gt;
+    &lt;div data-type="battery"&gt;电池: 80%&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="CUI-section">
+            <h2>应用状态图标</h2>
+            <div class="CUI-card">
+                <div class="CUI-status-bar">
+                    <div data-type="progress">处理中</div>
+                    <div data-type="queue">队列: 5</div>
+                    <div data-type="notification">通知: 3</div>
                     <div data-type="error">错误</div>
                 </div>
             </div>
             <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
-    &lt;div data-type="info"&gt;信息&lt;/div&gt;
-    &lt;div data-type="success"&gt;成功&lt;/div&gt;
-    &lt;div data-type="warning"&gt;警告&lt;/div&gt;
+    &lt;div data-type="progress"&gt;处理中&lt;/div&gt;
+    &lt;div data-type="queue"&gt;队列: 5&lt;/div&gt;
+    &lt;div data-type="notification"&gt;通知: 3&lt;/div&gt;
     &lt;div data-type="error"&gt;错误&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="CUI-section">
+            <h2>时间日期图标</h2>
+            <div class="CUI-card">
+                <div class="CUI-status-bar">
+                    <div data-type="time">14:30</div>
+                    <div data-type="date">2026-04-26</div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="time"&gt;14:30&lt;/div&gt;
+    &lt;div data-type="date"&gt;2026-04-26&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="CUI-section">
+            <h2>其他状态图标</h2>
+            <div class="CUI-card">
+                <div class="CUI-status-bar">
+                    <div data-type="weather">多云 24°C</div>
+                    <div data-type="location">北京</div>
+                    <div data-type="language">中文</div>
+                    <div data-type="theme">深色模式</div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="weather"&gt;多云 24°C&lt;/div&gt;
+    &lt;div data-type="location"&gt;北京&lt;/div&gt;
+    &lt;div data-type="language"&gt;中文&lt;/div&gt;
+    &lt;div data-type="theme"&gt;深色模式&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
 
@@ -98,12 +170,14 @@
                     <div data-type="info">正常状态</div>
                     <div data-type="warning" data-flash="true">闪动警告</div>
                     <div data-type="error" data-flash="true">闪动错误</div>
+                    <div data-type="download" data-flash="true">下载中</div>
                 </div>
             </div>
             <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
     &lt;div data-type="info"&gt;正常状态&lt;/div&gt;
     &lt;div data-type="warning" data-flash="true"&gt;闪动警告&lt;/div&gt;
     &lt;div data-type="error" data-flash="true"&gt;闪动错误&lt;/div&gt;
+    &lt;div data-type="download" data-flash="true"&gt;下载中&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
 
@@ -127,15 +201,34 @@
             <h2>自定义颜色</h2>
             <div class="CUI-card">
                 <div class="CUI-status-bar">
-                    <div data-type="info" style="--status-color: #ff6b6b">红色告警</div>
-                    <div data-type="info" style="--status-color: #4ecdc4">青色通知</div>
-                    <div data-type="info" style="--status-color: #45b7d1">蓝色信息</div>
+                    <div data-type="wifi" style="--status-color: #ff6b6b">红色Wi-Fi</div>
+                    <div data-type="cpu" style="--status-color: #4ecdc4">青色CPU</div>
+                    <div data-type="memory" style="--status-color: #45b7d1">蓝色内存</div>
                 </div>
             </div>
             <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
-    &lt;div data-type="info" style="--status-color: #ff6b6b"&gt;红色告警&lt;/div&gt;
-    &lt;div data-type="info" style="--status-color: #4ecdc4"&gt;青色通知&lt;/div&gt;
-    &lt;div data-type="info" style="--status-color: #45b7d1"&gt;蓝色信息&lt;/div&gt;
+    &lt;div data-type="wifi" style="--status-color: #ff6b6b"&gt;红色Wi-Fi&lt;/div&gt;
+    &lt;div data-type="cpu" style="--status-color: #4ecdc4"&gt;青色CPU&lt;/div&gt;
+    &lt;div data-type="memory" style="--status-color: #45b7d1"&gt;蓝色内存&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="CUI-section">
+            <h2>颜文字符号模式</h2>
+            <p>使用 data-symbol="emoji" 强制使用颜文字符号</p>
+            <div class="CUI-card">
+                <div class="CUI-status-bar">
+                    <div data-type="wifi" data-symbol="emoji">Wi-Fi: 满格</div>
+                    <div data-type="cpu" data-symbol="emoji">CPU: 25%</div>
+                    <div data-type="memory" data-symbol="emoji">内存: 1.2GB</div>
+                    <div data-type="download" data-symbol="emoji">下载中</div>
+                </div>
+            </div>
+            <pre><code class="language-html">&lt;div class="CUI-status-bar"&gt;
+    &lt;div data-type="wifi" data-symbol="emoji"&gt;Wi-Fi: 满格&lt;/div&gt;
+    &lt;div data-type="cpu" data-symbol="emoji"&gt;CPU: 25%&lt;/div&gt;
+    &lt;div data-type="memory" data-symbol="emoji"&gt;内存: 1.2GB&lt;/div&gt;
+    &lt;div data-type="download" data-symbol="emoji"&gt;下载中&lt;/div&gt;
 &lt;/div&gt;</code></pre>
         </div>
 
@@ -172,7 +265,7 @@ function toggleFlash() {
 function addStatusItem() {
     const statusBar = document.getElementById('dynamicStatus');
     const newItem = document.createElement('div');
-    newItem.dataset.type = 'info';
+    newItem.dataset.type = 'wifi';
     newItem.textContent = '新状态';
     statusBar.appendChild(newItem);
 }
@@ -202,7 +295,7 @@ function changeColor() {
         function addStatusItem() {
             const statusBar = document.getElementById('dynamicStatus');
             const newItem = document.createElement('div');
-            newItem.dataset.type = 'info';
+            newItem.dataset.type = 'wifi';
             newItem.textContent = '新状态';
             statusBar.appendChild(newItem);
         }
