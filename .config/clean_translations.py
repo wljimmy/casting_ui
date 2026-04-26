@@ -2,22 +2,61 @@
 import json
 import csv
 
-# 读取原始翻译结果
+# 读取翻译结果
 translations = json.load(open('/Users/wanglin/工作_本地/trae/Casting_UI/.config/translation_progress.json'))
 
 # 清理翻译结果
 clean_translations = {}
+
+# 特殊处理的缩写
+abbreviations = {
+    'nw': '西北',
+    'sw': '西南',
+    'ne': '东北',
+    'se': '东南',
+    'doc': '文档',
+    'h': '小时',
+    'lek': '莱克',
+    'nem': '否定',
+    'crest': ' crest',
+    'cubeplus': '立方体加',
+    'deca': '十',
+    'doublefifty': '双五十',
+    'doubleone': '双一',
+    'duo': '二重奏',
+    'duodec': '十二',
+    'entry': '入口',
+    'fitting': '合适的',
+    'flops': '浮点运算',
+    'fournine': '四九',
+    'fourtwo': '四二',
+    'novendec': '十九',
+    'novendecad': '十九',
+    'evencompass': '偶数指南针'
+}
+
 for tag, cn in translations.items():
+    # 特殊缩写处理
+    if tag in abbreviations:
+        clean_translations[tag] = abbreviations[tag]
     # 移除提示信息
-    if '抱歉' in cn or '请提供' in cn:
+    elif '可以翻译' in cn or '具体取决于' in cn or '如果你能提供' in cn:
         # 特殊符号直接使用原文
-        clean_translations[tag] = tag
-    else:
-        # 阿拉伯数字保持原样
-        if tag.isdigit():
+        if tag.isalnum() and len(tag) <= 3:
+            # 短缩写直接使用原文
             clean_translations[tag] = tag
         else:
-            clean_translations[tag] = cn
+            # 其他情况使用tag作为翻译
+            clean_translations[tag] = tag
+    # 阿拉伯数字保持原样
+    elif tag.isdigit():
+        clean_translations[tag] = tag
+    # 特殊符号保持原样
+    elif len(tag) == 1 and not tag.isalnum():
+        clean_translations[tag] = tag
+    else:
+        # 其他正常翻译保留
+        clean_translations[tag] = cn
 
 # 保存清理后的tag词典
 with open('/Users/wanglin/工作_本地/trae/Casting_UI/public/icons/tag_dictionary.txt', 'w', encoding='utf-8') as f:
@@ -55,3 +94,9 @@ print(f"已清理翻译结果: {len(clean_translations)} 个条目")
 print("示例清理结果:")
 for tag, cn in list(clean_translations.items())[:10]:
     print(f"  {tag} → {cn}")
+
+# 检查NW翻译
+if 'nw' in clean_translations:
+    print(f"\nNW翻译: {clean_translations['nw']}")
+else:
+    print("\nNW翻译: 未找到")

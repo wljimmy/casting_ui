@@ -1,6 +1,6 @@
 !	!
-#	图标标签
-+	加
+#	#
++	+
 0	0
 1	1
 100	100
@@ -66,7 +66,7 @@
 8k	8K
 9	9
 90degree	90度
-?	？
+?	?
 @	@
 HTML	HTML
 MacBook	MacBook
@@ -1374,8 +1374,7 @@ credit-refund	信用退款
 credit-transaction	信用交易
 creepy	令人毛骨悚然的
 crescent	新月
-crest	crest 可以翻译为“ crest ”，但根据具体语境，常见的中文翻译有：  
-- **波峰**（如波浪的
+crest	 crest
 crewmate	船员
 cricket	板球
 crime	犯罪
@@ -1411,8 +1410,7 @@ css3	CSS3
 csv	CSV
 ctemplar	ctemplar
 cube	立方体
-cubeplus	“cubeplus” 可以翻译为：  
-**立方加** 或 **立方增强版**（根据具体语境，如果是产品名称，
+cubeplus	立方体加
 cucumber	黄瓜
 cue	提示
 cuisine	烹饪
@@ -1505,7 +1503,7 @@ debt	债务
 debug	调试
 debugging	调试
 dec	dec
-deca	**deca** 可以翻译为 **十**（在拉丁语或希腊语词根中表示“十”），或者根据具体语境
+deca	十
 decad	堕落
 decade	十年
 decal	贴花
@@ -1773,7 +1771,7 @@ django	Django
 dkk	dkk
 dna	DNA
 doable	可行的
-doc	“doc” 可以翻译为“文档”。
+doc	文档
 dock	**码头**
 docks	码头
 doctor	医生
@@ -1801,9 +1799,9 @@ douban	豆瓣
 double	双倍
 double-arrow	双箭头
 doublefifteenplusone	双十五加一
-doublefifty	“doublefifty” 可以翻译为 **“双五十”** 或 **“双倍五十”**，具体含义需根据上下文
+doublefifty	双五十
 doublefive	双五
-doubleone	“doubleone” 可以翻译为“双一”或“双重一”，具体含义需结合上下文。如果是指品牌、名称或特定
+doubleone	双一
 doubleprime	双素数
 doublesixteen	双十六
 doublesixteenthplusone	双十六分之一加一
@@ -1854,11 +1852,8 @@ dual	双重的
 dubai	迪拜
 dubbing	配音
 due	由于
-duo	“duo” 可以翻译为：
-- 多（表示数量大）
-- 朵（用于花、云等）
-- 夺
-duodec	“duodec” 可以翻译为 **“十二”** 或 **“十二进制”**，具体取决于上下文。如果是指音乐
+duo	二重奏
+duodec	十二
 duodecad	十二人组
 duodecade	十二年
 duodecuple	十二重
@@ -2038,8 +2033,7 @@ entity	实体
 entrance	入口
 entrepreneurship	创业精神
 entries	条目
-entry	“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（
+entry	入口
 entryway	入口通道
 envato	envato
 envelope	信封
@@ -2084,7 +2078,7 @@ europe	欧洲
 evaluate	评估
 evaluation	评估
 even	甚至
-evencompass	“evencompass” 可以翻译为 **“偶数指南针”** 或 **“均衡罗盘”**，具体含义需结合
+evencompass	偶数指南针
 evendouble	偶数双倍
 evening	晚上
 event	事件
@@ -2292,7 +2286,7 @@ fishing	钓鱼
 fist	拳头
 fit	合适
 fitness	健身
-fitting	fitting 可以翻译为“合适的”或“恰当的”。
+fitting	合适的
 five	五
 five-pointed	五角星
 five-sided	五边形的
@@ -2342,7 +2336,7 @@ flipboard	Flipboard 是一个新闻聚合应用，中文通常翻译为“红板
 float	浮动
 floor	地板
 floppy	软盘
-flops	**浮点运算次数**（或译为**每秒浮点运算次数**，具体取决于上下文；若指性能指标，通常译为“浮
+flops	浮点运算
 flow	流动
 flower	花
 fluid	流体
@@ -2428,7 +2422,7 @@ fourfifths	五分之四
 fourfive	四五
 fourfold	四倍
 fourfour	四四
-fournine	“fournine” 可以翻译为“四九”。
+fournine	四九
 fourone	四一
 fourseven	四七
 foursix	四六
@@ -2441,7 +2435,7 @@ fourteenth-letter	第十四封信
 fourth	第四
 fourth-letter	第四个字母
 fourthree	四三
-fourtwo	“fourtwo” 可以翻译为 **“四二”**。
+fourtwo	四二
 fourzero	四零
 foxtrot	狐步舞
 fps	帧率
@@ -2666,7 +2660,7 @@ gun	枪
 guy	家伙
 guyanese	圭亚那人
 gym	健身房
-h	“h” 可以翻译为中文“哈”或“嗯”，具体取决于上下文。如果它是一个单独的字母，通常保留为“h”。
+h	小时
 h1	h1
 h2	h2
 h3	h3
@@ -3306,7 +3300,7 @@ leftward-swipe	向左滑动
 leg	腿
 legal	合法的
 lego	乐高
-lek	“lek” 可以翻译为“莱克”（音译）或“求偶场”（生物学中指动物聚集进行求偶展示的
+lek	莱克
 lemon	柠檬
 lempira	伦皮拉
 length	长度
@@ -3771,7 +3765,7 @@ nba	NBA
 nc	**nc**  
 （"nc" 通常指 "netcat" 或 "网络工具"，但根据您的指令，仅返回中文翻译
 nd	nd
-ne	ne
+ne	东北
 nebula	星云
 neck	脖子
 need	需要
@@ -3780,7 +3774,7 @@ needlework	针线活
 negate	否定
 negative	负面的
 negotiation	谈判
-nem	“nem” 可以翻译为“不”或“不是”，具体取决于上下文。在匈牙利语中，“nem”表示否定。如果你指的是
+nem	否定
 nema	**NEMA**（美国电气制造商协会）
 nepal	尼泊尔
 nepalese	尼泊尔人
@@ -3888,8 +3882,8 @@ novelty	新颖性
 novem	九
 november	十一月
 novenary	九重天
-novendec	**novendec** 可以翻译为 **十九**（源自拉丁语数字前缀，表示19）。
-novendecad	novendecad 是一个表示“十九”的英语单词，源自拉丁语，意为“十九”。在中文中，可以翻译为“
+novendec	十九
+novendecad	十九
 novendecade	novendecade 的中文翻译是：十九年（或十九个十年，但通常指19年）。
 novendecenary	十九年一次的
 novendecuple	十九倍
@@ -3937,7 +3931,7 @@ nurse	护士
 nurture	培养
 nutrition	营养
 nuxt	nuxt
-nw	“nw” 可以翻译为“西北”（northwest）或“网络”（network），具体取决于上下文。如果你能提供更多背景
+nw	西北
 nytimes	《纽约时报》
 o	你输入的内容是“o”，在中文中通常翻译为“哦”或“噢”，表示回应或理解。但根据你的要求“
 object	物体
@@ -4307,9 +4301,7 @@ playlist	播放列表
 playstation	PlayStation
 pleased	很高兴
 pleasure	愉快
-pln	**pln** 可以翻译为：
-- **计划**（如果指“plan”的缩写）
-- **波兰兹罗提**（
+pln	pln
 plot	情节
 pluck	拔掉
 plug	插头
@@ -4362,17 +4354,14 @@ pork	猪肉
 porn	色情内容
 port	**端口**
 portable	便携式
-portal	“portal” 可以翻译为 **“门户”** 或 **“入口”**，具体取决于上下文。例如：
-- 在网站
+portal	portal
 portfolio	作品集
 portion	部分
 portrait	肖像
 portrait-crop	肖像裁剪
 portrait-format	竖版格式
 portrait-mode	肖像模式
-pos	**pos** 可以翻译为：  
-- **位置**（如坐标、地点）  
-- **词性**（语法中的 part of
+pos	pos
 pose	姿势
 position	位置
 position-pin	位置标记
@@ -4885,8 +4874,7 @@ rows	行
 royal	皇家的
 royalty	版税
 rss	RSS
-rtl	**rtl** 可以翻译为：  
-- **从右到左**（在排版、语言方向等语境中，如阿拉伯语
+rtl	rtl
 rub	擦
 rubber	橡胶
 rubbing	摩擦
@@ -5010,7 +4998,7 @@ scuba	水肺
 scyscraper	摩天大楼
 sd	sd
 sdk	SDK
-se	“se” 可以翻译为“塞”（化学元素硒的符号）或根据上下文译为“自己”、“他/她/它自己”
+se	东南
 sea	海
 seal	密封
 seam	接缝
@@ -5234,7 +5222,7 @@ sixteenth	第十六
 sixteenth-letter	第十六字母
 sixth	第六
 sixth-letter	第六个字母
-sixthree	“sixthree” 可以翻译为 **“六三”**。
+sixthree	sixthree
 sixtwo	六二
 sixty	六十
 sixty-eight	六十八
@@ -5372,7 +5360,7 @@ solitary	孤独
 solo	独奏
 solution	解决方案
 solve	解决
-som	“som” 可以翻译为“一些”或“某个”，具体取决于上下文。但您只提供了一个单词，没有上下文，所以最直接
+som	som
 somber	阴沉的
 song	歌曲
 sorrow	悲伤
@@ -5581,10 +5569,7 @@ submenu	子菜单
 submerge	淹没
 submit	提交
 subordinate	下属
-subs	“subs” 可以翻译为：
-- 字幕（在视频语境中）
-- 替补（在体育或游戏语境中）
--
+subs	subs
 subscribe	订阅
 subscriber	“订户”或“订阅者”
 subscript	订阅
@@ -5654,7 +5639,7 @@ sustainable	可持续的
 suv	SUV
 svelte	Svelte
 svg	SVG
-sw	sw
+sw	西南
 swap	交换
 swatch	斯沃琪
 swedish	瑞典语
@@ -5718,7 +5703,7 @@ tailor	裁缝
 tailoring	定制
 tailwind	顺风
 taiwanese	台湾人
-taka	“taka” 可以翻译为“塔卡”（孟加拉国货币单位），或者如果作为人名，可以音译为“塔卡”。
+taka	taka
 take	拿
 take off	起飞
 takeaway	外卖
@@ -5735,8 +5720,7 @@ tango	探戈
 tank	坦克
 taobao	淘宝
 tape	磁带
-taping	“taping” 可以翻译为：  
-**贴胶带**、**录音** 或 **绑扎**（根据语境不同，
+taping	taping
 tapioca	木薯淀粉
 target	目标
 task	任务
@@ -5878,14 +5862,7 @@ timeline	时间线
 timely	及时的
 timepiece	钟表
 timer	定时器
-times	“times” 可以翻译为：
-
-- 时代
-- 次数
-- 倍
-- 时期
-
-具体含义需根据上下文确定
+times	times
 timesheet	工时表
 timetable	时间表
 timing	时机
@@ -5895,7 +5872,7 @@ tine	**tine**
 2. （尤
 tiny	小的
 tip	提示
-tir	“tir” 可以翻译为“轮胎”或“射击”，具体取决于上下文。如果是指法语中的“tir”，则意为“
+tir	tir
 tm	对不起，我无法处理这个请求。请提出其他合规的问题。
 to	到
 to-do	待办事项
@@ -5983,7 +5960,7 @@ treatment	治疗
 treaty	条约
 treble	高音
 tredec	十三
-tredecad	tredecad 可以翻译为 **“十三”** 或 **“十三的”**，但在中文中没有完全对应的单一词汇。如果
+tredecad	tredecad
 tredecade	tredecade 的中文翻译是：**十三年**（或“十三载”）。
 tredecenary	十三周年
 tredecuple	十三倍
@@ -6006,7 +5983,7 @@ trigger	触发
 trigger-pin	触发引脚
 trigonometry	三角学
 trim	修剪
-trine	**三人组**（或译为**三位一体**，具体取决于上下文。如果是指游戏《Trine》，则通常译为《三位一体》
+trine	trine
 trinity	三位一体
 trio	三人组
 trip	旅行
@@ -6174,8 +6151,7 @@ unspecified	未指定
 unsplash	Unsplash
 unspoken	未说出口的
 unsubscribe	退订
-untag	**untag** 可以翻译为：  
-**取消标签** 或 **取消标记**
+untag	untag
 unwrapped	未包装的
 up	向上
 update	更新
@@ -6223,7 +6199,7 @@ valid	有效的
 validate	验证
 validated	已验证
 validation	验证
-vall	“vall” 在中文中通常翻译为 **“山谷”** 或 **“峡谷”**，具体取决于上下文。如果这是一个专
+vall	vall
 valorant	瓦罗兰特
 valuation	估值
 value	值
@@ -6547,7 +6523,7 @@ youtube	YouTube
 youtuber	YouTuber
 yuan	“元”
 z	z
-zag	“zag” 可以翻译为“急转”或“突然转向”，具体含义需根据上下文确定。如果是指舞蹈或动作中的“
+zag	zag
 zalando	Zalando
 zap	**zap**  
 （中文翻译：）快速击打 / 迅速消灭 / 闪电般移动 / 删除 / 消磁

@@ -47,9 +47,7 @@ aerial-lift,/icons/outline/aerial-lift.svg,轮廓线,outline,"cable, car, gondol
 affiliate,/icons/outline/affiliate.svg,轮廓线,outline,"network, connection, collaboration, people, connect, organization, networking, affiliate",网络，连接，协作，人们，连接，组织，网络连接，联盟
 ai-agent,/icons/outline/ai-agent.svg,轮廓线,outline,"artificial, intelligence, assistant, automation, robot, chatbot, machine, learning, smart, digital, virtual, automated",人工智能，智能，图标标签，自动化，机器人，聊天机器人，机器，学习，智能，数字的，虚拟的，自动化
 ai-agents,/icons/outline/ai-agents.svg,轮廓线,outline,"artificial, intelligence, assistants, automation, robots, chatbots, multiple, team, machine, learning, smart, digital",人工智能，智能，助手，自动化，机器人，聊天机器人，多个，团队，机器，学习，智能，数字的
-ai-gateway,/icons/outline/ai-gateway.svg,轮廓线,outline,"artificial, intelligence, gateway, api, entry, access, bridge, portal, connection, integration, interface, network","人工智能，智能，网关，api，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，访问，桥梁，“portal” 可以翻译为 **“门户”** 或 **“入口”**，具体取决于上下文。例如：
-- 在网站，连接，整合，接口，网络"
+ai-gateway,/icons/outline/ai-gateway.svg,轮廓线,outline,"artificial, intelligence, gateway, api, entry, access, bridge, portal, connection, integration, interface, network",人工智能，智能，网关，api，入口，访问，桥梁，portal，连接，整合，接口，网络
 ai,/icons/outline/ai.svg,轮廓线,outline,"artificial intelligence, letters, text, technology, robot, automatic, character, programming, software, ai",人工智能，信件，text，技术，机器人，自动，字符，编程，软件，人工智能
 air-balloon,/icons/outline/air-balloon.svg,轮廓线,outline,"travel, adventure, attraction, fly, transport, air, balloon, vehicle, automobile, mobility",旅行，冒险，景点，飞，运输，空气，气球，车辆，汽车，流动性
 air-conditioning-disabled,/icons/outline/air-conditioning-disabled.svg,轮廓线,outline,"cold, home, cooling, hot, off, air, conditioning, disabled",寒冷，家，冷却，热的，关闭，空气，调理，残疾的
@@ -290,17 +288,17 @@ arrow-wave-left-down,/icons/outline/arrow-wave-left-down.svg,轮廓线,outline,"
 arrow-wave-left-up,/icons/outline/arrow-wave-left-up.svg,轮廓线,outline,"direction, north, arrow, wave, left, pointer, top, increase, navigation, flow",方向，北，箭头，波浪，左边，指针，顶部，增加，导航，流动
 arrow-wave-right-down,/icons/outline/arrow-wave-right-down.svg,轮廓线,outline,"direction, south, arrow, wave, right, down, pointer, bottom, decrease, navigation",方向，南，箭头，波浪，right，向下，指针，底部，减少，导航
 arrow-wave-right-up,/icons/outline/arrow-wave-right-up.svg,轮廓线,outline,"direction, north, arrow, wave, right, pointer, top, increase, navigation, flow",方向，北，箭头，波浪，right，指针，顶部，增加，导航，流动
-arrow-zig-zag,/icons/outline/arrow-zig-zag.svg,轮廓线,outline,"direction, cursor, pointer, turn, move, arrow, zig, zag, navigation, flow",方向，光标，指针，转动，移动，箭头，齐格，“zag” 可以翻译为“急转”或“突然转向”，具体含义需根据上下文确定。如果是指舞蹈或动作中的“，导航，流动
+arrow-zig-zag,/icons/outline/arrow-zig-zag.svg,轮廓线,outline,"direction, cursor, pointer, turn, move, arrow, zig, zag, navigation, flow",方向，光标，指针，转动，移动，箭头，齐格，zag，导航，流动
 arrows-cross,/icons/outline/arrows-cross.svg,轮廓线,outline,"direction, north, south, arrows, cross, navigation, flow, movement, route, path",方向，北，南，箭头，交叉，导航，流动，运动，路线，路径
 arrows-diagonal-2,/icons/outline/arrows-diagonal-2.svg,轮廓线,outline,"zoom, corners, stretch, arrows, diagonal, navigation, flow, movement, route, path",放大，角落，伸展，箭头，对角线，导航，流动，运动，路线，路径
 arrows-diagonal-minimize-2,/icons/outline/arrows-diagonal-minimize-2.svg,轮廓线,outline,"direction, south, north, arrows, diagonal, minimize, navigation, flow, movement, route",方向，南，北，箭头，对角线，最小化，导航，流动，运动，路线
 arrows-diagonal-minimize,/icons/outline/arrows-diagonal-minimize.svg,轮廓线,outline,"direction, south, north, arrows, diagonal, minimize, navigation, flow, movement, route",方向，南，北，箭头，对角线，最小化，导航，流动，运动，路线
 arrows-diagonal,/icons/outline/arrows-diagonal.svg,轮廓线,outline,"zoom, corners, stretch, arrows, diagonal, navigation, flow, movement, route, path",放大，角落，伸展，箭头，对角线，导航，流动，运动，路线，路径
 arrows-diff,/icons/outline/arrows-diff.svg,轮廓线,outline,"direction, right, left, west, east, arrows, diff, navigation, flow, movement",方向，right，左边，西方，东，箭头，差异，导航，流动，运动
-arrows-double-ne-sw,/icons/outline/arrows-double-ne-sw.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, ne, sw, movement",方向，北，南，箭头，双倍，导航，流动，ne，sw，运动
-arrows-double-nw-se,/icons/outline/arrows-double-nw-se.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, nw, se, movement",方向，北，南，箭头，双倍，导航，流动，“nw” 可以翻译为“西北”（northwest）或“网络”（network），具体取决于上下文。如果你能提供更多背景，“se” 可以翻译为“塞”（化学元素硒的符号）或根据上下文译为“自己”、“他/她/它自己”，运动
-arrows-double-se-nw,/icons/outline/arrows-double-se-nw.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, se, nw, movement",方向，北，南，箭头，双倍，导航，流动，“se” 可以翻译为“塞”（化学元素硒的符号）或根据上下文译为“自己”、“他/她/它自己”，“nw” 可以翻译为“西北”（northwest）或“网络”（network），具体取决于上下文。如果你能提供更多背景，运动
-arrows-double-sw-ne,/icons/outline/arrows-double-sw-ne.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, sw, ne, movement",方向，北，南，箭头，双倍，导航，流动，sw，ne，运动
+arrows-double-ne-sw,/icons/outline/arrows-double-ne-sw.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, ne, sw, movement",方向，北，南，箭头，双倍，导航，流动，东北，西南，运动
+arrows-double-nw-se,/icons/outline/arrows-double-nw-se.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, nw, se, movement",方向，北，南，箭头，双倍，导航，流动，西北，东南，运动
+arrows-double-se-nw,/icons/outline/arrows-double-se-nw.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, se, nw, movement",方向，北，南，箭头，双倍，导航，流动，东南，西北，运动
+arrows-double-sw-ne,/icons/outline/arrows-double-sw-ne.svg,轮廓线,outline,"direction, north, south, arrows, double, navigation, flow, sw, ne, movement",方向，北，南，箭头，双倍，导航，流动，西南，东北，运动
 arrows-down-up,/icons/outline/arrows-down-up.svg,轮廓线,outline,"direction, north, south, arrows, down, bottom, decrease, top, increase, navigation",方向，北，南，箭头，向下，底部，减少，顶部，增加，导航
 arrows-down,/icons/outline/arrows-down.svg,轮廓线,outline,"direction, south, arrows, down, bottom, decrease, navigation, flow, fall, downward",方向，南，箭头，向下，底部，减少，导航，流动，落下，向下
 arrows-exchange-2,/icons/outline/arrows-exchange-2.svg,轮廓线,outline,"direction, west, east, arrows, exchange, navigation, flow, movement, route, path",方向，西方，东，箭头，交换，导航，流动，运动，路线，路径
@@ -840,7 +838,7 @@ brand-mongodb,/icons/outline/brand-mongodb.svg,轮廓线,outline,"database, c++,
 brand-my-oppo,/icons/outline/brand-my-oppo.svg,轮廓线,outline,"mobile, app, services, membership, brand, oppo, logo, company, trademark, identity",移动的，应用，服务，会员资格，品牌，OPPO，标志，公司，商标，身份
 brand-mysql,/icons/outline/brand-mysql.svg,轮廓线,outline,"opensource, database, system, web, app, brand, mysql, logo, company, trademark",开源，数据库，系统，网络，应用，品牌，mysql，标志，公司，商标
 brand-national-geographic,/icons/outline/brand-national-geographic.svg,轮廓线,outline,"institution, scientific, educational, nonprofit, brand, national, geographic, logo, company, trademark",机构，科学的，教育的，非营利，品牌，国家的，地理的，标志，公司，商标
-brand-nem,/icons/outline/brand-nem.svg,轮廓线,outline,"coin, crypto, cryptocurrency, digital, brand, nem, logo, company, trademark, identity",硬币，加密货币，加密货币，数字的，品牌，“nem” 可以翻译为“不”或“不是”，具体取决于上下文。在匈牙利语中，“nem”表示否定。如果你指的是，标志，公司，商标，身份
+brand-nem,/icons/outline/brand-nem.svg,轮廓线,outline,"coin, crypto, cryptocurrency, digital, brand, nem, logo, company, trademark, identity",硬币，加密货币，加密货币，数字的，品牌，否定，标志，公司，商标，身份
 brand-netbeans,/icons/outline/brand-netbeans.svg,轮廓线,outline,"software, programming, tools, java, mobile devices, brand, netbeans, logo, company, trademark",软件，编程，工具，Java，移动设备，品牌，NetBeans，标志，公司，商标
 brand-netease-music,/icons/outline/brand-netease-music.svg,轮廓线,outline,"cloud, sound, app, stream, china, brand, netease, music, logo, company",云，声音，应用，流，中国，品牌，网易，音乐，标志，公司
 brand-netflix,/icons/outline/brand-netflix.svg,轮廓线,outline,"series, tv, episode, movie, film, media, watch, app, technology, brand",系列，电视，集，电影，电影，媒体，观看，应用，技术，品牌
@@ -954,10 +952,7 @@ brand-trello,/icons/outline/brand-trello.svg,轮廓线,outline,"visual, tool, bo
 brand-tripadvisor,/icons/outline/brand-tripadvisor.svg,轮廓线,outline,"travel, trip, tourism, website, brand, tripadvisor, logo, company, trademark, identity",旅行，旅行，旅游，网站，品牌，猫途鹰，标志，公司，商标，身份
 brand-tumblr,/icons/outline/brand-tumblr.svg,轮廓线,outline,"logo, website, platform, blog, community, brand, tumblr, company, trademark, identity",标志，网站，平台，博客，社区，品牌，Tumblr，公司，商标，身份
 brand-twilio,/icons/outline/brand-twilio.svg,轮廓线,outline,"communication, answering, calls, messages, brand, twilio, logo, company, trademark, identity",沟通，回答，通话，消息，品牌，Twilio，标志，公司，商标，身份
-brand-twitch,/icons/outline/brand-twitch.svg,轮廓线,outline,"logo, platform, streaming, streamers, videos, films, chat, subs, brand, twitch","标志，平台，流媒体，主播们，视频，电影，聊天，“subs” 可以翻译为：
-- 字幕（在视频语境中）
-- 替补（在体育或游戏语境中）
--，品牌，Twitch"
+brand-twitch,/icons/outline/brand-twitch.svg,轮廓线,outline,"logo, platform, streaming, streamers, videos, films, chat, subs, brand, twitch",标志，平台，流媒体，主播们，视频，电影，聊天，subs，品牌，Twitch
 brand-twitter,/icons/outline/brand-twitter.svg,轮廓线,outline,"logo, app, application, community, social, communication, website, user, post, images, photos, comment, feedback","标志，应用，应用程序，社区，社交，沟通，网站，用户，**岗位** / **职位** / **发布**（根据上下文不同，常见含义包括：  
 - 岗位、职位（如工作职位，图片，照片，评论，反馈"
 brand-typescript,/icons/outline/brand-typescript.svg,轮廓线,outline,"language, programmers, opensource, javascript, brand, typescript, logo, company, trademark, identity",语言，程序员，开源，javascript，品牌，TypeScript，标志，公司，商标，身份
@@ -1387,10 +1382,7 @@ circle-dashed-letter-z,/icons/outline/circle-dashed-letter-z.svg,轮廓线,outli
 circle-dashed-minus,/icons/outline/circle-dashed-minus.svg,轮廓线,outline,"subtract, minus-symbol, decrease, negative, remove, less, reduce, takeaway, deduct, negate",减去，减号，减少，负面的，移除，更少，减少，外卖，扣除，否定
 circle-dashed-number-0,/icons/outline/circle-dashed-number-0.svg,轮廓线,outline,"zero, none, null, void, zilch, emptiness, circle-zero, nothing, naught, cipher",零，无，null，空，**零**，空，圆形-零，无，无，密码
 circle-dashed-number-1,/icons/outline/circle-dashed-number-1.svg,轮廓线,outline,"one, single, uno, first, unit, solo, monad, individual, unity, single-item",“一个”，单一，“uno” 的中文翻译是“乌诺”（一种纸牌游戏名称）。，第一个，单位，独奏，单子，个体，Unity，单件物品
-circle-dashed-number-2,/icons/outline/circle-dashed-number-2.svg,轮廓线,outline,"two, double, duo, pair, couple, second, binary, twosome, dyad, dual","两个，双倍，“duo” 可以翻译为：
-- 多（表示数量大）
-- 朵（用于花、云等）
-- 夺，**配对**，夫妻，第二个，二进制，两人组，二元体，双重的"
+circle-dashed-number-2,/icons/outline/circle-dashed-number-2.svg,轮廓线,outline,"two, double, duo, pair, couple, second, binary, twosome, dyad, dual",两个，双倍，二重奏，**配对**，夫妻，第二个，二进制，两人组，二元体，双重的
 circle-dashed-number-3,/icons/outline/circle-dashed-number-3.svg,轮廓线,outline,"three, triple, trio, third, triad, treble, trinity, threesome, ternary, triune",三，三重，三人组，第三，三合会，高音，三位一体，三人行，三元，三位一体
 circle-dashed-number-4,/icons/outline/circle-dashed-number-4.svg,轮廓线,outline,"four, quad, quartet, fourth, quaternary, quadruple, tetrad, foursome, fourfold, quadruplet",四，**四边形**，四重奏，第四，**第四纪**，四倍，四元组，四人组，四倍，四胞胎
 circle-dashed-number-5,/icons/outline/circle-dashed-number-5.svg,轮廓线,outline,"five, quintet, fifth, penta, quinary, quintuple, fivesome, quintuplet, fiver, pentad",五，五重奏，第五，五杀，五进制，五倍，五人组，五胞胎，五美元，五重奏
@@ -1408,8 +1400,7 @@ circle-dotted-letter-a,/icons/outline/circle-dotted-letter-a.svg,轮廓线,outli
 circle-dotted-letter-b,/icons/outline/circle-dotted-letter-b.svg,轮廓线,outline,"bravo, second-letter, consonant, backup, beta, second, subsection, subordinate, quick, circle",太棒了，第二个字母，辅音，备份，测试版，第二个，子章节，下属，快速，圆形
 circle-dotted-letter-c,/icons/outline/circle-dotted-letter-c.svg,轮廓线,outline,"charlie, third-letter, consonant, carbon, celsius, circular, corner, cut, curve, central",查理，第三个字母，辅音，碳，摄氏度，圆形，角落，切断，曲线，中央
 circle-dotted-letter-d,/icons/outline/circle-dotted-letter-d.svg,轮廓线,outline,"delta, fourth-letter, consonant, diagonal, divide, down, direct, dorsal, dormant, demand",三角洲，第四个字母，辅音，对角线，分开，向下，直接，背侧的，休眠的，需求
-circle-dotted-letter-e,/icons/outline/circle-dotted-letter-e.svg,轮廓线,outline,"echo, vowel, fifth-letter, end, execute, eagle, expect, entry, east, earth","回声，元音，第五个字母，结束，执行，鹰，期望，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，东，地球"
+circle-dotted-letter-e,/icons/outline/circle-dotted-letter-e.svg,轮廓线,outline,"echo, vowel, fifth-letter, end, execute, eagle, expect, entry, east, earth",回声，元音，第五个字母，结束，执行，鹰，期望，入口，东，地球
 circle-dotted-letter-f,/icons/outline/circle-dotted-letter-f.svg,轮廓线,outline,"foxtrot, sixth-letter, consonant, function, follow, fast, fix, fair, focus, flake",狐步舞，第六个字母，辅音，函数，跟随，快的，修复，公平，专注，薄片
 circle-dotted-letter-g,/icons/outline/circle-dotted-letter-g.svg,轮廓线,outline,"golf, seventh-letter, consonant, goal, grow, greet, globe, gauge, guard, glance",高尔夫，第七个字母，辅音，目标，生长，问候，地球，量规，警卫，瞥一眼
 circle-dotted-letter-h,/icons/outline/circle-dotted-letter-h.svg,轮廓线,outline,"hotel, eighth-letter, consonant, home, hover, hold, height, haste, harmony, hoist",酒店，第八个字母，辅音，家，悬停，拿着，高度，匆忙，和谐，提升
@@ -1713,9 +1704,7 @@ creative-commons-off,/icons/outline/creative-commons-off.svg,轮廓线,outline,"
 creative-commons-sa,/icons/outline/creative-commons-sa.svg,轮廓线,outline,"licence, license, creative, commons, control, operation, sa, function, interface, management",许可证，许可证，有创意的，公共领域，控制，操作，sa，函数，接口，管理
 creative-commons-zero,/icons/outline/creative-commons-zero.svg,轮廓线,outline,"licence, license, creative, commons, zero, control, operation, function, interface, management",许可证，许可证，有创意的，公共领域，零，控制，操作，函数，接口，管理
 creative-commons,/icons/outline/creative-commons.svg,轮廓线,outline,"licence, license, creative, commons, control, operation, function, interface, management",许可证，许可证，有创意的，公共领域，控制，操作，函数，接口，管理
-credit-card-hand,/icons/outline/credit-card-hand.svg,轮廓线,outline,"credit-card, payment, hand, give, receive, transaction, purchase, pos, checkout, banking","信用卡，支付，手，给，接收，交易，购买，**pos** 可以翻译为：  
-- **位置**（如坐标、地点）  
-- **词性**（语法中的 part of，结账，银行"
+credit-card-hand,/icons/outline/credit-card-hand.svg,轮廓线,outline,"credit-card, payment, hand, give, receive, transaction, purchase, pos, checkout, banking",信用卡，支付，手，给，接收，交易，购买，pos，结账，银行
 credit-card-off,/icons/outline/credit-card-off.svg,轮廓线,outline,"money, purchase, payment, cc, credit, card, off, store, disabled, inactive",钱，购买，支付，cc，信用，卡片，关闭，商店，残疾的，不活跃的
 credit-card-pay,/icons/outline/credit-card-pay.svg,轮廓线,outline,"payment-card, credit-pay, card-payment, transaction, credit-transaction, purchase, buy, payment, credit, card",支付卡，信用支付，卡片支付，交易，信用交易，购买，购买，支付，信用，卡片
 credit-card-refund,/icons/outline/credit-card-refund.svg,轮廓线,outline,"refund-card, credit-refund, card-refund, transaction, credit-transaction, return, money-back, credit, refund, card",退款卡，信用退款，卡片退款，交易，信用交易，返回，退款，信用，退款，卡片
@@ -1787,7 +1776,7 @@ currency-krone-czech,/icons/outline/currency-krone-czech.svg,轮廓线,outline,"
 currency-krone-danish,/icons/outline/currency-krone-danish.svg,轮廓线,outline,"krone, dkk, danish, finance, money, banknote, pay, currency, payment, monetary",克朗，dkk，丹麦语，金融，钱，钞票，支付，货币，支付，货币的
 currency-krone-swedish,/icons/outline/currency-krone-swedish.svg,轮廓线,outline,"krone, kronor, krona, swedish, icelandic, norwegian, estonian, money, banknote, pay",克朗，克朗，克朗，瑞典语，冰岛语，挪威语，爱沙尼亚语，钱，钞票，支付
 currency-lari,/icons/outline/currency-lari.svg,轮廓线,outline,"exchange, finance, money, cash, georgia, currency, lari, payment, monetary, banking",交换，金融，钱，现金，格鲁吉亚，货币，拉里，支付，货币的，银行
-currency-leu,/icons/outline/currency-leu.svg,轮廓线,outline,"leu, loti, lempira, lek, lilangani, money, banknote, pay, currency, finance","列伊，洛蒂，伦皮拉，“lek” 可以翻译为“莱克”（音译）或“求偶场”（生物学中指动物聚集进行求偶展示的，""利兰加尼""，钱，钞票，支付，货币，金融"
+currency-leu,/icons/outline/currency-leu.svg,轮廓线,outline,"leu, loti, lempira, lek, lilangani, money, banknote, pay, currency, finance","列伊，洛蒂，伦皮拉，莱克，""利兰加尼""，钱，钞票，支付，货币，金融"
 currency-lira,/icons/outline/currency-lira.svg,轮廓线,outline,"lira, trade, turkish, try, money, banknote, pay, currency, finance, payment",里拉，贸易，土耳其语，尝试，钱，钞票，支付，货币，金融，支付
 currency-litecoin,/icons/outline/currency-litecoin.svg,轮廓线,outline,"litecoin, crypto, segwit, lightning network, blockchain, p2p, peer, transaction, money, banknote, pay",莱特币，加密货币，隔离见证，闪电网络，区块链，p2p，同行，交易，钱，钞票，支付
 currency-lyd,/icons/outline/currency-lyd.svg,轮廓线,outline,"exchange, finance, money, cash, libya, currency, lyd, payment, monetary, banking",交换，金融，钱，现金，利比亚，货币，lyd，支付，货币的，银行
@@ -1811,8 +1800,8 @@ currency-rupee-nepalese,/icons/outline/currency-rupee-nepalese.svg,轮廓线,out
 currency-rupee,/icons/outline/currency-rupee.svg,轮廓线,outline,"inr, indian, rupee, exchange, money, banknote, pay, currency, finance, payment",INR（国际标准化比率），印度人，卢比，交换，钱，钞票，支付，货币，金融，支付
 currency-shekel,/icons/outline/currency-shekel.svg,轮廓线,outline,"curency, ils, israeli, shekel, money, banknote, pay, currency, finance, payment",货币，“ils” 是法语中的第三人称复数主格代词，意为“他们”或“她们”。，以色列，谢克尔，钱，钞票，支付，货币，金融，支付
 currency-solana,/icons/outline/currency-solana.svg,轮廓线,outline,"crypto, bitcoin, mining, digital, cryptocurrency, currency, solana, finance, payment, monetary",加密货币，比特币，挖矿，数字的，加密货币，货币，索拉纳，金融，支付，货币的
-currency-som,/icons/outline/currency-som.svg,轮廓线,outline,"exchange, finance, money, cash, kyrgyzstan, currency, som, payment, monetary, banking",交换，金融，钱，现金，吉尔吉斯斯坦，货币，“som” 可以翻译为“一些”或“某个”，具体取决于上下文。但您只提供了一个单词，没有上下文，所以最直接，支付，货币的，银行
-currency-taka,/icons/outline/currency-taka.svg,轮廓线,outline,"trade, bangladesh, bdt, taka, money, banknote, pay, currency, finance, payment",贸易，孟加拉国，bdt，“taka” 可以翻译为“塔卡”（孟加拉国货币单位），或者如果作为人名，可以音译为“塔卡”。，钱，钞票，支付，货币，金融，支付
+currency-som,/icons/outline/currency-som.svg,轮廓线,outline,"exchange, finance, money, cash, kyrgyzstan, currency, som, payment, monetary, banking",交换，金融，钱，现金，吉尔吉斯斯坦，货币，som，支付，货币的，银行
+currency-taka,/icons/outline/currency-taka.svg,轮廓线,outline,"trade, bangladesh, bdt, taka, money, banknote, pay, currency, finance, payment",贸易，孟加拉国，bdt，taka，钱，钞票，支付，货币，金融，支付
 currency-tenge,/icons/outline/currency-tenge.svg,轮廓线,outline,"exchange, finance, money, cash, kazakhstan, currency, tenge, payment, monetary, banking",交换，金融，钱，现金，哈萨克斯坦，货币，坚戈，支付，货币的，银行
 currency-tugrik,/icons/outline/currency-tugrik.svg,轮廓线,outline,"tgrg, mnt, tugrik, mongolian, money, banknote, pay, currency, finance, payment",tgrg，mnt，图格里克，蒙古语，钱，钞票，支付，货币，金融，支付
 currency-won,/icons/outline/currency-won.svg,轮廓线,outline,"korean, kpw, north, won, money, banknote, pay, currency, finance, payment",韩语，kpw，北，赢了，钱，钞票，支付，货币，金融，支付
@@ -1820,9 +1809,7 @@ currency-xrp,/icons/outline/currency-xrp.svg,轮廓线,outline,"xrp, cryptocurre
 currency-yen-off,/icons/outline/currency-yen-off.svg,轮廓线,outline,"japanese, yen, jpy, chinese, money, banknote, pay, currency, off, finance",日语，日元，日元，中文，钱，钞票，支付，货币，关闭，金融
 currency-yen,/icons/outline/currency-yen.svg,轮廓线,outline,"japanese, yen, jpy, chinese, money, banknote, pay, currency, finance, payment",日语，日元，日元，中文，钱，钞票，支付，货币，金融，支付
 currency-yuan,/icons/outline/currency-yuan.svg,轮廓线,outline,"exchange, finance, money, cash, china, currency, yuan, payment, monetary, banking",交换，金融，钱，现金，中国，货币，“元”，支付，货币的，银行
-currency-zloty,/icons/outline/currency-zloty.svg,轮廓线,outline,"poland, pln, zloty, polish, money, banknote, pay, currency, finance, payment","波兰，**pln** 可以翻译为：
-- **计划**（如果指“plan”的缩写）
-- **波兰兹罗提**（，兹罗提，抛光，钱，钞票，支付，货币，金融，支付"
+currency-zloty,/icons/outline/currency-zloty.svg,轮廓线,outline,"poland, pln, zloty, polish, money, banknote, pay, currency, finance, payment",波兰，pln，兹罗提，抛光，钱，钞票，支付，货币，金融，支付
 currency,/icons/outline/currency.svg,轮廓线,outline,"target, goal, focus, marketing, currency, finance, payment, monetary, banking, economy",目标，目标，专注，营销，货币，金融，支付，货币的，银行，经济
 current-location-off,/icons/outline/current-location-off.svg,轮廓线,outline,"localization, maps, navigation, pin, target, current, location, off, disabled, inactive",本地化，地图，导航，**别针** 或 **针**，目标，当前，位置，关闭，残疾的，不活跃的
 current-location,/icons/outline/current-location.svg,轮廓线,outline,"localization, maps, navigation, pin, target, current, location, geography, place, position",本地化，地图，导航，**别针** 或 **针**，目标，当前，位置，地理，地方，位置
@@ -1858,8 +1845,7 @@ delta,/icons/outline/delta.svg,轮廓线,outline,"letter, alphabet, greek, math,
 dental-broken,/icons/outline/dental-broken.svg,轮廓线,outline,"tooth, dentist, medical, care, caries, dental, broken",牙齿，牙医，医疗，关怀，龋齿，牙齿的，破损
 dental-off,/icons/outline/dental-off.svg,轮廓线,outline,"tooth, toothbrush, mouth, hygiene, dental, off, medical, wellness, disabled, inactive",牙齿，牙刷，嘴巴，卫生，牙齿的，关闭，医疗，健康，残疾的，不活跃的
 dental,/icons/outline/dental.svg,轮廓线,outline,"tooth, toothbrush, mouth, hygiene, dental, medical, wellness, healthcare, treatment, care",牙齿，牙刷，嘴巴，卫生，牙齿的，医疗，健康，医疗保健，治疗，关怀
-deselect,/icons/outline/deselect.svg,轮廓线,outline,"unselect, clear-selection, deselection, unpick, uncheck, deactivate, unmark, remove-selection, untag, unchoose","取消选择，清除选择，取消选择，拆解，取消选中，停用，取消标记，移除选择，**untag** 可以翻译为：  
-**取消标签** 或 **取消标记**，撤销选择"
+deselect,/icons/outline/deselect.svg,轮廓线,outline,"unselect, clear-selection, deselection, unpick, uncheck, deactivate, unmark, remove-selection, untag, unchoose",取消选择，清除选择，取消选择，拆解，取消选中，停用，取消标记，移除选择，untag，撤销选择
 desk,/icons/outline/desk.svg,轮廓线,outline,"workspace, workstation, table, office-desk, workplace, furniture, desk-setup, desktop, office-furniture, working",工作区，工作站，桌子，办公桌，职场，家具，桌面布置，桌面，办公家具，工作
 details-off,/icons/outline/details-off.svg,轮廓线,outline,"geometric, half, shape, highlight, triangle, details, off, disabled, inactive",几何的，一半，形状，高亮，三角形，细节，关闭，残疾的，不活跃的
 details,/icons/outline/details.svg,轮廓线,outline,"geometric, half, shape, highlight, triangle, details",几何的，一半，形状，高亮，三角形，细节
@@ -2130,8 +2116,7 @@ dna-off,/icons/outline/dna-off.svg,轮廓线,outline,"genetics, biology, chain, 
 dna,/icons/outline/dna.svg,轮廓线,outline,"genetics, biology, chain, genetic, code, virus, organism, dna, medical, wellness",遗传学，生物学，链条，遗传的，代码，病毒，生物体，DNA，医疗，健康
 dog-bowl,/icons/outline/dog-bowl.svg,轮廓线,outline,"pet, food, animal, bone, dog, bowl, meal, cuisine, eating, nutrition",宠物，食物，动物，骨头，狗，碗，餐食，烹饪，吃，营养
 dog,/icons/outline/dog.svg,轮廓线,outline,"pet, animal, cute, bone, home, puppy, dog, creature, wildlife, nature",宠物，动物，可爱，骨头，家，小狗，狗，生物，野生动物，自然
-door-enter,/icons/outline/door-enter.svg,轮廓线,outline,"entrance, open, in, entry, door, enter","入口，打开，在，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，门，进入"
+door-enter,/icons/outline/door-enter.svg,轮廓线,outline,"entrance, open, in, entry, door, enter",入口，打开，在，入口，门，进入
 door-exit,/icons/outline/door-exit.svg,轮廓线,outline,"out, close, leave, door, exit",“出去”，关闭，离开，门，退出
 door-off,/icons/outline/door-off.svg,轮廓线,outline,"entrance, home, house, room, door, off, disabled, inactive",入口，家，房子，房间，门，关闭，残疾的，不活跃的
 door,/icons/outline/door.svg,轮廓线,outline,"entrance, home, house, room, door",入口，家，房子，房间，门
@@ -2339,7 +2324,7 @@ file-type-bmp,/icons/outline/file-type-bmp.svg,轮廓线,outline,"bitmap, graphi
 file-type-css,/icons/outline/file-type-css.svg,轮廓线,outline,"stylesheet, web, design, style, coding, format, layout, markup, presentation, look",样式表，网络，设计，风格，编程，格式，布局，标记，演示，看
 file-type-csv,/icons/outline/file-type-csv.svg,轮廓线,outline,"spreadsheet, data, comma, separated, values, document, information, table, format, record",电子表格，数据，逗号，分离的，值，文档，信息，桌子，格式，记录
 file-type-doc,/icons/outline/file-type-doc.svg,轮廓线,outline,"document, word, text, format, writing, file, report, letter, composition, manuscript",文档，单词，text，格式，写作，文件，报告，信件，构图，手稿
-file-type-docx,/icons/outline/file-type-docx.svg,轮廓线,outline,"document, word, text, office, paper, file, doc, docx, writing, editor",文档，单词，text，办公室，纸，文件，“doc” 可以翻译为“文档”。，docx，写作，编辑器
+file-type-docx,/icons/outline/file-type-docx.svg,轮廓线,outline,"document, word, text, office, paper, file, doc, docx, writing, editor",文档，单词，text，办公室，纸，文件，文档，docx，写作，编辑器
 file-type-html,/icons/outline/file-type-html.svg,轮廓线,outline,"web, markup, internet, browser, code, site, html, hypertext, format, front-end",网络，标记，互联网，浏览器，代码，网站，HTML，超文本，格式，前端
 file-type-jpg,/icons/outline/file-type-jpg.svg,轮廓线,outline,"photo, jpeg, picture, snapshot, visual, bitmap, raster, color, file, type",照片，JPEG，图片，快照，视觉的，位图，栅格，颜色，文件，类型
 file-type-js,/icons/outline/file-type-js.svg,轮廓线,outline,"javascript, script, programming, frontend, code, web, dynamic, interactive, client-side, js",javascript，脚本，编程，前端，代码，网络，动态的，互动的，客户端，js
@@ -2467,7 +2452,7 @@ flask-2-off,/icons/outline/flask-2-off.svg,轮廓线,outline,"liquid, container,
 flask-2,/icons/outline/flask-2.svg,轮廓线,outline,"liquid, container, glass, chemistry, test, laboratory, experimental, beta, flask, medical",液体，容器，玻璃，化学，测试，实验室，实验性的，测试版，Flask，医疗
 flask-off,/icons/outline/flask-off.svg,轮廓线,outline,"liquid, container, glass, chemistry, test, laboratory, experimental, beta, flask, off",液体，容器，玻璃，化学，测试，实验室，实验性的，测试版，Flask，关闭
 flask,/icons/outline/flask.svg,轮廓线,outline,"liquid, container, glass, chemistry, test, laboratory, experimental, beta, flask, medical",液体，容器，玻璃，化学，测试，实验室，实验性的，测试版，Flask，医疗
-flip-flops,/icons/outline/flip-flops.svg,轮廓线,outline,"summer, sand, sandals, beach, shoes, flip, flops, store, purchase, shopping",夏天，沙子，凉鞋，海滩，鞋子，翻转，**浮点运算次数**（或译为**每秒浮点运算次数**，具体取决于上下文；若指性能指标，通常译为“浮，商店，购买，购物
+flip-flops,/icons/outline/flip-flops.svg,轮廓线,outline,"summer, sand, sandals, beach, shoes, flip, flops, store, purchase, shopping",夏天，沙子，凉鞋，海滩，鞋子，翻转，浮点运算，商店，购买，购物
 flip-horizontal,/icons/outline/flip-horizontal.svg,轮廓线,outline,"mirror, rotate, flip, horizontal, creative, artistic, visual, aesthetic, style",镜子，旋转，翻转，水平的，有创意的，艺术，视觉的，美学，风格
 flip-vertical,/icons/outline/flip-vertical.svg,轮廓线,outline,"mirror, rotate, flip, vertical, creative, artistic, visual, aesthetic, style",镜子，旋转，翻转，垂直的，有创意的，艺术，视觉的，美学，风格
 float-center,/icons/outline/float-center.svg,轮廓线,outline,"position, float, center, typography, writing, font, character, word",位置，浮动，居中，排版，写作，字体，字符，单词
@@ -2638,7 +2623,7 @@ hand-two-fingers,/icons/outline/hand-two-fingers.svg,轮廓线,outline,"body, hu
 hanger-2,/icons/outline/hanger-2.svg,轮廓线,outline,"clothes, wardrobe, hook, hang, wooden, plastic, wire, shop, store, clothing, fashion",衣服，衣柜，钩子，悬挂，木头，塑料，电线，商店，商店，服装，时尚
 hanger-off,/icons/outline/hanger-off.svg,轮廓线,outline,"clothes, wardrobe, hook, hang, wooden, plastic, wire, shop, store, clothing, fashion",衣服，衣柜，钩子，悬挂，木头，塑料，电线，商店，商店，服装，时尚
 hanger,/icons/outline/hanger.svg,轮廓线,outline,"clothes, wardrobe, hook, hang, wooden, plastic, wire, shop, store, clothing, fashion",衣服，衣柜，钩子，悬挂，木头，塑料，电线，商店，商店，服装，时尚
-hash,/icons/outline/hash.svg,轮廓线,outline,"hashtag, #, instagram, hash",话题标签，图标标签，Instagram，哈希
+hash,/icons/outline/hash.svg,轮廓线,outline,"hashtag, #, instagram, hash",话题标签，#，Instagram，哈希
 haze-moon,/icons/outline/haze-moon.svg,轮廓线,outline,"blur, night, sky, cloud, opaque, dim, luminosity, atmosphere, twilight, haze",模糊，夜晚，天空，云，不透明的，**暗淡**，光度，大气，暮光，雾霾
 haze,/icons/outline/haze.svg,轮廓线,outline,"climate, meterology, weather, morning, haze, forecast, meteorology, atmospheric, conditions",气候，气象学，天气，早上，雾霾，预测，气象学，大气，条件
 hdr,/icons/outline/hdr.svg,轮廓线,outline,"high, dynamic, range, photography, contrast, intensity, clarity, capability, richness, hdr",高的，动态的，范围，摄影，对比，强度，清晰，能力，丰富性，HDR
@@ -2817,7 +2802,7 @@ home-minus,/icons/outline/home-minus.svg,轮廓线,outline,"remove, delete, canc
 home-move,/icons/outline/home-move.svg,轮廓线,outline,"relocation, moving, house, change, exchange, home, move, main, architecture, structure",搬迁，移动，房子，更改，交换，家，移动，主要，架构，结构
 home-off,/icons/outline/home-off.svg,轮廓线,outline,"house, dashboard, living, building, home, off, main, architecture, structure, disabled",房子，仪表盘，生活，建筑，家，关闭，主要，架构，结构，残疾的
 home-plus,/icons/outline/home-plus.svg,轮廓线,outline,"add, building, new, create, home, plus, house, main, architecture, structure",添加，建筑，新的，创建，家，plus，房子，主要，架构，结构
-home-question,/icons/outline/home-question.svg,轮廓线,outline,"support, help, information, ask, anwser, ?, home, question, house, main",支持，帮助，信息，询问，回答，？，家，问题，房子，主要
+home-question,/icons/outline/home-question.svg,轮廓线,outline,"support, help, information, ask, anwser, ?, home, question, house, main",支持，帮助，信息，询问，回答，?，家，问题，房子，主要
 home-ribbon,/icons/outline/home-ribbon.svg,轮廓线,outline,"contract, certifited, achievement, home, ribbon, house, main, architecture, structure, start",合同，认证，成就，家，丝带，房子，主要，架构，结构，开始
 home-search,/icons/outline/home-search.svg,轮廓线,outline,"find, estate, house, building, home, search, main, look, seek, architecture",找到，庄园，房子，建筑，家，搜索，主要，看，寻求，架构
 home-share,/icons/outline/home-share.svg,轮廓线,outline,"house, dashboard, living, building, network, link, connection, home, share, main",房子，仪表盘，生活，建筑，网络，链接，连接，家，分享，主要
@@ -2905,8 +2890,7 @@ inner-shadow-right,/icons/outline/inner-shadow-right.svg,轮廓线,outline,"shap
 inner-shadow-top-left,/icons/outline/inner-shadow-top-left.svg,轮廓线,outline,"shape, circle, up, north, west, inner, shadow, top, left, creative",形状，圆形，向上，北，西方，内部的，阴影，顶部，左边，有创意的
 inner-shadow-top-right,/icons/outline/inner-shadow-top-right.svg,轮廓线,outline,"shape, circle, up, north, east, inner, shadow, top, right, creative",形状，圆形，向上，北，东，内部的，阴影，顶部，right，有创意的
 inner-shadow-top,/icons/outline/inner-shadow-top.svg,轮廓线,outline,"shape, circle, up, north, inner, shadow, top, creative, artistic, visual",形状，圆形，向上，北，内部的，阴影，顶部，有创意的，艺术，视觉的
-input-ai,/icons/outline/input-ai.svg,轮廓线,outline,"data, feed, imbibe, consume, machine, learning, process, entry, artificial, intelligence","数据，喂食，吸收，消费，机器，学习，过程，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，人工智能，智能"
+input-ai,/icons/outline/input-ai.svg,轮廓线,outline,"data, feed, imbibe, consume, machine, learning, process, entry, artificial, intelligence",数据，喂食，吸收，消费，机器，学习，过程，入口，人工智能，智能
 input-check,/icons/outline/input-check.svg,轮廓线,outline,"verify, validate, review, inspect, control, tick, confirm, examine, approve, audit",验证，验证，审查，检查，控制，滴答，确认，检查，批准，审计
 input-search,/icons/outline/input-search.svg,轮廓线,outline,"find, website, field, explore, input, search, look, seek, query, browse",找到，网站，字段，探索，输入，搜索，看，寻求，query，浏览
 input-spark,/icons/outline/input-spark.svg,轮廓线,outline,"ignite, light, start, energize, power, initiate, kindle, trigger, active, catalyst",点燃，光，开始，激励，权力，启动，kindle，触发，活跃，催化剂
@@ -3043,8 +3027,8 @@ letter-f-small,/icons/outline/letter-f-small.svg,轮廓线,outline,"f, foxtrot, 
 letter-f,/icons/outline/letter-f.svg,轮廓线,outline,"alphabet, text, code, letter, character, typography, writing, f, glyph",字母，text，代码，信件，字符，排版，写作，“f”，字形
 letter-g-small,/icons/outline/letter-g-small.svg,轮廓线,outline,"g, golf, seventh, letter, alphabet, character, typeface, glyph, script, small",“g”，高尔夫，第七，信件，字母，字符，字体，字形，脚本，小的
 letter-g,/icons/outline/letter-g.svg,轮廓线,outline,"alphabet, text, code, letter, character, typography, writing, g, glyph",字母，text，代码，信件，字符，排版，写作，“g”，字形
-letter-h-small,/icons/outline/letter-h-small.svg,轮廓线,outline,"h, hotel, eighth, letter, alphabet, character, typeface, glyph, script, small",“h” 可以翻译为中文“哈”或“嗯”，具体取决于上下文。如果它是一个单独的字母，通常保留为“h”。，酒店，第八，信件，字母，字符，字体，字形，脚本，小的
-letter-h,/icons/outline/letter-h.svg,轮廓线,outline,"alphabet, text, code, letter, character, typography, writing, h, glyph",字母，text，代码，信件，字符，排版，写作，“h” 可以翻译为中文“哈”或“嗯”，具体取决于上下文。如果它是一个单独的字母，通常保留为“h”。，字形
+letter-h-small,/icons/outline/letter-h-small.svg,轮廓线,outline,"h, hotel, eighth, letter, alphabet, character, typeface, glyph, script, small",小时，酒店，第八，信件，字母，字符，字体，字形，脚本，小的
+letter-h,/icons/outline/letter-h.svg,轮廓线,outline,"alphabet, text, code, letter, character, typography, writing, h, glyph",字母，text，代码，信件，字符，排版，写作，小时，字形
 letter-i-small,/icons/outline/letter-i-small.svg,轮廓线,outline,"i, india, ninth, letter, alphabet, character, typeface, glyph, script, small",我，印度，第九，信件，字母，字符，字体，字形，脚本，小的
 letter-i,/icons/outline/letter-i.svg,轮廓线,outline,"alphabet, text, code, letter, character, typography, writing, i, glyph",字母，text，代码，信件，字符，排版，写作，我，字形
 letter-j-small,/icons/outline/letter-j-small.svg,轮廓线,outline,"j, juliett, tenth, letter, alphabet, character, typeface, glyph, script, small",j，juliett，第十，信件，字母，字符，字体，字形，脚本，小的
@@ -3153,15 +3137,12 @@ lock-exclamation,/icons/outline/lock-exclamation.svg,轮廓线,outline,"security
 lock-heart,/icons/outline/lock-heart.svg,轮廓线,outline,"privacy, affection, care, secure, safe, love, devotion, protection, guard, lock",隐私，情感，关怀，安全，安全的，爱，奉献，保护，警卫，锁定
 lock-minus,/icons/outline/lock-minus.svg,轮廓线,outline,"decrease, deduct, subtract, reduce, less, lower, diminish, deduction, down, minimize",减少，扣除，减去，减少，更少，更低的，减少，扣除，向下，最小化
 lock-off,/icons/outline/lock-off.svg,轮廓线,outline,"security, password, secure, lock, off, private, control, operation, disabled, inactive",安全，密码，安全，锁定，关闭，私有的，控制，操作，残疾的，不活跃的
-lock-open-2,/icons/outline/lock-open-2.svg,轮廓线,outline,"unlock, access, free, unlocked, available, entry, open, release, unseal, permit","解锁，访问，自由，已解锁，可用，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，打开，释放，解封，允许"
+lock-open-2,/icons/outline/lock-open-2.svg,轮廓线,outline,"unlock, access, free, unlocked, available, entry, open, release, unseal, permit",解锁，访问，自由，已解锁，可用，入口，打开，释放，解封，允许
 lock-open-off,/icons/outline/lock-open-off.svg,轮廓线,outline,"security, password, secure, unprotected, lock, open, off, private, control, operation",安全，密码，安全，未受保护的，锁定，打开，关闭，私有的，控制，操作
 lock-open,/icons/outline/lock-open.svg,轮廓线,outline,"security, password, secure, unprotected, lock, open, private, control, operation, protected",安全，密码，安全，未受保护的，锁定，打开，私有的，控制，操作，受保护的
-lock-password,/icons/outline/lock-password.svg,轮廓线,outline,"authentication, code, credential, secure, key, protected, identify, secret, entry, verification","认证，代码，凭证，安全，钥匙，受保护的，识别，秘密，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，验证"
+lock-password,/icons/outline/lock-password.svg,轮廓线,outline,"authentication, code, credential, secure, key, protected, identify, secret, entry, verification",认证，代码，凭证，安全，钥匙，受保护的，识别，秘密，入口，验证
 lock-pause,/icons/outline/lock-pause.svg,轮廓线,outline,"stop, halt, interruption, break, suspend, delay, hold, pause, wait, interlude",停止，停止，中断，中断，暂停，延迟，拿着，暂停，等待，间奏
-lock-pin,/icons/outline/lock-pin.svg,轮廓线,outline,"secure, code, number, access, key, protection, guard, password, entry, lock","安全，代码，数字，访问，钥匙，保护，警卫，密码，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，锁定"
+lock-pin,/icons/outline/lock-pin.svg,轮廓线,outline,"secure, code, number, access, key, protection, guard, password, entry, lock",安全，代码，数字，访问，钥匙，保护，警卫，密码，入口，锁定
 lock-plus,/icons/outline/lock-plus.svg,轮廓线,outline,"add, increase, additional, more, expand, extra, plus, growth, gain, increment",添加，增加，附加，更多，扩展，额外的，plus，生长，获得，增量
 lock-question,/icons/outline/lock-question.svg,轮廓线,outline,"query, uncertain, inquiry, doubt, ask, confused, unknown, ponder, curious, wonder",query，不确定，询问，怀疑，询问，困惑，未知，思考，好奇，奇迹
 lock-search,/icons/outline/lock-search.svg,轮廓线,outline,"find, locate, seek, browse, explore, look, investigate, discover, detect, inquire",找到，定位，寻求，浏览，探索，看，调查，发现，检测，询问
@@ -3325,14 +3306,7 @@ math-off,/icons/outline/math-off.svg,轮廓线,outline,"subject, count, plus, mi
 计数  
 
 **翻译解析：**  
-1. **词性判断**：原文""count""为动词或名词，plus，减去，“times” 可以翻译为：
-
-- 时代
-- 次数
-- 倍
-- 时期
-
-具体含义需根据上下文确定，数学，关闭，计算，方程，残疾的"
+1. **词性判断**：原文""count""为动词或名词，plus，减去，times，数学，关闭，计算，方程，残疾的"
 math-pi-divide-2,/icons/outline/math-pi-divide-2.svg,轮廓线,outline,"mathematic, sign, expression, math, divide, calculation, equation, pi, mathematics, numeric",数学，**标志**，表达，数学，分开，计算，方程，π，数学，数字的
 math-pi,/icons/outline/math-pi.svg,轮廓线,outline,"mathematic, sign, expression, math, calculation, equation, pi, mathematics, numeric, formula",数学，**标志**，表达，数学，计算，方程，π，数学，数字的，公式
 math-sec,/icons/outline/math-sec.svg,轮廓线,outline,"secant, geometry, math, circle, ratio, sine, trigonometry, function, angle, formula",正割，几何，数学，圆形，比率，正弦，三角学，函数，角度，公式
@@ -3354,14 +3328,7 @@ math,/icons/outline/math.svg,轮廓线,outline,"subject, count, plus, minus, tim
 计数  
 
 **翻译解析：**  
-1. **词性判断**：原文""count""为动词或名词，plus，减去，“times” 可以翻译为：
-
-- 时代
-- 次数
-- 倍
-- 时期
-
-具体含义需根据上下文确定，数学，计算，方程，数学，数字的"
+1. **词性判断**：原文""count""为动词或名词，plus，减去，times，数学，计算，方程，数学，数字的"
 matrix,/icons/outline/matrix.svg,轮廓线,outline,"grid, array, system, structure, arrangement, schema, chart, layout, framework, matrix",网格，数组，系统，结构，排列，模式，图表，布局，框架，矩阵
 maximize-off,/icons/outline/maximize-off.svg,轮廓线,outline,"fullscreen, maximize, expand, window, size, resize, direction, off, content, entertainment",全屏，最大化，扩展，窗户，尺寸，调整大小，方向，关闭，内容，娱乐
 maximize,/icons/outline/maximize.svg,轮廓线,outline,"fullscreen, maximize, expand, window, size, resize, direction, content, entertainment, multimedia",全屏，最大化，扩展，窗户，尺寸，调整大小，方向，内容，娱乐，多媒体
@@ -3646,8 +3613,7 @@ navigation-share,/icons/outline/navigation-share.svg,轮廓线,outline,"distribu
 - 岗位、职位（如工作职位，协作，连接，发送"
 navigation-south,/icons/outline/navigation-south.svg,轮廓线,outline,"downward, southern, equator, tropic, descent, drop, southward, bottomward, antarctic, latitude",向下，南方的，赤道，热带，下降，掉落，向南，向下，南极，纬度
 navigation-star,/icons/outline/navigation-star.svg,轮廓线,outline,"favorite, highlight, fame, rate, celebrity, asterisk, notable, feature, shine, emphasis",最喜欢的，高亮，名声，速率，名人，星号，显著的，特征，闪耀，强调
-navigation-top,/icons/outline/navigation-top.svg,轮廓线,outline,"peak, summit, highest, foremost, acme, crest, pinnacle, head, vertex, apex","峰值，峰会，最高的，最重要的，顶峰，crest 可以翻译为“ crest ”，但根据具体语境，常见的中文翻译有：  
-- **波峰**（如波浪的，巅峰，头部，顶点，顶点"
+navigation-top,/icons/outline/navigation-top.svg,轮廓线,outline,"peak, summit, highest, foremost, acme, crest, pinnacle, head, vertex, apex",峰值，峰会，最高的，最重要的，顶峰， crest，巅峰，头部，顶点，顶点
 navigation-up,/icons/outline/navigation-up.svg,轮廓线,outline,"ascend, rise, elevate, climb, increase, surge, uplift, upward, boost, advance",上升，上升，提升，攀登，增加，激增，提升，向上，提升，前进
 navigation-west,/icons/outline/navigation-west.svg,轮廓线,outline,"leftward, occidental, westward, sunset, america, westerly, westbound, westside, latitude, cardinal",向左，西方的，向西，日落，美国，西风，向西行驶，西区，纬度，红衣主教
 navigation-x,/icons/outline/navigation-x.svg,轮廓线,outline,"close, exit, terminate, cancel, reject, deny, remove, eliminate, cross, end",关闭，退出，终止，取消，拒绝，拒绝，移除，消除，交叉，结束
@@ -3677,36 +3643,33 @@ number-0-small,/icons/outline/number-0-small.svg,轮廓线,outline,"zero, nil, n
 number-0,/icons/outline/number-0.svg,轮廓线,outline,"zero, maths, value, quantity, calculate, calculation, total, amount, sum, order, digit",零，数学，值，数量，计算，计算，**总计**，金额，**总和**，订单，数字
 number-1-small,/icons/outline/number-1-small.svg,轮廓线,outline,"one, singular, first, unit, solitary, individual, alone, unique, sole, individualistic",“一个”，奇异的，第一个，单位，孤独，个体，单独，独特的，唯一的，个人主义的
 number-1,/icons/outline/number-1.svg,轮廓线,outline,"one, maths, value, quantity, calculate, calculation, total, amount, sum, order, digit",“一个”，数学，值，数量，计算，计算，**总计**，金额，**总和**，订单，数字
-number-10-small,/icons/outline/number-10-small.svg,轮廓线,outline,"ten, decade, decuple, decad, tenfold, decenary, dec, decuplet, tenth, deca",十，十年，十倍，堕落，十倍，十年，dec，十重态，第十，**deca** 可以翻译为 **十**（在拉丁语或希腊语词根中表示“十”），或者根据具体语境
+number-10-small,/icons/outline/number-10-small.svg,轮廓线,outline,"ten, decade, decuple, decad, tenfold, decenary, dec, decuplet, tenth, deca",十，十年，十倍，堕落，十倍，十年，dec，十重态，第十，十
 number-10,/icons/outline/number-10.svg,轮廓线,outline,"ten, decimal, base, tenth, numeric, doublefive, dime, score, count, digits","十，小数，基础，第十，数字的，双五，给我一毛钱，分数，**翻译结果：**  
 计数  
 
 **翻译解析：**  
 1. **词性判断**：原文""count""为动词或名词，数字"
-number-100-small,/icons/outline/number-100-small.svg,轮廓线,outline,"hundred, century, cent, triplefigure, complete, full, maximal, total, entire, doublefifty",一百，世纪，**分**，三位数，完成，“full”翻译为中文是：满的，最大的，**总计**，整个，“doublefifty” 可以翻译为 **“双五十”** 或 **“双倍五十”**，具体含义需根据上下文
+number-100-small,/icons/outline/number-100-small.svg,轮廓线,outline,"hundred, century, cent, triplefigure, complete, full, maximal, total, entire, doublefifty",一百，世纪，**分**，三位数，完成，“full”翻译为中文是：满的，最大的，**总计**，整个，双五十
 number-11-small,/icons/outline/number-11-small.svg,轮廓线,outline,"eleven, undecade, eleventh, undecuple, undecad, elevenfold, undecenary, undec, undecuplet, 11th",十一，十年，第十一，十一倍，undecad 可能是一个拼写错误或特定术语。如果是指 **undecad**（来自拉丁语 *undecim*，，十一倍，十一周年，未决定，十一个一组，第11届
 number-11,/icons/outline/number-11.svg,轮廓线,outline,"eleven, prime, odd, numeric, count, afterten, doubleone, scoreplusone, complementary, digits","十一，**质数**，奇怪的，数字的，**翻译结果：**  
 计数  
 
 **翻译解析：**  
-1. **词性判断**：原文""count""为动词或名词，十点后，“doubleone” 可以翻译为“双一”或“双重一”，具体含义需结合上下文。如果是指品牌、名称或特定，分数加一，互补，数字"
-number-12-small,/icons/outline/number-12-small.svg,轮廓线,outline,"twelve, duodecade, twelfth, duodecuple, duodecad, twelvefold, duodenary, duodec, duodecuplet, 12th",十二，十二年，第十二，十二重，十二人组，十二倍，十二进制的，“duodec” 可以翻译为 **“十二”** 或 **“十二进制”**，具体取决于上下文。如果是指音乐，十二胞胎，第十二
+1. **词性判断**：原文""count""为动词或名词，十点后，双一，分数加一，互补，数字"
+number-12-small,/icons/outline/number-12-small.svg,轮廓线,outline,"twelve, duodecade, twelfth, duodecuple, duodecad, twelvefold, duodenary, duodec, duodecuplet, 12th",十二，十二年，第十二，十二重，十二人组，十二倍，十二进制的，十二，十二胞胎，第十二
 number-123,/icons/outline/number-123.svg,轮廓线,outline,"numbers, digit, one, two, three, number, 123, numeric, numeral, count","数字，数字，“一个”，两个，三，数字，123，数字的，数字，**翻译结果：**  
 计数  
 
 **翻译解析：**  
 1. **词性判断**：原文""count""为动词或名词"
-number-13-small,/icons/outline/number-13-small.svg,轮廓线,outline,"thirteen, thirteenth, tredecade, tredecuple, tredecad, thirteenfold, tredecenary, tredec, tredecuplet, 13th",十三，第十三，tredecade 的中文翻译是：**十三年**（或“十三载”）。，十三倍，tredecad 可以翻译为 **“十三”** 或 **“十三的”**，但在中文中没有完全对应的单一词汇。如果，十三倍，十三周年，十三，十三重态，第13届
+number-13-small,/icons/outline/number-13-small.svg,轮廓线,outline,"thirteen, thirteenth, tredecade, tredecuple, tredecad, thirteenfold, tredecenary, tredec, tredecuplet, 13th",十三，第十三，tredecade 的中文翻译是：**十三年**（或“十三载”）。，十三倍，tredecad，十三倍，十三周年，十三，十三重态，第13届
 number-14-small,/icons/outline/number-14-small.svg,轮廓线,outline,"fourteen, fourteenth, quattuordecade, quattuordecuple, quattuordecad, fourteenfold, quattuordecenary, quattuordec, quattuordecuplet, 14th",十四，第十四，十四年，十四倍，十四，十四倍，十四年一次的，十四，十四胞胎，第十四
 number-15-small,/icons/outline/number-15-small.svg,轮廓线,outline,"fifteen, fifteenth, quindecade, quindecuple, quindecad, fifteenfold, quindecenary, quindec, quindecuplet, 15th",十五，第十五，十五年期，十五倍，十五人组，十五倍，十五周年纪念，**十五人一组**（或**十五人团**，取决于具体语境，quindec 通常指由十五人组成的团体或与，十五胞胎，第15届
 number-16-small,/icons/outline/number-16-small.svg,轮廓线,outline,"sixteen, sixteenth, sexdecade, sexdecuple, sexdecad, sixteenfold, sexdecenary, sexdec, sexdecuplet, 16th",十六，第十六，十六年，十六倍，十六，十六倍，十六年一次的，十六，十六胞胎，第16届
 number-17-small,/icons/outline/number-17-small.svg,轮廓线,outline,"seventeen, seventeenth, septendecade, septendecuple, septendecad, seventeenfold, septendecenary, septendec, septendecuplet, 17th",十七，第十七，十七年，十七倍，十七，十七倍，十七年一次的，十七，十七胞胎，第十七
 number-18-small,/icons/outline/number-18-small.svg,轮廓线,outline,"eighteen, eighteenth, octodecade, octodecuple, octodecad, eighteenfold, octodecenary, octodec, octodecuplet, 18th",十八，第十八，十八年，十八倍，八边形，十八倍，十八年周期，十八，十八胞胎，第十八
-number-19-small,/icons/outline/number-19-small.svg,轮廓线,outline,"nineteen, nineteenth, novendecade, novendecuple, novendecad, nineteenfold, novendecenary, novendec, novendecuplet, 19th",十九，第十九，novendecade 的中文翻译是：十九年（或十九个十年，但通常指19年）。，十九倍，novendecad 是一个表示“十九”的英语单词，源自拉丁语，意为“十九”。在中文中，可以翻译为“，十九倍，十九年一次的，**novendec** 可以翻译为 **十九**（源自拉丁语数字前缀，表示19）。，十九胞胎，第19届
-number-2-small,/icons/outline/number-2-small.svg,轮廓线,outline,"two, pair, duo, double, twofold, dual, second, couple, dyad, binary","两个，**配对**，“duo” 可以翻译为：
-- 多（表示数量大）
-- 朵（用于花、云等）
-- 夺，双倍，双重，双重的，第二个，夫妻，二元体，二进制"
+number-19-small,/icons/outline/number-19-small.svg,轮廓线,outline,"nineteen, nineteenth, novendecade, novendecuple, novendecad, nineteenfold, novendecenary, novendec, novendecuplet, 19th",十九，第十九，novendecade 的中文翻译是：十九年（或十九个十年，但通常指19年）。，十九倍，十九，十九倍，十九年一次的，十九，十九胞胎，第19届
+number-2-small,/icons/outline/number-2-small.svg,轮廓线,outline,"two, pair, duo, double, twofold, dual, second, couple, dyad, binary",两个，**配对**，二重奏，双倍，双重，双重的，第二个，夫妻，二元体，二进制
 number-2,/icons/outline/number-2.svg,轮廓线,outline,"two, maths, value, quantity, calculate, calculation, total, amount, sum, order, digit",两个，数学，值，数量，计算，计算，**总计**，金额，**总和**，订单，数字
 number-20-small,/icons/outline/number-20-small.svg,轮廓线,outline,"twenty, twentieth, vigintidecade, vigintidecuple, vigintidecad, twentyfold, vigintidecenary, vigintidec, vigintidecuplet, 20th",二十，第二十，二十年代，二十倍，二十进制，二十倍，二十进制，二十进制，二十胞胎，第20届
 number-21-small,/icons/outline/number-21-small.svg,轮廓线,outline,"twenty-one, 21st, twenty-first, viginti-uno, viginti-first, twenty, and, one, plus, 21th",二十一，21世纪，第二十一，二十一个，第二十一，二十，以及，“一个”，plus，第21届
@@ -3730,8 +3693,7 @@ number-31-small,/icons/outline/number-31-small.svg,轮廓线,outline,"thirtyone,
 
 **翻译解析：**  
 1. **词性判断**：原文""count""为动词或名词，PrimePlus，指南针，接下来的三十，双十五加一，数字"
-number-32-small,/icons/outline/number-32-small.svg,轮廓线,outline,"thirtytwo, even, binary, cubeplus, count, fourcubed, squareplusfour, evendouble, poweroftwo, digits","三十二，甚至，二进制，“cubeplus” 可以翻译为：  
-**立方加** 或 **立方增强版**（根据具体语境，如果是产品名称，，**翻译结果：**  
+number-32-small,/icons/outline/number-32-small.svg,轮廓线,outline,"thirtytwo, even, binary, cubeplus, count, fourcubed, squareplusfour, evendouble, poweroftwo, digits","三十二，甚至，二进制，立方体加，**翻译结果：**  
 计数  
 
 **翻译解析：**  
@@ -3745,7 +3707,7 @@ number-34-small,/icons/outline/number-34-small.svg,轮廓线,outline,"thirtyfour
 计数  
 
 **翻译解析：**  
-1. **词性判断**：原文""count""为动词或名词，四的立方加二，对十六加二，“evencompass” 可以翻译为 **“偶数指南针”** 或 **“均衡罗盘”**，具体含义需结合，第二个奇数结尾，偏移对，数字"
+1. **词性判断**：原文""count""为动词或名词，四的立方加二，对十六加二，偶数指南针，第二个奇数结尾，偏移对，数字"
 number-35-small,/icons/outline/number-35-small.svg,轮廓线,outline,"thirtyfive, odd, fivetime, halfseventies, numeric, count, roundplusfive, tripleplusfive, fivebyseven, digits","三十五，奇怪的，五次，半七十年代，数字的，**翻译结果：**  
 计数  
 
@@ -3759,14 +3721,14 @@ number-4-small,/icons/outline/number-4-small.svg,轮廓线,outline,"four, quarte
 number-4,/icons/outline/number-4.svg,轮廓线,outline,"four, maths, value, quantity, calculate, calculation, total, amount, sum, order, digit",四，数学，值，数量，计算，计算，**总计**，金额，**总和**，订单，数字
 number-40-small,/icons/outline/number-40-small.svg,轮廓线,outline,"tiny, forty, digit40, numeric, miniature, icon40, num40, small40, fourzero, miniscule",小的，四十，数字40，数字的，微型，图标40，num40，小40，四零，微小的
 number-41-small,/icons/outline/number-41-small.svg,轮廓线,outline,"tiny, fortyone, digit41, numeric, miniature, icon41, num41, small41, fourone, miniscule",小的，四十一，数字41，数字的，微型，icon41，num41，小41，四一，微小的
-number-42-small,/icons/outline/number-42-small.svg,轮廓线,outline,"tiny, fortytwo, digit42, numeric, miniature, icon42, num42, small42, fourtwo, miniscule",小的，四十二，数字42，数字的，微型，图标42，num42，小42，“fourtwo” 可以翻译为 **“四二”**。，微小的
+number-42-small,/icons/outline/number-42-small.svg,轮廓线,outline,"tiny, fortytwo, digit42, numeric, miniature, icon42, num42, small42, fourtwo, miniscule",小的，四十二，数字42，数字的，微型，图标42，num42，小42，四二，微小的
 number-43-small,/icons/outline/number-43-small.svg,轮廓线,outline,"tiny, fortythree, digit43, numeric, miniature, icon43, num43, small43, fourthree, miniscule",小的，四十三，数字43，数字的，微型，icon43，num43，小43，四三，微小的
 number-44-small,/icons/outline/number-44-small.svg,轮廓线,outline,"tiny, fortyfour, digit44, numeric, miniature, icon44, num44, small44, fourfour, miniscule",小的，四十四，数字44，数字的，微型，图标44，num44，小44，四四，微小的
 number-45-small,/icons/outline/number-45-small.svg,轮廓线,outline,"tiny, fortyfive, digit45, numeric, miniature, icon45, num45, small45, fourfive, miniscule",小的，四十五，数字45，数字的，微型，图标45，num45，小45，四五，微小的
 number-46-small,/icons/outline/number-46-small.svg,轮廓线,outline,"tiny, fortysix, digit46, numeric, miniature, icon46, num46, small46, foursix, miniscule",小的，四十六，数字46，数字的，微型，图标46，num46，小46，四六，微小的
 number-47-small,/icons/outline/number-47-small.svg,轮廓线,outline,"tiny, fortyseven, digit47, numeric, miniature, icon47, num47, small47, fourseven, miniscule",小的，四十七，数字47，数字的，微型，图标47，数字47，小47，四七，微小的
 number-48-small,/icons/outline/number-48-small.svg,轮廓线,outline,"tiny, fortyeight, digit48, numeric, miniature, icon48, num48, small48, foureight, miniscule",小的，四十八，数字48，数字的，微型，图标48，num48，小48，四八，微小的
-number-49-small,/icons/outline/number-49-small.svg,轮廓线,outline,"tiny, fortynine, digit49, numeric, miniature, icon49, num49, small49, fournine, miniscule",小的，四十九，数字49，数字的，微型，图标49，num49，小49，“fournine” 可以翻译为“四九”。，微小的
+number-49-small,/icons/outline/number-49-small.svg,轮廓线,outline,"tiny, fortynine, digit49, numeric, miniature, icon49, num49, small49, fournine, miniscule",小的，四十九，数字49，数字的，微型，图标49，num49，小49，四九，微小的
 number-5-small,/icons/outline/number-5-small.svg,轮廓线,outline,"five, quintet, quintuple, pentad, fivefold, quinary, quint, quintuplet, fifth, penta",五，五重奏，五倍，五重奏，五倍，五进制，**五度音**（或译为**五度**、**五重奏**等，具体含义需根据上下文确定），五胞胎，第五，五杀
 number-5,/icons/outline/number-5.svg,轮廓线,outline,"five, maths, value, quantity, calculate, calculation, total, amount, sum, order, digit",五，数学，值，数量，计算，计算，**总计**，金额，**总和**，订单，数字
 number-50-small,/icons/outline/number-50-small.svg,轮廓线,outline,"tiny, fifty, digit50, numeric, miniature, icon50, num50, small50, fivezero, miniscule",小的，五十，数字50，数字的，微型，图标50，num50，小50，五零，微小的
@@ -3784,7 +3746,7 @@ number-6,/icons/outline/number-6.svg,轮廓线,outline,"six, maths, value, quant
 number-60-small,/icons/outline/number-60-small.svg,轮廓线,outline,"tiny, sixty, digit60, numeric, miniature, icon60, num60, small60, sixzero, miniscule",小的，六十，数字60，数字的，微型，icon60，num60，小60，六零，微小的
 number-61-small,/icons/outline/number-61-small.svg,轮廓线,outline,"tiny, sixtyone, digit61, numeric, miniature, icon61, num61, small61, sixone, miniscule",小的，六十一，数字61，数字的，微型，图标61，num61，小61，六十一，微小的
 number-62-small,/icons/outline/number-62-small.svg,轮廓线,outline,"tiny, sixtytwo, digit62, numeric, miniature, icon62, num62, small62, sixtwo, miniscule",小的，六十二，数字62，数字的，微型，图标62，num62，小62，六二，微小的
-number-63-small,/icons/outline/number-63-small.svg,轮廓线,outline,"tiny, sixtythree, digit63, numeric, miniature, icon63, num63, small63, sixthree, miniscule",小的，六十三，数字63，数字的，微型，图标63，num63，小63，“sixthree” 可以翻译为 **“六三”**。，微小的
+number-63-small,/icons/outline/number-63-small.svg,轮廓线,outline,"tiny, sixtythree, digit63, numeric, miniature, icon63, num63, small63, sixthree, miniscule",小的，六十三，数字63，数字的，微型，图标63，num63，小63，sixthree，微小的
 number-64-small,/icons/outline/number-64-small.svg,轮廓线,outline,"tiny, sixtyfour, digit64, numeric, miniature, icon64, num64, small64, sixfour, miniscule",小的，六十四，数字64，数字的，微型，图标64，num64，小64，六四，微小的
 number-65-small,/icons/outline/number-65-small.svg,轮廓线,outline,"tiny, sixtyfive, digit65, numeric, miniature, icon65, num65, small65, sixfive, miniscule",小的，六十五，数字65，数字的，微型，图标65，num65，小65，六五，微小的
 number-66-small,/icons/outline/number-66-small.svg,轮廓线,outline,"sixty-six, digit, count, numeral, value, sequence, numeric, figure, calculate, number","六十六，数字，**翻译结果：**  
@@ -3950,7 +3912,7 @@ number-99-small,/icons/outline/number-99-small.svg,轮廓线,outline,"numerical,
 number,/icons/outline/number.svg,轮廓线,outline,"one, two, three, four, five, six, seven, eight, nine, ten, math, counting",“一个”，两个，三，四，五，六，七，八，九，十，数学，计数
 numbers,/icons/outline/numbers.svg,轮廓线,outline,"math, counting, calculator, calculate, one, two, three, four, five, numbers",数学，计数，计算器，计算，“一个”，两个，三，四，五，数字
 nurse,/icons/outline/nurse.svg,轮廓线,outline,"hospital, doctor, medical, woman, emergency, medicine, nurse, wellness, healthcare, treatment",医院，医生，医疗，女人，紧急情况，药物，护士，健康，医疗保健，治疗
-nut,/icons/outline/nut.svg,轮廓线,outline,"hardware, fastener, metal, steel, hexagon, fitting, mechanical, industrial, tool, connection",硬件，紧固件，金属，钢，六边形，fitting 可以翻译为“合适的”或“恰当的”。，机械的，工业的，工具，连接
+nut,/icons/outline/nut.svg,轮廓线,outline,"hardware, fastener, metal, steel, hexagon, fitting, mechanical, industrial, tool, connection",硬件，紧固件，金属，钢，六边形，合适的，机械的，工业的，工具，连接
 object-scan,/icons/outline/object-scan.svg,轮廓线,outline,"barcode, reader, scanner, inventory, retail, identification, inspection, analyze, tracking, detect",条形码，读者，扫描仪，库存，零售，识别，检查，分析，追踪，检测
 octagon-minus-2,/icons/outline/octagon-minus-2.svg,轮廓线,outline,"subtract, decrease, reduce, lower, lessen, discount, diminish, abstract, deduct, withdraw",减去，减少，减少，更低的，减少，折扣，减少，抽象，扣除，撤回
 octagon-minus,/icons/outline/octagon-minus.svg,轮廓线,outline,"subtract, decrease, reduce, lower, lessen, discount, diminish, abstract, deduct, withdraw",减去，减少，减少，更低的，减少，折扣，减少，抽象，扣除，撤回
@@ -4005,8 +3967,7 @@ password-user,/icons/outline/password-user.svg,轮廓线,outline,"authentication
 password,/icons/outline/password.svg,轮廓线,outline,"lock, secure, privacy, locked, login, password, control, operation, function, interface",锁定，安全，隐私，锁定，登录，密码，控制，操作，函数，接口
 paw-off,/icons/outline/paw-off.svg,轮廓线,outline,"animal, dog, cat, foot, pets, paw, off, disabled, inactive",动物，狗，猫，脚，宠物，爪子，关闭，残疾的，不活跃的
 paw,/icons/outline/paw.svg,轮廓线,outline,"animal, dog, cat, foot, pets, paw",动物，狗，猫，脚，宠物，爪子
-paywall,/icons/outline/paywall.svg,轮廓线,outline,"subscription, access, payment, content, exclusive, restricted, premium, member, entry, gate","订阅，访问，支付，内容，排他的，受限的，优质，成员，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，门"
+paywall,/icons/outline/paywall.svg,轮廓线,outline,"subscription, access, payment, content, exclusive, restricted, premium, member, entry, gate",订阅，访问，支付，内容，排他的，受限的，优质，成员，入口，门
 pdf,/icons/outline/pdf.svg,轮廓线,outline,"file, document, type, format, extencion, pdf, plugin, addon, module, component",文件，文档，类型，格式，扩展，pdf，插件，附加组件，模块，组件
 peace,/icons/outline/peace.svg,轮廓线,outline,"love, hippy, minority, opinion, equilibrium, peace, sign, mark, emblem, representation",爱，嬉皮士，少数群体，意见，平衡，和平，**标志**，标记，徽章，表征
 pencil-bolt,/icons/outline/pencil-bolt.svg,轮廓线,outline,"design, edit, modify, electric, lightning, sketch, illustrate, note, draw, creativity","设计，编辑，修改，电，闪电，草图，说明，笔记，好的，这是“draw”的中文翻译：
@@ -4040,11 +4001,8 @@ pennant,/icons/outline/pennant.svg,轮廓线,outline,"flag, ship, sports, champi
 pentagon-minus,/icons/outline/pentagon-minus.svg,轮廓线,outline,"subtract, decrease, reduce, deduct, remove, diminish, lessen, lower, abridge, curtail",减去，减少，减少，扣除，移除，减少，减少，更低的，省略，限制
 pentagon-number-0,/icons/outline/pentagon-number-0.svg,轮廓线,outline,"zero, none, nil, null, nothing, naught, cipher, void, blank, empty",零，无，空，null，无，无，密码，空，空白，空的
 pentagon-number-1,/icons/outline/pentagon-number-1.svg,轮廓线,outline,"one, single, unit, solo, unary, entity, individual, alone, distinct, first",“一个”，单一，单位，独奏，一元，实体，个体，单独，不同的，第一个
-pentagon-number-2,/icons/outline/pentagon-number-2.svg,轮廓线,outline,"two, pair, duo, double, twosome, binary, twin, couple, dyad, second","两个，**配对**，“duo” 可以翻译为：
-- 多（表示数量大）
-- 朵（用于花、云等）
-- 夺，双倍，两人组，二进制，双胞胎，夫妻，二元体，第二个"
-pentagon-number-3,/icons/outline/pentagon-number-3.svg,轮廓线,outline,"three, trio, triple, threesome, ternary, triad, trine, triune, tertiary, pentagon",三，三人组，三重，三人行，三元，三合会，**三人组**（或译为**三位一体**，具体取决于上下文。如果是指游戏《Trine》，则通常译为《三位一体》，三位一体，三级，五角大楼
+pentagon-number-2,/icons/outline/pentagon-number-2.svg,轮廓线,outline,"two, pair, duo, double, twosome, binary, twin, couple, dyad, second",两个，**配对**，二重奏，双倍，两人组，二进制，双胞胎，夫妻，二元体，第二个
+pentagon-number-3,/icons/outline/pentagon-number-3.svg,轮廓线,outline,"three, trio, triple, threesome, ternary, triad, trine, triune, tertiary, pentagon",三，三人组，三重，三人行，三元，三合会，trine，三位一体，三级，五角大楼
 pentagon-number-4,/icons/outline/pentagon-number-4.svg,轮廓线,outline,"four, quartet, quadruple, quadrangle, quart, quaternary, quad, foursome, quadro, fourfold",四，四重奏，四倍，四边形，石英，**第四纪**，**四边形**，四人组，**quadro** 的中文翻译是：**画框** 或 **四联画**（根据语境，也可译为“方形”、“，四倍
 pentagon-number-5,/icons/outline/pentagon-number-5.svg,轮廓线,outline,"five, quintet, quin, penta, fifth, quinary, pentad, pentagon, fiver, cinque",五，五重奏，quin，五杀，第五，五进制，五重奏，五角大楼，五美元，五
 pentagon-number-6,/icons/outline/pentagon-number-6.svg,轮廓线,outline,"six, sextet, sextuple, hexagon, hexad, senary, sixfold, sixer, hex, sixth",六，六重奏，六倍，六边形，六边形，六进制，六倍，六分球，十六进制，第六
@@ -4218,7 +4176,7 @@ plug-x,/icons/outline/plug-x.svg,轮廓线,outline,"electricity, charger, socket
 plug,/icons/outline/plug.svg,轮廓线,outline,"electricity, charger, socket, connection, plug, hardware, technology, electronic, gadget, equipment",电，充电器，套接字，连接，插头，硬件，技术，电子，小工具，设备
 plus-equal,/icons/outline/plus-equal.svg,轮廓线,outline,"math, sign, adding, equation, plus, equal, calculation, add, more, increase",数学，**标志**，添加，方程，plus，相等的，计算，添加，更多，增加
 plus-minus,/icons/outline/plus-minus.svg,轮廓线,outline,"math, sign, adding, subtraction, plus, minus, calculation, equation, add, more",数学，**标志**，添加，减法，plus，减去，计算，方程，添加，更多
-plus,/icons/outline/plus.svg,轮廓线,outline,"add, create, new, +, plus, calculation, equation, more, increase, positive",添加，创建，新的，加，plus，计算，方程，更多，增加，积极的
+plus,/icons/outline/plus.svg,轮廓线,outline,"add, create, new, +, plus, calculation, equation, more, increase, positive",添加，创建，新的，+，plus，计算，方程，更多，增加，积极的
 png,/icons/outline/png.svg,轮廓线,outline,"file, format, type, document, filetype, png, plugin, addon, module, component",文件，格式，类型，文档，文件类型，png，插件，附加组件，模块，组件
 podium-off,/icons/outline/podium-off.svg,轮廓线,outline,"speach, microphone, conference, politics, audience, presentation, podium, off, architecture, structure",演讲，麦克风，会议，政治，受众，演示，领奖台，关闭，架构，结构
 podium,/icons/outline/podium.svg,轮廓线,outline,"speach, microphone, conference, politics, audience, presentation, podium, architecture, structure, construction",演讲，麦克风，会议，政治，受众，演示，领奖台，架构，结构，施工
@@ -4293,7 +4251,7 @@ pyramid-plus,/icons/outline/pyramid-plus.svg,轮廓线,outline,"3d, pattern, abs
 pyramid,/icons/outline/pyramid.svg,轮廓线,outline,"3d, pattern, abstract, geometric, shape, pyramid, geometry, form, figure, outline",3D，模式，抽象，几何的，形状，金字塔，几何，表格，图形，大纲
 qrcode-off,/icons/outline/qrcode-off.svg,轮廓线,outline,"scan, data, qrcode, off, hardware, technology, disabled, inactive, electronic, gadget",扫描，数据，二维码，关闭，硬件，技术，残疾的，不活跃的，电子，小工具
 qrcode,/icons/outline/qrcode.svg,轮廓线,outline,"scan, data, qrcode, hardware, technology, electronic, gadget, equipment",扫描，数据，二维码，硬件，技术，电子，小工具，设备
-question-mark,/icons/outline/question-mark.svg,轮廓线,outline,"sign, ask, sentence, word, letters, ?, question, mark, help, inquiry",**标志**，询问，句子，单词，信件，？，问题，标记，帮助，询问
+question-mark,/icons/outline/question-mark.svg,轮廓线,outline,"sign, ask, sentence, word, letters, ?, question, mark, help, inquiry",**标志**，询问，句子，单词，信件，?，问题，标记，帮助，询问
 queue-pop-in,/icons/outline/queue-pop-in.svg,轮廓线,outline,"queue, pop, in, insert, stack, data-structure, add, development",队列，流行，在，插入，堆栈，数据结构，添加，发展
 queue-pop-out,/icons/outline/queue-pop-out.svg,轮廓线,outline,"queue, pop, out, remove, stack, data-structure, extract, development",队列，流行，“出去”，移除，堆栈，数据结构，提取，发展
 quote-off,/icons/outline/quote-off.svg,轮廓线,outline,"chat, message, text, punctuation, quotation, comment, quote, off, disabled, inactive",聊天，消息，text，标点符号，引用，评论，引用，关闭，残疾的，不活跃的
@@ -4724,7 +4682,7 @@ snowboarding,/icons/outline/snowboarding.svg,轮廓线,outline,"sport, winter, s
 snowflake-off,/icons/outline/snowflake-off.svg,轮廓线,outline,"winter, weather, cold, frost, snowflake, off, climate, forecast, disabled, inactive",冬天，天气，寒冷，霜，雪花，关闭，气候，预测，残疾的，不活跃的
 snowflake,/icons/outline/snowflake.svg,轮廓线,outline,"winter, weather, cold, frost, snowflake, climate, forecast, meteorology, atmospheric, conditions",冬天，天气，寒冷，霜，雪花，气候，预测，气象学，大气，条件
 snowman,/icons/outline/snowman.svg,轮廓线,outline,"winter, christmas, snow, cold, frosty, snowman",冬天，圣诞节，雪，寒冷，寒冷的，雪人
-soccer-field,/icons/outline/soccer-field.svg,轮廓线,outline,"football, pitch, player, vall, goal, goalkeeper, kick, ball, score, sport, sportsman",足球，音高，玩家，“vall” 在中文中通常翻译为 **“山谷”** 或 **“峡谷”**，具体取决于上下文。如果这是一个专，目标，守门员，踢，球，分数，运动，运动员
+soccer-field,/icons/outline/soccer-field.svg,轮廓线,outline,"football, pitch, player, vall, goal, goalkeeper, kick, ball, score, sport, sportsman",足球，音高，玩家，vall，目标，守门员，踢，球，分数，运动，运动员
 social-off,/icons/outline/social-off.svg,轮廓线,outline,"society, community, collectivity, social, off, disabled, inactive",社会，社区，集体，社交，关闭，残疾的，不活跃的
 social,/icons/outline/social.svg,轮廓线,outline,"society, community, collectivity, social",社会，社区，集体，社交
 sock,/icons/outline/sock.svg,轮廓线,outline,"clothing, clothes, foot, feet, leg, knit, wool, cotton, ankle, sock",服装，衣服，脚，脚，腿，编织，羊毛，棉花，脚踝，袜子
@@ -4827,14 +4785,7 @@ square-letter-t,/icons/outline/square-letter-t.svg,轮廓线,outline,"shape, alp
 square-letter-u,/icons/outline/square-letter-u.svg,轮廓线,outline,"shape, alphabet, sign, latin, square, letter, rectangular, character, typography, text",形状，字母，**标志**，拉丁语，正方形，信件，矩形，字符，排版，text
 square-letter-v,/icons/outline/square-letter-v.svg,轮廓线,outline,"shape, alphabet, sign, latin, square, letter, rectangular, character, typography, text",形状，字母，**标志**，拉丁语，正方形，信件，矩形，字符，排版，text
 square-letter-w,/icons/outline/square-letter-w.svg,轮廓线,outline,"shape, alphabet, sign, latin, square, letter, rectangular, character, typography, text",形状，字母，**标志**，拉丁语，正方形，信件，矩形，字符，排版，text
-square-letter-x,/icons/outline/square-letter-x.svg,轮廓线,outline,"cancel, close, delete, remove, times, clear, no, square, letter, rectangular","取消，关闭，删除，移除，“times” 可以翻译为：
-
-- 时代
-- 次数
-- 倍
-- 时期
-
-具体含义需根据上下文确定，清除，不，正方形，信件，矩形"
+square-letter-x,/icons/outline/square-letter-x.svg,轮廓线,outline,"cancel, close, delete, remove, times, clear, no, square, letter, rectangular",取消，关闭，删除，移除，times，清除，不，正方形，信件，矩形
 square-letter-y,/icons/outline/square-letter-y.svg,轮廓线,outline,"shape, alphabet, sign, latin, square, letter, rectangular, character, typography, text",形状，字母，**标志**，拉丁语，正方形，信件，矩形，字符，排版，text
 square-letter-z,/icons/outline/square-letter-z.svg,轮廓线,outline,"shape, alphabet, sign, latin, square, letter, rectangular, character, typography, text",形状，字母，**标志**，拉丁语，正方形，信件，矩形，字符，排版，text
 square-minus-2,/icons/outline/square-minus-2.svg,轮廓线,outline,"geometry, subtraction, math, symbol, calculate, decrease, subtract, count, diminish, reduce, indeterminate, remove","几何，减法，数学，符号，计算，减少，减去，**翻译结果：**  
@@ -4966,14 +4917,7 @@ square-rounded-x,/icons/outline/square-rounded-x.svg,轮廓线,outline,"shape, c
 square-rounded,/icons/outline/square-rounded.svg,轮廓线,outline,"shape, box, figure, geometry, square, rounded, rectangular, form, pattern, outline",形状，盒子，图形，几何，正方形，圆形的，矩形，表格，模式，大纲
 square-toggle-horizontal,/icons/outline/square-toggle-horizontal.svg,轮廓线,outline,"box, clone, move, square, toggle, horizontal, creative, artistic, rectangular, visual",盒子，克隆，移动，正方形，切换，水平的，有创意的，艺术，矩形，视觉的
 square-toggle,/icons/outline/square-toggle.svg,轮廓线,outline,"box, clone, move, square, toggle, creative, artistic, rectangular, visual, aesthetic",盒子，克隆，移动，正方形，切换，有创意的，艺术，矩形，视觉的，美学
-square-x,/icons/outline/square-x.svg,轮廓线,outline,"cancel, close, delete, remove, times, clear, no, square, rectangular, geometry","取消，关闭，删除，移除，“times” 可以翻译为：
-
-- 时代
-- 次数
-- 倍
-- 时期
-
-具体含义需根据上下文确定，清除，不，正方形，矩形，几何"
+square-x,/icons/outline/square-x.svg,轮廓线,outline,"cancel, close, delete, remove, times, clear, no, square, rectangular, geometry",取消，关闭，删除，移除，times，清除，不，正方形，矩形，几何
 square,/icons/outline/square.svg,轮廓线,outline,"checkbox, box, shape, square, rectangular, geometry, form, figure, pattern, outline",复选框，盒子，形状，正方形，矩形，几何，表格，图形，模式，大纲
 squares-diagonal,/icons/outline/squares-diagonal.svg,轮廓线,outline,"boxes, layers, squares, diagonal, creative, artistic, rectangular, visual, aesthetic, style",盒子，层，正方形，对角线，有创意的，艺术，矩形，视觉的，美学，风格
 squares-selected,/icons/outline/squares-selected.svg,轮廓线,outline,"checkbox, chosen, highlight, marked, pick, selected, choice, option, choose, preference",复选框，被选中的，高亮，标记的，挑选，选中的，选择，选项，选择，偏好
@@ -5112,8 +5056,7 @@ text-caption,/icons/outline/text-caption.svg,轮廓线,outline,"document, file, 
 text-color,/icons/outline/text-color.svg,轮廓线,outline,"format, document, file, edit, text, color, typography, writing, font, character",格式，文档，文件，编辑，text，颜色，排版，写作，字体，字符
 text-decrease,/icons/outline/text-decrease.svg,轮廓线,outline,"indent, minimalize, smaller, editor, size, edit, text, decrease, typography, writing",缩进，最小化，更小的，编辑器，尺寸，编辑，text，减少，排版，写作
 text-direction-ltr,/icons/outline/text-direction-ltr.svg,轮廓线,outline,"left, right, bidi, text, direction, ltr, typography, writing, font, character",左边，right，双向，text，方向，从左到右，排版，写作，字体，字符
-text-direction-rtl,/icons/outline/text-direction-rtl.svg,轮廓线,outline,"left, right, bidi, text, direction, rtl, typography, writing, font, character","左边，right，双向，text，方向，**rtl** 可以翻译为：  
-- **从右到左**（在排版、语言方向等语境中，如阿拉伯语，排版，写作，字体，字符"
+text-direction-rtl,/icons/outline/text-direction-rtl.svg,轮廓线,outline,"left, right, bidi, text, direction, rtl, typography, writing, font, character",左边，right，双向，text，方向，rtl，排版，写作，字体，字符
 text-grammar,/icons/outline/text-grammar.svg,轮廓线,outline,"language, syntax, structure, writing, rules, edit, correct, composition, linguistics, sentence",语言，语法，结构，写作，规则，编辑，正确，构图，语言学，句子
 text-increase,/icons/outline/text-increase.svg,轮廓线,outline,"expand, margin, size, editor, edit, text, increase, typography, writing, font",扩展，边距，尺寸，编辑器，编辑，text，增加，排版，写作，字体
 text-orientation,/icons/outline/text-orientation.svg,轮廓线,outline,"aglinment, file, document, edit, right, text, orientation, typography, writing, font",对齐，文件，文档，编辑，right，text，方向，排版，写作，字体
@@ -5134,10 +5077,8 @@ thumb-down,/icons/outline/thumb-down.svg,轮廓线,outline,"dislike, bad, emotio
 thumb-up-off,/icons/outline/thumb-up-off.svg,轮廓线,outline,"like, emotion, good, love, thumb, off, top, increase, control, operation",喜欢，情绪，好的，爱，拇指，关闭，顶部，增加，控制，操作
 thumb-up,/icons/outline/thumb-up.svg,轮廓线,outline,"like, emotion, good, love, thumb, top, increase, control, operation, rise",喜欢，情绪，好的，爱，拇指，顶部，增加，控制，操作，上升
 tic-tac,/icons/outline/tic-tac.svg,轮廓线,outline,"toe, game, strategy, cross, circle, tic, tac, athletic, fitness, exercise",脚趾，游戏，策略，交叉，圆形，抽搐，**塔克**，运动，健身，运动
-ticket-off,/icons/outline/ticket-off.svg,轮廓线,outline,"cinema, event, theatre, entry, fine, coupon, pass, ticket, off, disabled","电影院，事件，剧院，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，好的，优惠券，传递，票，关闭，残疾的"
-ticket,/icons/outline/ticket.svg,轮廓线,outline,"cinema, event, theatre, entry, fine, coupon, pass, ticket","电影院，事件，剧院，“entry” 可以翻译为：  
-**条目**、**入口**、**进入**、**登记**、**参赛作品**（，好的，优惠券，传递，票"
+ticket-off,/icons/outline/ticket-off.svg,轮廓线,outline,"cinema, event, theatre, entry, fine, coupon, pass, ticket, off, disabled",电影院，事件，剧院，入口，好的，优惠券，传递，票，关闭，残疾的
+ticket,/icons/outline/ticket.svg,轮廓线,outline,"cinema, event, theatre, entry, fine, coupon, pass, ticket",电影院，事件，剧院，入口，好的，优惠券，传递，票
 tie,/icons/outline/tie.svg,轮廓线,outline,"suit, buisness, fashion, clothes, accessory, clothing, tie, store, purchase, shopping",套装，商务，时尚，衣服，配件，服装，领带，商店，购买，购物
 tilde,/icons/outline/tilde.svg,轮廓线,outline,"key, sign, about, rounding, math, tilde",钥匙，**标志**，关于，四舍五入，数学，波浪号
 tilt-shift-off,/icons/outline/tilt-shift-off.svg,轮廓线,outline,"filter, shift, photography, photo, tilt, off, disabled, inactive, camera, picture",过滤，移动，摄影，照片，倾斜，关闭，残疾的，不活跃的，相机，图片
@@ -5162,7 +5103,7 @@ timezone,/icons/outline/timezone.svg,轮廓线,outline,"zone, utc, offset, regio
 tip-jar-euro,/icons/outline/tip-jar-euro.svg,轮廓线,outline,"donate, contribution, money, euro, charity, fund, gift, jar, support, currency",捐赠，贡献，钱，欧元，慈善，资金，礼物，jar，支持，货币
 tip-jar-pound,/icons/outline/tip-jar-pound.svg,轮廓线,outline,"donate, contribution, money, pound, charity, fund, gift, jar, support, currency",捐赠，贡献，钱，磅，慈善，资金，礼物，jar，支持，货币
 tip-jar,/icons/outline/tip-jar.svg,轮廓线,outline,"donate, contribution, money, charity, fund, gift, jar, support, currency, help",捐赠，贡献，钱，慈善，资金，礼物，jar，支持，货币，帮助
-tir,/icons/outline/tir.svg,轮廓线,outline,"delivery, transportation, transport, logistics, vehicle, goods, tir, travel, automobile, mobility",交付，运输，运输，物流，车辆，货物，“tir” 可以翻译为“轮胎”或“射击”，具体取决于上下文。如果是指法语中的“tir”，则意为“，旅行，汽车，流动性
+tir,/icons/outline/tir.svg,轮廓线,outline,"delivery, transportation, transport, logistics, vehicle, goods, tir, travel, automobile, mobility",交付，运输，运输，物流，车辆，货物，tir，旅行，汽车，流动性
 toggle-left,/icons/outline/toggle-left.svg,轮廓线,outline,"on, off, switch, toggle, left, control, operation, function, interface, management",在……上，关闭，切换，切换，左边，控制，操作，函数，接口，管理
 toggle-right,/icons/outline/toggle-right.svg,轮廓线,outline,"on, off, switch, toggle, right, control, operation, function, interface, management",在……上，关闭，切换，切换，right，控制，操作，函数，接口，管理
 toilet-paper-off,/icons/outline/toilet-paper-off.svg,轮廓线,outline,"bathroom, hygiene, wc, cleaning, rubbing, toilet, paper, off, disabled, inactive",浴室，卫生，wc，清洁，摩擦，马桶，纸，关闭，残疾的，不活跃的
@@ -5338,14 +5279,10 @@ vector,/icons/outline/vector.svg,轮廓线,outline,"curve, parametric, design, v
 venus,/icons/outline/venus.svg,轮廓线,outline,"female, venus, planet, gender, feminine, sign, mark, emblem, representation, symbol",女性，金星，行星，性别，女性化的，**标志**，标记，徽章，表征，符号
 versions-off,/icons/outline/versions-off.svg,轮廓线,outline,"app, variation, different, variant, alternative, versions, off, programming, software, disabled",应用，变异，不同的，变体，替代，版本，关闭，编程，软件，残疾的
 versions,/icons/outline/versions.svg,轮廓线,outline,"app, variation, different, variant, alternative, versions, programming, software, coding, technical",应用，变异，不同的，变体，替代，版本，编程，软件，编程，技术的
-video-minus,/icons/outline/video-minus.svg,轮廓线,outline,"film, shoot, recording, taping, camera, remotion, video, minus, content, entertainment","电影，射击，录音，“taping” 可以翻译为：  
-**贴胶带**、**录音** 或 **绑扎**（根据语境不同，，相机，remotion，视频，减去，内容，娱乐"
-video-off,/icons/outline/video-off.svg,轮廓线,outline,"film, shoot, recording, taping, camera, video, off, content, entertainment, disabled","电影，射击，录音，“taping” 可以翻译为：  
-**贴胶带**、**录音** 或 **绑扎**（根据语境不同，，相机，视频，关闭，内容，娱乐，残疾的"
-video-plus,/icons/outline/video-plus.svg,轮廓线,outline,"film, shoot, recording, taping, camera, closeup, video, plus, content, entertainment","电影，射击，录音，“taping” 可以翻译为：  
-**贴胶带**、**录音** 或 **绑扎**（根据语境不同，，相机，特写，视频，plus，内容，娱乐"
-video,/icons/outline/video.svg,轮廓线,outline,"film, shoot, recording, taping, camera, video, content, entertainment, multimedia, broadcast","电影，射击，录音，“taping” 可以翻译为：  
-**贴胶带**、**录音** 或 **绑扎**（根据语境不同，，相机，视频，内容，娱乐，多媒体，广播"
+video-minus,/icons/outline/video-minus.svg,轮廓线,outline,"film, shoot, recording, taping, camera, remotion, video, minus, content, entertainment",电影，射击，录音，taping，相机，remotion，视频，减去，内容，娱乐
+video-off,/icons/outline/video-off.svg,轮廓线,outline,"film, shoot, recording, taping, camera, video, off, content, entertainment, disabled",电影，射击，录音，taping，相机，视频，关闭，内容，娱乐，残疾的
+video-plus,/icons/outline/video-plus.svg,轮廓线,outline,"film, shoot, recording, taping, camera, closeup, video, plus, content, entertainment",电影，射击，录音，taping，相机，特写，视频，plus，内容，娱乐
+video,/icons/outline/video.svg,轮廓线,outline,"film, shoot, recording, taping, camera, video, content, entertainment, multimedia, broadcast",电影，射击，录音，taping，相机，视频，内容，娱乐，多媒体，广播
 view-360-arrow,/icons/outline/view-360-arrow.svg,轮廓线,outline,"rotate, view, degree, virtual, vr, 360, arrow, direction, pointer, navigate",旋转，视图，度数，虚拟的，虚拟现实，360，箭头，方向，指针，导航
 view-360-number,/icons/outline/view-360-number.svg,轮廓线,outline,"degree, rotation, reality, camera, view, 360, number",度数，旋转，现实，相机，视图，360，数字
 view-360-off,/icons/outline/view-360-off.svg,轮廓线,outline,"panoramic, degrees, around, view, 360, off, disabled, inactive",全景，度数，周围，视图，360，关闭，残疾的，不活跃的
@@ -5514,7 +5451,7 @@ zoom-money,/icons/outline/zoom-money.svg,轮廓线,outline,"magnifying, glass, m
 zoom-out-area,/icons/outline/zoom-out-area.svg,轮廓线,outline,"selected, square, magnifier, diminishing, zoom, out, area, location, navigation, magnify",选中的，正方形，放大镜，减少，放大，“出去”，区域，位置，导航，放大
 zoom-out,/icons/outline/zoom-out.svg,轮廓线,outline,"magnifying glass, zoom, out, location, navigation, magnify, enlarge, scale, focus, view, accessibility, a11y, vision",放大镜，放大，“出去”，位置，导航，放大，扩大，**规模**，专注，视图，无障碍，无障碍，视觉
 zoom-pan,/icons/outline/zoom-pan.svg,轮廓线,outline,"enlargement, shifting, magnifier, zoom, pan, location, navigation, magnify, enlarge, scale",扩大，转移，放大镜，放大，平底锅，位置，导航，放大，扩大，**规模**
-zoom-question,/icons/outline/zoom-question.svg,轮廓线,outline,"ask, help, support, cue, ?, zoom, question, location, navigation, magnify",询问，帮助，支持，提示，？，放大，问题，位置，导航，放大
+zoom-question,/icons/outline/zoom-question.svg,轮廓线,outline,"ask, help, support, cue, ?, zoom, question, location, navigation, magnify",询问，帮助，支持，提示，?，放大，问题，位置，导航，放大
 zoom-replace,/icons/outline/zoom-replace.svg,轮廓线,outline,"find, change, switch, swap, zoom, replace, location, navigation, magnify, enlarge",找到，更改，切换，交换，放大，替换，位置，导航，放大，扩大
 zoom-reset,/icons/outline/zoom-reset.svg,轮廓线,outline,"refresh, default, settings, vision, zoom, reset, location, navigation, magnify, enlarge",刷新，默认，设置，视觉，放大，重置，位置，导航，放大，扩大
 zoom-scan,/icons/outline/zoom-scan.svg,轮廓线,outline,"magnify, enlarge, analyze, focus, enhance, view, magnification, zoom-in, scan-zoom, magnify-scan",放大，扩大，分析，专注，增强，视图，放大，放大，扫描缩放，放大扫描
