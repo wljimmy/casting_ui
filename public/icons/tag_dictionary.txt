@@ -1,11 +1,11 @@
-!	抱歉，您没有提供具体的icon标签内容。请提供需要翻译的icon标签，我将为您翻译成中文。
+!	!
 #	图标标签
 +	加
-0	抱歉，您没有提供具体的 icon 标签内容。请提供需要翻译的 icon 标签，我将为您返回中文翻译。
+0	0
 1	1
 100	100
 11th	第11届
-123	抱歉，您没有提供具体的 icon 标签内容。请提供需要翻译的 icon 标签，我会将其翻译为中文并只返回中文结果
+123	123
 12th	第十二
 13th	第13届
 14th	第十四
@@ -22,7 +22,7 @@
 21st	21世纪
 21th	第21届
 22nd	第22届
-23	抱歉，您提供的文本“23”并不是一个icon标签，而是一个数字。请提供具体的icon标签内容，例如“fa-home”或
+23	23
 23rd	第23届
 24	24
 24-hour	24小时
@@ -31,7 +31,7 @@
 25th	第25届
 26	26
 26th	第26届
-27	抱歉，您提供的原文中只包含数字“27”，没有“icon标签”的具体内容。请提供需要翻译的英文icon标签文本，
+27	27
 27th	第27届
 28	28
 28th	第28届
@@ -43,12 +43,12 @@
 2nd-sticker	第二个贴纸
 2th2	第二
 2x	两倍
-3	抱歉，您没有提供具体的 icon 标签内容。请提供需要翻译的标签，我会为您返回中文翻译。
+3	3
 3-by-2	三乘二
 360	360
 3d	3D
 3g	3G
-4	抱歉，您没有提供具体的 icon 标签内容。请提供需要翻译的 icon 标签，我会将其翻译为中文并只返回中文结果
+4	4
 404	404
 4chan	4chan
 4g	4G
@@ -62,9 +62,9 @@
 7	7
 7-by-5	7乘5
 8	8
-80	抱歉，您提供的 "80" 并不是一个 icon 标签，而是一个数字。请提供具体的 icon 标签（例如 "home", "
+80	80
 8k	8K
-9	抱歉，您提供的文本中“9”并不是一个“icon标签”，而是一个数字。如果您指的是某个具体的图标标签（如 `<i class
+9	9
 90degree	90度
 ?	？
 @	@
@@ -75,7 +75,7 @@ a11y	无障碍
 abacus	算盘
 abandon	放弃
 abate	减少
-abc	抱歉，您提供的文本 "abc" 并不是一个具体的 icon 标签，它只是英文字母。如果您指的是某个具体的图标名称或标签
+abc	abc
 abolish	废除
 abort	中止
 abortive	失败的
@@ -417,7 +417,7 @@ astrology	占星术
 astronomy	天文学
 asynchronous	异步
 at	**在**
-ateca	抱歉，您提供的 "icon标签" 内容似乎不完整。您只给出了 "ateca" 这个词，它可能是一个品牌名（
+ateca	ateca
 athlete	运动员
 athletic	运动
 athletics	田径
@@ -486,7 +486,7 @@ axis	轴
 axle	车轴
 azerbaijan	阿塞拜疆
 azure	Azure
-b	抱歉，您提供的“b”似乎不是一个完整的 icon 标签。请提供完整的标签内容（例如 `<i class="fa fa-home"></i
+b	b
 baby	婴儿
 back	返回
 backbone	骨干
@@ -564,7 +564,7 @@ battle	战斗
 battlefield	战场
 bauble	小饰品
 bbq	烧烤
-bdt	抱歉，您提供的“bdt”并不是一个完整的icon标签或常见缩写。如果您能提供完整的标签内容（例如 `<i class="b
+bdt	bdt
 beach	海滩
 beacon	信标
 bead	珠子
@@ -603,8 +603,8 @@ beverage	饮料
 bewildered	困惑
 beyond	超出
 bezier	贝塞尔
-bhd	抱歉，您提供的“bhd”并不是一个标准的 icon 标签或常见缩写。如果它是某个图标库中的特定名称（比如 FontAwesome
-bi	抱歉，您提供的 "bi" 并不是一个完整的 icon 标签。常见的 icon 标签如 `<i class="bi bi-house"></i>`
+bhd	bhd
+bi	bi
 bi-directional	双向
 bible	圣经
 bicycle	自行车
@@ -699,7 +699,7 @@ border	边框
 borderless	无边框
 borderless-frame	无边框框架
 borders	边框
-bore	抱歉，您提供的 "bore" 并不是一个完整的 icon 标签。常见的 icon 标签通常包含前缀（如 `fa-`、`
+bore	bore
 boreal	北方
 bot	机器人
 botanical	植物
@@ -916,7 +916,7 @@ cathedral	大教堂
 catholic	天主教
 caution	警告
 cautionary	警示
-cbd	抱歉，您提供的“icon标签”内容似乎不完整。请提供完整的标签或文本，我将为您翻译成中文。
+cbd	cbd
 cc	cc
 cctv	中央电视台
 cd	光盘
@@ -1028,7 +1028,7 @@ chromecast	Chromecast
 chronicle	编年史
 chunk	块
 church	教堂
-ci	对不起，您没有提供具体的icon标签内容。请提供需要翻译的icon标签，我将为您翻译成中文。
+ci	ci
 cigarette	香烟
 cinema	电影院
 cinematic-crop	电影裁剪
@@ -1460,7 +1460,7 @@ cypress	柏树
 cyrillic	西里尔字母
 czech	捷克
 czk	捷克克朗
-d	好的，请提供需要翻译的英文内容。您只发送了“d”，这看起来不完整。请发送完整的英文文本，我将为您
+d	d
 damage	伤害
 danger	危险
 dangerous	危险的
@@ -1770,7 +1770,7 @@ diy	DIY
 dizzy	头晕
 dj	DJ
 django	Django
-dkk	抱歉，您提供的“dkk”可能是一个缩写或拼写错误，无法直接翻译为中文。请提供更完整的上下文或确认是否正确
+dkk	dkk
 dna	DNA
 doable	可行的
 doc	“doc” 可以翻译为“文档”。
@@ -2020,7 +2020,7 @@ enhance	增强
 enigma	谜
 enlarge	扩大
 enlargement	扩大
-ennea	抱歉，您提供的单词 "ennea" 在常见语言中并无直接对应的中文翻译。它可能是某个专有名词、品牌名、
+ennea	ennea
 ennead	九柱神
 enneagon	九边形
 enormous	巨大的
@@ -2078,8 +2078,7 @@ ethereum	以太坊
 ethical	道德的
 etsy	etsy
 eu	**欧盟**
-eur	“eur” 可以翻译为 **“欧元”**（货币单位）。  
-如果是指其他语境（如缩写），请提供更多信息以便
+eur	eur
 euro	欧元
 europe	欧洲
 evaluate	评估
@@ -2717,7 +2716,7 @@ haunt	**作祟**
 hazard	危险
 haze	雾霾
 hbo	HBO
-hd	好的，请提供需要翻译的英文内容。您只发了“hd”，这可能是“高清”（high definition）的缩写，但为了准确
+hd	hd
 hdr	HDR
 head	头部
 header	标题
@@ -2880,9 +2879,9 @@ icon37	图标37
 icon38	图标38
 icon39	图标39
 icon40	图标40
-icon41	抱歉，您提供的文本“icon41”看起来像是一个图标或代码的标识符，没有明确的语义内容。如果您能提供更多上下文或
+icon41	icon41
 icon42	图标42
-icon43	抱歉，您提供的 "icon43" 似乎是一个标识或代码，没有明确的上下文或含义。如果您能提供更多背景信息或完整句子
+icon43	icon43
 icon44	图标44
 icon45	图标45
 icon46	图标46
@@ -2892,14 +2891,14 @@ icon49	图标49
 icon50	图标50
 icon51	图标51
 icon52	图标52
-icon53	抱歉，您提供的文本“icon53”看起来像是一个文件名或代码中的标识符，没有明确的上下文或语义。如果您能提供更多背景
+icon53	icon53
 icon54	图标54
-icon55	抱歉，您提供的“icon55”看起来像是一个文件名或代码中的标识符，没有明确的上下文或标准翻译。如果您能提供更多信息
+icon55	icon55
 icon56	图标56
 icon57	图标57
 icon58	图标58
 icon59	图标59
-icon60	抱歉，您提供的单词 "icon60" 似乎是一个技术术语或特定名称，没有标准的中文翻译。如果您能提供更多上下文或
+icon60	icon60
 icon61	图标61
 icon62	图标62
 icon63	图标63
@@ -3124,7 +3123,7 @@ jewel	珠宝
 jewellery	珠宝
 jewelry	珠宝
 jewish	犹太人
-jezus	抱歉，您输入的“jezus”可能是拼写错误或非标准词汇。如果是荷兰语或波兰语中的“Jezus”，通常
+jezus	jezus
 jigsaw	拼图
 jingle	叮当声
 jira	Jira
@@ -3753,7 +3752,7 @@ nail	指甲
 naira	奈拉
 naked	**赤裸的**
 name	名字
-nand	抱歉，您输入的 "nand" 可能是一个拼写错误或缩写。如果是英文单词 "and" 的误拼，其中文
+nand	nand
 nano	纳米
 nap	**小睡**
 nappy	尿布
@@ -3772,7 +3771,7 @@ nba	NBA
 nc	**nc**  
 （"nc" 通常指 "netcat" 或 "网络工具"，但根据您的指令，仅返回中文翻译
 nd	nd
-ne	好的，请提供您需要翻译的英文内容。
+ne	ne
 nebula	星云
 neck	脖子
 need	需要
@@ -3804,7 +3803,7 @@ news	新闻
 newsfeed	新闻推送
 newspaper	报纸
 newspapper	报纸
-nexo	抱歉，您只输入了“nexo”这一个词，没有提供完整的英文句子或段落。请提供需要翻译的英文内容，我会
+nexo	nexo
 next	下一个
 nextcloud	Nextcloud
 nextjs	Next.js
@@ -3993,7 +3992,7 @@ okay	好的
 old	老的
 olympic	奥运
 olympics	奥运会
-om	抱歉，您只输入了“om”，没有提供需要翻译的英文内容。请提供完整的英文句子或段落，我将为您翻译成中文
+om	om
 omega	欧米伽
 omit	省略
 on	在……上
@@ -4141,7 +4140,7 @@ partner	伙伴
 parts	部分
 party	派对
 pass	传递
-passage	请提供需要翻译的“passage”内容。
+passage	passage
 passenger	乘客
 passion	激情
 passport	护照
@@ -4319,7 +4318,7 @@ plugin	插件
 plumb	铅垂
 plummet	骤降
 plunge	暴跌
-plus	好的，请提供需要翻译的英文内容。您只发了“plus”一词，其对应的中文是“加”或“加上”。如果您
+plus	plus
 plus-sign	加号
 plus-symbol	加号符号
 png	png
@@ -4532,7 +4531,7 @@ puzzled	困惑
 pwc	普华永道
 pyramid	金字塔
 python	Python
-q	请提供需要翻译的英文内容，您只输入了“q”。
+q	q
 qq	QQ
 qr	qr
 qr code	二维码
@@ -4568,7 +4567,7 @@ quetzal	克沙尔鸟
 queue	队列
 quick	快速
 quiet	安静
-quin	抱歉，您提供的单词 "quin" 可能是一个拼写错误或缩写。如果您是指英文单词 "queen"，翻译为中文是“
+quin	quin
 quinary	五进制
 quindec	**十五人一组**（或**十五人团**，取决于具体语境，quindec 通常指由十五人组成的团体或与
 quindecad	十五人组
@@ -4615,7 +4614,7 @@ rank	排名
 ranking	排名
 rapid	快速的
 raport	报告
-rar	抱歉，您提供的单词 "rar" 本身不是完整的句子或短语。如果您是指英文单词 "rar"，它通常是一个压缩文件格式（
+rar	rar
 raster	栅格
 rate	速率
 rated	评级的
@@ -4814,7 +4813,7 @@ richness	丰富性
 riddle	谜语
 ride	骑
 riding	骑行
-right	好的，请提供您需要翻译的英文内容。
+right	right
 right-merge	右合并
 right-path	正确路径
 right-road	正确的道路
@@ -4910,8 +4909,8 @@ rural	农村
 russia	俄罗斯
 russian	俄语
 rust	锈
-s	好的，请提供需要翻译的英文内容。您只发送了“s”，这似乎不是一个完整的单词或句子。请提供完整的文本，
-sa	“sa” 可以翻译为“萨”或“莎”，具体取决于上下文。如果是作为缩写或特定术语，请提供更多信息以便
+s	s
+sa	sa
 sacred	神圣的
 sad	悲伤
 safari	Safari
@@ -4943,7 +4942,7 @@ sandwiches	三明治
 sanitizer	消毒剂
 sankey	桑基
 santa	圣诞老人
-sar	抱歉，您提供的单词 "sar" 可能是一个拼写错误或缩写。如果您是指英语中的 "sir"，中文翻译是“先生
+sar	sar
 sass	Sass
 sasuage	香肠
 satanism	撒旦教
@@ -5009,7 +5008,7 @@ scrutinize	仔细检查
 scrutiny	严格审查
 scuba	水肺
 scyscraper	摩天大楼
-sd	抱歉，您输入的“sd”可能有多种含义。请提供更多上下文或完整的句子，以便我准确翻译成中文。例如，“sd”
+sd	sd
 sdk	SDK
 se	“se” 可以翻译为“塞”（化学元素硒的符号）或根据上下文译为“自己”、“他/她/它自己”
 sea	海
@@ -5127,7 +5126,7 @@ sextet	六重奏
 sextuple	六倍
 sextuplet	六胞胎
 sexual	性
-sgd	抱歉，您提供的“sgd”可能是一个缩写或拼写错误。如果您指的是货币代码“SGD”，其中文翻译是“新加坡
+sgd	sgd
 shade	阴影
 shades	阴影
 shadow	阴影
@@ -5686,7 +5685,7 @@ syrup	糖浆
 system	系统
 systemize	系统化
 systems	系统
-t	你提供的文本“t”本身就是一个字母，没有具体的含义。如果这是某个单词或句子的缩写或部分，请提供更多上下文，
+t	t
 tab	标签
 table	桌子
 table-add	表格-添加
@@ -5796,7 +5795,7 @@ testing	测试
 tether	泰达币
 tetrad	四元组
 tex	**tex**
-text	请提供需要翻译的文本，我会将其翻译为中文并只返回中文内容。
+text	text
 textarea	textarea
 textile	纺织品
 texting	发短信
@@ -6529,13 +6528,13 @@ xnor	**异或非**
 xor	异或
 xrp	瑞波币
 xrp-coin	瑞波币
-xxx	好的，请提供您需要翻译的英文内容，我会将其翻译为中文并只返回中文结果。
+xxx	xxx
 xy	xy
 y	你提供的输入“y”是一个单独的字母，没有上下文。如果这是英文单词“yes”的缩写，翻译成中文是“是”。
 yahoo	雅虎
 yang	杨
 yankee	**扬基**（指美国北方人，尤指新英格兰地区的人；或泛指美国人）
-yatse	很抱歉，您提供的单词 "yatse" 在常见语言中（如英语、中文、日语等）没有直接对应的翻译或明确
+yatse	yatse
 year	年份
 yellow	黄色
 yen	日元
@@ -6547,7 +6546,7 @@ young	年轻的
 youtube	YouTube
 youtuber	YouTuber
 yuan	“元”
-z	你提供的“z”是一个字母，没有具体的上下文或含义。如果这是一个单词或缩写，请提供更多信息以便准确翻译。如果只是
+z	z
 zag	“zag” 可以翻译为“急转”或“突然转向”，具体含义需根据上下文确定。如果是指舞蹈或动作中的“
 zalando	Zalando
 zap	**zap**  
@@ -6574,4 +6573,4 @@ zulu	祖鲁语
 zwift	Zwift
 zzz	zzz
 ą	您好，您输入的字符“ą”是波兰语字母，中文翻译为“a”或“ą”（保留原字母）。如果您需要更
-ł	您输入的内容“ł”是波兰语字母，无法直接翻译为中文。如果您需要翻译某个单词或句子，请提供完整的文本。
+ł	ł
