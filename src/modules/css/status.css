@@ -47,7 +47,7 @@
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background-color: transparent;
+    background-color: var(--status-color);
     -webkit-mask-image: var(--svg-mask);
     mask-image: var(--svg-mask);
     -webkit-mask-size: contain;
@@ -187,10 +187,12 @@
 
 .CUI-status-bar > [data-type="online"] {
     --status-color: #28a745;
+    --svg-mask: url('/icons/outline/link.svg');
 }
 
 .CUI-status-bar > [data-type="offline"] {
     --status-color: #dc3545;
+    --svg-mask: url('/icons/outline/link-off.svg');
 }
 
 .CUI-status-bar > [data-flash="true"]::before {
