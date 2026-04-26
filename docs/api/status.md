@@ -2,7 +2,7 @@
 
 ## 概述
 
-状态栏模块 (`status.css`) 提供了一个简洁的状态栏组件，用于显示系统状态、通知和其他信息。采用**纯CSS实现**，无需JavaScript，CSS选择器自动处理所有样式和交互。
+状态栏模块 (`status.css`) 提供了一个简洁的状态栏组件，用于显示系统状态、通知和指示信息。支持多种样式变体、闪动效果和自定义颜色。采用**纯CSS实现**，无需JavaScript，CSS选择器自动处理所有样式。
 
 ## 版本信息
 
@@ -20,10 +20,10 @@
 <!-- 引入CSS -->
 <link rel="stylesheet" href="/modules/css/status.css">
 
-<!-- 状态栏HTML -->
+<!-- 状态栏HTML - 文字直接写在标签内 -->
 <div class="CUI-status-bar">
-    <div data-text="就绪" data-type="info"></div>
-    <div data-text="3 项任务" data-type="success"></div>
+    <div data-type="info">就绪</div>
+    <div data-type="success">3 项任务</div>
 </div>
 ```
 
@@ -39,11 +39,12 @@
 
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `data-text` | string | `""` | 状态项显示的文本内容 |
 | `data-type` | string | `"info"` | 状态项类型，可选值：`info`, `success`, `warning`, `error` |
 | `data-flash` | string | `"false"` | 动态闪动效果，可选值：`"true"`, `"false"` |
 | `title` | string | - | 鼠标悬停时显示的详细说明文字（原生HTML属性） |
 | `style` | string | - | CSS变量 `--status-color` 用于自定义颜色 |
+
+**注意**：状态项的文字直接写在HTML标签内，不需要额外的`data-text`属性。
 
 ## 样式类型
 
@@ -73,8 +74,8 @@
 
 ```html
 <div class="CUI-status-bar">
-    <div data-text="正常状态" data-type="info"></div>
-    <div data-text="警告状态" data-type="error" data-flash="true"></div>
+    <div data-type="info">正常状态</div>
+    <div data-type="error" data-flash="true">错误状态</div>
 </div>
 ```
 
@@ -86,8 +87,7 @@
 
 ```html
 <div class="CUI-status-bar">
-    <div data-text="CPU: 45%" data-type="warning" title="CPU使用率中等，建议关注"></div>
-    <div data-text="内存泄漏" data-type="error" title="检测到内存泄漏，请及时处理！"></div>
+    <div data-type="error" title="检测到内存泄漏，请及时处理！">内存泄漏</div>
 </div>
 ```
 
@@ -97,8 +97,8 @@
 
 ```html
 <div class="CUI-status-bar">
-    <div data-text="红色" style="--status-color: #ff6b6b"></div>
-    <div data-text="青色" style="--status-color: #4ecdc4"></div>
+    <div data-type="info" style="--status-color: #ff6b6b">红色告警</div>
+    <div data-type="info" style="--status-color: #4ecdc4">青色通知</div>
 </div>
 ```
 
@@ -109,50 +109,43 @@
 ```html
 <!-- 基础状态栏 -->
 <div class="CUI-status-bar">
-    <div data-text="就绪" data-type="info"></div>
-    <div data-text="3 项任务" data-type="success"></div>
+    <div data-type="info">就绪</div>
+    <div data-type="success">3 项任务</div>
 </div>
 
 <!-- 玻璃效果状态栏 -->
 <div class="CUI-status-bar CUI-status-glass">
-    <div data-text="系统运行中" data-type="info"></div>
-    <div data-text="CPU: 25%" data-type="warning"></div>
+    <div data-type="info">系统运行中</div>
+    <div data-type="warning">CPU: 25%</div>
 </div>
 
 <!-- 深色状态栏 -->
 <div class="CUI-status-bar CUI-status-dark">
-    <div data-text="在线" data-type="success"></div>
-    <div data-text="已连接" data-type="info"></div>
+    <div data-type="success">在线</div>
+    <div data-type="info">已连接</div>
 </div>
 
 <!-- 主色状态栏 -->
 <div class="CUI-status-bar CUI-status-primary">
-    <div data-text="同步中" data-type="info"></div>
-    <div data-text="50%" data-type="warning"></div>
-</div>
-
-<!-- 文本内容自动识别 -->
-<div class="CUI-status-bar">
-    <div data-type="info">系统正常</div>
-    <div data-type="success">已连接</div>
-</div>
-
-<!-- 自定义颜色 -->
-<div class="CUI-status-bar">
-    <div data-text="红色" style="--status-color: #ff6b6b"></div>
-    <div data-text="青色" style="--status-color: #4ecdc4"></div>
+    <div data-type="info">同步中</div>
+    <div data-type="warning">50%</div>
 </div>
 
 <!-- 动态闪动效果 -->
 <div class="CUI-status-bar">
-    <div data-text="正常状态" data-type="info"></div>
-    <div data-text="警告状态" data-type="error" data-flash="true"></div>
+    <div data-type="info">正常状态</div>
+    <div data-type="error" data-flash="true">错误状态</div>
 </div>
 
 <!-- 悬停提示 -->
 <div class="CUI-status-bar">
-    <div data-text="CPU: 45%" data-type="warning" title="CPU使用率中等，建议关注"></div>
-    <div data-text="内存泄漏" data-type="error" title="检测到内存泄漏，请及时处理！"></div>
+    <div data-type="warning" title="CPU使用率中等，建议关注">CPU: 45%</div>
+</div>
+
+<!-- 自定义颜色 -->
+<div class="CUI-status-bar">
+    <div data-type="info" style="--status-color: #ff6b6b">红色告警</div>
+    <div data-type="info" style="--status-color: #4ecdc4">青色通知</div>
 </div>
 ```
 
@@ -167,9 +160,6 @@ const item = document.querySelector('.CUI-status-bar > [data-type="info"]');
 // 更新状态类型
 item.dataset.type = 'error';
 
-// 更新状态文本
-item.dataset.text = '错误状态';
-
 // 启用/关闭闪动效果
 item.dataset.flash = 'true';
 
@@ -178,6 +168,9 @@ item.style.setProperty('--status-color', '#ff6b6b');
 
 // 动态设置悬停提示
 item.title = '新的详细说明';
+
+// 更新文字内容
+item.textContent = '新的文字';
 ```
 
 ## 最佳实践
