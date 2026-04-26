@@ -3102,7 +3102,7 @@ j	j
 jack	杰克
 jacket	夹克
 jail	监狱
-jalapeño	墨西哥辣椒
+jalapeño	jalapeño
 japan	日本
 japanese	日语
 jar	jar
@@ -6548,5 +6548,5 @@ zulip	Zulip
 zulu	祖鲁语
 zwift	Zwift
 zzz	zzz
-ą	您好，您输入的字符“ą”是波兰语字母，中文翻译为“a”或“ą”（保留原字母）。如果您需要更
+ą	ą
 ł	ł

@@ -107,7 +107,7 @@ alphabet-greek,/icons/outline/alphabet-greek.svg,轮廓线,outline,"letters, lan
 alphabet-hebrew,/icons/outline/alphabet-hebrew.svg,轮廓线,outline,"language, alphabet, hebrew, jewish, typography, writing, font, character, word, letters",语言，字母，希伯来语，犹太人，排版，写作，字体，字符，单词，信件
 alphabet-korean,/icons/outline/alphabet-korean.svg,轮廓线,outline,"language, alphabet, korean, typography, writing, font, character, word, letters, characters",语言，字母，韩语，排版，写作，字体，字符，单词，信件，字符
 alphabet-latin,/icons/outline/alphabet-latin.svg,轮廓线,outline,"letters, language, rome, alphabet, latin, typography, writing, font, character, word",信件，语言，罗马，字母，拉丁语，排版，写作，字体，字符，单词
-alphabet-polish,/icons/outline/alphabet-polish.svg,轮廓线,outline,"alphabet, polish, poland, letters, language, diacritics, font, text, ą, ł, typography",字母，抛光，波兰，信件，语言，变音符号，字体，text，您好，您输入的字符“ą”是波兰语字母，中文翻译为“a”或“ą”（保留原字母）。如果您需要更，ł，排版
+alphabet-polish,/icons/outline/alphabet-polish.svg,轮廓线,outline,"alphabet, polish, poland, letters, language, diacritics, font, text, ą, ł, typography",字母，抛光，波兰，信件，语言，变音符号，字体，text，ą，ł，排版
 alphabet-runes,/icons/outline/alphabet-runes.svg,轮廓线,outline,"alphabet, runes, viking, nordic, ancient, letters, language, font, futhark, norse, text",字母，符文，维京人，北欧，古代，信件，语言，字体，富萨克，**诺尔斯**，text
 alphabet-thai,/icons/outline/alphabet-thai.svg,轮廓线,outline,"language, alphabet, thailand, thai, typography, writing, font, character, word, letters",语言，字母，泰国，泰语，排版，写作，字体，字符，单词，信件
 alt,/icons/outline/alt.svg,轮廓线,outline,"alternative, substitute, replacement, variant, different, alternate, variation, stand-in, option, choice",替代，替代，替换，变体，不同的，备用，变异，替身，选项，选择
@@ -4014,8 +4014,8 @@ pentagon-plus,/icons/outline/pentagon-plus.svg,轮廓线,outline,"add, increase,
 pentagon-x,/icons/outline/pentagon-x.svg,轮廓线,outline,"cancel, remove, delete, cross, negate, reject, discard, terminate, close, erase",取消，移除，删除，交叉，否定，拒绝，丢弃，终止，关闭，擦除
 pentagon,/icons/outline/pentagon.svg,轮廓线,outline,"shape, figure, math, geometry, form, pentagon, pattern, outline",形状，图形，数学，几何，表格，五角大楼，模式，大纲
 pentagram,/icons/outline/pentagram.svg,轮廓线,outline,"evil, scary, satanism, halloween, pentagram",邪恶，可怕的，撒旦教，万圣节，五角星
-pepper-off,/icons/outline/pepper-off.svg,轮廓线,outline,"food, spice, chili, jalapeño, hot, spicy, pepper, off, meal, cuisine",食物，香料，辣椒，墨西哥辣椒，热的，辣的，胡椒，关闭，餐食，烹饪
-pepper,/icons/outline/pepper.svg,轮廓线,outline,"food, spice, chili, jalapeño, hot, spicy, pepper, meal, cuisine, eating",食物，香料，辣椒，墨西哥辣椒，热的，辣的，胡椒，餐食，烹饪，吃
+pepper-off,/icons/outline/pepper-off.svg,轮廓线,outline,"food, spice, chili, jalapeño, hot, spicy, pepper, off, meal, cuisine",食物，香料，辣椒，jalapeño，热的，辣的，胡椒，关闭，餐食，烹饪
+pepper,/icons/outline/pepper.svg,轮廓线,outline,"food, spice, chili, jalapeño, hot, spicy, pepper, meal, cuisine, eating",食物，香料，辣椒，jalapeño，热的，辣的，胡椒，餐食，烹饪，吃
 percentage-0,/icons/outline/percentage-0.svg,轮廓线,outline,"none, zero, null, void, empty, naught, cipher, nil, nothing, blank",无，零，null，空，空的，无，密码，空，无，空白
 percentage-10,/icons/outline/percentage-10.svg,轮廓线,outline,"ten, decile, tenth, fraction, portion, degree, segment, bit, trace, piece",十，十分位数，第十，分数，部分，度数，片段，比特，追踪，块
 percentage-100,/icons/outline/percentage-100.svg,轮廓线,outline,"full, whole, complete, total, entire, max, absolute, consummate, perfect, finished",“full”翻译为中文是：满的，整体，完成，**总计**，整个，**最大**，绝对，完美，完美，完成
