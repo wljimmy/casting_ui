@@ -1,0 +1,282 @@
+<section class="CUI-section">
+    <h2>Form 表单布局</h2>
+    <p>Form 表单布局模块提供灵活的网格表单布局，自动按钮容器，统一的标签对齐和响应式适配功能。</p>
+
+    <h3>基础用法</h3>
+    <div class="CUI-box">
+        <h4>最简表单写法</h4>
+        <p>只需为 form 添加 <code>class="CUI-form"</code>，框架自动完成所有布局处理。</p>
+        <form class="CUI-form" data-form-cols="12">
+            <div>
+                <div>姓名</div>
+                <input type="text" name="name1" class="CUI-input CUI-span-10c" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" name="email1" class="CUI-input CUI-span-10c" placeholder="请输入邮箱">
+            </div>
+            <button type="submit" class="CUI-span-2c">提交</button>
+        </form>
+    </div>
+    <pre><code>&lt;form class="CUI-form" data-form-cols="12"&gt;
+    &lt;div&gt;
+        &lt;div&gt;姓名&lt;/div&gt;
+        &lt;input type="text" name="name" class="CUI-input CUI-span-10c" placeholder="请输入姓名"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;div&gt;邮箱&lt;/div&gt;
+        &lt;input type="email" name="email" class="CUI-input CUI-span-10c" placeholder="请输入邮箱"&gt;
+    &lt;/div&gt;
+    &lt;button type="submit" class="CUI-span-2c"&gt;提交&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+    <h3>灵活列数（12列/8列/4列/2列）</h3>
+    <div class="CUI-box">
+        <p>通过 <code>data-form-cols</code> 控制表单总列数，实现不同的布局密度：</p>
+        <h4>12列布局（3列展示）</h4>
+        <form class="CUI-form" data-form-cols="12">
+            <div>
+                <div>姓名</div>
+                <input type="text" name="name2" class="CUI-input CUI-span-2c" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" name="email2" class="CUI-input CUI-span-2c" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>电话</div>
+                <input type="tel" name="tel2" class="CUI-input CUI-span-2c" placeholder="请输入电话">
+            </div>
+            <button type="submit" class="CUI-span-2c">提交</button>
+        </form>
+
+        <h4 class="CUI-mt-lg">8列布局（2列展示）</h4>
+        <form class="CUI-form" data-form-cols="8">
+            <div>
+                <div>姓名</div>
+                <input type="text" name="name3" class="CUI-input CUI-span-5c" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" name="email3" class="CUI-input CUI-span-5c" placeholder="请输入邮箱">
+            </div>
+            <button type="submit" class="CUI-span-2c">提交</button>
+        </form>
+
+        <h4 class="CUI-mt-lg">4列布局（单列展示）</h4>
+        <form class="CUI-form" data-form-cols="4">
+            <div>
+                <div>姓名</div>
+                <input type="text" name="name4" class="CUI-input CUI-span-2c" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" name="email4" class="CUI-input CUI-span-2c" placeholder="请输入邮箱">
+            </div>
+            <button type="submit" class="CUI-span-2c">提交</button>
+        </form>
+    </div>
+
+    <h3>标签位置控制</h3>
+    <div class="CUI-box">
+        <p>通过 <code>data-label-position</code> 控制标签位置：</p>
+        <div class="CUI-grid CUI-grid-12c">
+            <div class="CUI-span-6c">
+                <h4>标签在左（默认）</h4>
+                <form class="CUI-form" data-form-cols="12">
+                    <div>
+                        <div>姓名</div>
+                        <input type="text" name="name5" class="CUI-input CUI-span-9c" placeholder="请输入姓名">
+                    </div>
+                    <div>
+                        <div>邮箱</div>
+                        <input type="email" name="email5" class="CUI-input CUI-span-9c" placeholder="请输入邮箱">
+                    </div>
+                </form>
+            </div>
+            <div class="CUI-span-6c">
+                <h4>标签在上</h4>
+                <form class="CUI-form" data-form-cols="12">
+                    <div data-label-position="top">
+                        <div>姓名</div>
+                        <input type="text" name="name6" class="CUI-input CUI-span-10c" placeholder="请输入姓名">
+                    </div>
+                    <div data-label-position="top">
+                        <div>邮箱</div>
+                        <input type="email" name="email6" class="CUI-input CUI-span-10c" placeholder="请输入邮箱">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <pre><code>&lt;!-- 标签在左（默认） --&gt;
+&lt;form class="CUI-form"&gt;
+    &lt;div&gt;
+        &lt;div&gt;姓名&lt;/div&gt;
+        &lt;input type="text" class="CUI-input CUI-span-9c" placeholder="请输入姓名"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+
+&lt;!-- 标签在上 --&gt;
+&lt;form class="CUI-form"&gt;
+    &lt;div data-label-position="top"&gt;
+        &lt;div&gt;姓名&lt;/div&gt;
+        &lt;input type="text" class="CUI-input CUI-span-10c" placeholder="请输入姓名"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+
+    <h3>跨列布局（灵活的CUI-span）</h3>
+    <div class="CUI-box">
+        <p>通过 <code>CUI-span-Xc</code> 控制输入框占列数，实现灵活的布局：</p>
+        <form class="CUI-form" data-form-cols="12">
+            <div>
+                <div>省</div>
+                <select name="province1" class="CUI-input CUI-span-1c">
+                    <option value="">请选择</option>
+                    <option value="bj">北京</option>
+                    <option value="sh">上海</option>
+                </select>
+            </div>
+            <div>
+                <div>市</div>
+                <select name="city1" class="CUI-input CUI-span-1c">
+                    <option value="">请选择</option>
+                    <option value="bj">北京市</option>
+                    <option value="sh">上海市</option>
+                </select>
+            </div>
+            <div>
+                <div>区</div>
+                <select name="district1" class="CUI-input CUI-span-1c">
+                    <option value="">请选择</option>
+                    <option value="hd">海淀区</option>
+                    <option value="pd">浦东新区</option>
+                </select>
+            </div>
+            <div>
+                <div>详细地址</div>
+                <input type="text" name="address1" class="CUI-input CUI-span-5c" placeholder="请输入详细地址">
+            </div>
+            <button type="submit" class="CUI-span-2c">提交</button>
+        </form>
+    </div>
+    <pre><code>&lt;form class="CUI-form" data-form-cols="12"&gt;
+    &lt;div&gt;
+        &lt;div&gt;省&lt;/div&gt;
+        &lt;select name="province" class="CUI-input CUI-span-1c"&gt;...&lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;div&gt;市&lt;/div&gt;
+        &lt;select name="city" class="CUI-input CUI-span-1c"&gt;...&lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;div&gt;区&lt;/div&gt;
+        &lt;select name="district" class="CUI-input CUI-span-1c"&gt;...&lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;div&gt;详细地址&lt;/div&gt;
+        &lt;input type="text" name="address" class="CUI-input CUI-span-5c" placeholder="请输入详细地址"&gt;
+    &lt;/div&gt;
+    &lt;button type="submit" class="CUI-span-2c"&gt;提交&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+    <h3>完整示例：用户注册表单</h3>
+    <div class="CUI-box">
+        <form class="CUI-form" data-form-cols="12">
+            <div>
+                <div>用户名</div>
+                <input type="text" name="username1" class="CUI-input CUI-span-2c" data-icon="user" placeholder="请输入用户名">
+            </div>
+            <div>
+                <div>密码</div>
+                <input type="password" name="password1" class="CUI-input CUI-span-2c" data-icon="userpassword" placeholder="请输入密码">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" name="email7" class="CUI-input CUI-span-2c" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>电话</div>
+                <input type="tel" name="tel3" class="CUI-input CUI-span-2c" placeholder="请输入电话">
+            </div>
+            <div>
+                <div>性别</div>
+                <select name="gender1" class="CUI-input CUI-span-2c">
+                    <option value="">请选择</option>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div data-label-position="top">
+                <div>个人简介</div>
+                <textarea name="bio1" class="CUI-input CUI-span-10c" placeholder="请输入个人简介" rows="3"></textarea>
+            </div>
+            <button type="submit" class="CUI-span-2c">注册</button>
+        </form>
+    </div>
+
+    <h3>参数说明</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>参数</th>
+                    <th>值</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>data-form-cols</td>
+                    <td>12 / 8 / 4 / 2</td>
+                    <td>表单总列数，控制布局密度</td>
+                </tr>
+                <tr>
+                    <td>data-label-position</td>
+                    <td>left / top</td>
+                    <td>标签位置（在form或div上设置）</td>
+                </tr>
+                <tr>
+                    <td>CUI-span-Xc</td>
+                    <td>1~11</td>
+                    <td>在input上设置，控制占列数</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>布局规范</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>规范</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>标签与input不换行</td>
+                    <td>避免一行放不下时标签和input被拆散</td>
+                </tr>
+                <tr>
+                    <td>手动调整列数</td>
+                    <td>若布局不合理，可通过调整data-form-cols或CUI-span来优化</td>
+                </tr>
+                <tr>
+                    <td>input后可添加内容</td>
+                    <td>input之后可以继续放div做额外提示，不受框架限制</td>
+                </tr>
+                <tr>
+                    <td>默认上对齐</td>
+                    <td>标签和input第一行保持对齐</td>
+                </tr>
+                <tr>
+                    <td>响应式适配</td>
+                    <td>小屏幕自动切换为单列布局</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

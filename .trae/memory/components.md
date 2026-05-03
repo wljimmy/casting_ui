@@ -25,6 +25,43 @@
   - `.layout-container` - 侧边布局容器
 - **使用场景**：页面布局、内容组织、响应式设计
 
+## 表单组件
+
+### 输入框
+- **功能**：提供不同类型、自动图标渲染、标签布局和组合框样式的输入框
+- **类名**：
+  - `.CUI-input` - 基础输入框类，自动美化
+  - `.CUI-input-box` - 组合输入框，包含标签、提示、错误信息
+  - `.CUI-input--simple` - 简约样式（仅下边框）
+- **属性**：
+  - `data-label` - 输入框标签文字
+  - `data-hint` - 永久显示的提示文字
+  - `data-info` - 焦点时显示的提示文字
+  - `data-error` - 错误状态显示的错误信息
+  - `data-isError` - 设为 true 强制显示错误状态
+  - `data-icon` - 自定义图标名称（email, user, sms等）
+  - `data-label-position` - 标签位置（left/top）
+- **自动图标类型**：search, email, tel, password, url, number, sms, date, time, user, userpassword
+- **图标库**：Tabler Icons
+- **使用场景**：表单输入、用户输入、数据采集
+
+### 表单布局
+- **功能**：提供灵活的网格表单布局，自动按钮容器，统一标签对齐，响应式适配
+- **类名**：
+  - `.CUI-form` - 表单容器，自动卡片包装
+  - `.CUI-form-card` - 自动添加的卡片容器类
+  - `.CUI-form-actions` - 自动添加的按钮容器
+- **属性**：
+  - `data-form-cols` - 表单总列数（12/8/4/2）
+  - `data-label-position` - 标签位置（left/top）
+  - `CUI-span-Xc` - 在input上设置，控制占列数（1~11）
+- **布局规范**：
+  - 默认标签和input第一行保持对齐
+  - 避免标签和input被拆散到两行
+  - 可通过调整列数或CUI-span来优化布局
+  - input后可添加内容做额外提示
+- **使用场景**：表单构建、数据录入、信息填写
+
 ## 交互控件
 
 ### 按钮

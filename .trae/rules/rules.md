@@ -49,3 +49,13 @@
       - `docs/api/模块名.md` - 模块的API接口文档
     - 每次开始新模块建设时，必须先检查以上文件是否存在，若不存在则先创建再开始工作。
 
+15. AI翻译API使用规范：
+    - **API配置位置**：`/Users/wanglin/工作_本地/trae/Casting_UI/.config/deepseek_api.json`
+    - **接口参数**：
+      - API Key: sk-dd1ead04de5c47dea4943ff9bf41bb2d
+      - API URL: https://api.deepseek.com/v1/chat/completions
+      - Model: deepseek-chat
+    - **使用约束**：该API为付费接口，仅在用户明确要求时方可调用；
+    - **调用方式**：通过Python脚本使用requests库调用，禁止使用openai官方库；
+    - **并发限制**：建议并发数20，超过可能导致字典并发写入错误。
+

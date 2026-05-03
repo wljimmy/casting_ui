@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casting UI - Form 完整测试</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+</head>
+<body>
+    <div class="container" style="padding: 40px;">
+        <h1>CUI-form 完整测试</h1>
+        <p class="CUI-text-muted">展示不同列布局下各种 Input 组件的展示效果</p>
+
+        <hr>
+
+        <!-- ==================== 12列 - 三列展示 ==================== -->
+        <h2>12列 - 三列展示</h2>
+        <form class="CUI-form" data-form-cols="12">
+            <div>
+                <div>搜索</div>
+                <input type="search" class="CUI-input" placeholder="请输入搜索内容">
+                <div>用户名</div>
+                <input type="text" class="CUI-input" data-icon="user" placeholder="请输入用户名">
+                <div>邮箱</div>
+                <input type="email" class="CUI-input" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>电话</div>
+                <input type="tel" class="CUI-input" placeholder="请输入电话">
+                <div>密码</div>
+                <input type="password" class="CUI-input" placeholder="请输入密码">
+                <div>网址</div>
+                <input type="url" class="CUI-input" placeholder="请输入网址">
+            </div>
+            <div>
+                <div>数字</div>
+                <input type="number" class="CUI-input" placeholder="请输入数字">
+                <div>短信</div>
+                <input type="sms" class="CUI-input" placeholder="请输入验证码">
+                <div>日期</div>
+                <input type="date" class="CUI-input" placeholder="选择日期">
+            </div>
+            <div>
+                <div>时间</div>
+                <input type="time" class="CUI-input" placeholder="选择时间">
+                <div>多行文本</div>
+                <textarea class="CUI-input" placeholder="请输入描述..." rows="2"></textarea>
+                <div>选择</div>
+                <select class="CUI-input">
+                    <option value="">请选择城市</option>
+                    <option value="bj">北京</option>
+                    <option value="sh">上海</option>
+                </select>
+            </div>
+            <div>
+                <div>备注</div>
+                <input type="text" class="CUI-input CUI-span-7c" placeholder="备注内容占7列">
+                <div>作者</div>
+                <input type="text" class="CUI-input CUI-span-4c" placeholder="作者名">
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 8列 - 两列展示 ==================== -->
+        <h2>8列 - 两列展示</h2>
+        <form class="CUI-form" data-form-cols="8">
+            <div>
+                <div>姓名</div>
+                <input type="text" class="CUI-input" placeholder="请输入姓名">
+                <div>性别</div>
+                <select class="CUI-input">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </div>
+            <div>
+                <div>手机号</div>
+                <input type="tel" class="CUI-input" placeholder="请输入手机号">
+                <div>邮箱</div>
+                <input type="email" class="CUI-input" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>密码</div>
+                <input type="password" class="CUI-input" placeholder="请输入密码">
+                <div>确认密码</div>
+                <input type="password" class="CUI-input" placeholder="请确认密码">
+            </div>
+            <div>
+                <div>省</div>
+                <select class="CUI-input CUI-span-1c">
+                    <option>北京</option>
+                    <option>上海</option>
+                </select>
+                <div>市</div>
+                <select class="CUI-input CUI-span-1c">
+                    <option>北京市</option>
+                    <option>上海市</option>
+                </select>
+                <div>区</div>
+                <select class="CUI-input CUI-span-1c">
+                    <option>朝阳区</option>
+                    <option>海淀区</option>
+                </select>
+                <div>详细</div>
+                <input type="text" class="CUI-input CUI-span-4c" placeholder="请输入详细地址">
+            </div>
+            <div>
+                <div>简介</div>
+                <textarea class="CUI-input CUI-span-7c" placeholder="简单介绍..." rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 4列 - 单列展示 ==================== -->
+        <h2>4列 - 单列展示</h2>
+        <form class="CUI-form" data-form-cols="4">
+            <div>
+                <div>姓名</div>
+                <input type="text" class="CUI-input" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" class="CUI-input" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>手机号</div>
+                <input type="tel" class="CUI-input" placeholder="请输入手机号">
+            </div>
+            <div>
+                <div>地址</div>
+                <textarea class="CUI-input" placeholder="请输入地址..." rows="3"></textarea>
+            </div>
+            <div>
+                <div>备注</div>
+                <input type="text" class="CUI-input CUI-input-box" data-label="详细备注" data-hint="这是永久提示信息" data-info="焦点时显示的补充提示" placeholder="请输入备注">
+            </div>
+            <div>
+                <div>有错误</div>
+                <input type="text" class="CUI-input CUI-input-box" data-label="错误示例" data-hint="这是永久提示" data-error="这是错误信息" data-isError="true" placeholder="请输入内容">
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 2列 - 单列布局 ==================== -->
+        <h2>2列 - 单列布局</h2>
+        <form class="CUI-form" data-form-cols="2">
+            <div>
+                <div>姓名</div>
+                <input type="text" class="CUI-input" placeholder="请输入姓名">
+            </div>
+            <div>
+                <div>邮箱</div>
+                <input type="email" class="CUI-input" placeholder="请输入邮箱">
+            </div>
+            <div>
+                <div>电话</div>
+                <input type="tel" class="CUI-input" placeholder="请输入电话">
+            </div>
+            <div>
+                <div>简介</div>
+                <textarea class="CUI-input" placeholder="简单介绍..." rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 标签在上 ==================== -->
+        <h2>标签在上（8列）</h2>
+        <form class="CUI-form" data-form-cols="8">
+            <div data-label-position="top">
+                <div>姓名</div>
+                <input type="text" class="CUI-input CUI-span-2c" placeholder="请输入姓名">
+                <div>性别</div>
+                <select class="CUI-input CUI-span-2c">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+                <div>年龄</div>
+                <input type="number" class="CUI-input CUI-span-2c" placeholder="年龄">
+            </div>
+            <div data-label-position="top">
+                <div>邮箱</div>
+                <input type="email" class="CUI-input CUI-span-4c" placeholder="请输入邮箱">
+                <div>电话</div>
+                <input type="tel" class="CUI-input CUI-span-4c" placeholder="请输入电话">
+            </div>
+            <div data-label-position="top">
+                <div>简约搜索</div>
+                <input type="search" class="CUI-input CUI-input--simple CUI-span-8c" placeholder="请输入搜索内容">
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 完整表单示例：用户注册 ==================== -->
+        <h2>完整表单示例：用户注册</h2>
+        <form class="CUI-form" data-form-cols="12" id="registerForm">
+            <div>
+                <div>用户名</div>
+                <input type="text" class="CUI-input" name="username" placeholder="请输入用户名">
+                <div>邮箱</div>
+                <input type="email" class="CUI-input" name="email" placeholder="请输入邮箱">
+                <div>电话</div>
+                <input type="tel" class="CUI-input" name="phone" placeholder="请输入电话">
+            </div>
+            <div>
+                <div>密码</div>
+                <input type="password" class="CUI-input" name="password" placeholder="请输入密码">
+                <div>确认密码</div>
+                <input type="password" class="CUI-input" name="confirmPwd" placeholder="请再次输入密码">
+                <div>验证码</div>
+                <input type="sms" class="CUI-input" name="code" placeholder="请输入验证码">
+            </div>
+            <div>
+                <div>真实姓名</div>
+                <input type="text" class="CUI-input CUI-span-4c" name="realName" placeholder="请输入真实姓名">
+                <div>身份证</div>
+                <input type="text" class="CUI-input CUI-span-4c" name="idCard" placeholder="请输入身份证号">
+            </div>
+            <div>
+                <div>地区</div>
+                <select class="CUI-input CUI-span-1c" name="province">
+                    <option value="">省</option>
+                    <option value="bj">北京</option>
+                    <option value="gd">广东</option>
+                </select>
+                <select class="CUI-input CUI-span-1c" name="city">
+                    <option value="">市</option>
+                    <option value="gz">广州</option>
+                    <option value="sz">深圳</option>
+                </select>
+                <div>详细地址</div>
+                <input type="text" class="CUI-input CUI-span-6c" name="address" placeholder="请输入详细地址">
+            </div>
+            <div>
+                <div>个人简介</div>
+                <textarea class="CUI-input CUI-span-11c" name="intro" placeholder="简单介绍一下自己..." rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">注册</button>
+            <button type="button" class="btn btn-secondary">取消</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 完整表单示例：搜索筛选 ==================== -->
+        <h2>完整表单示例：搜索筛选</h2>
+        <form class="CUI-form" data-form-cols="12" id="searchForm">
+            <div>
+                <div>关键词</div>
+                <input type="search" class="CUI-input CUI-span-4c" placeholder="输入搜索关键词">
+                <div>状态</div>
+                <select class="CUI-input CUI-span-2c">
+                    <option value="">全部</option>
+                    <option value="active">启用</option>
+                    <option value="inactive">停用</option>
+                </select>
+                <div>类型</div>
+                <select class="CUI-input CUI-span-2c">
+                    <option value="">全部类型</option>
+                    <option value="type1">类型一</option>
+                    <option value="type2">类型二</option>
+                </select>
+            </div>
+            <div>
+                <div>开始日期</div>
+                <input type="date" class="CUI-input CUI-span-3c">
+                <div>结束日期</div>
+                <input type="date" class="CUI-input CUI-span-3c">
+            </div>
+            <div>
+                <div>最低价格</div>
+                <input type="number" class="CUI-input CUI-span-2c" placeholder="最低">
+                <div>最高价格</div>
+                <input type="number" class="CUI-input CUI-span-2c" placeholder="最高">
+            </div>
+
+            <button type="submit" class="btn btn-primary">搜索</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+        <hr>
+
+        <!-- ==================== 特殊场景示例 ==================== -->
+        <h2>特殊场景示例</h2>
+        <form class="CUI-form" data-form-cols="8">
+            <div>
+                <div>极长标签名称展示测试</div>
+                <input type="text" class="CUI-input" placeholder="短标签内容">
+                <div>短</div>
+                <input type="text" class="CUI-input" placeholder="长标签内容">
+            </div>
+            <div>
+                <div>禁用状态</div>
+                <input type="text" class="CUI-input" disabled value="已禁用的内容">
+                <div>只读状态</div>
+                <input type="text" class="CUI-input" readonly value="只读内容">
+            </div>
+            <div>
+                <div>简约样式</div>
+                <input type="text" class="CUI-input CUI-input--simple" placeholder="简约输入框">
+                <div>默认样式</div>
+                <input type="text" class="CUI-input" placeholder="默认输入框">
+            </div>
+            <div>
+                <div>很高的多行文本</div>
+                <textarea class="CUI-input" placeholder="这个内容很长..." rows="5"></textarea>
+                <div>普通高度</div>
+                <input type="text" class="CUI-input" placeholder="普通高度输入框">
+            </div>
+
+            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="reset" class="btn btn-secondary">重置</button>
+        </form>
+
+    </div>
+
+    <script type="module" src="/modules/js/index.js"></script>
+    <script src="/modules/js/input.js"></script>
+    <script src="/modules/js/form.js"></script>
+</body>
+</html>

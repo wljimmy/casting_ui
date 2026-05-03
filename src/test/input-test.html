@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input 输入框测试 | Casting UI</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/header.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/progress.css">
+    <link rel="stylesheet" href="/modules/css/menu.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/prism/prism.css">
+</head>
+<body class="CUI-page">
+    <header>
+        <div class="CUI-grid CUI-grid-2c CUI-grid-v-center">
+            <div>
+                <h1>Casting UI</h1>
+                <p>Input 输入框测试</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="CUI-content">
+        <section class="CUI-section">
+
+            <h2>带图标输入框（根据type自动显示）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg CUI-gap-md">
+                <div class="CUI-span-4c">
+                    <input type="search" name="s1" class="CUI-input" placeholder="搜索框">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="u1" class="CUI-input" data-icon="user" placeholder="用户名">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="email" name="e1" class="CUI-input" placeholder="邮箱">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="tel" name="t1" class="CUI-input" placeholder="电话">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="password" name="p1" class="CUI-input" placeholder="密码">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="password" name="up1" class="CUI-input" data-icon="userpassword" placeholder="用户密码">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="url" name="url1" class="CUI-input" placeholder="网址">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="number" name="n1" class="CUI-input" placeholder="数字">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="sms" name="sms1" class="CUI-input" placeholder="短信验证码">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="date" name="d1" class="CUI-input" placeholder="日期">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="time" name="ti1" class="CUI-input" placeholder="时间">
+                </div>
+            </div>
+
+            <h2>带标签输入框</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg CUI-gap-md">
+                <div class="CUI-span-6c">
+                    <h3>标签在左</h3>
+                    <input type="text" name="name" class="CUI-input" data-label="姓名" placeholder="">
+                </div>
+                <div class="CUI-span-6c">
+                    <h3>标签在上</h3>
+                    <input type="text" name="email2" class="CUI-input" data-label="邮箱地址" data-label-position="top" placeholder="">
+                </div>
+            </div>
+
+            <h2>简约样式输入框（仅下边框）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg CUI-gap-md">
+                <div class="CUI-span-4c">
+                    <input type="text" name="simple1" class="CUI-input CUI-input--simple" placeholder="简约搜索" data-label="搜索" data-label-position="top">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="simple2" class="CUI-input CUI-input--simple" placeholder="简约邮箱" data-label="邮箱" data-label-position="top">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="simple3" class="CUI-input CUI-input--simple" placeholder="简约电话" data-label="电话" data-label-position="top">
+                </div>
+            </div>
+
+            <h2>CUI-input-box 组合输入框</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg CUI-gap-md">
+                <div class="CUI-span-6c">
+                    <input type="text" name="box1" class="CUI-input-box" placeholder="请输入" data-label="普通输入" data-hint="这是永久提示">
+                </div>
+                <div class="CUI-span-6c">
+                    <input type="text" name="box2" class="CUI-input-box" placeholder="请输入" data-label="错误输入" data-hint="这是永久提示" data-error="这是错误信息" data-isError="true">
+                </div>
+                <div class="CUI-span-6c">
+                    <input type="text" name="box3" class="CUI-input-box CUI-input--simple" placeholder="请输入" data-label="简约+提示+错误" data-hint="灰色永久提示" data-info="焦点时显示的提示" data-error="错误信息" data-isError="true">
+                </div>
+                <div class="CUI-span-6c">
+                    <input type="email" name="box4" class="CUI-input-box" placeholder="请输入邮箱" data-label="邮箱" data-icon="email" data-hint="请输入有效的邮箱地址" data-info="焦点时显示：请注意邮箱格式">
+                </div>
+            </div>
+
+            <h2>独立Input（无表单包裹）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-6c">
+                    <input type="text" name="search" class="CUI-input" placeholder="独立搜索框" id="searchInput">
+                </div>
+                <div class="CUI-span-6c CUI-flex CUI-gap-sm CUI-ai-center">
+                    <button class="btn btn-secondary" onclick="testGetValue('search')">获取值</button>
+                    <button class="btn btn-secondary" onclick="testElement('search')">获取DOM</button>
+                    <span id="result-search" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>表单内Input</h2>
+            <form id="loginForm" class="CUI-mb-lg">
+                <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                    <div class="CUI-span-6c">
+                        <input type="text" name="username" class="CUI-input" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                    <div class="CUI-span-6c">
+                        <input type="password" name="password" class="CUI-input" placeholder="密码">
+                    </div>
+                </div>
+                <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                    <div class="CUI-span-6c CUI-flex CUI-gap-sm">
+                        <button type="button" class="btn btn-primary" onclick="testGetFormData('loginForm')">获取表单数据</button>
+                        <button type="button" class="btn btn-secondary" onclick="testSetFormData('loginForm')">设置表单数据</button>
+                        <button type="button" class="btn btn-secondary" onclick="testGetValue('loginForm.username')">获取用户名</button>
+                    </div>
+                </div>
+                <div id="result-loginForm" class="CUI-text-muted CUI-mb-md"></div>
+            </form>
+
+            <h2>注册表单（嵌套子表单）</h2>
+            <form id="registerForm">
+                <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                    <div class="CUI-span-4c">
+                        <input type="email" name="email" class="CUI-input" placeholder="邮箱">
+                    </div>
+                    <div class="CUI-span-4c">
+                        <input type="tel" name="phone" class="CUI-input" placeholder="手机号">
+                    </div>
+                    <div class="CUI-span-4c">
+                        <input type="sms" name="captcha" class="CUI-input" placeholder="验证码">
+                    </div>
+                </div>
+                <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                    <div class="CUI-span-6c CUI-flex CUI-gap-sm">
+                        <button type="button" class="btn btn-primary" onclick="testGetFormData('registerForm')">获取注册表单数据</button>
+                        <button type="button" class="btn btn-secondary" onclick="testSetFormData('registerForm')">设置注册表单数据</button>
+                    </div>
+                </div>
+                <div id="result-registerForm" class="CUI-text-muted CUI-mb-md"></div>
+            </form>
+
+            <h2>Input 注册表</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-12c">
+                    <button class="btn btn-secondary CUI-mb-md" onclick="refreshRegistry()">刷新注册表</button>
+                    <pre id="registry-display" class="CUI-p-md CUI-bg-gray-100 CUI-radius-md CUI-overflow-auto" style="max-height: 400px;"></pre>
+                </div>
+            </div>
+
+            <h2>文本域（textarea）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-8c">
+                    <textarea name="description" class="CUI-input" placeholder="请输入描述..." rows="3"></textarea>
+                </div>
+                <div class="CUI-span-4c CUI-flex CUI-gap-sm CUI-ai-center">
+                    <button class="btn btn-secondary" onclick="testGetValue('description')">获取值</button>
+                    <span id="result-description" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>下拉选择（select）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <select name="city" class="CUI-input">
+                        <option value="">请选择城市</option>
+                        <option value="bj">北京</option>
+                        <option value="sh">上海</option>
+                        <option value="sz">深圳</option>
+                    </select>
+                </div>
+                <div class="CUI-span-8c CUI-flex CUI-gap-sm CUI-ai-center">
+                    <button class="btn btn-secondary" onclick="testGetValue('city')">获取值</button>
+                    <span id="result-city" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>复选框（checkbox）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-12c">
+                    <label><input type="checkbox" name="hobby" class="CUI-input" value="read"> 阅读</label>
+                    <label><input type="checkbox" name="hobby" class="CUI-input" value="music"> 音乐</label>
+                    <label><input type="checkbox" name="hobby" class="CUI-input" value="sport"> 运动</label>
+                </div>
+                <div class="CUI-span-12c CUI-mt-sm">
+                    <button class="btn btn-secondary" onclick="testGetValue('hobby')">获取值</button>
+                    <span id="result-hobby" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>单选框（radio）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <div class="CUI-span-12c">
+                    <label><input type="radio" name="gender" class="CUI-input" value="male"> 男</label>
+                    <label><input type="radio" name="gender" class="CUI-input" value="female"> 女</label>
+                    <label><input type="radio" name="gender" class="CUI-input" value="other"> 其他</label>
+                </div>
+                <div class="CUI-span-12c CUI-mt-sm">
+                    <button class="btn btn-secondary" onclick="testGetValue('gender')">获取值</button>
+                    <span id="result-gender" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>隐藏字段（hidden）</h2>
+            <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
+                <input type="hidden" name="token" value="abc123xyz">
+                <div class="CUI-span-12c">
+                    <button class="btn btn-secondary" onclick="testGetValue('token')">获取值</button>
+                    <span id="result-token" class="CUI-text-muted"></span>
+                </div>
+            </div>
+
+            <h2>JavaScript API 测试</h2>
+            <table class="CUI-table CUI-span-12c">
+                <thead>
+                    <tr>
+                        <th>API</th>
+                        <th>说明</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>CUI.input.get(path)</code></td>
+                        <td>获取节点信息</td>
+                        <td><code>CUI.input.get('loginForm.username')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.getValue(path)</code></td>
+                        <td>获取input的值</td>
+                        <td><code>CUI.input.getValue('search')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.setValue(path, value)</code></td>
+                        <td>设置input的值</td>
+                        <td><code>CUI.input.setValue('search', 'test')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.getFormData(formId)</code></td>
+                        <td>获取整个表单数据对象</td>
+                        <td><code>CUI.input.getFormData('loginForm')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.setFormData(formId, data)</code></td>
+                        <td>设置整个表单数据</td>
+                        <td><code>CUI.input.setFormData('loginForm', {username: 'test'})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.element(path)</code></td>
+                        <td>获取input的DOM元素</td>
+                        <td><code>CUI.input.element('search')</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>CUI.input.getAll()</code></td>
+                        <td>获取完整注册表</td>
+                        <td><code>CUI.input.getAll()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="module" src="/modules/js/index.js"></script>
+    <script src="/modules/js/prism/prism.js"></script>
+    <script src="/modules/js/input.js"></script>
+    <script>
+        function refreshRegistry() {
+            const registry = CUI.input.getAll();
+            document.getElementById('registry-display').textContent = JSON.stringify(registry, null, 2);
+        }
+
+        window.CUIInputRegistryCallback = function(data) {
+            refreshRegistry();
+        };
+
+        function testGetValue(path) {
+            const value = CUI.input.getValue(path);
+            const parts = path.split('.');
+            const resultId = parts.length > 1 ? 'result-' + parts[0] : 'result-' + path;
+            const resultEl = document.getElementById(resultId);
+            if (resultEl) {
+                resultEl.textContent = '值: ' + value;
+            } else {
+                console.log('result-' + path + ' element not found');
+            }
+        }
+
+        function testElement(path) {
+            const el = CUI.input.element(path);
+            const parts = path.split('.');
+            const resultId = parts.length > 1 ? 'result-' + parts[0] : 'result-' + path;
+            const resultEl = document.getElementById(resultId);
+            if (resultEl) {
+                resultEl.textContent = 'DOM: ' + (el ? el.tagName + '#' + el.id + '[name=' + el.name + ']' : 'null');
+            }
+        }
+
+        function testGetFormData(formId) {
+            const data = CUI.input.getFormData(formId);
+            document.getElementById('result-' + formId).textContent = JSON.stringify(data);
+        }
+
+        function testSetFormData(formId) {
+            CUI.input.setFormData(formId, {
+                username: '测试用户',
+                password: '123456',
+                email: 'test@example.com',
+                phone: '13800138000',
+                captcha: '8888'
+            });
+            document.getElementById('result-' + formId).textContent = '已设置数据';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshRegistry();
+        });
+    </script>
+</body>
+</html>

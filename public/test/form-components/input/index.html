@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input 输入框测试 | Casting UI</title>
+    <link rel="stylesheet" href="../../src/modules/css/core.css">
+    <link rel="stylesheet" href="../../src/modules/css/components.css">
+    <link rel="stylesheet" href="../../src/modules/css/container.css">
+    <link rel="stylesheet" href="../../src/modules/css/responsive.css">
+</head>
+<body>
+<section class="CUI-section">
+    <h1>Input 输入框测试</h1>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input CUI-span-12c">
+            <input type="text" placeholder="基础输入框">
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-primary CUI-span-6c">
+            <input type="text" placeholder="主要输入框">
+        </div>
+        <div class="input input-secondary CUI-span-6c">
+            <input type="text" placeholder="次要输入框">
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-success CUI-span-4c">
+            <input type="text" placeholder="成功状态">
+        </div>
+        <div class="input input-warning CUI-span-4c">
+            <input type="text" placeholder="警告状态">
+        </div>
+        <div class="input input-error CUI-span-4c">
+            <input type="text" placeholder="错误状态">
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-disabled CUI-span-6c">
+            <input type="text" placeholder="禁用状态" disabled>
+        </div>
+        <div class="input input-readonly CUI-span-6c">
+            <input type="text" value="只读状态" readonly>
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-large CUI-span-6c">
+            <input type="text" placeholder="大尺寸">
+        </div>
+        <div class="input input-small CUI-span-6c">
+            <input type="text" placeholder="小尺寸">
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-icon CUI-span-6c">
+            <span class="input-icon-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../icons/outline/search.svg#icon"></use>
+                </svg>
+            </span>
+            <input type="text" placeholder="带图标-左侧">
+        </div>
+        <div class="input input-icon CUI-span-6c">
+            <input type="text" placeholder="带图标-右侧">
+            <span class="input-icon-right">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <use href="../../icons/outline/search.svg#icon"></use>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input input-prefix CUI-span-4c">
+            <span class="input-prefix-text">https://</span>
+            <input type="text" placeholder="前缀">
+        </div>
+        <div class="input input-suffix CUI-span-4c">
+            <input type="text" placeholder="后缀">
+            <span class="input-suffix-text">.com</span>
+        </div>
+        <div class="input input-clearable CUI-span-4c">
+            <input type="text" value="可清除内容" class="input-clearable-input">
+            <span class="input-clear-btn">&times;</span>
+        </div>
+    </div>
+
+    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+        <div class="input CUI-span-12c">
+            <textarea placeholder="文本域" rows="4"></textarea>
+        </div>
+    </div>
+</section>
+</body>
+</html>

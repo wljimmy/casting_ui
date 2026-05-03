@@ -1,0 +1,247 @@
+/*
+ * Casting UI Framework
+ * Version: 0.3.0
+ * Module: input.css
+ * Description: Input 输入框组件样式
+ * Copyright (c) 2026 Bingo工作室
+ */
+
+/* ================================
+   容器基础样式
+   ================================ */
+
+.input,
+.CUI-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--size-sm) var(--size-md);
+    transition: all var(--transition-normal);
+    /* margin: var(--size-sm) var(--size-md); */
+}
+
+
+/* ================================
+   内部元素基础样式
+   ================================ */
+
+.input > input,
+.input > textarea,
+.CUI-input > input,
+.CUI-input > textarea,
+.CUI-input > select {
+    flex: 1;
+    font-size: var(--font-size-md);
+    color: var(--text-color);
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.input > input,
+.input > textarea {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.CUI-input > input,
+.CUI-input > textarea,
+.CUI-input > select {
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* ================================
+   简约样式（仅下边框）
+   ================================ */
+
+.CUI-input.CUI-input--simple {
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+}
+
+.CUI-input.CUI-input--simple:focus-within {
+    border-bottom-color: var(--primary-color);
+    box-shadow: none;
+}
+
+.CUI-input.CUI-input--simple > input,
+.CUI-input.CUI-input--simple > textarea,
+.CUI-input.CUI-input--simple > select {
+    padding-left: 0;
+}
+
+/* ================================
+   标签布局
+   ================================ */
+
+/* 标签在上 */
+.CUI-input.CUI-input--label-top {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--size-md);
+}
+
+.CUI-input.CUI-input--label-top > .CUI-input__label {
+    margin-bottom: var(--size-xs);
+}
+
+/* 标签在左 */
+.CUI-input.CUI-input--label-left {
+    padding-left: var(--size-xs);
+}
+
+/* ================================
+   带图标的输入框
+   ================================ */
+
+.CUI-input.CUI-input--with-icon {
+    padding-right: var(--size-xl);
+}
+
+.CUI-input__icon {
+    position: absolute;
+    right: var(--size-md);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-lg);
+    height: var(--size-lg);
+    color: var(--text-light);
+    pointer-events: none;
+}
+
+.CUI-input__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ================================
+   Textarea 特殊样式
+   ================================ */
+
+.input > textarea,
+.CUI-input > textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ================================
+   Select 特殊样式
+   ================================ */
+
+.CUI-input > select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: var(--size-lg);
+}
+
+.CUI-input:has(> select)::after {
+    content: '';
+    position: absolute;
+    right: var(--size-md);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--text-light);
+    pointer-events: none;
+}
+
+/* ================================
+   Placeholder 样式
+   ================================ */
+
+.input > input::placeholder,
+.input > textarea::placeholder {
+    color: var(--text-light);
+}
+
+/* ================================
+   聚焦状态
+   ================================ */
+
+.input:focus-within,
+.CUI-input:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+}
+
+/* ================================
+   禁用状态
+   ================================ */
+
+.input-disabled {
+    background-color: var(--gray-100);
+    cursor: not-allowed;
+}
+
+.input-disabled > input,
+.input-disabled > textarea {
+    cursor: not-allowed;
+    color: var(--text-light);
+}
+
+/* ================================
+   输入框组合盒
+   ================================ */
+
+.CUI-input-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.CUI-input-box > .CUI-input__label {
+    margin-bottom: var(--size-xs);
+}
+
+.CUI-input-box > .CUI-input__hint {
+    margin-top: var(--size-xs);
+}
+
+.CUI-input-box > .CUI-input__info,
+.CUI-input-box > .CUI-input__error {
+    margin-top: var(--size-xs);
+    display: none;
+}
+
+.CUI-input-box:focus-within > .CUI-input__info {
+    display: block;
+}
+
+.CUI-input-box.is-error > .CUI-input__error {
+    display: block;
+}
+
+.CUI-input-box > .CUI-input__info > .message,
+.CUI-input-box > .CUI-input__error > .message {
+    margin: 0;
+    padding: var(--size-sm) var(--size-md);
+}
+
+/* ================================
+   错误状态
+   ================================ */
+
+.CUI-input.CUI-input--error {
+    border-color: var(--danger-color, #ff4d4f);
+}
+
+.CUI-input.CUI-input--error:focus-within {
+    box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.1);
+}

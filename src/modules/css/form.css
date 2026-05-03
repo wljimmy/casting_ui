@@ -1,0 +1,124 @@
+/*
+ * Casting UI Framework
+ * Version: 0.3.0
+ * Module: form.css
+ * Description: Form 表单布局 - 极简版
+ * Copyright (c) 2026 Bingo工作室
+ */
+
+.CUI-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-md);
+}
+
+.CUI-form-card {
+    padding: var(--size-xl);
+    background: var(--surface-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--size-lg);
+}
+
+.CUI-form > div {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: start;
+    justify-items: start;
+    gap: var(--size-md);
+    width: 100%;
+}
+
+/* 不同列数 */
+.CUI-form[data-form-cols="8"] > div {
+    grid-template-columns: repeat(8, 1fr);
+}
+.CUI-form[data-form-cols="4"] > div {
+    grid-template-columns: repeat(4, 1fr);
+}
+.CUI-form[data-form-cols="2"] > div {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.CUI-form > div > div {
+    font-size: var(--font-size-md);
+    color: var(--text-color);
+    font-weight: 500;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    padding-top: var(--size-sm);
+    padding-bottom: var(--size-sm);
+}
+
+/* 默认标签占1列，输入占3列 */
+.CUI-form > div > .CUI-input:not([class*="CUI-span"]),
+.CUI-form > div > .CUI-input-box:not([class*="CUI-span"]) {
+    grid-column: span 3;
+    width: 100%;
+}
+
+/* 不同列数下的默认span */
+
+.CUI-form[data-form-cols="2"] > div > .CUI-input,
+.CUI-form[data-form-cols="2"] > div > .CUI-input-box {
+    grid-column: span 1;
+}
+
+/* 标签在上 */
+.CUI-form > div[data-label-position="top"] {
+    align-items: flex-start;
+}
+
+.CUI-form > div[data-label-position="top"] > div {
+    grid-column: 1 / -1;
+}
+
+.CUI-form > div[data-label-position="top"] > .CUI-input,
+.CUI-form > div[data-label-position="top"] > .CUI-input-box {
+    grid-column: 1 / -1;
+}
+
+.CUI-form > .CUI-form-actions {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--size-md);
+    padding-top: var(--size-md);
+    width: 100%;
+}
+
+/* 按钮容器列数 */
+.CUI-form[data-form-cols="8"] > .CUI-form-actions {
+    grid-template-columns: repeat(8, 1fr);
+}
+.CUI-form[data-form-cols="4"] > .CUI-form-actions {
+    grid-template-columns: repeat(4, 1fr);
+}
+.CUI-form[data-form-cols="2"] > .CUI-form-actions {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.CUI-form-actions > button,
+.CUI-form-actions > input[type="button"],
+.CUI-form-actions > input[type="submit"],
+.CUI-form-actions > input[type="reset"] {
+    grid-column: span 2;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .CUI-form > div,
+    .CUI-form > .CUI-form-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .CUI-form > div > div,
+    .CUI-form > div > .CUI-input,
+    .CUI-form > div > .CUI-input-box,
+    .CUI-form-actions > button,
+    .CUI-form-actions > input[type="button"],
+    .CUI-form-actions > input[type="submit"],
+    .CUI-form-actions > input[type="reset"] {
+        grid-column: auto;
+    }
+}

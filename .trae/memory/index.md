@@ -8,9 +8,11 @@
   - `basic-layout/` - 基础布局组件
     - `card-container/` - 卡片容器
     - `general-container/` - 通用容器
+  - `form-components/` - 表单组件
+    - `input-container/` - 输入框
+    - `form-container/` - 表单布局
   - `interaction-controls/` - 交互控件
     - `button-container/` - 按钮
-    - `input-container/` - 输入框
     - `select-container/` - 选择控件
   - `feedback-components/` - 反馈组件
     - `modal-container-1/` - 弹窗
@@ -66,6 +68,8 @@
 - 无依赖
 
 ## 最近更新
+- 2026-05-04: 新增 Form 表单布局组件，支持 12/8/4/2 列灵活布局，自动按钮容器，统一标签对齐，响应式适配
+- 2026-05-04: 完善 Input 组件，新增 Tabler 图标支持，data-icon自定义图标，CUI-input-box组合输入框
 - 2026-03-21: 完成内容拆分和动态加载功能
 - 2026-03-21: 测试应用并确保所有功能正常工作
 - 2026-03-21: 整理记忆，创建细粒度的记忆文件结构
