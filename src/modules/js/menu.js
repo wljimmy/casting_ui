@@ -1093,6 +1093,11 @@ class MenuInstance {
                     if (typeof Prism !== 'undefined') {
                         Prism.highlightAll();
                     }
+                    
+                    // 触发表单组件处理
+                    if (typeof CUI !== 'undefined' && CUI.form) {
+                        CUI.form.processForms();
+                    }
                 } else {
                     console.error('加载页面失败:', xhr.status);
                 }
