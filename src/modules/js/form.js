@@ -11,22 +11,31 @@ const CUIFormProcessor = {
     processedForms: new WeakSet(),
 
     init() {
-        this.processForms();
         this.setupObserver();
+        this.processForms();
     },
 
     processForms() {
-        document.querySelectorAll('form').forEach(form => {
-            if (form.classList.contains('CUI-form') && !this.processedForms.has(form)) {
-                this.processedForms.add(form);
-                this.processForm(form);
-            }
+        document.querySelectorAll('form.CUI-form').forEach(form => {
+            this.processForm(form);
         });
     },
 
     processForm(form) {
+        if (this.isProcessed(form)) return;
+        this.markProcessed(form);
+        
         this.wrapInCard(form);
         this.wrapButtons(form);
+    },
+
+    isProcessed(form) {
+        return form.classList.contains('CUI-form-processed') || this.processedForms.has(form);
+    },
+
+    markProcessed(form) {
+        form.classList.add('CUI-form-processed');
+        this.processedForms.add(form);
     },
 
     wrapInCard(form) {
@@ -72,20 +81,21 @@ const CUIFormProcessor = {
     setupObserver() {
         if (typeof CastingDOMObserver !== 'undefined') {
             CastingDOMObserver.onAdd('form-processor', 'form.CUI-form', (form) => {
-                if (!this.processedForms.has(form)) {
-                    this.processedForms.add(form);
-                    this.processForm(form);
-                }
+                this.processForm(form);
             });
         }
     }
 };
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => CUIFormProcessor.init());
-} else {
-    CUIFormProcessor.init();
+function initFormProcessor() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => CUIFormProcessor.init());
+    } else {
+        CUIFormProcessor.init();
+    }
 }
 
 window.CUI = window.CUI || {};
 window.CUI.form = CUIFormProcessor;
+
+initFormProcessor();
