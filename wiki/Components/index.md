@@ -35,7 +35,9 @@
 | **进度条** | [Data-Display](./Data-Display.md) | [手册](../../public/manual/data-display/progress-container/) |
 | **徽章** | [Data-Display](./Data-Display.md) | [手册](../../public/manual/data-display/badge-container/) |
 | **状态栏** | [Data-Display](./Data-Display.md) | [手册](../../public/manual/data-display/status-container/) |
+| **表单** | [Form](./Form.md) | [手册](../../public/manual/form-components/) |
 | **输入框** | [Form](./Form.md) | [手册](../../public/manual/form-components/input-container/) |
+| **表单布局** | [Form](./Form.md) | [手册](../../public/manual/form-components/form-container/) |
 | **文本** | [Text](./Text.md) | [手册](../../public/manual/general-ui/text-container/) |
 | **Toast** | [Feedback](./Feedback.md) | [手册](../../public/manual/feedback-components/toast-container/) |
 | **Modal** | [Feedback](./Feedback.md) | [手册](../../public/manual/feedback-components/modal-container-1/) |

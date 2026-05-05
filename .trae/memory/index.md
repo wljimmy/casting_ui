@@ -29,7 +29,33 @@
     - `icon-container/` - 图标
     - `divider-container/` - 分隔组件
 
-## 记忆文件结构
+## 手册页目录
+- `public/manual/` - 手册页文件夹
+  - `basic-layout/` - 基础布局组件
+    - `card-container/` - 卡片容器
+    - `button-container/` - 按钮
+    - `general-container/` - 通用容器
+    - `layout-container/` - 布局容器
+    - `index.html` - 基础布局索引
+  - `form-components/` - 表单组件
+    - `input-container/` - 输入框
+    - `form-container/` - 表单布局
+    - `index.html` - 表单组件索引
+  - `data-display/` - 数据展示组件
+    - `badge-container/` - 徽章
+    - `progress-container/` - 进度条
+    - `status-container/` - 状态栏
+    - `icon-search/` - 图标搜索
+    - `index.html` - 数据展示索引
+  - `feedback-components/` - 反馈组件
+    - `modal-container-1/` - 弹窗
+    - `toast-container/` - Toast
+    - `message-container/` - 消息提示
+    - `index.html` - 反馈组件索引
+  - `general-ui/` - 通用UI元素
+    - `text-container/` - 文本
+    - `index.html` - 通用UI索引
+  - `init-guide/` - 初始化指南
 - `.trae/memory/` - 记忆文件文件夹
   - `index.md` - 记忆索引
   - `project-structure.md` - 项目结构
