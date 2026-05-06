@@ -3,11 +3,23 @@
 
 Casting UI 提供完整的表单组件，包括输入框、表单处理、表单验证等功能。
 
+## 核心规则
+
+**重要：form 下的第一级 div 就是一行！**
+
+表单的每一行是一个独立的 `<div>` 容器，每个容器内可以包含多组标签和输入框。
+
+| 结构 | 说明 |
+|------|------|
+| `form.CUI-form` | 表单容器，flex布局 |
+| `form > div` | **每一行**，grid布局 |
+| `form > div > div` | 标签，默认占1列 |
+| `form > div > .CUI-input` | 输入框，默认占3列 |
+| `form > button` | 按钮，自动收集到操作区 |
+
 ## 输入框 (Input)
 
 ### 基础用法
-
-使用 `CUI-input
 
 只需为 input/textarea/select 添加 `CUI-input` 类，框架会自动美化并注册到注册表。
 
@@ -195,14 +207,80 @@ CUI.input.getAll()
 
 ## 表单容器 (CUI-form)
 
+### 核心结构
+
+**重要：form 下的第一级 div 就是一行！**
+
 ```html
-<form class="CUI-form" id="myForm">
-    <!-- 输入框 -->
-    <input type="text" name="username" class="CUI-input" data-label="用户名">
-    
-    <!-- 按钮会被自动收集到按钮区域 -->
+<form class="CUI-form" data-form-cols="12">
+    <!-- 每一行是一个div -->
+    <div>
+        <div>姓名</div>
+        <input type="text" name="username" class="CUI-input" placeholder="请输入姓名">
+        <div>邮箱</div>
+        <input type="email" name="email" class="CUI-input" placeholder="请输入邮箱">
+        <div>电话</div>
+        <input type="tel" name="phone" class="CUI-input" placeholder="请输入电话">
+    </div>
+    <!-- 按钮会自动收集到操作区 -->
     <button type="submit" class="btn btn-primary">提交</button>
     <button type="button" class="btn btn-secondary">取消</button>
+</form>
+```
+
+### 布局参数
+
+| 参数 | 值 | 说明 |
+|------|------|------|
+| data-form-cols | 12 / 8 / 4 / 2 | 表单总列数，控制布局密度 |
+| data-label-position | left / top | 标签位置（在form或div上设置） |
+| CUI-span-Xc | 1~11 | 在input上设置，控制占列数 |
+
+### 布局规范
+
+| 规范 | 说明 |
+|------|------|
+| form下第一级div就是一行 | 每个直接子div是一行，形成独立的grid布局 |
+| 标签与input不换行 | 避免一行放不下时标签和input被拆散 |
+| 手动调整列数 | 若布局不合理，可通过调整data-form-cols或CUI-span来优化 |
+| input后可添加内容 | input之后可以继续放div做额外提示，不受框架限制 |
+| 默认上对齐 | 标签和input第一行保持对齐 |
+| 响应式适配 | 小屏幕自动切换为单列布局 |
+
+### 示例
+
+```html
+<!-- 12列布局（3列展示） -->
+<form class="CUI-form" data-form-cols="12">
+    <div>
+        <div>姓名</div>
+        <input type="text" name="name" class="CUI-input" placeholder="请输入姓名">
+        <div>邮箱</div>
+        <input type="email" name="email" class="CUI-input" placeholder="请输入邮箱">
+        <div>电话</div>
+        <input type="tel" name="tel" class="CUI-input" placeholder="请输入电话">
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+
+<!-- 8列布局（2列展示） -->
+<form class="CUI-form" data-form-cols="8">
+    <div>
+        <div>姓名</div>
+        <input type="text" name="name" class="CUI-input" placeholder="请输入姓名">
+        <div>邮箱</div>
+        <input type="email" name="email" class="CUI-input" placeholder="请输入邮箱">
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+
+<!-- 标签在上 -->
+<form class="CUI-form" data-form-cols="12">
+    <div data-label-position="top">
+        <div>个人简介</div>
+        <textarea name="bio" class="CUI-input" placeholder="请输入个人简介" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
 </form>
 ```
 
