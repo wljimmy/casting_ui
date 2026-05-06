@@ -128,40 +128,13 @@ function verifyPlatform(platform) {
 }
 
 function checkNativeInputIcons() {
-    const testInput = document.createElement('input');
-    testInput.type = 'date';
-    testInput.style.cssText = `
-        position: fixed;
-        top: -100px;
-        left: -100px;
-        opacity: 0;
-        pointer-events: none;
-    `;
-    
-    document.body.appendChild(testInput);
-    
-    const widthWithIcon = testInput.offsetWidth;
-    
-    testInput.style.setProperty('::-webkit-calendar-picker-indicator', 'display: none !important');
-    testInput.style.webkitAppearance = 'none';
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        #cui-native-icon-test::-webkit-calendar-picker-indicator {
-            display: none !important;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    testInput.id = 'cui-native-icon-test';
-    const widthWithoutIcon = testInput.offsetWidth;
-    
-    document.body.removeChild(testInput);
-    document.head.removeChild(style);
-    
-    const hasNativeIcon = widthWithIcon > widthWithoutIcon + 2;
-    
-    return hasNativeIcon;
+    try {
+        const input = document.createElement('input');
+        input.type = 'date';
+        return !!window.getComputedStyle(input, '::-webkit-calendar-picker-indicator').content;
+    } catch {
+        return false;
+    }
 }
 
 window.CUI = window.CUI || {};
