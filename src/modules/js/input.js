@@ -261,10 +261,18 @@ function CUIInputInit() {
     }
 
     function getIconNameForInput(input) {
+        const type = (input.type || 'text').toLowerCase();
+        
+        if (typeof CUI !== 'undefined' && CUI.env && CUI.env.features.nativeInputIcons) {
+            const nativeIconTypes = ['date', 'time', 'datetime-local'];
+            if (nativeIconTypes.includes(type)) {
+                return null;
+            }
+        }
+        
         if (input.dataset.icon) {
             return input.dataset.icon;
         }
-        const type = (input.type || 'text').toLowerCase();
         return CUIInputIconMap[type] || null;
     }
 

@@ -7,8 +7,17 @@
  * Email: wljimmy@hotmail.com
  */
 
-// 优先加载DOM观察器模块
-import('./dom-observer.js').then(() => {
+// 首先加载环境检测模块
+import('./env.js').then(() => {
+    console.log('环境检测模块加载完成:', {
+        browser: CUI.env.browser,
+        platform: CUI.env.platform,
+        hasNativeIcons: CUI.env.features.nativeInputIcons
+    });
+
+    // 优先加载DOM观察器模块
+    return import('./dom-observer.js');
+}).then(() => {
     console.log('DOM观察器模块加载完成');
 
     // 加载核心模块
