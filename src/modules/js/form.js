@@ -53,7 +53,7 @@ const CUIFormProcessor = {
     },
 
     wrapButtons(form) {
-        const buttons = form.querySelectorAll('button:not(.CUI-form-actions *), input[type="submit"], input[type="button"], input[type="reset"]');
+        const buttons = form.querySelectorAll('button:not(.CUI-form-actions *):not(.CUI-input-box *), input[type="submit"]:not(.CUI-input-box *), input[type="button"]:not(.CUI-input-box *), input[type="reset"]:not(.CUI-input-box *)');
         if (buttons.length === 0) return;
 
         let actionsContainer = form.querySelector('.CUI-form-actions');
