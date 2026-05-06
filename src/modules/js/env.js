@@ -128,15 +128,40 @@ function verifyPlatform(platform) {
 }
 
 function checkNativeInputIcons() {
-    const browser = CUIEnvironment.browser;
-    const version = CUIEnvironment.browserVersion;
-
-    switch (browser) {
-        case 'chrome': return version >= 90;
-        case 'edge': return version >= 90;
-        case 'firefox': return version >= 93;
-        default: return false;
-    }
+    const testInput = document.createElement('input');
+    testInput.type = 'date';
+    testInput.style.cssText = `
+        position: fixed;
+        top: -100px;
+        left: -100px;
+        opacity: 0;
+        pointer-events: none;
+    `;
+    
+    document.body.appendChild(testInput);
+    
+    const widthWithIcon = testInput.offsetWidth;
+    
+    testInput.style.setProperty('::-webkit-calendar-picker-indicator', 'display: none !important');
+    testInput.style.webkitAppearance = 'none';
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        #cui-native-icon-test::-webkit-calendar-picker-indicator {
+            display: none !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    testInput.id = 'cui-native-icon-test';
+    const widthWithoutIcon = testInput.offsetWidth;
+    
+    document.body.removeChild(testInput);
+    document.head.removeChild(style);
+    
+    const hasNativeIcon = widthWithIcon > widthWithoutIcon + 2;
+    
+    return hasNativeIcon;
 }
 
 window.CUI = window.CUI || {};
