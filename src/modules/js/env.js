@@ -26,39 +26,48 @@ const CUIEnvironment = {
 (function init() {
     const ua = navigator.userAgent.toLowerCase();
     const platform = navigator.platform.toLowerCase();
-    
+    const vendor = navigator.vendor.toLowerCase();
+
     let detectedBrowser = 'unknown';
     let detectedVersion = 0;
 
-    if (ua.includes('edg')) {
+    if ((ua.includes('edg') || ua.includes('edge')) && vendor.includes('microsoft')) {
         detectedBrowser = 'edge';
-        detectedVersion = parseInt(ua.match(/edg\/(\d+)/)?.[1]) || 0;
-    } else if (ua.includes('chrome') && !ua.includes('edg')) {
+        const match = ua.match(/Edge\/(\d+)/) || ua.match(/edg\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
+    } else if (ua.includes('chrome') && !ua.includes('edg') && vendor.includes('google')) {
         detectedBrowser = 'chrome';
-        detectedVersion = parseInt(ua.match(/chrome\/(\d+)/)?.[1]) || 0;
-    } else if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('edg')) {
+        const match = ua.match(/Chrome\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
+    } else if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('edg') && vendor.includes('apple')) {
         detectedBrowser = 'safari';
-        detectedVersion = parseInt(ua.match(/version\/(\d+)/)?.[1]) || 0;
+        const match = ua.match(/Version\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
     } else if (ua.includes('firefox')) {
         detectedBrowser = 'firefox';
-        detectedVersion = parseInt(ua.match(/firefox\/(\d+)/)?.[1]) || 0;
+        const match = ua.match(/Firefox\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
     } else if (ua.includes('opera') || ua.includes('opr')) {
         detectedBrowser = 'opera';
-        detectedVersion = parseInt(ua.match(/(?:opera|opr)\/(\d+)/)?.[1]) || 0;
+        const match = ua.match(/(?:Opera|OPR)\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
+    } else if (ua.includes('edg') && !ua.includes('chrome')) {
+        detectedBrowser = 'edge';
+        const match = ua.match(/edg\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
+    } else if (ua.includes('chrome') && !ua.includes('edg')) {
+        detectedBrowser = 'chrome';
+        const match = ua.match(/Chrome\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
+    } else if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('edg')) {
+        detectedBrowser = 'safari';
+        const match = ua.match(/Version\/(\d+)/);
+        detectedVersion = match ? parseInt(match[1]) : 0;
     }
 
-    const verificationResults = verifyBrowser(detectedBrowser, detectedVersion);
-
-    if (verificationResults.trusted) {
-        CUIEnvironment.browser = detectedBrowser;
-        CUIEnvironment.browserVersion = detectedVersion;
-        CUIEnvironment.verified.browser = true;
-    } else {
-        CUIEnvironment.browser = verificationResults.inferredBrowser;
-        CUIEnvironment.browserVersion = verificationResults.inferredVersion;
-        CUIEnvironment.verified.browser = false;
-        CUIEnvironment.verified.isFake = true;
-    }
+    CUIEnvironment.browser = detectedBrowser;
+    CUIEnvironment.browserVersion = detectedVersion;
+    CUIEnvironment.verified.browser = detectedBrowser !== 'unknown';
 
     let detectedPlatform = 'unknown';
     if (platform.includes('mac')) {
@@ -71,67 +80,33 @@ const CUIEnvironment = {
         detectedPlatform = 'android';
     }
 
-    const platformVerified = verifyPlatform(detectedPlatform);
     CUIEnvironment.platform = detectedPlatform;
-    CUIEnvironment.verified.platform = platformVerified;
+    CUIEnvironment.verified.platform = detectedPlatform !== 'unknown';
 
     CUIEnvironment.features.nativeInputIcons = checkNativeInputIcons();
     CUIEnvironment.features.viewTransitions = typeof document.startViewTransition === 'function';
     CUIEnvironment.features.containerQueries = CSS.supports('container-type: inline-size');
 })();
 
-function verifyBrowser(browser, version) {
-    const result = {
-        trusted: true,
-        inferredBrowser: browser,
-        inferredVersion: version
-    };
-
-    if (browser === 'chrome') {
-        const hasChromeFeatures = window.chrome && typeof window.chrome.runtime !== 'undefined';
-        if (!hasChromeFeatures) {
-            result.trusted = false;
-            result.inferredBrowser = CSS.supports('-webkit-appearance: none') ? 'safari' : 'unknown';
-        }
-    }
-
-    if (browser === 'safari') {
-        const isWebKit = navigator.vendor === 'Apple Computer, Inc.';
-        if (!isWebKit) {
-            result.trusted = false;
-            result.inferredBrowser = 'chrome';
-        }
-    }
-
-    if (browser === 'firefox') {
-        const hasFirefoxFeatures = typeof InstallTrigger !== 'undefined';
-        if (!hasFirefoxFeatures) {
-            result.trusted = false;
-            result.inferredBrowser = 'unknown';
-        }
-    }
-
-    return result;
-}
-
-function verifyPlatform(platform) {
-    if (platform === 'mac') {
-        return navigator.vendor === 'Apple Computer, Inc.';
-    }
-    if (platform === 'windows') {
-        return navigator.platform.includes('Win');
-    }
-    if (platform === 'ios') {
-        return /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && navigator.maxTouchPoints > 1;
-    }
-    return true;
-}
-
 function checkNativeInputIcons() {
     try {
         const input = document.createElement('input');
         input.type = 'date';
-        return !!window.getComputedStyle(input, '::-webkit-calendar-picker-indicator').content;
+        const pseudoStyle = window.getComputedStyle(input, '::-webkit-calendar-picker-indicator');
+
+        const content = pseudoStyle.content;
+        const width = pseudoStyle.width;
+        const height = pseudoStyle.height;
+        const backgroundImage = pseudoStyle.backgroundImage;
+        const display = pseudoStyle.display;
+        const opacity = pseudoStyle.opacity;
+
+        return (
+            (content && content !== 'none' && content.length > 0) ||
+            (width !== '0px' && height !== '0px') ||
+            (backgroundImage && backgroundImage !== 'none') ||
+            (display !== 'none' && opacity !== '0')
+        );
     } catch {
         return false;
     }

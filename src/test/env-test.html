@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环境检测测试 - 高级版</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .container { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { color: #1a1a1a; margin-top: 0; font-size: 24px; }
+        .result { margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 8px; font-family: monospace; font-size: 13px; white-space: pre-wrap; word-break: break-all; }
+        .debug-info { background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 12px; white-space: pre-wrap; max-height: 500px; overflow-y: auto; }
+        .debug-info .log { margin: 3px 0; }
+        .debug-info .log.info { color: #569cd6; }
+        .debug-info .log.success { color: #6a9955; }
+        .debug-info .log.error { color: #f14c4c; }
+        .debug-info .log.warning { color: #dcdcaa; }
+        .debug-info .log.highlight { color: #c586c0; }
+        .debug-info .log.key { color: #dcdcaa; }
+        .test-inputs { margin-top: 20px; padding: 20px; background: #fff3e0; border-radius: 8px; }
+        input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; margin-right: 12px; margin-bottom: 12px; }
+        .status { padding: 8px 12px; border-radius: 4px; margin-top: 8px; font-weight: 500; }
+        .status.true { background: #d4edda; color: #155724; }
+        .status.false { background: #f8d7da; color: #721c24; }
+        .browser-metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
+        .metric { background: #e8f5e9; padding: 8px; border-radius: 4px; font-size: 12px; }
+        .metric.key { background: #fff3e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 环境检测测试 - 高级版</h1>
+        
+        <div class="result" id="result">加载中...</div>
+        
+        <div class="test-inputs">
+            <h3>📅 原生图标测试</h3>
+            <input type="date" placeholder="日期选择">
+            <input type="time" placeholder="时间选择">
+            <input type="datetime-local" placeholder="日期时间">
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🔍 调试日志</h2>
+        <div class="debug-info" id="debugLog"></div>
+    </div>
+
+    <script>
+        const debugLog = document.getElementById('debugLog');
+        
+        function log(type, message) {
+            const logEl = document.createElement('div');
+            logEl.className = `log ${type}`;
+            logEl.textContent = message;
+            debugLog.appendChild(logEl);
+            console[type]?.(message) || console.log(message);
+        }
+
+        function isNativeDateTimeIconSupported() {
+            log('info', '=== 开始执行 isNativeDateTimeIconSupported() ===');
+            
+            try {
+                log('info', '1. 创建 input[type="date"] 元素');
+                const input = document.createElement('input');
+                input.type = 'date';
+                
+                log('info', '2. 获取 ::-webkit-calendar-picker-indicator 样式');
+                const pseudoStyle = window.getComputedStyle(input, '::-webkit-calendar-picker-indicator');
+                
+                log('info', '3. 检测多个CSS属性...');
+                const metrics = {
+                    content: pseudoStyle.content,
+                    width: pseudoStyle.width,
+                    height: pseudoStyle.height,
+                    backgroundImage: pseudoStyle.backgroundImage,
+                    backgroundPosition: pseudoStyle.backgroundPosition,
+                    display: pseudoStyle.display,
+                    opacity: pseudoStyle.opacity
+                };
+                
+                log('key', '--- 伪元素样式指标 ---');
+                for (const [key, value] of Object.entries(metrics)) {
+                    log('info', `   ${key}: "${value}"`);
+                }
+                
+                log('info', '4. 判断是否有原生图标（多指标综合判断）');
+                const hasIcon = (
+                    // 方法1: content属性有值
+                    (metrics.content && metrics.content !== 'none' && metrics.content.length > 0) ||
+                    // 方法2: 有实际尺寸
+                    (metrics.width !== '0px' && metrics.height !== '0px') ||
+                    // 方法3: 有背景图片
+                    (metrics.backgroundImage && metrics.backgroundImage !== 'none') ||
+                    // 方法4: 可见且非透明
+                    (metrics.display !== 'none' && metrics.opacity !== '0')
+                );
+                
+                log('highlight', `   判断逻辑: content有值(${!!metrics.content && metrics.content !== 'none'}) || 有尺寸(${metrics.width !== '0px' && metrics.height !== '0px'}) || 有背景图(${!!metrics.backgroundImage && metrics.backgroundImage !== 'none'})`);
+                log('success', `   ✓ 检测结果: ${hasIcon}`);
+                
+                return hasIcon;
+                
+            } catch (error) {
+                log('error', `❌ 异常捕获: ${error.message}`);
+                return false;
+            }
+        }
+
+        function detectBrowser() {
+            log('info', '=== 开始执行 detectBrowser() ===');
+            const ua = navigator.userAgent;
+            const uaLower = ua.toLowerCase();
+            
+            log('key', '--- 浏览器识别指标 ---');
+            log('info', `navigator.userAgent: ${ua.substring(0, 150)}${ua.length > 150 ? '...' : ''}`);
+            log('info', `navigator.vendor: "${navigator.vendor}"`);
+            log('info', `window.chrome: ${typeof window.chrome}`);
+            log('info', `InstallTrigger: ${typeof InstallTrigger}`);
+            
+            log('key', '--- UA 关键词分析 ---');
+            const keywords = ['edg', 'chrome', 'safari', 'firefox', 'opera', 'opr'];
+            for (const kw of keywords) {
+                log('info', `   包含 "${kw}": ${uaLower.includes(kw)}`);
+            }
+            
+            // 基于 navigator.vendor 的精确检测
+            const vendor = navigator.vendor.toLowerCase();
+            log('info', `   navigator.vendor (小写): "${vendor}"`);
+            
+            // 优先级：Edge > Chrome > Safari > Firefox > Opera
+            // 结合 vendor 和 UA 进行精确判断
+            
+            // Edge 检测
+            if ((uaLower.includes('edg') || uaLower.includes('edge')) && vendor.includes('microsoft')) {
+                const match = ua.match(/Edge\/(\d+)/) || ua.match(/edg\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('success', `检测到 Edge 浏览器 (vendor: microsoft)`);
+                return { browser: 'edge', version, vendor: navigator.vendor };
+            }
+            
+            // Chrome 检测
+            if (uaLower.includes('chrome') && !uaLower.includes('edg') && vendor.includes('google')) {
+                const match = ua.match(/Chrome\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('success', `检测到 Chrome 浏览器 (vendor: google)`);
+                return { browser: 'chrome', version, vendor: navigator.vendor };
+            }
+            
+            // Safari 检测
+            if (uaLower.includes('safari') && !uaLower.includes('chrome') && !uaLower.includes('edg') && vendor.includes('apple')) {
+                const match = ua.match(/Version\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('success', `检测到 Safari 浏览器 (vendor: apple)`);
+                return { browser: 'safari', version, vendor: navigator.vendor };
+            }
+            
+            // 基于 UA 的回退检测（适用于伪装的浏览器）
+            if (uaLower.includes('edg') && !uaLower.includes('chrome')) {
+                const match = ua.match(/edg\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('warning', `检测到 Edge 浏览器 (仅 UA 匹配)`);
+                return { browser: 'edge', version, vendor: navigator.vendor };
+            }
+            
+            if (uaLower.includes('chrome') && !uaLower.includes('edg')) {
+                const match = ua.match(/Chrome\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('warning', `检测到 Chrome 浏览器 (仅 UA 匹配)`);
+                return { browser: 'chrome', version, vendor: navigator.vendor };
+            }
+            
+            if (uaLower.includes('safari') && !uaLower.includes('chrome') && !uaLower.includes('edg')) {
+                const match = ua.match(/Version\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('warning', `检测到 Safari 浏览器 (仅 UA 匹配)`);
+                return { browser: 'safari', version, vendor: navigator.vendor };
+            }
+            
+            if (uaLower.includes('firefox')) {
+                const match = ua.match(/Firefox\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('success', `检测到 Firefox 浏览器`);
+                return { browser: 'firefox', version, vendor: navigator.vendor };
+            }
+            
+            if (uaLower.includes('opera') || uaLower.includes('opr')) {
+                const match = ua.match(/(?:Opera|OPR)\/(\d+)/);
+                const version = match ? parseInt(match[1]) : 0;
+                log('success', `检测到 Opera 浏览器`);
+                return { browser: 'opera', version, vendor: navigator.vendor };
+            }
+            
+            log('warning', '未识别的浏览器');
+            return { browser: 'unknown', version: 0, vendor: navigator.vendor };
+        }
+
+        log('info', '========================================');
+        log('info', '         环境检测测试开始');
+        log('info', '========================================');
+        
+        const browser = detectBrowser();
+        const hasNativeIcon = isNativeDateTimeIconSupported();
+        
+        log('info', '========================================');
+        log('info', '         检测结果汇总');
+        log('info', '========================================');
+        log('success', `浏览器: ${browser.browser} (v${browser.version})`);
+        log('success', `平台: ${navigator.platform}`);
+        log('success', `供应商: ${browser.vendor}`);
+        log(hasNativeIcon ? 'success' : 'warning', `支持原生图标: ${hasNativeIcon}`);
+        
+        document.getElementById('result').innerHTML = `检测结果：
+
+浏览器: ${browser.browser} (v${browser.version})
+平台: ${navigator.platform}
+供应商: ${browser.vendor}
+支持原生图标: ${hasNativeIcon} ${hasNativeIcon ? '✅' : '❌'}
+User Agent: ${navigator.userAgent}`;
+        
+        const statusEl = document.createElement('div');
+        statusEl.className = `status ${hasNativeIcon}`;
+        statusEl.textContent = hasNativeIcon ? '✅ 浏览器支持原生日期时间图标' : '❌ 浏览器不支持原生日期时间图标';
+        document.querySelector('.test-inputs').appendChild(statusEl);
+    </script>
+</body>
+</html>
