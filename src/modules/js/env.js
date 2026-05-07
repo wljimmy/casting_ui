@@ -92,6 +92,9 @@ function checkNativeInputIcons() {
     try {
         const input = document.createElement('input');
         input.type = 'date';
+        input.style.cssText = 'position: fixed; top: -1000px; left: -1000px; opacity: 0; pointer-events: none;';
+        document.body.appendChild(input);
+        
         const pseudoStyle = window.getComputedStyle(input, '::-webkit-calendar-picker-indicator');
 
         const content = pseudoStyle.content;
@@ -100,6 +103,8 @@ function checkNativeInputIcons() {
         const backgroundImage = pseudoStyle.backgroundImage;
         const display = pseudoStyle.display;
         const opacity = pseudoStyle.opacity;
+
+        document.body.removeChild(input);
 
         return (
             (content && content !== 'none' && content.length > 0) ||
