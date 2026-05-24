@@ -1,11 +1,10 @@
 <section class="CUI-section">
     <h2>Input 输入框</h2>
-    <p>Input 输入框模块提供注册表管理、值操作、表单批量操作和自动美化功能。支持多种输入类型、自动图标渲染、标签布局和组合框样式。</p>
+    <p>Input 模块提供注册表管理、值操作、表单批量操作、自动美化与数据验证功能。支持多种输入类型、自动图标渲染、标签布局、组合框样式和正则验证。</p>
 
-    <h3>基础用法</h3>
+    <h3>快速上手</h3>
     <div class="CUI-box">
-        <h4>最简写法（自动美化）</h4>
-        <p>只需为 input/textarea/select 添加 <code>class="CUI-input"</code>，框架自动完成所有渲染和注册。</p>
+        <p>只需为 input/textarea/select 添加 <code>class="CUI-input"</code>，框架自动完成渲染、注册和生命周期管理。</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
             <div class="CUI-span-4c">
                 <input type="text" name="demo1" class="CUI-input" placeholder="文本输入">
@@ -18,13 +17,93 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;input type="text" name="myInput" class="CUI-input" placeholder="文本输入"&gt;
+    <pre><code class="language-html">&lt;input type="text" name="myInput" class="CUI-input" placeholder="文本输入"&gt;
 &lt;input type="password" name="myPassword" class="CUI-input" placeholder="密码输入"&gt;
 &lt;input type="email" name="myEmail" class="CUI-input" placeholder="邮箱输入"&gt;</code></pre>
 
-    <h3>自动图标（根据type渲染）</h3>
+    <hr class="CUI-hr">
+
+    <h3>完整参数参考</h3>
     <div class="CUI-box">
-        <p>框架会根据 input 的 type 属性自动渲染对应图标：</p>
+        <p>以下属性适用于 <code>CUI-input</code> 和 <code>CUI-input-box</code>：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>属性</th>
+                    <th>适用类型</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>class="CUI-input"</code></td>
+                    <td>input / textarea / select</td>
+                    <td>基础美化样式，自动添加图标、标签包装</td>
+                </tr>
+                <tr>
+                    <td><code>class="CUI-input CUI-input--simple"</code></td>
+                    <td>input</td>
+                    <td>简约下边框样式，无背景框</td>
+                </tr>
+                <tr>
+                    <td><code>class="CUI-input-box"</code></td>
+                    <td>input</td>
+                    <td>完整组合框样式（含标签、提示、错误信息容器）</td>
+                </tr>
+                <tr>
+                    <td><code>data-label</code></td>
+                    <td>CUI-input / CUI-input-box</td>
+                    <td>输入框标签文字（渲染为 <code>.CUI-input__label</code>）</td>
+                </tr>
+                <tr>
+                    <td><code>data-label-position</code></td>
+                    <td>CUI-input</td>
+                    <td>标签位置，可选 <code>left</code>（默认）或 <code>top</code></td>
+                </tr>
+                <tr>
+                    <td><code>data-hint</code></td>
+                    <td>CUI-input-box</td>
+                    <td>永久显示的提示文字（灰色背景，不会因交互消失）</td>
+                </tr>
+                <tr>
+                    <td><code>data-info</code></td>
+                    <td>CUI-input-box</td>
+                    <td>焦点时显示的提示文字（蓝色背景）</td>
+                </tr>
+                <tr>
+                    <td><code>data-error</code></td>
+                    <td>CUI-input-box</td>
+                    <td>验证失败时显示的错误信息文字（红色背景，由验证引擎驱动）</td>
+                </tr>
+                <tr>
+                    <td><code>data-isError</code></td>
+                    <td>CUI-input-box</td>
+                    <td>设为 <code>"true"</code> 强制显示错误状态（渲染时初始错误态）</td>
+                </tr>
+                <tr>
+                    <td><code>data-icon</code></td>
+                    <td>CUI-input / CUI-input-box</td>
+                    <td>自定义图标名称（如 <code>user</code> <code>email</code> <code>sms</code>），覆盖 type 自动识别</td>
+                </tr>
+                <tr>
+                    <td><code>data-validate</code></td>
+                    <td>CUI-input / CUI-input-box</td>
+                    <td>验证规则名称，可选 <code>idcard</code> <code>phone</code> <code>email</code> <code>number</code> <code>url</code> <code>required</code> <code>custom</code></td>
+                </tr>
+                <tr>
+                    <td><code>data-validate-pattern</code></td>
+                    <td>CUI-input / CUI-input-box</td>
+                    <td><code>data-validate="custom"</code> 时的自定义正则表达式字符串</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>自动图标（根据 type 渲染）</h3>
+    <div class="CUI-box">
+        <p>框架会根据 input 的 type 属性自动渲染对应图标。支持的类型及对应图标如下：</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
             <div class="CUI-span-4c">
                 <input type="search" name="search1" class="CUI-input" placeholder="搜索框">
@@ -46,16 +125,33 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;input type="search" name="search" class="CUI-input" placeholder="搜索框"&gt;
-&lt;input type="tel" name="tel" class="CUI-input" placeholder="电话"&gt;
-&lt;input type="url" name="url" class="CUI-input" placeholder="网址"&gt;
-&lt;input type="number" name="number" class="CUI-input" placeholder="数字"&gt;
-&lt;input type="date" name="date" class="CUI-input" placeholder="日期"&gt;
-&lt;input type="time" name="time" class="CUI-input" placeholder="时间"&gt;</code></pre>
+    <table class="CUI-table">
+        <thead>
+            <tr>
+                <th>type 值</th>
+                <th>图标</th>
+                <th>说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>search</td><td>搜索</td><td>搜索框</td></tr>
+            <tr><td>email</td><td>邮件</td><td>邮箱输入</td></tr>
+            <tr><td>tel / telephone</td><td>电话</td><td>电话号码</td></tr>
+            <tr><td>password</td><td>密码</td><td>密码输入</td></tr>
+            <tr><td>url / link</td><td>链接</td><td>网址输入</td></tr>
+            <tr><td>number / numeric</td><td>数字</td><td>数字输入</td></tr>
+            <tr><td>sms / verification</td><td>短信</td><td>验证码</td></tr>
+            <tr><td>code</td><td>代码</td><td>兑换码/验证码</td></tr>
+            <tr><td>date</td><td>日期</td><td>日期选择</td></tr>
+            <tr><td>time</td><td>时间</td><td>时间选择</td></tr>
+            <tr><td>user / username</td><td>用户</td><td>用户名</td></tr>
+            <tr><td>userpassword</td><td>用户+密码</td><td>用户密码组合</td></tr>
+        </tbody>
+    </table>
 
-    <h3>自定义图标（data-icon）</h3>
+    <h4>自定义图标</h4>
     <div class="CUI-box">
-        <p>使用 <code>data-icon</code> 属性指定图标名称，覆盖自动识别：</p>
+        <p>使用 <code>data-icon</code> 覆盖自动识别的图标：</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
             <div class="CUI-span-6c">
                 <input type="text" name="user1" class="CUI-input" data-icon="user" placeholder="用户名">
@@ -65,83 +161,8 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;input type="text" name="username" class="CUI-input" data-icon="user" placeholder="用户名"&gt;
-&lt;input type="text" name="captcha" class="CUI-input" data-icon="sms" placeholder="验证码"&gt;</code></pre>
 
-    <h3>支持的数据类型</h3>
-    <div class="CUI-box">
-        <table class="CUI-table">
-            <thead>
-                <tr>
-                    <th>type值</th>
-                    <th>图标</th>
-                    <th>说明</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>search</td>
-                    <td>搜索</td>
-                    <td>搜索框</td>
-                </tr>
-                <tr>
-                    <td>email</td>
-                    <td>邮件</td>
-                    <td>邮箱输入</td>
-                </tr>
-                <tr>
-                    <td>tel / telephone</td>
-                    <td>电话</td>
-                    <td>电话号码</td>
-                </tr>
-                <tr>
-                    <td>password</td>
-                    <td>密码</td>
-                    <td>密码输入</td>
-                </tr>
-                <tr>
-                    <td>url / link</td>
-                    <td>链接</td>
-                    <td>网址输入</td>
-                </tr>
-                <tr>
-                    <td>number / numeric</td>
-                    <td>数字</td>
-                    <td>数字输入</td>
-                </tr>
-                <tr>
-                    <td>sms / verification</td>
-                    <td>短信</td>
-                    <td>验证码</td>
-                </tr>
-                <tr>
-                    <td>code</td>
-                    <td>代码</td>
-                    <td>验证码/兑换码</td>
-                </tr>
-                <tr>
-                    <td>date</td>
-                    <td>日期</td>
-                    <td>日期选择</td>
-                </tr>
-                <tr>
-                    <td>time</td>
-                    <td>时间</td>
-                    <td>时间选择</td>
-                </tr>
-                <tr>
-                    <td>user / username</td>
-                    <td>用户</td>
-                    <td>用户名</td>
-                </tr>
-                <tr>
-                    <td>userpassword</td>
-                    <td>用户+密码</td>
-                    <td>用户密码组合</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <hr class="CUI-hr">
 
     <h3>带标签输入框</h3>
     <div class="CUI-box">
@@ -155,11 +176,13 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;!-- 标签在左 --&gt;
-&lt;input type="text" name="name" class="CUI-input" data-label="姓名" placeholder=""&gt;
+    <pre><code class="language-html">&lt;!-- 标签在左（默认） --&gt;
+&lt;input type="text" name="name" class="CUI-input" data-label="姓名"&gt;
 
 &lt;!-- 标签在上 --&gt;
-&lt;input type="text" name="email" class="CUI-input" data-label="邮箱地址" data-label-position="top" placeholder=""&gt;</code></pre>
+&lt;input type="text" name="email" class="CUI-input" data-label="邮箱地址" data-label-position="top"&gt;</code></pre>
+
+    <hr class="CUI-hr">
 
     <h3>简约样式（仅下边框）</h3>
     <div class="CUI-box">
@@ -176,83 +199,223 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;input type="text" name="search" class="CUI-input CUI-input--simple" data-label="搜索" data-label-position="top" placeholder="简约搜索"&gt;
-&lt;input type="text" name="email" class="CUI-input CUI-input--simple" data-label="邮箱" data-label-position="top" placeholder="简约邮箱"&gt;</code></pre>
+
+    <hr class="CUI-hr">
 
     <h3>组合输入框（CUI-input-box）</h3>
     <div class="CUI-box">
-        <p><code>CUI-input-box</code> 提供完整的输入组件，包含标签、提示、错误信息等功能：</p>
+        <p><code>CUI-input-box</code> 提供完整的输入组件，包含标签、提示、错误信息等全套 UI：</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
-            <div class="CUI-span-6c">
-                <input type="text" name="box1" class="CUI-input-box" placeholder="请输入" data-label="普通输入" data-hint="这是永久提示">
+            <div class="CUI-span-4c">
+                <input type="text" name="box1" class="CUI-input-box" placeholder="请输入" data-label="普通输入" data-hint="永久提示">
             </div>
-            <div class="CUI-span-6c">
-                <input type="text" name="box2" class="CUI-input-box" placeholder="请输入" data-label="错误输入" data-hint="这是永久提示" data-error="这是错误信息" data-isError="true">
+            <div class="CUI-span-4c">
+                <input type="text" name="box2" class="CUI-input-box" placeholder="请输入" data-label="带错误" data-hint="提示" data-error="错误信息" data-isError="true">
             </div>
-            <div class="CUI-span-6c">
-                <input type="text" name="box3" class="CUI-input-box CUI-input--simple" placeholder="请输入" data-label="简约+提示+错误" data-hint="灰色永久提示" data-info="焦点时显示的提示" data-error="错误信息" data-isError="true">
+            <div class="CUI-span-4c">
+                <input type="email" name="box3" class="CUI-input-box" placeholder="输入邮箱" data-label="邮箱" data-icon="email" data-hint="输入有效邮箱" data-info="焦点时显示此提示">
             </div>
-            <div class="CUI-span-6c">
-                <input type="email" name="box4" class="CUI-input-box" placeholder="请输入邮箱" data-label="邮箱" data-icon="email" data-hint="请输入有效的邮箱地址" data-info="焦点时显示：请注意邮箱格式">
+            <div class="CUI-span-4c">
+                <input type="text" name="box4" class="CUI-input-box CUI-input--simple" placeholder="简约风格" data-label="简约组合框" data-hint="简约+提示" data-error="错误信息">
             </div>
         </div>
     </div>
-    <pre><code>&lt;!-- 普通组合框 --&gt;
-&lt;input type="text" name="input1" class="CUI-input-box" data-label="普通输入" data-hint="这是永久提示" placeholder="请输入"&gt;
+    <pre><code class="language-html">&lt;!-- 基础组合框 --&gt;
+&lt;input type="text" name="input1" class="CUI-input-box" data-label="标签" data-hint="提示文字" placeholder="请输入"&gt;
 
-&lt;!-- 错误状态组合框 --&gt;
-&lt;input type="text" name="input2" class="CUI-input-box" data-label="错误输入" data-hint="这是永久提示" data-error="这是错误信息" data-isError="true" placeholder="请输入"&gt;
+&lt;!-- 带错误态和图标 --&gt;
+&lt;input type="email" name="input2" class="CUI-input-box" data-label="邮箱" data-icon="email" data-hint="提示" data-error="错误信息" data-isError="true"&gt;
 
-&lt;!-- 带图标和提示的组合框 --&gt;
-&lt;input type="email" name="input3" class="CUI-input-box" data-label="邮箱" data-icon="email" data-hint="请输入有效的邮箱地址" data-info="焦点时显示：请注意邮箱格式" placeholder="请输入邮箱"&gt;</code></pre>
+&lt;!-- 简约组合框 --&gt;
+&lt;input type="text" name="input3" class="CUI-input-box CUI-input--simple" data-label="简约" data-hint="提示"&gt;</code></pre>
 
-    <h3>CUI-input-box 参数说明</h3>
+    <h4>CUI-input-box 参数详解</h4>
     <div class="CUI-box">
         <table class="CUI-table">
             <thead>
-                <tr>
-                    <th>参数</th>
-                    <th>说明</th>
-                </tr>
+                <tr><th>参数</th><th>渲染位置</th><th>说明</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>data-label</td>
-                    <td>输入框标签文字</td>
-                </tr>
-                <tr>
-                    <td>data-hint</td>
-                    <td>永久显示的提示文字</td>
-                </tr>
-                <tr>
-                    <td>data-info</td>
-                    <td>焦点时显示的提示文字</td>
-                </tr>
-                <tr>
-                    <td>data-error</td>
-                    <td>错误状态显示的错误信息</td>
-                </tr>
-                <tr>
-                    <td>data-isError</td>
-                    <td>设为 "true" 强制显示错误状态</td>
-                </tr>
-                <tr>
-                    <td>data-icon</td>
-                    <td>图标名称（如 email, user, sms）</td>
-                </tr>
+                <tr><td><code>data-label</code></td><td><code>.CUI-input__label</code></td><td>标签文字，位于输入框上方</td></tr>
+                <tr><td><code>data-hint</code></td><td><code>.CUI-input__hint</code></td><td>永久显示在输入框下方的灰色提示</td></tr>
+                <tr><td><code>data-info</code></td><td><code>.CUI-input__info &gt; .CUI-message-info</code></td><td>输入框获得焦点时显示的蓝色提示</td></tr>
+                <tr><td><code>data-error</code></td><td><code>.CUI-input__error &gt; .CUI-message-error</code></td><td>验证失败时显示的红色错误信息</td></tr>
+                <tr><td><code>data-isError</code></td><td>添加 <code>CUI-is-error</code> 类</td><td>渲染时是否强制显示错误状态</td></tr>
+                <tr><td><code>data-icon</code></td><td><code>.CUI-input__icon</code></td><td>图标名称，位于输入框内部左侧</td></tr>
             </tbody>
         </table>
     </div>
 
-    <h3>文本域（textarea）</h3>
+    <hr class="CUI-hr">
+
+    <h3>数据验证（Validation）</h3>
+
+    <h4>验证规则表</h4>
     <div class="CUI-box">
+        <p>使用 <code>data-validate</code> 属性声明验证规则，框架在失焦（blur）时自动验证，输入（input）时自动清除错误状态：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>规则名称</th>
+                    <th>正则表达式</th>
+                    <th>默认错误提示</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>idcard</code></td><td><code>/^\d{17}[\dXx]$/</code></td><td>身份证号格式错误</td></tr>
+                <tr><td><code>phone</code></td><td><code>/^1[3-9]\d{9}$/</code></td><td>手机号格式错误</td></tr>
+                <tr><td><code>email</code></td><td><code>/^[^\s@]+@[^\s@]+\.[^\s@]+$/</code></td><td>邮箱格式错误</td></tr>
+                <tr><td><code>number</code></td><td><code>/^-?\d+(\.\d+)?$/</code></td><td>请输入有效数字</td></tr>
+                <tr><td><code>url</code></td><td><code>/^https?:\/\/.+/</code></td><td>网址格式错误</td></tr>
+                <tr><td><code>required</code></td><td><code>/.+/</code></td><td>此项不能为空</td></tr>
+                <tr><td><code>custom</code></td><td>由 <code>data-validate-pattern</code> 指定</td><td>输入格式不正确</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>验证行为规则</h4>
+    <div class="CUI-box">
+        <ul>
+            <li><strong>触发时机</strong>：输入框失焦（blur）时执行验证</li>
+            <li><strong>错误清除</strong>：用户继续输入（input 事件）时自动清除错误状态</li>
+            <li><strong>空值策略</strong>：
+                <ul>
+                    <li><code>required</code> 规则：空值 <strong>触发</strong>错误</li>
+                    <li>其他规则（idcard/phone/email/number/url/custom）：空值 <strong>不触发</strong>错误（仅在填写时校验格式）</li>
+                </ul>
+            </li>
+            <li><strong>无 data-validate 属性</strong>：不进行验证，任何值均视为有效</li>
+        </ul>
+    </div>
+
+    <h4>CUI-input 验证示例</h4>
+    <div class="CUI-box">
+        <p>普通输入框验证时添加 <code>CUI-input--error</code> 类（红色边框），错误信息通过 <code>title</code> 属性显示（鼠标悬停可看）：</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
-            <div class="CUI-span-8c">
-                <textarea name="description" class="CUI-input" placeholder="请输入描述..." rows="3"></textarea>
+            <div class="CUI-span-4c">
+                <input type="text" name="demoIdcard" class="CUI-input" data-validate="idcard" placeholder="身份证号" data-error="身份证号必须是18位">
+            </div>
+            <div class="CUI-span-4c">
+                <input type="text" name="demoPhone" class="CUI-input" data-validate="phone" placeholder="手机号">
+            </div>
+            <div class="CUI-span-4c">
+                <input type="text" name="demoEmail" class="CUI-input" data-validate="email" placeholder="邮箱">
             </div>
         </div>
     </div>
-    <pre><code>&lt;textarea name="description" class="CUI-input" placeholder="请输入描述..." rows="3"&gt;&lt;/textarea&gt;</code></pre>
+    <pre><code class="language-html">&lt;input type="text" name="idcard" class="CUI-input" data-validate="idcard" data-error="自定义错误信息"&gt;
+&lt;input type="text" name="phone" class="CUI-input" data-validate="phone"&gt;
+&lt;input type="text" name="email" class="CUI-input" data-validate="email"&gt;</code></pre>
+
+    <h4>CUI-input-box 验证示例</h4>
+    <div class="CUI-box">
+        <p>组合框验证时添加 <code>CUI-is-error</code> 类，同时显示 <code>.CUI-input__error &gt; .CUI-message-error</code> 中的错误信息文字：</p>
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-4c">
+                <input type="text" name="demoBoxPhone" class="CUI-input-box" data-label="手机号" data-validate="phone" data-hint="请输入11位手机号" data-error="手机号格式不对" placeholder="请输入手机号">
+            </div>
+            <div class="CUI-span-4c">
+                <input type="text" name="demoBoxEmail" class="CUI-input-box" data-label="邮箱" data-validate="email" data-hint="输入有效邮箱" data-error="邮箱格式错误" placeholder="请输入邮箱">
+            </div>
+            <div class="CUI-span-4c">
+                <input type="text" name="demoBoxRequired" class="CUI-input-box" data-label="必填项" data-validate="required" data-hint="此项不能为空" data-error="请填写此项" placeholder="必填">
+            </div>
+        </div>
+    </div>
+    <pre><code class="language-html">&lt;input type="text" name="phone" class="CUI-input-box" data-label="手机号" data-validate="phone" data-hint="提示文字" data-error="错误信息"&gt;
+&lt;input type="text" name="requiredField" class="CUI-input-box" data-label="必填" data-validate="required" data-hint="必填项" data-error="请填写"&gt;</code></pre>
+
+    <h4>自定义正则验证</h4>
+    <div class="CUI-box">
+        <p>使用 <code>data-validate="custom"</code> 搭配 <code>data-validate-pattern</code> 指定正则：</p>
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-4c">
+                <input type="text" name="demoCode" class="CUI-input" data-validate="custom" data-validate-pattern="^\d{6}$" placeholder="6位数字验证码(自定义正则)">
+            </div>
+        </div>
+    </div>
+    <pre><code class="language-html">&lt;input type="text" name="code" class="CUI-input" data-validate="custom" data-validate-pattern="^\d{6}$" placeholder="6位数字"&gt;</code></pre>
+
+    <h4>错误状态 CSS 类</h4>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr><th>类名</th><th>适用容器</th><th>效果</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>CUI-input--error</code></td><td><code>.CUI-input</code></td><td>红色边框 + 红色阴影 + 图标变红</td></tr>
+                <tr><td><code>CUI-is-error</code></td><td><code>.CUI-input-box</code></td><td>显示内部的 <code>.CUI-input__error</code> 错误信息块</td></tr>
+            </tbody>
+        </table>
+        <p class="CUI-text-sm CUI-text-muted CUI-mt-md">注意：错误状态完全由 CSS 类驱动，不修改 data 属性。验证引擎通过 classList.add/remove 控制显示，与用户自定义样式无冲突。</p>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>表单验证</h3>
+    <div class="CUI-box">
+        <p>表单内的输入框自动按 <code>form.id.name</code> 路径注册。表单级的批量验证 API：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>API</th><th>说明</th><th>返回值</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>CUI.input.isValid(path)</code></td>
+                    <td>检查单个输入框是否有效</td>
+                    <td><code>boolean</code> — <code>true</code> 表示值有效</td>
+                </tr>
+                <tr>
+                    <td><code>CUI.input.isFormValid(formId)</code></td>
+                    <td>检查整个表单是否全部有效</td>
+                    <td><code>boolean</code> — <code>true</code> 表示所有字段均通过验证</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre><code class="language-javascript">// 表单内所有字段正确时才通过
+if (CUI.input.isFormValid('myForm')) {
+    // 提交表单...
+} else {
+    // 有错误字段，框架已自动高亮并显示错误信息
+}</code></pre>
+
+    <hr class="CUI-hr">
+
+    <h3>属性保留（Property Preservation）</h3>
+    <div class="CUI-box">
+        <p>CUI-input-box 渲染时会创建一个新的 <code>&lt;input&gt;</code> 元素替代原始元素。以下属性会被自动拷贝到新 input 上：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>属性</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>id</code></td><td>元素 ID，保留以便 <code>document.getElementById</code> 访问</td></tr>
+                <tr><td><code>readonly</code></td><td>只读状态</td></tr>
+                <tr><td><code>disabled</code></td><td>禁用状态</td></tr>
+                <tr><td><code>required</code></td><td>HTML5 原生必填标记</td></tr>
+                <tr><td><code>autocomplete</code></td><td>自动完成行为</td></tr>
+                <tr><td><code>inputmode</code></td><td>移动端键盘模式</td></tr>
+                <tr><td><code>maxlength</code></td><td>最大字符数</td></tr>
+                <tr><td><code>min</code></td><td>最小值</td></tr>
+                <tr><td><code>max</code></td><td>最大值</td></tr>
+                <tr><td><code>step</code></td><td>步进值</td></tr>
+                <tr><td><code>pattern</code></td><td>HTML5 原生正则模式</td></tr>
+                <tr><td><code>data-validate</code></td><td>框架验证规则</td></tr>
+                <tr><td><code>data-validate-pattern</code></td><td>框架自定义验证正则</td></tr>
+            </tbody>
+        </table>
+        <p class="CUI-text-sm CUI-text-muted CUI-mt-md">注意：<code>data-error</code>、<code>data-label</code>、<code>data-hint</code>、<code>data-info</code>、<code>data-icon</code>、<code>data-isError</code> 等已被框架消费的属性<strong>不会</strong>被拷贝到新 input 上。</p>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>文本域（textarea）</h3>
+    <div class="CUI-box">
+        <textarea name="description" class="CUI-input" placeholder="请输入描述..." rows="3"></textarea>
+    </div>
+
+    <hr class="CUI-hr">
 
     <h3>下拉选择（select）</h3>
     <div class="CUI-box">
@@ -267,133 +430,261 @@
             </div>
         </div>
     </div>
-    <pre><code>&lt;select name="city" class="CUI-input"&gt;
-    &lt;option value=""&gt;请选择城市&lt;/option&gt;
-    &lt;option value="bj"&gt;北京&lt;/option&gt;
-    &lt;option value="sh"&gt;上海&lt;/option&gt;
-    &lt;option value="sz"&gt;深圳&lt;/option&gt;
-&lt;/select&gt;</code></pre>
 
-    <h3>复选框（checkbox）</h3>
+    <hr class="CUI-hr">
+
+    <h3>复选框（checkbox）与单选框（radio）</h3>
     <div class="CUI-box">
+        <p>复选框和单选框使用 <code>CUI-input</code> 类，需包裹在 <code>&lt;label&gt;</code> 内：</p>
         <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
-            <div class="CUI-span-12c">
+            <div class="CUI-span-6c">
                 <label><input type="checkbox" name="hobby" class="CUI-input" value="read"> 阅读</label>
                 <label><input type="checkbox" name="hobby" class="CUI-input" value="music"> 音乐</label>
                 <label><input type="checkbox" name="hobby" class="CUI-input" value="sport"> 运动</label>
             </div>
-        </div>
-    </div>
-    <pre><code>&lt;label&gt;&lt;input type="checkbox" name="hobby" class="CUI-input" value="read"&gt; 阅读&lt;/label&gt;
-&lt;label&gt;&lt;input type="checkbox" name="hobby" class="CUI-input" value="music"&gt; 音乐&lt;/label&gt;
-&lt;label&gt;&lt;input type="checkbox" name="hobby" class="CUI-input" value="sport"&gt; 运动&lt;/label&gt;</code></pre>
-
-    <h3>单选框（radio）</h3>
-    <div class="CUI-box">
-        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
-            <div class="CUI-span-12c">
+            <div class="CUI-span-6c">
                 <label><input type="radio" name="gender" class="CUI-input" value="male"> 男</label>
                 <label><input type="radio" name="gender" class="CUI-input" value="female"> 女</label>
-                <label><input type="radio" name="gender" class="CUI-input" value="other"> 其他</label>
             </div>
         </div>
     </div>
-    <pre><code>&lt;label&gt;&lt;input type="radio" name="gender" class="CUI-input" value="male"&gt; 男&lt;/label&gt;
-&lt;label&gt;&lt;input type="radio" name="gender" class="CUI-input" value="female"&gt; 女&lt;/label&gt;
-&lt;label&gt;&lt;input type="radio" name="gender" class="CUI-input" value="other"&gt; 其他&lt;/label&gt;</code></pre>
+    <pre><code class="language-html">&lt;label&gt;&lt;input type="checkbox" name="hobby" class="CUI-input" value="read"&gt; 阅读&lt;/label&gt;
+&lt;label&gt;&lt;input type="radio" name="gender" class="CUI-input" value="male"&gt; 男&lt;/label&gt;</code></pre>
+
+    <hr class="CUI-hr">
 
     <h3>表单组合</h3>
     <div class="CUI-box">
-        <p>框架支持嵌套表单结构，通过 <code>name</code> 属性自动注册到注册表：</p>
-        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
-            <div class="CUI-span-12c">
-                <form id="demoForm">
-                    <div class="CUI-grid CUI-grid-12c CUI-mb-md">
-                        <div class="CUI-span-4c">
-                            <input type="email" name="email" class="CUI-input" placeholder="邮箱">
-                        </div>
-                        <div class="CUI-span-4c">
-                            <input type="tel" name="phone" class="CUI-input" placeholder="手机号">
-                        </div>
-                        <div class="CUI-span-4c">
-                            <input type="sms" name="captcha" class="CUI-input" placeholder="验证码">
-                        </div>
-                    </div>
-                </form>
+        <p>框架支持嵌套表单结构，通过 <code>form.id</code> 自动分组注册：</p>
+        <form id="demoFormManual">
+            <div class="CUI-grid CUI-grid-12c CUI-mb-md">
+                <div class="CUI-span-4c">
+                    <input type="email" name="email" class="CUI-input" placeholder="邮箱">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="tel" name="phone" class="CUI-input" placeholder="手机号">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="captcha" class="CUI-input" placeholder="验证码">
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-    <pre><code>&lt;form id="myForm"&gt;
+    <pre><code class="language-html">&lt;form id="myForm"&gt;
     &lt;input type="email" name="email" class="CUI-input" placeholder="邮箱"&gt;
     &lt;input type="tel" name="phone" class="CUI-input" placeholder="手机号"&gt;
-    &lt;input type="sms" name="captcha" class="CUI-input" placeholder="验证码"&gt;
 &lt;/form&gt;</code></pre>
 
-    <h3>JavaScript API</h3>
+    <hr class="CUI-hr">
+
+    <h3>JavaScript API 大全</h3>
     <div class="CUI-box">
+        <p>所有 API 通过 <code>CUI.input</code> 访问，核心对象为 <code>CUIInputRegistry</code>：</p>
+
+        <h4>值操作</h4>
         <table class="CUI-table">
             <thead>
-                <tr>
-                    <th>API</th>
-                    <th>说明</th>
-                    <th>示例</th>
-                </tr>
+                <tr><th>方法</th><th>说明</th><th>示例</th></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><code>CUI.input.get(path)</code></td>
-                    <td>获取节点信息</td>
+                    <td><code>get(path)</code></td>
+                    <td>获取节点完整信息对象<br><code>{ type, element, value, valid }</code></td>
                     <td><code>CUI.input.get('myForm.username')</code></td>
                 </tr>
                 <tr>
-                    <td><code>CUI.input.getValue(path)</code></td>
-                    <td>获取input的值</td>
-                    <td><code>CUI.input.getValue('username')</code></td>
-                </tr>
-                <tr>
-                    <td><code>CUI.input.setValue(path, value)</code></td>
-                    <td>设置input的值</td>
-                    <td><code>CUI.input.setValue('username', 'test')</code></td>
-                </tr>
-                <tr>
-                    <td><code>CUI.input.getFormData(formId)</code></td>
-                    <td>获取整个表单数据对象</td>
-                    <td><code>CUI.input.getFormData('myForm')</code></td>
-                </tr>
-                <tr>
-                    <td><code>CUI.input.setFormData(formId, data)</code></td>
-                    <td>设置整个表单数据</td>
-                    <td><code>CUI.input.setFormData('myForm', {username: 'test'})</code></td>
-                </tr>
-                <tr>
-                    <td><code>CUI.input.element(path)</code></td>
-                    <td>获取input的DOM元素</td>
-                    <td><code>CUI.input.element('username')</code></td>
-                </tr>
-                <tr>
+                    <td><code>getAll()</code></td>
+                    <td>获取完整注册表数据结构（树形）</td>
                     <td><code>CUI.input.getAll()</code></td>
-                    <td>获取完整注册表</td>
-                    <td><code>CUI.input.getAll()</code></td>
+                </tr>
+                <tr>
+                    <td><code>getValue(path)</code></td>
+                    <td>获取输入框当前值</td>
+                    <td><code>CUI.input.getValue('phone')</code></td>
+                </tr>
+                <tr>
+                    <td><code>setValue(path, value)</code></td>
+                    <td>设置输入框值（同步更新 DOM）</td>
+                    <td><code>CUI.input.setValue('phone', '13800138000')</code></td>
+                </tr>
+                <tr>
+                    <td><code>element(path)</code></td>
+                    <td>获取输入框的 DOM 元素</td>
+                    <td><code>CUI.input.element('captcha')</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="CUI-mt-lg">表单操作</h4>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>方法</th><th>说明</th><th>示例</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>getFormData(formId)</code></td>
+                    <td>获取整个表单的键值对数据对象</td>
+                    <td><code>CUI.input.getFormData('myForm')</code><br><code>// → { username: 'xxx', phone: '138...' }</code></td>
+                </tr>
+                <tr>
+                    <td><code>setFormData(formId, data)</code></td>
+                    <td>批量设置表单数据</td>
+                    <td><code>CUI.input.setFormData('myForm', { username: 'test', phone: '13800138000' })</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="CUI-mt-lg">验证操作</h4>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>方法</th><th>说明</th><th>返回值</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>isValid(path)</code></td>
+                    <td>检查单个输入框是否通过验证</td>
+                    <td><code>boolean</code></td>
+                </tr>
+                <tr>
+                    <td><code>isFormValid(formId)</code></td>
+                    <td>检查表单内所有输入框是否全部通过验证</td>
+                    <td><code>boolean</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="CUI-mt-lg">事件监听</h4>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>方法</th><th>说明</th><th>示例</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>onChange(path, callback)</code></td>
+                    <td>监听指定路径的值变化</td>
+                    <td><code>CUI.input.onChange('phone', (val) => console.log(val))</code></td>
+                </tr>
+                <tr>
+                    <td><code>offChange(path, callback)</code></td>
+                    <td>移除值变化监听</td>
+                    <td><code>CUI.input.offChange('phone', handler)</code></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <h3>路径规则</h3>
+    <h4>路径规则</h4>
     <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr><th>场景</th><th>路径格式</th><th>示例</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>独立输入框（不在 form 内）</td><td><code>name</code></td><td><code>'username'</code></td></tr>
+                <tr><td>表单内输入框</td><td><code>formId.name</code></td><td><code>'loginForm.username'</code></td></tr>
+                <tr><td>复选框/单选框组</td><td><code>name</code> 或 <code>formId.name</code></td><td><code>'hobby'</code>，值为数组 <code>['read', 'music']</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>注册表数据结构</h4>
+    <div class="CUI-box">
+        <p><code>CUI.input.getAll()</code> 返回的结构示例：</p>
+        <pre><code class="language-javascript">{
+    "username": { type: "input", element: &lt;input&gt;, value: "...", valid: true },
+    "loginForm": {
+        type: "form",
+        children: {
+            "email": { type: "input", element: &lt;input&gt;, value: "...", valid: false },
+            "password": { type: "input", element: &lt;input&gt;, value: "...", valid: true }
+        }
+    }
+}</code></pre>
+    </div>
+
+    <h4 class="CUI-mt-lg">手动初始化</h4>
+    <div class="CUI-box">
+        <p>在某些场景下（如 AJAX 加载内容后），可手动调用初始化：</p>
+        <pre><code class="language-javascript">// 重新扫描 DOM 并注册新元素
+CUI.inputInit();</code></pre>
+        <p class="CUI-text-sm CUI-text-muted">注意：已处理的元素不会重复处理，<code>processedNames</code> 和 <code>beautifiedElements</code> 提供了双重防重复保护。</p>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>事件系统</h3>
+    <div class="CUI-box">
+        <p>框架使用<strong>事件委托</strong>模式处理所有输入框交互，而非逐个绑定：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>事件</th><th>阶段</th><th>行为</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>blur</code></td>
+                    <td>捕获阶段（capture）</td>
+                    <td>触发验证：读取 <code>data-validate</code> 规则，校验值，更新 <code>node.valid</code> 和 CSS 类</td>
+                </tr>
+                <tr>
+                    <td><code>input</code></td>
+                    <td>冒泡阶段</td>
+                    <td>清除错误状态（移除 CSS 类，重置 <code>node.valid = true</code>），同步值到注册表</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="CUI-text-sm CUI-text-muted CUI-mt-md">采用事件委托的优势：无论动态添加多少输入框，只需两个全局监听器，性能恒定 O(1)。</p>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>自动注册与生命周期</h3>
+    <div class="CUI-box">
+        <h4>DOM 扫描</h4>
         <ul>
-            <li><strong>独立输入框</strong>：直接使用 name 属性值，如 <code>'username'</code></li>
-            <li><strong>表单内输入框</strong>：使用 <code>formId.name</code> 格式，如 <code>'loginForm.username'</code></li>
-            <li><strong>复选框/单选框</strong>：返回值为数组，如 <code>['read', 'music']</code></li>
+            <li><strong>初次加载</strong>：通过 <code>scanInputs()</code> 全量扫描 <code>input/textarea/select</code> 元素</li>
+            <li><strong>动态添加</strong>：通过 <code>CastingDOMObserver</code> 自动检测新增元素并处理</li>
+            <li><strong>移除清理</strong>：元素移除时，自动从注册表注销</li>
+        </ul>
+
+        <h4 class="CUI-mt-md">防重复机制</h4>
+        <ul>
+            <li><strong>processedNames</strong>（Set）：按 name 标记已注册的输入框，防止重复注册</li>
+            <li><strong>beautifiedElements</strong>（WeakSet）：按 DOM 元素引用标记已美化的输入框，防止重复渲染</li>
+        </ul>
+
+        <h4 class="CUI-mt-md">CUI-input-box 的 DOM 重建</h4>
+        <p>CUI-input-box 渲染时会将原始 <code>&lt;input&gt;</code> 替换为新的包装结构。为了确保开发者能继续正常访问元素：</p>
+        <ul>
+            <li><code>id</code> 被拷贝到新 input 上</li>
+            <li>所有原生 HTML 属性（readonly、disabled、maxlength 等）被拷贝</li>
+            <li>框架验证属性（data-validate、data-validate-pattern）被拷贝</li>
+            <li>已消费的 data 属性（data-label、data-hint、data-error、data-icon、data-info、data-isError）不会被拷贝</li>
+            <li>注册表的 <code>element</code> 指向新创建的 input</li>
         </ul>
     </div>
 
-    <h3>自动注册与垃圾回收</h3>
+    <hr class="CUI-hr">
+
+    <h3>模块加载说明</h3>
     <div class="CUI-box">
-        <ul>
-            <li>框架通过 DOMObserver 自动扫描并注册所有 <code>input/textarea/select</code> 元素</li>
-            <li>当元素被移除时，自动从注册表注销并清理事件监听</li>
-            <li>无需手动管理生命周期</li>
-        </ul>
+        <p>input 模块支持两种加载方式：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>方式</th><th>适用场景</th><th>示例</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>通过框架入口（推荐）</td>
+                    <td>使用完整 Casting UI 框架</td>
+                    <td><code>&lt;script type="module" src="/modules/js/index.js"&gt;</code></td>
+                </tr>
+                <tr>
+                    <td>独立加载</td>
+                    <td>仅需 Input 功能</td>
+                    <td><code>&lt;script src="/modules/js/input.js"&gt;</code></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="CUI-text-sm CUI-text-muted CUI-mt-md">独立加载时，模块会自动检测调度器是否可用，不可用时直接初始化。</p>
     </div>
 </section>

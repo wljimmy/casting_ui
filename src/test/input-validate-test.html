@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input 验证测试 | Casting UI</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/header.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/progress.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/menu.css">
+    <link rel="stylesheet" href="/modules/css/color-picker.css">
+    <link rel="stylesheet" href="/modules/css/theme-manager.css">
+</head>
+<body class="CUI-page">
+    <header>
+        <h1>Casting UI</h1>
+        <p>Input 验证功能测试</p>
+    </header>
+
+    <main class="CUI-content">
+        <section class="CUI-section">
+            <h2>CUI-input 验证</h2>
+            <p>输入错误值后失焦（blur），普通输入框显示红边框 + title 提示</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="testIdcard" class="CUI-input" data-validate="idcard" data-error="身份证号格式错误" placeholder="身份证号（18位）">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="testPhone" class="CUI-input" data-validate="phone" data-error="手机号格式错误" placeholder="手机号（11位）">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="email" name="testEmail" class="CUI-input" data-validate="email" placeholder="邮箱（无自定义错误）">
+                </div>
+            </div>
+        </section>
+
+        <section class="CUI-section">
+            <h2>CUI-input-box 验证</h2>
+            <p>输入错误值后失焦（blur），组合框显示错误信息</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="boxIdcard" class="CUI-input-box" data-label="身份证" data-validate="idcard" data-error="身份证号必须是18位" data-hint="请输入18位身份证号" placeholder="请输入">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="boxPhone" id="boxPhone" class="CUI-input-box" data-label="手机号" data-validate="phone" data-error="手机号格式不对" data-hint="请输入11位手机号" placeholder="请输入">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="email" name="boxEmail" class="CUI-input-box" data-label="邮箱" data-validate="email" data-error="邮箱格式错误" data-hint="例如: user@example.com" placeholder="请输入">
+                </div>
+            </div>
+        </section>
+
+        <section class="CUI-section">
+            <h2>自定义正则验证</h2>
+            <p>使用 data-validate="custom" + data-validate-pattern 自定义正则</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="customCode" class="CUI-input" data-validate="custom" data-validate-pattern="^\d{6}$" data-error="请输入6位数字验证码" placeholder="6位数字验证码">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="customPostcode" class="CUI-input-box" data-label="邮政编码" data-validate="custom" data-validate-pattern="^\d{6}$" data-error="邮政编码为6位数字" data-hint="例如: 518000" placeholder="请输入">
+                </div>
+            </div>
+        </section>
+
+        <section class="CUI-section">
+            <h2>CUI-input--simple 验证</h2>
+            <p>简约样式下验证：失焦变红，鼠标悬停显示 title 错误</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="simpleIdcard" class="CUI-input CUI-input--simple" data-validate="idcard" data-error="身份证号有误" data-label="身份证" data-label-position="top" placeholder="请输入">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="simplePhone" class="CUI-input CUI-input--simple" data-validate="phone" data-error="手机号有误" data-label="手机号" data-label-position="top" placeholder="请输入">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="email" name="simpleEmail" class="CUI-input CUI-input--simple" data-validate="email" data-error="邮箱格式错误" data-label="邮箱" data-label-position="top" placeholder="请输入">
+                </div>
+            </div>
+        </section>
+
+        <section class="CUI-section">
+            <h2>表单验证</h2>
+            <p>提交前检查整个表单是否有错误项</p>
+
+            <form id="validateForm" class="CUI-form" data-form-cols="12">
+                <div>
+                    <input type="text" name="username" class="CUI-input-box" data-label="用户名" placeholder="请输入用户名" data-validate="custom" data-validate-pattern="^[a-zA-Z]\w{2,15}$" data-error="用户名3-16位字母数字下划线" data-hint="字母开头，3-16位">
+                    <input type="text" name="phone" class="CUI-input-box" data-label="手机号" placeholder="请输入手机号" data-validate="phone" data-error="手机号格式错误" data-hint="11位手机号">
+                    <input type="email" name="email" class="CUI-input-box" data-label="邮箱" placeholder="请输入邮箱" data-validate="email" data-error="邮箱格式错误" data-hint="例如: user@example.com">
+                    <input type="text" name="fullname" class="CUI-input-box" data-label="姓名" placeholder="请输入姓名" data-validate="required" data-error="姓名不能为空" data-hint="必填项">
+                </div>
+                <button type="button" class="CUI-btn CUI-btn-primary" onclick="checkForm()">检查表单</button>
+            </form>
+
+            <div id="formResult" class="CUI-mt-md" style="display:none;"></div>
+
+            <script>
+                function checkForm() {
+                    const result = document.getElementById('formResult');
+                    result.style.display = 'block';
+                    const valid = CUI.input.isFormValid('validateForm');
+                    const data = CUI.input.getFormData('validateForm');
+                    result.innerHTML = '<h4>表单检查结果</h4>' +
+                        '<table class="CUI-table">' +
+                        '<thead><tr><th>字段</th><th>值</th><th>是否有效</th></tr></thead>' +
+                        '<tbody>' +
+                        Object.keys(data).map(key => {
+                            const path = 'validateForm.' + key;
+                            const isValid = CUI.input.isValid(path);
+                            return '<tr>' +
+                                '<td>' + key + '</td>' +
+                                '<td>' + (data[key] || '(空)') + '</td>' +
+                                '<td style="color:' + (isValid ? 'green' : 'red') + '">' +
+                                (isValid ? '有效' : '无效') +
+                                '</td></tr>';
+                        }).join('') +
+                        '</tbody></table>' +
+                        '<p style="color:' + (valid ? 'green' : 'red') + ';font-weight:bold;margin-top:8px;">' +
+                        '表单整体验证：' + (valid ? '通过' : '有错误项') + '</p>';
+                }
+            </script>
+        </section>
+
+        <section class="CUI-section">
+            <h2>取消验证的场景</h2>
+            <p>不设 data-validate 的输入框不受验证影响</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="noValidate" class="CUI-input" placeholder="无验证的普通输入框">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="noValidateBox" class="CUI-input-box" data-label="无验证" data-hint="随便输入，不会报错" placeholder="请输入" readonly maxlength="10">
+                </div>
+            </div>
+        </section>
+
+        <section class="CUI-section">
+            <h2>空值不报错</h2>
+            <p>验证规则：空值通过验证，只有填了内容但格式不对才报错</p>
+
+            <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-lg">
+                <div class="CUI-span-4c">
+                    <input type="text" name="emptyIdcard" class="CUI-input" data-validate="idcard" data-error="身份证格式错误" placeholder="不填内容失焦不报错">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="emptyPhone" class="CUI-input-box" data-label="手机号" data-validate="phone" data-error="手机号格式错误" data-hint="不填内容失焦不报错" placeholder="请输入">
+                </div>
+            </div>
+        </section>
+    <section class="CUI-section">
+            <h2>自动化测试</h2>
+            <p>一键自动填入各种值并验证校验逻辑、属性保留、边界情况</p>
+            <button type="button" class="CUI-btn CUI-btn-primary" onclick="runAutoTest()">运行自动化测试</button>
+            <div id="autoTestResult" class="CUI-mt-md" style="display:none;"></div>
+
+            <script>
+            function getPath(el) {
+                const form = el.closest('form');
+                const parentId = form && form.id ? form.id : null;
+                return parentId ? parentId + '.' + el.name : el.name;
+            }
+
+            function hasError(el) {
+                const wrapper = el.closest('.CUI-input-box') || el.closest('.CUI-input');
+                if (!wrapper) return false;
+                return wrapper.classList.contains('CUI-is-error') || wrapper.classList.contains('CUI-input--error');
+            }
+
+            function resetAllInputs() {
+                document.querySelectorAll('input,textarea,select').forEach(function(el) {
+                    if (!el.name) return;
+                    if (el.type === 'hidden') return;
+                    el.value = '';
+                    el.title = '';
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    var wrapper = el.closest('.CUI-input-box') || el.closest('.CUI-input');
+                    if (wrapper) {
+                        wrapper.classList.remove('CUI-is-error', 'CUI-input--error');
+                    }
+                    var path = getPath(el);
+                    var node = CUI.input ? CUI.input.get(path) : null;
+                    if (node) node.valid = true;
+                });
+            }
+
+            function runAutoTest() {
+                resetAllInputs();
+                var result = document.getElementById('autoTestResult');
+                result.style.display = 'block';
+                var tests = [];
+
+                function t(name, selector, value, expectError) {
+                    var el = document.querySelector(selector);
+                    if (!el) {
+                        tests.push({ name: name, type: 'validation', pass: false, detail: '元素未找到 [' + selector + ']' });
+                        return;
+                    }
+                    el.value = value;
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('blur', { bubbles: true }));
+
+                    var path = getPath(el);
+                    var regValid = CUI.input.isValid(path);
+                    var hasErr = hasError(el);
+                    var cssConsistent = (regValid && !hasErr) || (!regValid && hasErr);
+                    var pass = (!regValid === expectError) && cssConsistent;
+
+                    var detail = '值="' + value + '"  isValid=' + regValid + '  hasError=' + hasErr + '  css一致=' + cssConsistent;
+                    tests.push({ name: name, type: 'validation', pass: pass, detail: detail });
+                }
+
+                function tAttr(name, selector, attr, expected) {
+                    var el = document.querySelector(selector);
+                    if (!el) {
+                        tests.push({ name: name, type: 'attr', pass: false, detail: '元素未找到 [' + selector + ']' });
+                        return;
+                    }
+                    var actual = el.getAttribute(attr);
+                    var pass = actual === String(expected);
+                    var detail = '属性 ' + attr + '="' + actual + '" (期望="' + expected + '")';
+                    tests.push({ name: name, type: 'attr', pass: pass, detail: detail });
+                }
+
+                function tAttrExists(name, selector, attr) {
+                    var el = document.querySelector(selector);
+                    if (!el) {
+                        tests.push({ name: name, type: 'attr', pass: false, detail: '元素未找到 [' + selector + ']' });
+                        return;
+                    }
+                    var has = el.hasAttribute(attr);
+                    var detail = '属性 ' + attr + (has ? ' 存在' : ' 不存在') + ' (期望: 存在)';
+                    tests.push({ name: name, type: 'attr', pass: has, detail: detail });
+                }
+
+                function tConsistencyCheck(name, el1, el2, attr) {
+                    var v1 = el1.getAttribute(attr);
+                    var v2 = el2.getAttribute(attr);
+                    var pass = v1 === v2;
+                    tests.push({
+                        name: name,
+                        type: 'attr',
+                        pass: pass,
+                        detail: attr + ' 一致性: ' + (v1 || '(空)') + ' vs ' + (v2 || '(空)')
+                    });
+                }
+
+                var totalStart = tests.length;
+
+                /* ============ 1. 验证逻辑测试 ============ */
+
+                t('CUI-input 身份证-正确', '[name="testIdcard"]', '110101199001011234', false);
+                t('CUI-input 身份证-错误', '[name="testIdcard"]', '12345', true);
+                t('CUI-input 手机号-正确', '[name="testPhone"]', '13800138000', false);
+                t('CUI-input 手机号-错误', '[name="testPhone"]', '1234', true);
+                t('CUI-input 邮箱-正确', '[name="testEmail"]', 'test@example.com', false);
+                t('CUI-input 邮箱-错误', '[name="testEmail"]', 'not-email', true);
+
+                t('CUI-input-box 身份证-正确', '[name="boxIdcard"]', '110101199001011234', false);
+                t('CUI-input-box 身份证-错误', '[name="boxIdcard"]', '12345', true);
+                t('CUI-input-box 手机号-正确', '[name="boxPhone"]', '13800138000', false);
+                t('CUI-input-box 手机号-错误', '[name="boxPhone"]', 'abcd', true);
+                t('CUI-input-box 邮箱-正确', '[name="boxEmail"]', 'user@domain.com', false);
+                t('CUI-input-box 邮箱-错误', '[name="boxEmail"]', 'bad-email', true);
+
+                t('自定义正则 Code-正确', '[name="customCode"]', '123456', false);
+                t('自定义正则 Code-错误', '[name="customCode"]', 'abc', true);
+                t('自定义正则 邮编-正确', '[name="customPostcode"]', '518000', false);
+                t('自定义正则 邮编-错误', '[name="customPostcode"]', 'abcd', true);
+
+                t('CUI-input--simple 身份证-正确', '[name="simpleIdcard"]', '110101199001011234', false);
+                t('CUI-input--simple 身份证-错误', '[name="simpleIdcard"]', '123', true);
+                t('CUI-input--simple 手机号-正确', '[name="simplePhone"]', '13900139000', false);
+                t('CUI-input--simple 手机号-错误', '[name="simplePhone"]', 'abc', true);
+
+                t('required 必填-空值报错', '[name="fullname"]', '', true);
+                t('required 必填-已填通过', '[name="fullname"]', '张三', false);
+
+                t('空值不报错 CUI-input', '[name="emptyIdcard"]', '', false);
+                t('空值不报错 CUI-input-box', '[name="emptyPhone"]', '', false);
+
+                t('无验证不受影响 CUI-input', '[name="noValidate"]', '任意内容', false);
+                t('无验证不受影响 CUI-input-box', '[name="noValidateBox"]', '任意内容', false);
+
+                /* ============ 2. 边界情况 ============ */
+
+                t('边界-邮箱带加号', '[name="testEmail"]', 'test+tag@example.com', false);
+                t('边界-邮箱子域名', '[name="testEmail"]', 'user@sub.example.com.cn', false);
+                t('边界-手机号带空格(应报错)', '[name="testPhone"]', '138 0013 8000', true);
+                t('边界-身份证小写x', '[name="testIdcard"]', '11010119900101123x', false);
+                t('边界-身份证大写X', '[name="testIdcard"]', '11010119900101123X', false);
+                t('边界-自定义正则空值(不报错)', '[name="customCode"]', '', false);
+                t('边界-CUI-input-box 邮箱子域名', '[name="boxEmail"]', 'a@b.co', false);
+
+                /* ============ 3. 属性保留测试 ============ */
+
+                tAttr('属性-ID保留-boxPhone', '[name="boxPhone"]', 'id', 'boxPhone');
+
+                tAttrExists('属性-readonly保留', '[name="noValidateBox"]', 'readonly');
+                tAttr('属性-maxlength保留', '[name="noValidateBox"]', 'maxlength', '10');
+
+                /* ============ 4. 输入清除错误状态测试 ============ */
+
+                (function testClearOnInput() {
+                    var el = document.querySelector('[name="testPhone"]');
+                    if (!el) {
+                        tests.push({ name: '输入清除错误-准备', type: 'clear', pass: false, detail: '元素未找到' });
+                        return;
+                    }
+                    el.value = '错误值';
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('blur', { bubbles: true }));
+                    var beforeClear = hasError(el);
+                    el.value = '13800138000';
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    var afterClear = hasError(el);
+                    var pass = beforeClear && !afterClear;
+                    tests.push({
+                        name: '输入清除错误-输入正确值后自动清除',
+                        type: 'clear',
+                        pass: pass,
+                        detail: '错误时hasError=' + beforeClear + ' 修正后hasError=' + afterClear
+                    });
+                })();
+
+                /* ============ 5. 表单验证 ============ */
+
+                (function testFormValidation() {
+                    document.querySelector('[name="username"]').value = '';
+                    document.querySelector('[name="phone"]').value = '';
+                    document.querySelector('[name="email"]').value = '';
+                    document.querySelector('[name="fullname"]').value = '';
+                    [].forEach.call(document.querySelectorAll('#validateForm input'), function(el) {
+                        el.dispatchEvent(new Event('input', { bubbles: true }));
+                        el.dispatchEvent(new Event('blur', { bubbles: true }));
+                    });
+                    var formValidAfterEmpty = CUI.input.isFormValid('validateForm');
+                    tests.push({
+                        name: '表单验证-全部空值(fullname必填应无效)',
+                        type: 'form',
+                        pass: !formValidAfterEmpty,
+                        detail: 'isFormValid=' + formValidAfterEmpty + ' (fullname含required且为空，应false)'
+                    });
+
+                    document.querySelector('[name="username"]').value = 'validUser';
+                    document.querySelector('[name="phone"]').value = '13800138000';
+                    document.querySelector('[name="email"]').value = 'test@test.com';
+                    document.querySelector('[name="fullname"]').value = '张三';
+                    [].forEach.call(document.querySelectorAll('#validateForm input'), function(el) {
+                        el.dispatchEvent(new Event('input', { bubbles: true }));
+                        el.dispatchEvent(new Event('blur', { bubbles: true }));
+                    });
+                    var formValidAfterFill = CUI.input.isFormValid('validateForm');
+                    tests.push({
+                        name: '表单验证-全部正确值(应通过)',
+                        type: 'form',
+                        pass: formValidAfterFill,
+                        detail: 'isFormValid=' + formValidAfterFill
+                    });
+
+                    document.querySelector('[name="phone"]').value = '123';
+                    document.querySelector('[name="phone"]').dispatchEvent(new Event('input', { bubbles: true }));
+                    document.querySelector('[name="phone"]').dispatchEvent(new Event('blur', { bubbles: true }));
+                    var formValidAfterError = CUI.input.isFormValid('validateForm');
+                    tests.push({
+                        name: '表单验证-存在错误值(应不通过)',
+                        type: 'form',
+                        pass: !formValidAfterError,
+                        detail: 'isFormValid=' + formValidAfterError + ' (手机号错误，应false)'
+                    });
+                })();
+
+                /* ============ 统计结果 ============ */
+
+                var passed = 0, failed = 0;
+                var valPass = 0, valFail = 0;
+                var attrPass = 0, attrFail = 0;
+                var clearPass = 0, clearFail = 0;
+                var formPass = 0, formFail = 0;
+
+                tests.forEach(function(test) {
+                    if (test.pass) {
+                        passed++;
+                        if (test.type === 'validation') valPass++;
+                        else if (test.type === 'attr') attrPass++;
+                        else if (test.type === 'clear') clearPass++;
+                        else if (test.type === 'form') formPass++;
+                    } else {
+                        failed++;
+                        if (test.type === 'validation') valFail++;
+                        else if (test.type === 'attr') attrFail++;
+                        else if (test.type === 'clear') clearFail++;
+                        else if (test.type === 'form') formFail++;
+                    }
+                });
+
+                var html = '<h4>测试结果</h4>' +
+                    '<table class="CUI-table">' +
+                    '<thead><tr><th>#</th><th>类型</th><th>测试项</th><th>结果</th><th>详情</th></tr></thead><tbody>';
+                tests.forEach(function(test, i) {
+                    var typeLabel = { validation: '验证', attr: '属性', clear: '清除', form: '表单' }[test.type] || test.type;
+                    var badgeStyle = {
+                        validation: 'background:#f0f0f0;color:#666;',
+                        attr: 'background:#e6f7ff;color:#1890ff;',
+                        clear: 'background:#fff7e6;color:#d46b08;',
+                        form: 'background:var(--primary-color);color:white;'
+                    }[test.type] || 'background:#f0f0f0;color:#666;';
+                    html += '<tr' + (test.pass ? '' : ' style="background:#fff1f0"') + '>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td><span class="CUI-badge" style="font-size:0.75em;padding:1px 6px;border-radius:3px;' + badgeStyle + '">' + typeLabel + '</span></td>' +
+                        '<td>' + test.name + '</td>' +
+                        '<td style="color:' + (test.pass ? 'green' : 'red') + ';font-weight:bold;">' +
+                        (test.pass ? '通过' : '失败') + '</td>' +
+                        '<td style="font-size:0.85em;max-width:400px;word-break:break-all;">' + test.detail + '</td></tr>';
+                });
+                html += '</tbody></table>' +
+
+                    '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;">' +
+                    '  <div style="padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;">' +
+                    '    <div style="font-size:0.85em;color:#666;">验证测试</div>' +
+                    '    <div style="font-size:1.1em;font-weight:bold;color:' + (valFail === 0 ? 'green' : 'red') + ';">' +
+                            (valPass + valFail) + '项 | 通过' + valPass + ' | 失败' + valFail + '</div>' +
+                    '  </div>' +
+                    '  <div style="padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;">' +
+                    '    <div style="font-size:0.85em;color:#666;">属性保留</div>' +
+                    '    <div style="font-size:1.1em;font-weight:bold;color:' + (attrFail === 0 ? 'green' : 'red') + ';">' +
+                            (attrPass + attrFail) + '项 | 通过' + attrPass + ' | 失败' + attrFail + '</div>' +
+                    '  </div>' +
+                    '  <div style="padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;">' +
+                    '    <div style="font-size:0.85em;color:#666;">错误清除</div>' +
+                    '    <div style="font-size:1.1em;font-weight:bold;color:' + (clearFail === 0 ? 'green' : 'red') + ';">' +
+                            (clearPass + clearFail) + '项 | 通过' + clearPass + ' | 失败' + clearFail + '</div>' +
+                    '  </div>' +
+                    '  <div style="padding:8px 16px;border:1px solid #e0e0e0;border-radius:6px;">' +
+                    '    <div style="font-size:0.85em;color:#666;">表单验证</div>' +
+                    '    <div style="font-size:1.1em;font-weight:bold;color:' + (formFail === 0 ? 'green' : 'red') + ';">' +
+                            (formPass + formFail) + '项 | 通过' + formPass + ' | 失败' + formFail + '</div>' +
+                    '  </div>' +
+                    '</div>' +
+
+                    '<p style="font-weight:bold;font-size:1.1em;color:' + (failed === 0 ? 'green' : 'red') + ';margin-top:12px;">' +
+                    '总计 ' + tests.length + ' 项，通过 ' + passed + ' 项，失败 ' + failed + ' 项。' +
+                    (failed === 0 ? ' 全部通过 ✅' : ' 存在失败项 ❌') +
+                    '</p>';
+
+                result.innerHTML = html;
+            }
+            </script>
+        </section>
+    </main>
+
+    <script type="module" src="/modules/js/index.js"></script>
+    <script src="/modules/js/input.js"></script>
+</body>
+</html>
