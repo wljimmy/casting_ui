@@ -4,6 +4,7 @@
  * Module: ui.js
  * Description: UI框架模块，提供UI组件管理
  * Copyright (c) 2026 Bingo工作室
+ * @dependency: core, colorPicker, modal
  * Email: wljimmy@hotmail.com
  */
 
@@ -26,19 +27,56 @@ class UI {
         this.initFormValidation();
         this.initCollapsePanels();
         this.initMenus();
+        this.initRightSidebarDrawer();
+    }
+
+    // 右侧移动端抽屉
+    initRightSidebarDrawer() {
+        const rightSidebar = document.querySelector('.CUI-sidebar-right');
+        if (!rightSidebar || document.querySelector('.CUI-sidebar-right-trigger')) return;
+
+        // 仅在拥有右侧边栏时创建右侧抽屉边缘拉环标签
+        const rightTrigger = document.createElement('div');
+        rightTrigger.className = 'CUI-sidebar-right-trigger';
+        // 左指小箭头
+        rightTrigger.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        `;
+
+        const backdrop = document.createElement('div');
+        backdrop.className = 'CUI-sidebar-right-backdrop';
+
+        document.body.appendChild(rightTrigger);
+        document.body.appendChild(backdrop);
+
+        // 点击拉环展开/收起抽屉
+        rightTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.body.classList.toggle('CUI-right-drawer-opened');
+        });
+
+        // 点击遮罩收起抽屉
+        backdrop.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.body.classList.remove('CUI-right-drawer-opened');
+        });
+        
+        debug('移动端右侧抽屉拉环标签注入成功');
     }
 
     // 折叠面板相关
     initCollapsePanels() {
-        const collapseHeaders = document.querySelectorAll('.collapse-header');
+        const collapseHeaders = document.querySelectorAll('.CUI-collapse-header');
         collapseHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 debug('折叠面板点击', header, { panelId: header.parentElement.id });
                 const panel = header.parentElement;
-                panel.classList.toggle('active');
-                const content = panel.querySelector('.collapse-content');
+                panel.classList.toggle('CUI-active');
+                const content = panel.querySelector('.CUI-collapse-content');
                 const icon = header.querySelector('span');
-                if (panel.classList.contains('active')) {
+                if (panel.classList.contains('CUI-active')) {
                     icon.textContent = '▲';
                 } else {
                     icon.textContent = '▼';
@@ -141,12 +179,12 @@ class UI {
                 // 切换菜单显示/隐藏
                 const menu = document.getElementById(menuId);
                 if (menu) {
-                    if (menu.classList.contains('menu-hidden')) {
-                        menu.classList.remove('menu-hidden');
-                        menu.classList.add('menu-visible');
+                    if (menu.classList.contains('CUI-menu-hidden')) {
+                        menu.classList.remove('CUI-menu-hidden');
+                        menu.classList.add('CUI-menu-visible');
                     } else {
-                        menu.classList.remove('menu-visible');
-                        menu.classList.add('menu-hidden');
+                        menu.classList.remove('CUI-menu-visible');
+                        menu.classList.add('CUI-menu-hidden');
                     }
                 }
             },
@@ -154,9 +192,9 @@ class UI {
                 // 设置菜单项为激活状态
                 const menu = menuItem.closest('menu');
                 menu.querySelectorAll('li').forEach(item => {
-                    item.classList.remove('active');
+                    item.classList.remove('CUI-active');
                 });
-                menuItem.classList.add('active');
+                menuItem.classList.add('CUI-active');
             },
             addItem: (menuId, parentItem, itemData) => {
                 // 动态添加菜单项
@@ -195,14 +233,14 @@ class UI {
                 
                 if (itemData.icon) {
                     const iconSpan = document.createElement('span');
-                    iconSpan.className = 'menu-icon';
+                    iconSpan.className = 'CUI-menu-icon';
                     iconSpan.textContent = itemData.icon;
                     a.insertBefore(iconSpan, a.firstChild);
                 }
                 
                 if (itemData.badge) {
                     const badgeSpan = document.createElement('span');
-                    badgeSpan.className = `menu-badge badge badge-${itemData.badge.type || 'primary'}`;
+                    badgeSpan.className = `CUI-menu-badge CUI-badge CUI-badge-${itemData.badge.type || 'primary'}`;
                     badgeSpan.textContent = itemData.badge.text;
                     a.appendChild(badgeSpan);
                 }
@@ -283,7 +321,7 @@ class UI {
         
         // 初始化子菜单为收起状态
         menu.querySelectorAll('ul ul').forEach(submenu => {
-            submenu.classList.add('collapsed');
+            submenu.classList.add('CUI-collapsed');
         });
         
         // 创建菜单对象
@@ -301,12 +339,12 @@ class UI {
                     this.menu.setActive(item);
                     
                     // 关闭当前菜单中所有展开的子菜单
-                    const allExpandedItems = menu.querySelectorAll('li.expanded');
+                    const allExpandedItems = menu.querySelectorAll('li.CUI-expanded');
                     allExpandedItems.forEach(expandedItem => {
                         const expandedSubmenu = expandedItem.querySelector(':scope > ul');
                         if (expandedSubmenu) {
-                            expandedSubmenu.classList.add('collapsed');
-                            expandedItem.classList.remove('expanded');
+                            expandedSubmenu.classList.add('CUI-collapsed');
+                            expandedItem.classList.remove('CUI-expanded');
                         }
                     });
                     
@@ -314,8 +352,8 @@ class UI {
                     const submenu = item.querySelector(':scope > ul');
                     if (submenu) {
                         // 展开当前子菜单
-                        submenu.classList.remove('collapsed');
-                        item.classList.add('expanded');
+                        submenu.classList.remove('CUI-collapsed');
+                        item.classList.add('CUI-expanded');
                     }
                     
                     // 查找菜单项内的链接（如果有）
@@ -421,9 +459,9 @@ class UI {
 // 全局主题选择器函数
 function openThemeSelector(options) {
     debug('启动主题选择器', null, options);
-    if (window.ui) {
-        debug('UI实例存在，获取ThemeManager', null, { ui: window.ui });
-        const themeManager = window.ui.getThemeManager();
+    if (window.CUI) {
+        debug('CUI实例存在，获取ThemeManager', null, { ui: window.CUI });
+        const themeManager = window.CUI.getThemeManager();
         // 处理容器选择器
         if (options.container && typeof options.container === 'string') {
             debug('处理容器选择器', options.container, { selector: options.container });
@@ -433,8 +471,8 @@ function openThemeSelector(options) {
         debug('调用ThemeManager.openThemeSelector', themeManager);
         themeManager.openThemeSelector(options);
     } else {
-        debug('UI实例不存在，延迟重试', null, { retry: true });
-        // 如果UI实例还未创建，延迟重试
+        debug('CUI实例不存在，延迟重试', null, { retry: true });
+        // 如果CUI实例还未创建，延迟重试
         setTimeout(() => openThemeSelector(options), 100);
     }
 }
@@ -442,9 +480,9 @@ function openThemeSelector(options) {
 // 颜色选择器函数
 function openColorPicker(options) {
     debug('启动颜色选择器', null, options);
-    if (window.ui) {
-        debug('UI实例存在，调用颜色选择器', null, { ui: window.ui });
-        const colorPicker = window.ui.getColorPicker();
+    if (window.CUI) {
+        debug('CUI实例存在，调用颜色选择器', null, { ui: window.CUI });
+        const colorPicker = window.CUI.getColorPicker();
         // 处理容器选择器
         if (options.container && typeof options.container === 'string') {
             debug('处理容器选择器', options.container, { selector: options.container });
@@ -454,8 +492,8 @@ function openColorPicker(options) {
         debug('调用ColorPicker.open', colorPicker);
         return colorPicker.open(options);
     } else {
-        debug('UI实例不存在，延迟重试', null, { retry: true });
-        // 如果UI实例还未创建，延迟重试
+        debug('CUI实例不存在，延迟重试', null, { retry: true });
+        // 如果CUI实例还未创建，延迟重试
         return new Promise((resolve) => {
             setTimeout(() => {
                 openColorPicker(options).then(resolve);
@@ -464,10 +502,24 @@ function openColorPicker(options) {
     }
 }
 
-// 在DOM加载完成后初始化UI
-document.addEventListener('DOMContentLoaded', function() {
-    debug('DOM加载完成，初始化UI');
-    window.ui = new UI();
+function initUI() {
+    debug('初始化CUI UI系统');
+    const oldCUI = window.CUI || {};
+    const uiInstance = new UI();
+    
+    // 合并之前已经挂载到 window.CUI 的各种模块和变量，防止被 new UI() 粗暴覆盖
+    Object.assign(uiInstance, oldCUI);
+    window.CUI = uiInstance;
+}
+
+// 注册到全局生命周期调度器，声明对 core, colorPicker, modal 的依赖，并在最后的 READY 阶段启动整个UI系统
+window.CUI.registerModule('ui', {
+    dependencies: ['core', 'colorPicker', 'modal'],
+    stages: {
+        READY: () => {
+            initUI();
+        }
+    }
 });
 
 // 导出

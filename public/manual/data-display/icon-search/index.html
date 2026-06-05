@@ -1,3 +1,14 @@
+<!--
+Page-Info: Icon Gallery & Search Demo
+Type: third-party-integration
+Purpose: Display and search Tabler Icons library
+Framework-Usage: Use framework CSS classes for layout
+Ignored-Rules:
+  - inline-script: Functional code for icon search, not part of framework
+  - inline-style: Minimal inline styles for icon display layout
+Note: This page demonstrates third-party icons within the framework.
+      Functional JS is standalone code, not framework module.
+-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -14,9 +25,9 @@
     <h1>图标示例与搜索</h1>
 
     <div class="CUI-grid CUI-grid-12c CUI-mb-md">
-        <input type="text" id="search-input" class="input CUI-span-9c" placeholder="搜索图标名称或标签...">
-        <button id="search-btn" class="btn btn-primary CUI-span-1c">搜索</button>
-        <button id="reset-btn" class="btn btn-secondary CUI-span-2c">重置</button>
+        <input type="text" id="search-input" class="CUI-input CUI-span-9c" placeholder="搜索图标名称或标签...">
+        <button id="search-btn" class="CUI-btn CUI-btn-primary CUI-span-1c">搜索</button>
+        <button id="reset-btn" class="CUI-btn CUI-btn-secondary CUI-span-2c">重置</button>
     </div>
 
     <div id="search-info" class="CUI-text-muted CUI-mb-sm"></div>
@@ -26,7 +37,188 @@
     <div id="pagination" class="CUI-grid CUI-grid-center CUI-mt-lg"></div>
 </section>
 <script>
-const D=[],F=[],T=[];function getOutlinePath(n){return"/icons/outline/"+n+".svg"}function getFilledPath(n){return"/icons/filled/"+n+".svg"}function getTag(n){return T[n]||""}function M(){S();document.getElementById("search-btn").addEventListener("click",E);document.getElementById("reset-btn").addEventListener("click",R);document.getElementById("search-input").addEventListener("keypress",e=>{e.key==="Enter"&&E()});if(window.CastingDOMObserver){ CastingDOMObserver.onAdd('icon-tag-search','.tag-search',function(el){el.style.cursor='pointer';el.addEventListener('click',function(){document.getElementById('search-input').value=el.dataset.tag;E()})})}}function S(){fetch("/manual/data-display/icon-search/icons_data.json").then(e=>e.json()).then(e=>{T.splice(0,T.length,...e.t);D.length=0;D.push(...e.d);F.splice(0,F.length,...D);U();updatePagination()}).catch(e=>{console.error("加载图标数据失败:",e);document.getElementById("search-info").textContent="加载图标数据失败"})}function E(){const e=document.getElementById("search-input").value.toLowerCase().trim();if(e){F.splice(0,F.length,...D.filter(n=>n[0].toLowerCase().includes(e)||n[1].some(t=>getTag(t).toLowerCase().includes(e))))}else{F.splice(0,F.length,...D)}currentPage=1;U();updatePagination()}function R(){document.getElementById("search-input").value="";F.splice(0,F.length,...D);currentPage=1;U();updatePagination()}function U(){const e=document.getElementById("icon-container"),n=(currentPage-1)*50,t=n+50,a=F.slice(n,t);e.innerHTML="";if(a.length===0){e.innerHTML='<div class="CUI-text-center CUI-text-muted CUI-span-12c CUI-p-lg">没有找到匹配的图标</div>';return}a.forEach(n=>{const t=document.createElement("div");t.className="card card-size-3";const i=n[0],o=n[1],l=n[2],h=l===1||l===2,c=l===2||l===3;let d='<div class="card-header CUI-p-sm CUI-bb CUI-bg-gray-100"><h3 class="CUI-m-0 CUI-fs-md">'+i+'</h3></div><div class="CUI-p-md CUI-bg-gray-50"><div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:nowrap;">';h&&(d+='<div style="display:flex;flex-direction:column;align-items:center;"><svg style="width:48px;height:48px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use xlink:href="'+getOutlinePath(i)+'#icon"></use></svg><span class="CUI-fs-xs CUI-text-muted" style="margin-top:4px;">线条</span></div>');c&&(d+='<div style="display:flex;flex-direction:column;align-items:center;"><svg style="width:48px;height:48px;" viewBox="0 0 24 24" fill="currentColor"><use xlink:href="'+getFilledPath(i)+'#icon"></use></svg><span class="CUI-fs-xs CUI-text-muted" style="margin-top:4px;">填充</span></div>');d+='</div></div><div class="card-footer CUI-p-sm CUI-bt"><div class="CUI-flex CUI-flex-wrap CUI-gap-xs">';o.forEach(e=>{d+='<span class="tag-search badge badge-secondary CUI-fs-11" data-tag="'+getTag(e)+'">'+getTag(e)+"</span>"});d+='</div></div>';t.innerHTML=d;e.appendChild(t)});const s=document.getElementById("search-info");s.textContent=F.length===D.length?"共 "+D.length+" 个图标":"找到 "+F.length+" 个匹配的图标（共 "+D.length+" 个）"}function updatePagination(){const e=document.getElementById("pagination"),n=Math.ceil(F.length/50);e.innerHTML="";if(n<=1)return;const t=document.createElement("button");t.className="btn btn-secondary"+(currentPage===1?" btn-disabled":"");t.textContent="上一页";t.onclick=()=>{currentPage>1&&(currentPage--,U(),updatePagination())};e.appendChild(t);const a=Math.max(1,currentPage-2),i=Math.min(n,currentPage+2);for(let s=a;s<=i;s++){const n=document.createElement("button");n.className="btn"+(s===currentPage?" btn-primary":" btn-secondary");n.textContent=s;n.onclick=()=>{currentPage=s;U(),updatePagination()};e.appendChild(n)}const o=document.createElement("button");o.className="btn btn-secondary"+(currentPage===n?" btn-disabled":"");o.textContent="下一页";o.onclick=()=>{currentPage<n&&(currentPage++,U(),updatePagination())};e.appendChild(o)}var currentPage=1;M();
+const D = [], F = [], T = [];
+
+function getOutlinePath(n) {
+    return "/icons/outline/" + n + ".svg";
+}
+
+function getFilledPath(n) {
+    return "/icons/filled/" + n + ".svg";
+}
+
+function getTag(n) {
+    return T[n] || "";
+}
+
+function M() {
+    S();
+    document.getElementById("search-btn").addEventListener("click", E);
+    document.getElementById("reset-btn").addEventListener("click", R);
+    document.getElementById("search-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") E();
+    });
+    if (window.CastingDOMObserver) {
+        CastingDOMObserver.onAdd("icon-tag-search", ".CUI-tag-search", function(el) {
+            el.style.cursor = "pointer";
+            el.addEventListener("click", function() {
+                document.getElementById("search-input").value = el.dataset.tag;
+                E();
+            });
+        });
+    }
+}
+
+function S() {
+    fetch("/manual/data-display/icon-search/icons_data.json")
+        .then(function(e) { return e.json(); })
+        .then(function(e) {
+            T.splice(0, T.length, ...e.t);
+            D.length = 0;
+            D.push(...e.d);
+            F.splice(0, F.length, ...D);
+            U();
+            updatePagination();
+        })
+        .catch(function(e) {
+            console.error("加载图标数据失败:", e);
+            document.getElementById("search-info").textContent = "加载图标数据失败";
+        });
+}
+
+function E() {
+    const e = document.getElementById("search-input").value.toLowerCase().trim();
+    if (e) {
+        F.splice(0, F.length, ...D.filter(function(n) {
+            return n[0].toLowerCase().includes(e) || n[1].some(function(t) {
+                return getTag(t).toLowerCase().includes(e);
+            });
+        }));
+    } else {
+        F.splice(0, F.length, ...D);
+    }
+    currentPage = 1;
+    U();
+    updatePagination();
+}
+
+function R() {
+    document.getElementById("search-input").value = "";
+    F.splice(0, F.length, ...D);
+    currentPage = 1;
+    U();
+    updatePagination();
+}
+
+function U() {
+    const e = document.getElementById("icon-container");
+    const n = (currentPage - 1) * 50;
+    const t = n + 50;
+    const a = F.slice(n, t);
+    e.innerHTML = "";
+
+    if (a.length === 0) {
+        e.innerHTML = '<div class="CUI-text-center CUI-text-muted CUI-span-12c CUI-p-lg">没有找到匹配的图标</div>';
+        return;
+    }
+
+    a.forEach(function(n) {
+        const t = document.createElement("div");
+        t.className = "CUI-card CUI-card-size-3";
+        const i = n[0];
+        const o = n[1];
+        const l = n[2];
+        const h = l === 1 || l === 2;
+        const c = l === 2 || l === 3;
+
+        let d = '<div class="CUI-card-header CUI-p-sm CUI-bb CUI-bg-gray-100"><h3 class="CUI-m-0 CUI-fs-md">' + i + '</h3></div>';
+        d += '<div class="CUI-p-md CUI-bg-gray-50"><div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:nowrap;">';
+
+        if (h) {
+            d += '<div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="' + getOutlinePath(i) + '#icon"></use></svg></div>';
+        }
+        if (c) {
+            d += '<div style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><use href="' + getFilledPath(i) + '#icon"></use></svg></div>';
+        }
+
+        d += '</div></div><div class="CUI-card-footer CUI-p-sm CUI-bt CUI-bg-gray-100">';
+
+        o.forEach(function(n) {
+            const tagText = getTag(n);
+            d += '<span class="CUI-tag-search" data-tag="' + tagText + '" style="display:inline-block;padding:2px 6px;margin:2px;background:#e0e0e0;border-radius:4px;font-size:12px;cursor:pointer;">' + tagText + '</span>';
+        });
+
+        d += '</div>';
+        t.innerHTML = d;
+        e.appendChild(t);
+    });
+}
+
+let currentPage = 1;
+
+function updatePagination() {
+    const e = document.getElementById("pagination");
+    const n = Math.ceil(F.length / 50);
+
+    if (n <= 1) {
+        e.innerHTML = "";
+        return;
+    }
+
+    let t = '<div class="CUI-flex CUI-items-center CUI-gap-sm">';
+
+    // 上一页按钮
+    if (currentPage === 1) {
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-disabled">上一页</button>';
+    } else {
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-secondary" onclick="changePage(' + (currentPage - 1) + ')">上一页</button>';
+    }
+
+    // 页码按钮
+    const a = Math.max(1, currentPage - 2);
+    const i = Math.min(n, currentPage + 2);
+
+    if (a > 1) {
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-secondary" onclick="changePage(1)">1</button>';
+        if (a > 2) {
+            t += '<span class="CUI-text-muted">...</span>';
+        }
+    }
+
+    for (let o = a; o <= i; o++) {
+        if (o === currentPage) {
+            t += '<button class="CUI-btn CUI-btn-sm CUI-btn-primary">' + o + '</button>';
+        } else {
+            t += '<button class="CUI-btn CUI-btn-sm CUI-btn-secondary" onclick="changePage(' + o + ')">' + o + '</button>';
+        }
+    }
+
+    if (i < n) {
+        if (i < n - 1) {
+            t += '<span class="CUI-text-muted">...</span>';
+        }
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-secondary" onclick="changePage(' + n + ')">' + n + '</button>';
+    }
+
+    // 下一页按钮
+    if (currentPage === n) {
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-disabled">下一页</button>';
+    } else {
+        t += '<button class="CUI-btn CUI-btn-sm CUI-btn-secondary" onclick="changePage(' + (currentPage + 1) + ')">下一页</button>';
+    }
+
+    t += '</div>';
+    e.innerHTML = t;
+}
+
+function changePage(p) {
+    currentPage = p;
+    U();
+    updatePagination();
+}
+
+// 立即初始化
+M();
 </script>
 </body>
 </html>

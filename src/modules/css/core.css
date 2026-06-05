@@ -1,20 +1,19 @@
 /* 
  * Casting UI Framework
- * Version: 0.3.0
+ * Version: 0.4.0
  * Module: core.css
  * Description: 核心样式，包含CSS变量和基础样式
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */
 
-/* CSS变量定义 */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap');
+
 :root {
-    /* 主色系 */
     --primary-color: #222021;
     --primary-hover: #171617;
     --primary-active: #0C0C0C;
     
-    /* 中性灰 */
     --gray-100: #F7F5F6;
     --gray-200: #E9E5E7;
     --gray-300: #D1C9CD;
@@ -23,175 +22,424 @@
     --gray-600: #6E646A;
     --gray-700: #4D454A;
     
-    /* 功能色 */
     --success-color: #66BB6A;
     --warning-color: #FFA726;
     --error-color: #C2185B;
     --info-color: #7986CB;
     
-    /* 背景色 */
     --bg-color: #FAFAFA;
     --bg-gray: #F7F5F6;
     
-    /* 边框色 */
     --border-color: #E9E5E7;
     --border-hover: #D1C9CD;
     
-    /* 文本色 */
     --text-primary: #222021;
     --text-secondary: #6E646A;
     --text-light: #8F8389;
     --text-disabled: #B0A6AB;
     
-    /* 字体 */
     --font-serif: "Noto Serif SC", "SimSun", "STSong", "宋体", Georgia, serif;
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --font-mono: "SF Mono", Menlo, Monaco, PingFang SC, Microsoft YaHei Mono, monospace;
+    
+    --font-display: "Playfair Display", "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+    --font-display-alt: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+    --font-body: "Inter", "Noto Serif SC", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-code: "JetBrains Mono", "SF Mono", monospace;
+    
+    --font-weight-hairline: 300;
+    --font-weight-light: 300;
     --font-weight-body: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
     --font-weight-title: 900;
-    --font-size-body: 14px;
-    --font-size-title: 20px;
     
-    /* 尺寸 */
-    --size-xs: 4px;
-    --size-sm: 8px;
-    --size-md: 16px;
-    --size-lg: 24px;
-    --size-xl: 32px;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --font-size-body: clamp(0.875rem, 0.2vw + 0.8rem, 1rem); /* Body: 14px ~ 16px */
+    --text-lg: clamp(0.875rem, 0.25vw + 0.8rem, 1.125rem); /* H6: 14px ~ 18px */
+    --text-xl: clamp(1rem, 0.5vw + 0.8rem, 1.25rem); /* H5: 16px ~ 20px */
+    --text-2xl: clamp(1.125rem, 1vw + 0.8rem, 1.5rem); /* H4: 18px ~ 24px */
+    --text-3xl: clamp(1.25rem, 1.5vw + 0.8rem, 1.875rem); /* H3: 20px ~ 30px */
+    --text-4xl: clamp(1.5rem, 1.5vw + 1rem, 2.25rem);
+    --font-size-title: clamp(1.5rem, 2vw + 1rem, 2.5rem); /* H2: 24px ~ 40px */
+    --text-6xl: clamp(1.75rem, 2.5vw + 1rem, 3rem);
+    --text-7xl: clamp(2rem, 3vw + 1rem, 3.5rem);          /* H1: 32px ~ 56px */
+    --text-8xl: clamp(2.5rem, 4vw + 1rem, 4.5rem);
     
-    /* 圆角 */
+    --leading-tight: 1.05;
+    --leading-snug: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    --leading-body: 1.85;
+    --leading-loose: 2;
+    --leading-display: 1.05;
+    --leading-wide: 2.1;
+    
+    --tracking-tight: -0.05em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.02em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+    --tracking-display: -0.02em;
+    --tracking-caption: 0.15em;
+    --tracking-headline: -0.01em;
+    
+    --size-xs: 0.25rem;
+    --size-sm: 0.5rem;
+    --size-md: 1rem;
+    --size-lg: 1.5rem;
+    --size-xl: 2rem;
+    --size-2xl: 2.5rem;
+    --size-3xl: 3rem;
+    --size-4xl: 4rem;
+    --size-5xl: 5rem;
+    --size-6xl: 6rem;
+    
+    --radius-none: 0;
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
+    --radius-xl: 16px;
     --radius-full: 9999px;
     
-    /* 阴影 */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-none: none;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 24px 60px rgba(0, 0, 0, 0.12);
     
-    /* 过渡 */
-    --transition-fast: 0.15s ease;
-    --transition-normal: 0.3s ease;
-    --transition-slow: 0.5s ease;
+    --transition-fast: 120ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-normal: 220ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-slow: 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     
-    /* 布局相关变量 */
+    --blur-sm: 4px;
+    --blur-md: 8px;
+    --blur-lg: 16px;
+    
+    --z-index-base: 1;
+    --z-index-dropdown: 100;
+    --z-index-sticky: 200;
+    --z-index-modal: 300;
+    --z-index-toast: 400;
+    
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    
     --main-padding: 20px;
     
-    /* 网页布局 */
     --web-header-height: 120px;
     --web-footer-height: 50px;
     --web-sidebar-left-width: 200px;
     --web-sidebar-right-width: 200px;
     --web-main-max-width: 1000px;
     
-    /* 应用壳布局 App Shell */
     --shell-header-height: 60px;
     --shell-footer-height: 50px;
     --shell-sidebar-left-width: 220px;
     --shell-sidebar-right-width: 220px;
-    
 
 }
 
-/* 基础样式重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 正文ul和li样式 */
-ul, ol {
-    margin-left: var(--size-lg);
-    margin-bottom: var(--size-md);
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
-li {
-    margin-bottom: var(--size-xs);
-}
-
-/* 嵌套列表缩进 */
-ul ul, ol ul, ul ol, ol ol {
-    margin-left: var(--size-md);
-    margin-bottom: var(--size-xs);
-}
-
-/* 字体样式 */
 body {
     margin: 0;
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-body);
-    line-height: 1.8;
-    letter-spacing: 0.8px;
-    color: #333;
+    line-height: var(--leading-body);
+    color: var(--text-primary);
     background-color: var(--bg-gray);
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "tnum" 1;
+    overflow-x: hidden;
 }
 
-/* 标题样式 - 基础定义 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.015) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 100%, rgba(0, 0, 0, 0.01) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin-top: var(--size-lg);
-    font-family: var(--font-serif);
-    line-height: 1;
-    letter-spacing: 1px;
+    font-family: var(--font-display);
+    font-weight: 300; /* 极致精细纤美，呈现雕刻高贵感 */
+    line-height: var(--leading-display);
+    letter-spacing: -0.02em; /* 略微收紧字距，防大字松散 */
     color: var(--primary-color);
-    margin-bottom: var(--size-md);
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
+    text-wrap: balance; /* 自动平衡折行 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     vertical-align: bottom;
 }
+
 header h1 {
     margin: 0 0 0 0 !important;
 }
 
-/* 标题尺寸 - 仅在非section/subtitle上下文中生效 */
-:not(.section):not(.section-subtitle) > h1 { font-size: 28px; font-weight: 900; }
-:not(.section):not(.section-subtitle) > h2 { font-size: 24px; font-weight: 700; }
-:not(.section):not(.section-subtitle) > h3 { font-size: 20px; font-weight: 700; }
-:not(.section):not(.section-subtitle) > h4 { font-size: 18px; font-weight: 700; }
-:not(.section):not(.section-subtitle) > h5 { font-size: 16px; font-weight: 700; }
-:not(.section):not(.section-subtitle) > h6 { font-size: 14px; font-weight: 700; }
+:not(.section):not(.section-subtitle) > h1 { font-size: var(--text-7xl); font-weight: 300; text-align: center; margin-bottom: var(--size-3xl); }
+:not(.section):not(.section-subtitle) > h2 { font-size: var(--font-size-title); font-weight: 300; margin-bottom: var(--size-xl); padding-bottom: var(--size-md); border-bottom: 1px solid var(--border-color); }
+:not(.section):not(.section-subtitle) > h3 { font-size: var(--text-3xl); font-weight: 400; margin-bottom: var(--size-lg); }
+:not(.section):not(.section-subtitle) > h4 { font-size: var(--text-2xl); font-weight: 400; margin-bottom: var(--size-lg); }
+:not(.section):not(.section-subtitle) > h5 { font-size: var(--text-xl); font-weight: 500; margin-bottom: var(--size-md); }
+:not(.section):not(.section-subtitle) > h6 { font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--size-md); text-transform: uppercase; letter-spacing: var(--tracking-caption); }
 
-/* 低分辨率屏幕适配 */
+p {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--leading-body);
+    color: var(--text-secondary);
+    margin-bottom: var(--size-lg);
+    max-width: 72ch; /* 锁定黄金阅读宽度，防止宽屏阅读疲劳 */
+    text-align: justify;
+    text-justify: inter-character;
+}
+
+ul, ol {
+    margin-left: var(--size-xl);
+    margin-bottom: var(--size-lg);
+    max-width: 72ch; /* 列表同步锁定黄金阅读宽度 */
+}
+
+li {
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: var(--leading-body);
+    color: var(--text-secondary);
+    margin-bottom: var(--size-sm);
+}
+
+ul ul, ol ul, ul ol, ol ol {
+    margin-left: var(--size-lg);
+    margin-bottom: var(--size-xs);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-underline-offset: 0.25em; /* 尊贵间距链接下滑线 */
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--border-hover);
+    transition: text-decoration-color var(--transition-normal), color var(--transition-normal);
+}
+
+a:hover {
+    text-decoration-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+/* 🏷️ 杂志级 Kicker 眉标（主标题上方的紧致全大写导引标签） */
+.CUI-kicker {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em; /* 极致宽间距 */
+    color: var(--text-light);
+    margin-bottom: var(--size-sm);
+    display: block;
+}
+
+/* 🖋️ 杂志大首字下沉工具类 */
+.CUI-drop-cap::first-letter {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 5vw, 4.8rem);
+    font-weight: 300;
+    float: left;
+    line-height: 0.85;
+    margin-top: 0.08em;
+    margin-right: 0.12em;
+    color: var(--primary-color);
+}
+
+strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+em {
+    font-style: italic;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: var(--size-3xl) 0;
+}
+
+figure {
+    margin: 0;
+    display: block;
+}
+
+figure img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+figure img:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+figcaption {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-style: italic;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: var(--size-md);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+code {
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    background-color: var(--bg-gray);
+    padding: 0.2em 0.4em;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+}
+
+pre {
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    background-color: var(--gray-700);
+    color: #ffffff;
+    padding: var(--size-lg);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin-bottom: var(--size-lg);
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+mark {
+    background-color: rgba(255, 255, 0, 0.3);
+    padding: 0.1em 0.2em;
+}
+
+blockquote {
+    font-family: var(--font-display-alt);
+    font-size: var(--text-xl);
+    font-style: italic;
+    font-weight: var(--font-weight-light);
+    line-height: var(--leading-wide);
+    color: var(--text-secondary);
+    margin: var(--size-3xl) 0;
+    padding: var(--size-xl) var(--size-lg);
+    border-left: 3px solid var(--primary-color);
+    background-color: var(--bg-gray);
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+blockquote::before {
+    content: open-quote;
+    font-size: 3em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+    color: var(--text-light);
+}
+
+blockquote cite {
+    display: block;
+    margin-top: var(--size-md);
+    font-size: var(--text-sm);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-light);
+    letter-spacing: var(--tracking-wide);
+}
+
 @media (max-resolution: 192dpi) {
     :root {
         --font-weight-body: 600;
         --font-weight-title: 700;
-        --font-size-body: 15px;
-        --font-size-title: 21px;
     }
 }
 
-/* 高分辨率屏幕适配 */
 @media (min-resolution: 220dpi) {
     :root {
         --font-weight-body: 400;
         --font-weight-title: 600;
-        --font-size-body: 14px;
-        --font-size-title: 20px;
     }
 }
 
-/* 思源宋体加载失败兜底 */
 @supports not (font-family: "Noto Serif SC") {
     :root {
         --font-weight-body: 400;
         --font-weight-title: 600;
-        --font-size-body: 14px;
-        --font-size-title: 20px;
     }
     
     body {
         font-weight: 400;
-        font-size: 14px;
     }
     
     h1, h2, h3, h4, h5, h6 {
         font-weight: 600;
     }
+}
+
+@media (max-width: 1024px) {
+    :not(.section):not(.section-subtitle) > h1 { font-size: var(--text-5xl); }
+    :not(.section):not(.section-subtitle) > h2 { font-size: var(--text-4xl); }
+}
+
+@media (max-width: 768px) {
+    :not(.section):not(.section-subtitle) > h1 { font-size: var(--text-4xl); margin-bottom: var(--size-xl); }
+    :not(.section):not(.section-subtitle) > h2 { font-size: var(--text-3xl); margin-bottom: var(--size-lg); }
+    :not(.section):not(.section-subtitle) > h3 { font-size: var(--text-2xl); }
+    
+    p {
+        font-size: var(--text-sm);
+        line-height: var(--leading-relaxed);
+    }
+}
+
+@media (max-width: 640px) {
+    :not(.section):not(.section-subtitle) > h1 { font-size: var(--text-3xl); }
+    :not(.section):not(.section-subtitle) > h2 { font-size: var(--text-2xl); }
 }

@@ -5,15 +5,15 @@
     <h3>基础弹窗</h3>
     <div class="CUI-box">
         <p>点击下方按钮查看弹窗效果：</p>
-        <button class="btn btn-primary" onclick="showModal({title: '信息弹窗', content: '这是一个信息弹窗示例', buttons: [{ text: '关闭', type: 'secondary' }]})">显示信息弹窗</button>
+        <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '信息弹窗', content: '这是一个信息弹窗示例', buttons: [{ text: '关闭', type: 'secondary' }]})">显示信息弹窗</button>
     </div>
-    <pre><code>&lt;button class="btn btn-primary" onclick="showModal({title: '信息弹窗', content: '这是一个信息弹窗示例', buttons: [{ text: '关闭', type: 'secondary' }]})"&gt;显示信息弹窗&lt;/button&gt;</code></pre>
+    <pre><code class="language-html">&lt;button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '信息弹窗', content: '这是一个信息弹窗示例', buttons: [{ text: '关闭', type: 'secondary' }]})"&gt;显示信息弹窗&lt;/button&gt;</code></pre>
 
     <h3>确认弹窗</h3>
     <div class="CUI-box">
-        <button class="btn btn-primary" onclick="showModal({title: '确认操作', content: '确定要执行此操作吗？', buttons: [{ text: '取消', type: 'secondary' }, { text: '确定', type: 'primary' }]})">显示确认弹窗</button>
+        <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '确认操作', content: '确定要执行此操作吗？', buttons: [{ text: '取消', type: 'secondary' }, { text: '确定', type: 'primary' }]})">显示确认弹窗</button>
     </div>
-    <pre><code>showModal({
+    <pre><code class="language-js">showModal({
     title: '确认操作',
     content: '确定要执行此操作吗？',
     buttons: [
@@ -25,18 +25,18 @@
     <h3>不同位置的弹窗</h3>
     <div class="CUI-box">
         <div class="CUI-grid CUI-grid-4c">
-            <button class="btn btn-primary" onclick="showModal({title: '顶部弹窗', content: '这是一个顶部弹窗示例', position: 'top'})">顶部弹窗</button>
-            <button class="btn btn-primary" onclick="showModal({title: '底部弹窗', content: '这是一个底部弹窗示例', position: 'bottom'})">底部弹窗</button>
-            <button class="btn btn-primary" onclick="showModal({title: '左侧弹窗', content: '这是一个左侧弹窗示例', position: 'left'})">左侧弹窗</button>
-            <button class="btn btn-primary" onclick="showModal({title: '右侧弹窗', content: '这是一个右侧弹窗示例', position: 'right'})">右侧弹窗</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '顶部弹窗', content: '这是一个顶部弹窗示例', position: 'top'})">顶部弹窗</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '底部弹窗', content: '这是一个底部弹窗示例', position: 'bottom'})">底部弹窗</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '左侧弹窗', content: '这是一个左侧弹窗示例', position: 'left'})">左侧弹窗</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '右侧弹窗', content: '这是一个右侧弹窗示例', position: 'right'})">右侧弹窗</button>
         </div>
     </div>
 
     <h3>带输入框的弹窗</h3>
     <div class="CUI-box">
-        <button class="btn btn-primary" onclick="showModal({title: '用户信息', content: '请输入以下信息：', buttons: [{ text: '取消', type: 'secondary' }, { text: '提交', type: 'primary' }], inputs: [{ label: '姓名', name: 'name', placeholder: '请输入姓名' }, { label: '邮箱', name: 'email', type: 'email', placeholder: '请输入邮箱' }]})">带输入框的弹窗</button>
+        <button class="CUI-btn CUI-btn-primary" onclick="showModal({title: '用户信息', content: '请输入以下信息：', buttons: [{ text: '取消', type: 'secondary' }, { text: '提交', type: 'primary' }], inputs: [{ label: '姓名', name: 'name', placeholder: '请输入姓名' }, { label: '邮箱', name: 'email', type: 'email', placeholder: '请输入邮箱' }]})">带输入框的弹窗</button>
     </div>
-    <pre><code>showModal({
+    <pre><code class="language-js">showModal({
     title: '用户信息',
     content: '请输入以下信息：',
     buttons: [
@@ -52,19 +52,19 @@
     <h3>按钮类型</h3>
     <div class="CUI-box">
         <div class="CUI-grid CUI-grid-4c">
-            <button class="btn btn-primary">btn-primary</button>
-            <button class="btn btn-secondary">btn-secondary</button>
-            <button class="btn btn-text">btn-text</button>
-            <button class="btn btn-icon">Icon</button>
+            <button class="CUI-btn CUI-btn-primary">btn-primary</button>
+            <button class="CUI-btn CUI-btn-secondary">btn-secondary</button>
+            <button class="CUI-btn CUI-btn-text">btn-text</button>
+            <button class="CUI-btn CUI-btn-icon">Icon</button>
         </div>
     </div>
 
     <h3>按钮尺寸</h3>
     <div class="CUI-box">
         <div class="CUI-grid CUI-grid-3c">
-            <button class="btn btn-primary btn-sm">btn-sm</button>
-            <button class="btn btn-primary btn-md">btn-md</button>
-            <button class="btn btn-primary btn-lg">btn-lg</button>
+            <button class="CUI-btn CUI-btn-primary CUI-btn-sm">btn-sm</button>
+            <button class="CUI-btn CUI-btn-primary CUI-btn-md">btn-md</button>
+            <button class="CUI-btn CUI-btn-primary CUI-btn-lg">btn-lg</button>
         </div>
     </div>
 </section>

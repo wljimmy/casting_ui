@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题管理器测试 | Casting UI</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/theme-manager.css">
+</head>
+<body>
+    <div class="CUI-container" style="padding: 40px;">
+        <h1>Casting UI - 主题管理器测试</h1>
+        <p class="CUI-text-muted">测试主题管理器的各项功能</p>
+
+        <hr>
+
+        <!-- ==================== 1. 基础功能测试 ==================== -->
+        <h2>1. 基础功能测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-12c">
+                <div class="CUI-span-4c">
+                    <button class="CUI-btn CUI-btn-primary" onclick="testInit()">初始化</button>
+                </div>
+                <div class="CUI-span-4c">
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetCurrentTheme()">获取当前主题</button>
+                </div>
+                <div class="CUI-span-4c">
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetThemes()">获取主题列表</button>
+                </div>
+            </div>
+            <div id="result-basic" class="CUI-text-muted CUI-mt-md"></div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 2. 主题切换测试 ==================== -->
+        <h2>2. 主题切换测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-4c CUI-gap-md">
+                <button class="CUI-btn" onclick="applyTheme('极简高级蓝')">极简高级蓝</button>
+                <button class="CUI-btn" onclick="applyTheme('莫兰迪粉棕')">莫兰迪粉棕</button>
+                <button class="CUI-btn" onclick="applyTheme('轻奢黑金')">轻奢黑金</button>
+                <button class="CUI-btn" onclick="applyTheme('墨黑酒红')">墨黑酒红</button>
+                <button class="CUI-btn" onclick="applyTheme('清新薄荷')">清新薄荷</button>
+                <button class="CUI-btn" onclick="applyTheme('海洋深蓝')">海洋深蓝</button>
+                <button class="CUI-btn" onclick="applyTheme('森林绿意')">森林绿意</button>
+                <button class="CUI-btn" onclick="applyTheme('日落橙红')">日落橙红</button>
+            </div>
+            <div id="result-theme" class="CUI-text-muted CUI-mt-md"></div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 3. 自定义主题测试 ==================== -->
+        <h2>3. 自定义主题测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-12c CUI-gap-md">
+                <div class="CUI-span-6c">
+                    <input type="text" id="customThemeName" class="CUI-input" placeholder="主题名称">
+                </div>
+                <div class="CUI-span-3c">
+                    <input type="color" id="customThemeColor" class="CUI-input" value="#165DFF">
+                </div>
+                <div class="CUI-span-3c">
+                    <button class="CUI-btn CUI-btn-primary" onclick="testAddTheme()">添加主题</button>
+                </div>
+            </div>
+            <div id="result-custom" class="CUI-text-muted CUI-mt-md"></div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 4. 主题选择器测试 ==================== -->
+        <h2>4. 主题选择器测试</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-primary" onclick="openThemeSelector()">打开主题选择器</button>
+            <div id="result-selector" class="CUI-text-muted CUI-mt-md"></div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 5. 事件监听测试 ==================== -->
+        <h2>5. 事件监听测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-12c">
+                <div class="CUI-span-6c">
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testEventListen()">注册事件监听</button>
+                </div>
+                <div class="CUI-span-6c">
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testEventClear()">清空事件日志</button>
+                </div>
+            </div>
+            <pre id="event-log" class="CUI-p-md CUI-bg-gray-100 CUI-radius-md CUI-overflow-auto" style="max-height: 200px; margin-top: 16px;"></pre>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 6. 主题统计 ==================== -->
+        <h2>6. 主题统计</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-3c">
+                <div class="CUI-card">
+                    <h3 id="stat-total">0</h3>
+                    <p>主题总数</p>
+                </div>
+                <div class="CUI-card">
+                    <h3 id="stat-presets">0</h3>
+                    <p>预设主题</p>
+                </div>
+                <div class="CUI-card">
+                    <h3 id="stat-custom">0</h3>
+                    <p>自定义主题</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 7. 组件预览 ==================== -->
+        <h2>7. 组件预览</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-2c CUI-gap-lg">
+                <div>
+                    <h3>标题层级</h3>
+                    <h1>一级标题</h1>
+                    <h2>二级标题</h2>
+                    <h3>三级标题</h3>
+                    <h4>四级标题</h4>
+                </div>
+                <div>
+                    <h3>按钮样式</h3>
+                    <button class="CUI-btn CUI-btn-primary">主要按钮</button>
+                    <button class="CUI-btn CUI-btn-secondary">次要按钮</button>
+                    <button class="CUI-btn">普通按钮</button>
+                    <button class="CUI-btn" disabled>禁用按钮</button>
+                </div>
+                <div>
+                    <h3>标签样式</h3>
+                    <span class="CUI-tag">普通标签</span>
+                    <span class="CUI-tag CUI-tag-primary">主要标签</span>
+                    <span class="CUI-tag CUI-tag-success">成功标签</span>
+                    <span class="CUI-tag CUI-tag-warning">警告标签</span>
+                    <span class="CUI-tag CUI-tag-error">错误标签</span>
+                </div>
+                <div>
+                    <h3>文本颜色</h3>
+                    <p class="CUI-text-primary">主要文本</p>
+                    <p class="CUI-text-secondary">次要文本</p>
+                    <p class="CUI-text-muted">辅助文本</p>
+                    <p class="CUI-text-disabled">禁用文本</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 8. 当前主题信息 ==================== -->
+        <h2>8. 当前主题信息</h2>
+        <div class="CUI-box">
+            <table class="CUI-table">
+                <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>主题名称</td>
+                        <td id="info-name">-</td>
+                    </tr>
+                    <tr>
+                        <td>描述</td>
+                        <td id="info-desc">-</td>
+                    </tr>
+                    <tr>
+                        <td>是否预设</td>
+                        <td id="info-default">-</td>
+                    </tr>
+                    <tr>
+                        <td>主色调</td>
+                        <td><span id="info-primary" style="display: inline-block; width: 32px; height: 32px; border-radius: 4px;"></span></td>
+                    </tr>
+                    <tr>
+                        <td>背景色</td>
+                        <td><span id="info-bg" style="display: inline-block; width: 32px; height: 32px; border-radius: 4px;"></span></td>
+                    </tr>
+                    <tr>
+                        <td>文本色</td>
+                        <td><span id="info-text" style="display: inline-block; width: 32px; height: 32px; border-radius: 4px;"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { ThemeManager } from '/modules/js/theme-manager.js';
+        
+        const themeManager = new ThemeManager();
+        let eventLog = [];
+
+        async function init() {
+            await themeManager.init();
+            updateStats();
+            updateThemeInfo();
+        }
+
+        function logEvent(msg) {
+            eventLog.unshift(`[${new Date().toLocaleTimeString()}] ${msg}`);
+            if (eventLog.length > 20) eventLog.pop();
+            document.getElementById('event-log').textContent = eventLog.join('\n');
+        }
+
+        async function testInit() {
+            try {
+                await themeManager.init();
+                document.getElementById('result-basic').textContent = '初始化成功！';
+                updateStats();
+                updateThemeInfo();
+            } catch (e) {
+                document.getElementById('result-basic').textContent = '初始化失败: ' + e.message;
+            }
+        }
+
+        function testGetCurrentTheme() {
+            const theme = themeManager.getCurrentTheme();
+            if (theme) {
+                document.getElementById('result-basic').textContent = JSON.stringify(theme, null, 2);
+            } else {
+                document.getElementById('result-basic').textContent = '暂无当前主题';
+            }
+        }
+
+        function testGetThemes() {
+            const themes = themeManager.getThemes();
+            document.getElementById('result-basic').textContent = JSON.stringify(themes.map(t => t.name), null, 2);
+        }
+
+        async function applyTheme(name) {
+            try {
+                const themes = themeManager.getThemes();
+                const theme = themes.find(t => t.name === name);
+                if (theme) {
+                    await themeManager.applyTheme(theme);
+                    document.getElementById('result-theme').textContent = '已应用主题: ' + name;
+                    updateThemeInfo();
+                    updateStats();
+                } else {
+                    document.getElementById('result-theme').textContent = '未找到主题: ' + name;
+                }
+            } catch (e) {
+                document.getElementById('result-theme').textContent = '切换失败: ' + e.message;
+            }
+        }
+
+        async function testAddTheme() {
+            const name = document.getElementById('customThemeName').value;
+            const color = document.getElementById('customThemeColor').value;
+            
+            if (!name) {
+                document.getElementById('result-custom').textContent = '请输入主题名称';
+                return;
+            }
+
+            const newTheme = {
+                name: name,
+                description: '自定义主题',
+                isDefault: false,
+                colors: {
+                    'primary-color': color,
+                    'bg-color': '#FFFFFF',
+                    'text-primary': '#212529',
+                    'text-secondary': '#495057',
+                    'text-light': '#868E96',
+                    'text-disabled': '#ADB5BD',
+                    'border-color': '#E9ECEF',
+                    'gray-100': '#F8F9FA',
+                    'gray-200': '#E9ECEF',
+                    'gray-300': '#DEE2E6',
+                    'success-color': '#5CAC49',
+                    'warning-color': '#D89F42',
+                    'error-color': '#E06666',
+                    'info-color': '#868E96'
+                }
+            };
+
+            try {
+                await themeManager.addTheme(newTheme);
+                document.getElementById('result-custom').textContent = '已添加自定义主题: ' + name;
+                document.getElementById('customThemeName').value = '';
+                updateStats();
+            } catch (e) {
+                document.getElementById('result-custom').textContent = '添加失败: ' + e.message;
+            }
+        }
+
+        async function openThemeSelector() {
+            try {
+                const theme = await themeManager.openThemeSelector();
+                document.getElementById('result-selector').textContent = '已选择主题: ' + theme.name;
+                updateThemeInfo();
+                updateStats();
+            } catch (e) {
+                document.getElementById('result-selector').textContent = '用户取消选择';
+            }
+        }
+
+        function testEventListen() {
+            themeManager.on('themeChanged', (theme) => {
+                logEvent('themeChanged: ' + theme.name);
+            });
+
+            themeManager.on('themeAdded', (theme) => {
+                logEvent('themeAdded: ' + theme.name);
+            });
+
+            themeManager.on('themeUpdated', (theme) => {
+                logEvent('themeUpdated: ' + theme.name);
+            });
+
+            themeManager.on('themeDeleted', (theme) => {
+                logEvent('themeDeleted: ' + theme.name);
+            });
+
+            logEvent('事件监听器已注册');
+        }
+
+        function testEventClear() {
+            eventLog = [];
+            document.getElementById('event-log').textContent = '';
+        }
+
+        function updateStats() {
+            const themes = themeManager.getThemes();
+            const presets = themes.filter(t => t.isDefault);
+            const custom = themes.filter(t => !t.isDefault);
+            
+            document.getElementById('stat-total').textContent = themes.length;
+            document.getElementById('stat-presets').textContent = presets.length;
+            document.getElementById('stat-custom').textContent = custom.length;
+        }
+
+        function updateThemeInfo() {
+            const theme = themeManager.getCurrentTheme();
+            if (theme) {
+                document.getElementById('info-name').textContent = theme.name;
+                document.getElementById('info-desc').textContent = theme.description || '无描述';
+                document.getElementById('info-default').textContent = theme.isDefault ? '是' : '否';
+                document.getElementById('info-primary').style.backgroundColor = theme.colors['primary-color'];
+                document.getElementById('info-bg').style.backgroundColor = theme.colors['bg-color'];
+                document.getElementById('info-text').style.backgroundColor = theme.colors['text-primary'];
+            }
+        }
+
+        window.testInit = testInit;
+        window.testGetCurrentTheme = testGetCurrentTheme;
+        window.testGetThemes = testGetThemes;
+        window.applyTheme = applyTheme;
+        window.testAddTheme = testAddTheme;
+        window.openThemeSelector = openThemeSelector;
+        window.testEventListen = testEventListen;
+        window.testEventClear = testEventClear;
+
+        init();
+    </script>
+</body>
+</html>

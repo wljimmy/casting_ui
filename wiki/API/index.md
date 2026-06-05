@@ -15,6 +15,8 @@ CUI.message    // 消息提示
 CUI.modal      // 弹窗
 CUI.ColorPicker // 颜色选择器
 CUI.openColorPicker // 打开颜色选择器
+CUI.scheduler  // 全局生命周期调度器实例
+CUI.registerModule // 注册功能模块的统一 API 方法
 ```
 
 ### window.CastingDOMObserver
@@ -112,6 +114,7 @@ ui.getColorPicker()
 
 ## 详细文档
 
+- [LifecycleScheduler API](../Core/LifecycleScheduler.md) - 全局生命周期时序调度与沙箱容灾隔离详细文档
 - [DOMObserver API](../Core/DOMObserver.md) - DOM 观察者详细文档
 - [ColorPicker API](../Core/ColorPicker.md) - 颜色选择器详细文档
 - [ThemeManager API](../Core/ThemeManager.md) - 主题管理器详细文档

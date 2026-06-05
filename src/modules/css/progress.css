@@ -88,19 +88,19 @@
 }
 
 /* 进度条颜色 */
-.CUI-progress-bar.success {
+.CUI-progress-bar.CUI-text-success {
     background-color: var(--success-color);
 }
 
-.CUI-progress-bar.warning {
+.CUI-progress-bar.CUI-text-warning {
     background-color: var(--warning-color);
 }
 
-.CUI-progress-bar.error {
+.CUI-progress-bar.CUI-text-error {
     background-color: var(--error-color);
 }
 
-.CUI-progress-bar.info {
+.CUI-progress-bar.CUI-text-info {
     background-color: var(--info-color);
 }
 

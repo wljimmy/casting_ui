@@ -15,7 +15,7 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
         <div>
             <h2>1. 侧边栏菜单 (menu-sidebar)</h2>
-            <menu id="menu-sidebar-demo" class="menu-sidebar menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <menu id="menu-sidebar-demo" class="CUI-menu-sidebar CUI-menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md);">
                 <ul>
                     <li data-icon="outline/home.svg" data-badge="new">首页</li>
                     <li data-icon="outline/package.svg">产品
@@ -34,7 +34,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-divider"></li>
+                    <li class="CUI-menu-divider"></li>
                     <li data-icon="outline/settings.svg" data-action='{"url":"init-guide/index.html","container":"#content-demo","callback":"onPageLoaded"}'>设置</li>
                 </ul>
             </menu>
@@ -51,9 +51,9 @@
     <div style="margin-bottom: 40px;">
         <h2>3. 多个独立菜单实例</h2>
         <div style="display: flex; gap: 40px;">
-            <menu id="menu-inline-1" class="menu-inline menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+            <menu id="menu-inline-1" class="CUI-menu-inline CUI-menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
                 <ul>
-                    <li class="menu-active">菜单1 - 选项1</li>
+                    <li class="CUI-menu-active">菜单1 - 选项1</li>
                     <li>菜单1 - 选项2
                         <ul>
                             <li>子选项A</li>
@@ -63,10 +63,10 @@
                 </ul>
             </menu>
 
-            <menu id="menu-inline-2" class="menu-inline menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+            <menu id="menu-inline-2" class="CUI-menu-inline CUI-menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
                 <ul>
                     <li>菜单2 - 选项1</li>
-                    <li class="menu-active">菜单2 - 选项2
+                    <li class="CUI-menu-active">菜单2 - 选项2
                         <ul>
                             <li>子选项X</li>
                             <li>子选项Y</li>
@@ -82,7 +82,7 @@
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <div>
                 <h3>基础动画 (menu-animate)</h3>
-                <menu class="menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                <menu class="CUI-menu-animate" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
                     <ul>
                         <li>选项1
                             <ul>
@@ -95,7 +95,7 @@
             </div>
             <div>
                 <h3>淡入淡出 (menu-animate-fade)</h3>
-                <menu class="menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                <menu class="CUI-menu-animate-fade" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
                     <ul>
                         <li>选项1
                             <ul>
@@ -108,7 +108,7 @@
             </div>
             <div>
                 <h3>滑入滑出 (menu-animate-slide)</h3>
-                <menu class="menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
+                <menu class="CUI-menu-animate-slide" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; width: 200px;">
                     <ul>
                         <li>选项1
                             <ul>
@@ -136,8 +136,8 @@
     <div style="margin-bottom: 40px;">
         <h2>6. JS API 调用模式</h2>
         <div style="margin-bottom: 20px;">
-            <button class="btn btn-primary" onclick="createDynamicMenu()">动态创建菜单</button>
-            <button class="btn btn-secondary" onclick="destroyDynamicMenu()">销毁菜单</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="createDynamicMenu()">动态创建菜单</button>
+            <button class="CUI-btn CUI-btn-secondary" onclick="destroyDynamicMenu()">销毁菜单</button>
         </div>
         <div id="dynamic-menu-container" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; min-height: 200px;">
             <p>点击上方按钮，通过 JS API 动态创建菜单</p>
@@ -171,7 +171,7 @@
         </ul>
 
         <h3>标准写法示例</h3>
-        <pre><code>&lt;menu id="*" class="menu-sidebar"&gt;
+        <pre><code>&lt;menu id="*" class="CUI-menu-sidebar"&gt;
   &lt;ul&gt;
     &lt;li data-icon="*" data-badge="*" data-action="*"&gt;主菜单内容&lt;/li&gt;
     &lt;li&gt;

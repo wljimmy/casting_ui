@@ -4,10 +4,11 @@
  * Module: modal.js
  * Description: 弹窗模块，提供模态框功能
  * Copyright (c) 2026 Bingo工作室
+ * @dependency: core, overlay
  * Email: wljimmy@hotmail.com
  */
 
-import { debug, showOverlay, hideOverlay } from './core.js';
+import { debug } from './core.js';
 
 // 弹窗函数，返回Promise
 function showModal(options) {
@@ -30,23 +31,24 @@ function showModal(options) {
     return new Promise((resolve, reject) => {
         try {
             // 创建遮罩
-            const overlay = showOverlay({
-                id: overlayId,
+            const overlayObj = window.CUI.overlay({
                 type: config.glass ? 'glass' : 'transparent',
                 zIndex: 1000
             });
+            const overlay = overlayObj.element;
+            overlay.id = overlayId;
             
             // 创建弹窗内容元素
             const modalContent = document.createElement('div');
-            modalContent.className = `modal-content ${config.position ? `modal-${config.position}` : ''}`;
+            modalContent.className = `CUI-modal-content ${config.position ? `CUI-modal-${config.position}` : ''}`;
             
             // 创建输入框HTML
             let inputsHTML = '';
             config.inputs.forEach((input, index) => {
                 inputsHTML += `
-                    <div class="input-group" style="margin-bottom: 12px;">
-                        <label class="input-label">${input.label}</label>
-                        <input type="${input.type || 'text'}" class="input" id="${id}-input-${index}" placeholder="${input.placeholder || ''}" value="${input.value || ''}">
+                    <div class="CUI-input-group" style="margin-bottom: 12px;">
+                        <label class="CUI-input-label">${input.label}</label>
+                        <input type="${input.type || 'text'}" class="CUI-input" id="${id}-input-${index}" placeholder="${input.placeholder || ''}" value="${input.value || ''}">
                     </div>
                 `;
             });
@@ -54,20 +56,20 @@ function showModal(options) {
             // 创建按钮HTML
             let buttonsHTML = '';
             config.buttons.forEach((button, index) => {
-                buttonsHTML += `<button class="btn btn-${button.type}" data-index="${index}">${button.text}</button>`;
+                buttonsHTML += `<button class="CUI-btn CUI-btn-${button.type}" data-index="${index}">${button.text}</button>`;
             });
             
             // 构建弹窗内容
             modalContent.innerHTML = `
-                <div class="modal-header">
-                    <h4 class="modal-title">${config.title}</h4>
-                    <button class="modal-close">&times;</button>
+                <div class="CUI-modal-header">
+                    <h4 class="CUI-modal-title">${config.title}</h4>
+                    <button class="CUI-modal-close">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="CUI-modal-body">
                     <p>${config.content}</p>
                     ${inputsHTML}
                 </div>
-                <div class="modal-footer">
+                <div class="CUI-modal-footer">
                     ${buttonsHTML}
                 </div>
             `;
@@ -75,13 +77,10 @@ function showModal(options) {
             // 添加到遮罩
             overlay.appendChild(modalContent);
             
-            // 显示弹窗
-            setTimeout(() => {
-                overlay.classList.add('show');
-            }, 10);
+            // 显示弹窗 (遮罩内的显示无需再次操作 overlay 的类，因为 Overlay.create 已处理)
             
             // 处理按钮点击
-            const buttons = modalContent.querySelectorAll('.modal-footer button');
+            const buttons = modalContent.querySelectorAll('.CUI-modal-footer button');
             buttons.forEach((button, index) => {
                 button.addEventListener('click', () => {
                     // 收集输入内容
@@ -99,12 +98,11 @@ function showModal(options) {
                         buttonConfig.action();
                     }
                     
-                    // 隐藏遮罩
-                    overlay.classList.remove('show');
+                    // 关闭遮罩
+                    overlayObj.close();
                     
-                    // 动画结束后移除元素并返回结果
+                    // 动画结束后返回结果
                     setTimeout(() => {
-                        hideOverlay(overlayId);
                         resolve({
                             status: 'success',
                             button: buttonConfig,
@@ -115,11 +113,10 @@ function showModal(options) {
             });
             
             // 处理关闭按钮点击
-            const closeButton = modalContent.querySelector('.modal-close');
+            const closeButton = modalContent.querySelector('.CUI-modal-close');
             closeButton.addEventListener('click', () => {
-                overlay.classList.remove('show');
+                overlayObj.close();
                 setTimeout(() => {
-                    hideOverlay(overlayId);
                     resolve({
                         status: 'closed',
                         button: null,
@@ -131,9 +128,8 @@ function showModal(options) {
             // 处理点击遮罩关闭
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) {
-                    overlay.classList.remove('show');
+                    overlayObj.close();
                     setTimeout(() => {
-                        hideOverlay(overlayId);
                         resolve({
                             status: 'closed',
                             button: null,
@@ -155,11 +151,18 @@ function showModal(options) {
 // 导出
 export { showModal };
 
-// 避免全局变量冲突，使用更安全的命名空间
+// 保证命名空间完整
 if (!window.CUI) {
     window.CUI = {};
 }
 
-// 暴露到全局
-window.CUI.showModal = showModal;
+// 注册到全局生命周期调度器，声明对 core, overlay 的强依赖关系
+window.CUI.registerModule('modal', {
+    dependencies: ['core', 'overlay'],
+    stages: {
+        CORE: () => {
+            window.CUI.showModal = showModal;
+        }
+    }
+});
 

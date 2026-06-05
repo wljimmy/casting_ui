@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="/modules/css/text.css">
     <link rel="stylesheet" href="/modules/css/status.css">
     <link rel="stylesheet" href="/modules/css/components.css">
-    <link rel="stylesheet" href="/modules/css/prism/prism.css">
+    <link rel="stylesheet" href="/css/prism/prism.css">
 </head>
 <body class="CUI-page">
     <div class="CUI-wrap">
-        <h1 class="text-serif title">状态栏示例</h1>
+        <h1 class="CUI-text-serif CUI-title">状态栏示例</h1>
 
         <div class="CUI-section">
             <h2>基础状态栏</h2>
@@ -239,14 +239,14 @@
                     <div id="statusItem1" data-type="info">初始状态</div>
                     <div id="statusItem2" data-type="success">就绪</div>
                 </div>
-                <div class="btn-group CUI-m-md">
-                    <button class="btn btn-primary" onclick="updateStatus('info')">设置为正常</button>
-                    <button class="btn btn-warning" onclick="updateStatus('warning')">设置为警告</button>
-                    <button class="btn btn-error" onclick="updateStatus('error')">设置为错误</button>
-                    <button class="btn btn-success" onclick="updateStatus('success')">设置为成功</button>
-                    <button class="btn btn-secondary" onclick="toggleFlash()">切换闪动</button>
-                    <button class="btn btn-secondary" onclick="addStatusItem()">添加状态项</button>
-                    <button class="btn btn-info" onclick="changeColor()">随机颜色</button>
+                <div class="CUI-btn-group CUI-m-md">
+                    <button class="CUI-btn CUI-btn-primary" onclick="updateStatus('info')">设置为正常</button>
+                    <button class="CUI-btn CUI-btn-warning" onclick="updateStatus('warning')">设置为警告</button>
+                    <button class="CUI-btn CUI-btn-error" onclick="updateStatus('error')">设置为错误</button>
+                    <button class="CUI-btn CUI-btn-success" onclick="updateStatus('success')">设置为成功</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="toggleFlash()">切换闪动</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="addStatusItem()">添加状态项</button>
+                    <button class="CUI-btn CUI-btn-info" onclick="changeColor()">随机颜色</button>
                 </div>
             </div>
             <pre><code class="language-javascript">// 更新状态栏类型
@@ -280,7 +280,8 @@ function changeColor() {
         </div>
     </div>
 
-    <script src="/modules/js/prism/prism.js"></script>
+    <script src="/js/prism/prism.js"></script>
+    <script>Prism.highlightAll();</script>
     <script>
         function updateStatus(type) {
             const item = document.getElementById('statusItem1');

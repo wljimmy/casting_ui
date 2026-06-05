@@ -65,12 +65,12 @@ const CUIFormProcessor = {
 
         buttons.forEach(btn => {
             if (!btn.classList.contains('btn')) {
-                btn.classList.add('btn');
+                btn.classList.add("CUI-btn");
             }
             if (btn.type === 'submit' && !btn.classList.contains('btn-primary')) {
-                btn.classList.add('btn-primary');
+                btn.classList.add("CUI-btn-primary");
             } else if (!btn.classList.contains('btn-primary') && !btn.classList.contains('btn-secondary')) {
-                btn.classList.add('btn-secondary');
+                btn.classList.add("CUI-btn-secondary");
             }
             if (btn.parentElement !== actionsContainer) {
                 actionsContainer.appendChild(btn);
@@ -87,15 +87,14 @@ const CUIFormProcessor = {
     }
 };
 
-function initFormProcessor() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => CUIFormProcessor.init());
-    } else {
-        CUIFormProcessor.init();
-    }
-}
-
 window.CUI = window.CUI || {};
 window.CUI.form = CUIFormProcessor;
 
-initFormProcessor();
+// 注册到全局生命周期调度器，在 DOM_REGISTRY 阶段由调度器驱动
+window.CUI.registerModule('form', {
+    stages: {
+        DOM_REGISTRY: () => {
+            CUIFormProcessor.init();
+        }
+    }
+});

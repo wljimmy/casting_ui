@@ -20,71 +20,6 @@ function debug(action, element, details = {}) {
     }
 }
 
-// 遮罩组件
-function createOverlay(options = {}) {
-    const id = options.id || `overlay-${Date.now()}`;
-    const type = options.type || 'transparent'; // transparent 或 glass
-    const zIndex = options.zIndex || 9999;
-    
-    // 检查是否已存在遮罩
-    let overlay = document.getElementById(id);
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = id;
-        overlay.className = `overlay overlay-${type}`;
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: ${zIndex};
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-normal);
-        `;
-        
-        // 添加到body
-        document.body.appendChild(overlay);
-    }
-    
-    return overlay;
-}
-
-// 显示遮罩
-function showOverlay(options = {}) {
-    const overlay = createOverlay(options);
-    
-    // 显示遮罩
-    setTimeout(() => {
-        overlay.style.opacity = '1';
-        overlay.style.visibility = 'visible';
-    }, 10);
-    
-    return overlay;
-}
-
-// 隐藏遮罩
-function hideOverlay(id) {
-    const overlay = document.getElementById(id);
-    if (overlay) {
-        overlay.style.opacity = '0';
-        overlay.style.visibility = 'hidden';
-        
-        // 动画结束后移除元素
-        setTimeout(() => {
-            if (document.getElementById(id)) {
-                document.body.removeChild(overlay);
-            }
-        }, 300);
-    }
-}
-
-
-
 // 弹出机制基类
 class PopupBase {
     constructor() {
@@ -113,28 +48,22 @@ class PopupBase {
     openModal(options = {}) {
         return new Promise((resolve, reject) => {
             try {
-                const overlay = showOverlay({
-                    id: this.getOverlayId(),
+                const overlayObj = window.CUI.overlay({
                     type: 'transparent',
                     zIndex: 1000
                 });
+                const overlayElement = overlayObj.element;
+                // 为了兼容旧版逻辑 依然绑定 id
+                overlayElement.id = this.getOverlayId();
+                this._currentOverlayObj = overlayObj;
 
-                const container = this.createContainer({ ...options, resolve, reject, overlay });
-                overlay.appendChild(container);
+                const container = this.createContainer({ ...options, resolve, reject, overlay: overlayElement });
+                overlayElement.appendChild(container);
 
-                // 显示遮罩
-                setTimeout(() => {
-                    overlay.classList.add('show');
-                }, 10);
-
-                // 处理点击遮罩关闭
-                overlay.addEventListener('click', (e) => {
-                    if (e.target === overlay) {
-                        overlay.classList.remove('show');
-                        setTimeout(() => {
-                            hideOverlay(this.getOverlayId());
-                            reject(this.getCloseReason());
-                        }, 300);
+                overlayElement.addEventListener('click', (e) => {
+                    if (e.target === overlayElement) {
+                        this.close();
+                        reject(this.getCloseReason());
                     }
                 });
 
@@ -242,6 +171,19 @@ class PopupBase {
         return 'Popup toggled';
     }
 
+    close() {
+        if (this._currentOverlayObj) {
+            this._currentOverlayObj.close();
+            this._currentOverlayObj = null;
+        } else {
+            // 降级兼容：如果不是通过新方法创建的
+            const overlay = document.getElementById(this.getOverlayId());
+            if (overlay && overlay.parentNode) {
+                window.CUI.overlay.close(overlay.parentNode);
+            }
+        }
+    }
+
     // 子类需要实现的方法
     createContainer(options) {
         throw new Error('Subclass must implement createContainer method');
@@ -249,17 +191,20 @@ class PopupBase {
 }
 
 // 导出
-export { DEBUG_MODE, debug, createOverlay, showOverlay, hideOverlay, PopupBase };
+export { DEBUG_MODE, debug, PopupBase };
 
-// 避免全局变量冲突，使用更安全的命名空间
+// 保证命名空间完整
 if (!window.CUI) {
     window.CUI = {};
 }
 
-// 暴露到全局
-window.CUI.DEBUG_MODE = DEBUG_MODE;
-window.CUI.debug = debug;
-window.CUI.createOverlay = createOverlay;
-window.CUI.showOverlay = showOverlay;
-window.CUI.hideOverlay = hideOverlay;
-window.CUI.PopupBase = PopupBase;
+// 注册到全局生命周期调度器，并在 CORE 阶段释放核心 API 成员
+window.CUI.registerModule('core', {
+    stages: {
+        CORE: () => {
+            window.CUI.DEBUG_MODE = DEBUG_MODE;
+            window.CUI.debug = debug;
+            window.CUI.PopupBase = PopupBase;
+        }
+    }
+});

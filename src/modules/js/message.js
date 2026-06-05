@@ -21,7 +21,7 @@ function createMessage(options = {}) {
     // 创建消息容器
     const message = document.createElement('div');
     message.id = id;
-    message.className = `message message-${type} message-${position}`;
+    message.className = `CUI-message CUI-message-${type} CUI-message-${position}`;
     message.style.cssText = `
         padding: 16px;
         background-color: var(--gray-100);
@@ -97,7 +97,7 @@ function showToast(type, message, position = 'top') {
     debug('显示Toast', null, { type, message, position });
     // 创建Toast元素
     const toast = document.createElement('div');
-    toast.className = `toast toast-${type} toast-${position}`;
+    toast.className = `CUI-toast CUI-toast-${type} CUI-toast-${position}`;
     toast.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             ${type === 'success' ? '<polyline points="20 6 9 17 4 12"></polyline>' : ''}
@@ -113,12 +113,12 @@ function showToast(type, message, position = 'top') {
     
     // 显示Toast
     setTimeout(() => {
-        toast.classList.add('show');
+        toast.classList.add("CUI-show");
     }, 100);
     
     // 3秒后隐藏并移除
     setTimeout(() => {
-        toast.classList.remove('show');
+        toast.classList.remove("CUI-show");
         setTimeout(() => {
             document.body.removeChild(toast);
         }, 300);
@@ -136,9 +136,9 @@ function showLoading(text = '加载中...') {
         // 创建加载遮罩元素
         loadingOverlay = document.createElement('div');
         loadingOverlay.id = 'loadingOverlay';
-        loadingOverlay.className = 'loading-overlay';
+        loadingOverlay.className = 'CUI-loading-overlay';
         loadingOverlay.style.display = 'none';
-        loadingOverlay.innerHTML = `<div class="loading loading-lg"></div><p style="margin-top: 10px; color: var(--text-primary);">${text}</p>`;
+        loadingOverlay.innerHTML = `<div class="CUI-loading CUI-loading-lg"></div><p style="margin-top: 10px; color: var(--text-primary);">${text}</p>`;
         
         // 添加到body
         document.body.appendChild(loadingOverlay);

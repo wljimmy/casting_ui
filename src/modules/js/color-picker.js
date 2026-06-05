@@ -1,37 +1,143 @@
 /* 
  * Casting UI Framework
- * Version: 0.3.0
+ * Version: 0.7.0
  * Module: color-picker.js
- * Description: 颜色选择器模块，支持多种颜色格式
+ * Description: 颜色选择器模块，使用模板引擎重构
+ * ID策略：所有系统生成的ID使用 CUI-GEN- 前缀 + 随机字符串
  * Copyright (c) 2026 Bingo工作室
+ * @dependency: core, overlay
  * Email: wljimmy@hotmail.com
  */
 
-import { PopupBase, showOverlay, hideOverlay, debug } from './core.js';
+import { PopupBase, debug } from './core.js';
+import { templateEngine } from './template-engine.js';
+import { utils } from './utils.js';
+import { commonTemplates } from './templates/common.tpl.js';
+import { colorPickerTemplates } from './templates/color-picker.tpl.js';
 
-// 颜色选择器类
 class ColorPicker extends PopupBase {
     constructor() {
         super();
+        this.currentHue = 0;
+        this.currentSaturation = 100;
+        this.currentLightness = 50;
+        this._initTemplates();
     }
 
-    init() {
-        // 初始化颜色选择器
+    _initTemplates() {
+        templateEngine.register('popupHeader', commonTemplates.popupHeader);
+        templateEngine.register('popupFooter', commonTemplates.popupFooter);
+        
+        templateEngine.register('colorPickerContainer', colorPickerTemplates.container);
+        templateEngine.register('colorPickerHeader', colorPickerTemplates.header);
+        templateEngine.register('colorPickerHueSlider', colorPickerTemplates.hueSlider);
+        templateEngine.register('colorPickerSaturationCanvas', colorPickerTemplates.saturationCanvas);
+        templateEngine.register('colorPickerBrightnessSlider', colorPickerTemplates.brightnessSlider);
+        templateEngine.register('colorPickerPresets', colorPickerTemplates.presetColors);
+        templateEngine.register('colorPickerInputs', colorPickerTemplates.colorInputs);
+        templateEngine.register('colorPickerFooter', colorPickerTemplates.footer);
     }
 
-    // 打开颜色选择器
+    init() {}
+
     open(options = {}) {
         const presetColors = options.presetColors || [
             '#165DFF', '#67C23A', '#E6A23C', '#F56C6C', '#909399',
             '#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF',
-            '#FFFF00', '#FF00FF', '#00FFFF', '#808080', '#800000'
+            '#FFFF00', '#FF00FF', '#00FFFF', '#808080', '#800000',
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+            '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
         ];
-        const format = options.format || 'hex'; // hex, rgb, rgba
+        const format = options.format || 'hex';
+        const initialColor = options.initialColor || '#165DFF';
 
-        return super.open({ ...options, presetColors, format });
+        this._parseColor(initialColor);
+
+        return super.open({ ...options, presetColors, format, initialColor });
     }
 
-    // 模板方法实现
+    _parseColor(color) {
+        if (color.startsWith('#')) {
+            const hex = color.replace('#', '');
+            const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
+            const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
+            const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
+            const hsl = this._rgbToHsl(r, g, b);
+            this.currentHue = hsl[0];
+            this.currentSaturation = hsl[1];
+            this.currentLightness = hsl[2];
+        } else if (color.startsWith('rgb')) {
+            const match = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\s*(,\s*([\d.]+))?\)/);
+            if (match) {
+                const hsl = this._rgbToHsl(parseInt(match[1]), parseInt(match[2]), parseInt(match[3]));
+                this.currentHue = hsl[0];
+                this.currentSaturation = hsl[1];
+                this.currentLightness = hsl[2];
+            }
+        }
+    }
+
+    _rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+
+        if (max === min) {
+            h = s = 0;
+        } else {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                case g: h = ((b - r) / d + 2) / 6; break;
+                case b: h = ((r - g) / d + 4) / 6; break;
+                default: h = 0;
+            }
+        }
+
+        return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+    }
+
+    _hslToRgb(h, s, l) {
+        h /= 360; s /= 100; l /= 100;
+        let r, g, b;
+
+        if (s === 0) {
+            r = g = b = l;
+        } else {
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1/6) return p + (q - p) * 6 * t;
+                if (t < 1/2) return q;
+                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            const p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    }
+
+    _hslToHex(h, s, l) {
+        const [r, g, b] = this._hslToRgb(h, s, l);
+        return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+    }
+
+    _hslToRgbString(h, s, l) {
+        const [r, g, b] = this._hslToRgb(h, s, l);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    _hslToRgbaString(h, s, l, alpha = 1) {
+        const [r, g, b] = this._hslToRgb(h, s, l);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
     getOverlayId() {
         return 'color-picker-overlay';
     }
@@ -45,7 +151,7 @@ class ColorPicker extends PopupBase {
     }
 
     getHeaderSelector() {
-        return '.color-picker-header';
+        return '.CUI-popup-header';
     }
 
     getCloseReason() {
@@ -56,572 +162,227 @@ class ColorPicker extends PopupBase {
         return 'Color picker toggled';
     }
 
-    // 创建颜色选择器容器
     createContainer(options = {}) {
-        const { presetColors, format, resolve, reject, overlay } = options;
+        const { presetColors, format, initialColor, resolve, reject, overlay } = options;
 
-        const container = document.createElement('div');
-        container.className = 'color-picker-container';
-        container.style.cssText = `
-            width: 90vw;
-            max-width: 500px;
-            max-height: 70vh;
-            background: var(--bg-color);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        `;
+        const closeBtnId = utils.generateId('CUI-GEN', 8, 7);
+        const hexInputId = utils.generateId('CUI-GEN', 8, 7);
+        const cancelBtnId = utils.generateId('CUI-GEN', 8, 7);
+        const confirmBtnId = utils.generateId('CUI-GEN', 8, 7);
 
-        // 创建头部
-        const header = document.createElement('div');
-        header.className = 'color-picker-header';
-        header.style.cssText = `
-            padding: var(--size-lg);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-color);
-            z-index: 10;
-        `;
+        const header = templateEngine.render('colorPickerHeader', { closeBtnId });
 
-        const title = document.createElement('h3');
-        title.textContent = '颜色选择器';
-        title.style.cssText = `
-            margin: 0;
-            color: var(--text-primary);
-        `;
-
-        const closeButton = document.createElement('button');
-        closeButton.className = 'color-picker-close';
-        closeButton.textContent = '×';
-        closeButton.style.cssText = `
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-light);
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-normal);
-        `;
-
-        closeButton.addEventListener('mouseenter', () => {
-            closeButton.style.backgroundColor = 'var(--gray-100)';
-            closeButton.style.color = 'var(--text-primary)';
-        });
-
-        closeButton.addEventListener('mouseleave', () => {
-            closeButton.style.backgroundColor = 'transparent';
-            closeButton.style.color = 'var(--text-light)';
-        });
-
-        closeButton.addEventListener('click', () => {
-            if (overlay) {
-                overlay.classList.remove('show');
-                setTimeout(() => {
-                    hideOverlay('color-picker-overlay');
-                    reject('Color picker closed');
-                }, 300);
-            } else {
-                const inlinePicker = closeButton.closest('.color-picker-inline');
-                if (inlinePicker) {
-                    inlinePicker.style.display = 'none';
-                    reject('Color picker closed');
-                }
-            }
-        });
-
-        header.appendChild(title);
-        header.appendChild(closeButton);
-        container.appendChild(header);
-
-        // 创建内容区域
-        const content = document.createElement('div');
-        content.className = 'color-picker-content';
-        content.style.cssText = `
-            padding: var(--size-lg);
-            overflow-y: auto;
-            flex: 1;
-        `;
-
-        // 创建颜色预览
-        const colorPreview = document.createElement('div');
-        colorPreview.className = 'color-preview-section';
-        colorPreview.style.cssText = `
-            margin-bottom: var(--size-lg);
-        `;
-
-        const previewTitle = document.createElement('h4');
-        previewTitle.textContent = '颜色预览';
-        previewTitle.style.cssText = `
-            margin: 0 0 var(--size-sm) 0;
-            color: var(--text-primary);
-            font-size: 14px;
-        `;
-
-        const previewContainer = document.createElement('div');
-        previewContainer.className = 'preview-container';
-        previewContainer.style.cssText = `
-            display: flex;
-            align-items: center;
-            gap: var(--size-sm);
-        `;
-
-        const initialColor = options.initialColor || '#165DFF';
+        const hueSlider = templateEngine.render('colorPickerHueSlider');
+        const saturationCanvas = templateEngine.render('colorPickerSaturationCanvas');
+        const brightnessSlider = templateEngine.render('colorPickerBrightnessSlider');
+        const presetButtons = presetColors.map(color => 
+            `<button class="CUI-color-picker-preset" data-color="${color}"></button>`
+        ).join('');
+        const presets = templateEngine.render('colorPickerPresets', { presetButtons });
         
-        const colorDisplay = document.createElement('div');
-        colorDisplay.className = 'color-display';
-        colorDisplay.style.cssText = `
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            background-color: ${initialColor};
-        `;
-
-        const colorInfo = document.createElement('div');
-        colorInfo.className = 'color-info';
-        colorInfo.style.cssText = `
-            flex: 1;
-        `;
-
-        const colorValue = document.createElement('div');
-        colorValue.className = 'color-value';
-        colorValue.style.cssText = `
-            font-family: monospace;
-            padding: var(--size-xs);
-            background: var(--gray-100);
-            border-radius: var(--radius-sm);
-            margin-bottom: var(--size-xs);
-            font-size: 12px;
-        `;
-        colorValue.textContent = initialColor;
-
-        const formatSelector = document.createElement('div');
-        formatSelector.className = 'format-selector';
-        formatSelector.style.cssText = `
-            display: flex;
-            gap: var(--size-xs);
-        `;
-
-        const formatOptions = ['hex', 'rgb', 'rgba'];
-        formatOptions.forEach(fmt => {
-            const formatOption = document.createElement('button');
-            formatOption.className = `format-option ${fmt === format ? 'active' : ''}`;
-            formatOption.textContent = fmt.toUpperCase();
-            formatOption.style.cssText = `
-                padding: 2px 8px;
-                border: 1px solid var(--border-color);
-                border-radius: var(--radius-sm);
-                background: ${fmt === format ? 'var(--primary-color)' : 'var(--bg-color)'};
-                color: ${fmt === format ? 'white' : 'var(--text-primary)'};
-                cursor: pointer;
-                font-size: 10px;
-            `;
-
-            formatOption.addEventListener('click', () => {
-                // 更新激活状态
-                document.querySelectorAll('.format-option').forEach(opt => {
-                    opt.style.background = 'var(--bg-color)';
-                    opt.style.color = 'var(--text-primary)';
-                });
-                formatOption.style.background = 'var(--primary-color)';
-                formatOption.style.color = 'white';
-
-                // 更新格式并重新显示颜色值
-                const currentColor = colorDisplay.style.backgroundColor;
-                const newFormat = fmt;
-                const formattedColor = this.formatColor(currentColor, newFormat);
-                colorValue.textContent = formattedColor;
-            });
-
-            formatSelector.appendChild(formatOption);
+        const formatButtons = ['hex', 'rgb', 'rgba'].map(fmt => {
+            const active = fmt === format;
+            return `<button class="CUI-btn CUI-btn-sm ${active ? 'CUI-btn-primary' : 'CUI-btn-secondary'}" data-format="${fmt}">${fmt.toUpperCase()}</button>`;
+        }).join('');
+        
+        const colorInputs = templateEngine.render('colorPickerInputs', {
+            hexInputId,
+            currentColor: initialColor,
+            formatButtons
         });
 
-        colorInfo.appendChild(colorValue);
-        colorInfo.appendChild(formatSelector);
-        previewContainer.appendChild(colorDisplay);
-        previewContainer.appendChild(colorInfo);
-        colorPreview.appendChild(previewTitle);
-        colorPreview.appendChild(previewContainer);
-
-        // 创建预设颜色
-        const presetColorsSection = document.createElement('div');
-        presetColorsSection.className = 'preset-colors-section';
-        presetColorsSection.style.cssText = `
-            margin-bottom: var(--size-lg);
-        `;
-
-        const presetTitle = document.createElement('h4');
-        presetTitle.textContent = '预设颜色';
-        presetTitle.style.cssText = `
-            margin: 0 0 var(--size-sm) 0;
-            color: var(--text-primary);
-            font-size: 14px;
-        `;
-
-        const presetGrid = document.createElement('div');
-        presetGrid.className = 'preset-grid';
-        presetGrid.style.cssText = `
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
-            gap: var(--size-xs);
-        `;
-
-        presetColors.forEach(color => {
-            const colorBox = document.createElement('div');
-            colorBox.className = 'color-box';
-            colorBox.style.cssText = `
-                width: 100%;
-                aspect-ratio: 1;
-                border-radius: var(--radius-sm);
-                background-color: ${color};
-                border: 1px solid transparent;
-                cursor: pointer;
-                transition: all var(--transition-normal);
-            `;
-
-            colorBox.addEventListener('mouseenter', () => {
-                colorBox.style.transform = 'scale(1.1)';
-                colorBox.style.boxShadow = 'var(--shadow-md)';
-            });
-
-            colorBox.addEventListener('mouseleave', () => {
-                colorBox.style.transform = 'scale(1)';
-                colorBox.style.boxShadow = 'none';
-            });
-
-            colorBox.addEventListener('click', () => {
-                colorDisplay.style.backgroundColor = color;
-                const formattedColor = this.formatColor(color, format);
-                colorValue.textContent = formattedColor;
-            });
-
-            presetGrid.appendChild(colorBox);
+        const footer = templateEngine.render('colorPickerFooter', { 
+            cancelBtnId,
+            confirmBtnId
         });
 
-        presetColorsSection.appendChild(presetTitle);
-        presetColorsSection.appendChild(presetGrid);
-
-        // 创建标准色盘
-        const colorWheelSection = document.createElement('div');
-        colorWheelSection.className = 'color-wheel-section';
-        colorWheelSection.style.cssText = `
-            margin-bottom: var(--size-xl);
-        `;
-
-        const wheelTitle = document.createElement('h4');
-        wheelTitle.textContent = '标准色盘';
-        wheelTitle.style.cssText = `
-            margin: 0 0 var(--size-md) 0;
-            color: var(--text-primary);
-        `;
-
-        const colorWheel = document.createElement('div');
-        colorWheel.className = 'color-wheel';
-        colorWheel.style.cssText = `
-            width: 100%;
-            height: 200px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(to right, red, yellow, lime, aqua, blue, magenta, red);
-            position: relative;
-            cursor: crosshair;
-            margin-bottom: var(--size-md);
-        `;
-
-        // 添加亮度滑块
-        const brightnessSlider = document.createElement('input');
-        brightnessSlider.type = 'range';
-        brightnessSlider.min = '0';
-        brightnessSlider.max = '100';
-        brightnessSlider.value = '100';
-        brightnessSlider.className = 'brightness-slider';
-        brightnessSlider.style.cssText = `
-            width: 100%;
-            height: 6px;
-            border-radius: var(--radius-full);
-            background: linear-gradient(to right, black, white);
-            outline: none;
-            -webkit-appearance: none;
-        `;
-
-        brightnessSlider.addEventListener('input', () => {
-            const brightness = brightnessSlider.value;
-            colorWheel.style.filter = `brightness(${brightness}%)`;
+        const content = hueSlider + saturationCanvas + brightnessSlider + presets + colorInputs;
+        
+        const html = templateEngine.render('colorPickerContainer', {
+            header,
+            content,
+            footer
         });
 
-        colorWheel.addEventListener('click', (e) => {
-            const rect = colorWheel.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // 创建临时 canvas 来获取点击位置的颜色
-            const canvas = document.createElement('canvas');
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            const ctx = canvas.getContext('2d');
-            
-            // 绘制渐变
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-            gradient.addColorStop(0, 'red');
-            gradient.addColorStop(1/6, 'yellow');
-            gradient.addColorStop(2/6, 'lime');
-            gradient.addColorStop(3/6, 'aqua');
-            gradient.addColorStop(4/6, 'blue');
-            gradient.addColorStop(5/6, 'magenta');
-            gradient.addColorStop(1, 'red');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // 获取点击位置的颜色
-            const imageData = ctx.getImageData(x, y, 1, 1);
-            const [r, g, b] = imageData.data;
-            const color = `rgb(${r}, ${g}, ${b})`;
-            
-            colorDisplay.style.backgroundColor = color;
-            const formattedColor = this.formatColor(color, format);
-            colorValue.textContent = formattedColor;
-        });
+        const container = templateEngine.toElement(html);
 
-        colorWheelSection.appendChild(wheelTitle);
-        colorWheelSection.appendChild(colorWheel);
-        colorWheelSection.appendChild(brightnessSlider);
-
-        // 创建颜色输入
-        const colorInputSection = document.createElement('div');
-        colorInputSection.className = 'color-input-section';
-        colorInputSection.style.cssText = `
-            margin-bottom: var(--size-xl);
-        `;
-
-        const inputTitle = document.createElement('h4');
-        inputTitle.textContent = '手动输入';
-        inputTitle.style.cssText = `
-            margin: 0 0 var(--size-md) 0;
-            color: var(--text-primary);
-        `;
-
-        const inputContainer = document.createElement('div');
-        inputContainer.className = 'input-container';
-        inputContainer.style.cssText = `
-            display: flex;
-            gap: var(--size-sm);
-        `;
-
-        const colorInput = document.createElement('input');
-        colorInput.type = 'color';
-        colorInput.className = 'color-input';
-        colorInput.style.cssText = `
-            width: 50px;
-            height: 32px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-        `;
-        colorInput.value = initialColor;
-
-        colorInput.addEventListener('change', () => {
-            const color = colorInput.value;
-            colorDisplay.style.backgroundColor = color;
-            const formattedColor = this.formatColor(color, format);
-            colorValue.textContent = formattedColor;
-        });
-
-        const textInput = document.createElement('input');
-        textInput.type = 'text';
-        textInput.className = 'text-input';
-        textInput.style.cssText = `
-            flex: 1;
-            padding: var(--size-xs) var(--size-sm);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-family: monospace;
-            font-size: 12px;
-        `;
-        textInput.value = initialColor;
-
-        textInput.addEventListener('input', () => {
-            const color = textInput.value;
-            try {
-                colorDisplay.style.backgroundColor = color;
-            } catch (e) {
-                // 忽略无效颜色
-            }
-        });
-
-        inputContainer.appendChild(colorInput);
-        inputContainer.appendChild(textInput);
-        colorInputSection.appendChild(inputTitle);
-        colorInputSection.appendChild(inputContainer);
-
-        // 创建按钮区域
-        const buttonSection = document.createElement('div');
-        buttonSection.className = 'button-section';
-        buttonSection.style.cssText = `
-            display: flex;
-            justify-content: flex-end;
-            gap: var(--size-sm);
-            padding-top: var(--size-sm);
-            border-top: 1px solid var(--border-color);
-        `;
-
-        const cancelButton = document.createElement('button');
-        cancelButton.className = 'btn btn-default';
-        cancelButton.textContent = '取消';
-        cancelButton.style.cssText = `
-            padding: var(--size-xs) var(--size-sm);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            background: var(--bg-color);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            font-size: 12px;
-        `;
-
-        cancelButton.addEventListener('click', () => {
-            if (overlay) {
-                overlay.classList.remove('show');
-                setTimeout(() => {
-                    hideOverlay('color-picker-overlay');
-                    reject('Color picker cancelled');
-                }, 300);
-            } else {
-                const inlinePicker = cancelButton.closest('.color-picker-inline');
-                if (inlinePicker) {
-                    inlinePicker.style.display = 'none';
-                    reject('Color picker cancelled');
-                }
-            }
-        });
-
-        const confirmButton = document.createElement('button');
-        confirmButton.className = 'btn btn-primary';
-        confirmButton.textContent = '确认';
-        confirmButton.style.cssText = `
-            padding: var(--size-xs) var(--size-sm);
-            border: none;
-            border-radius: var(--radius-sm);
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            font-size: 12px;
-        `;
-
-        confirmButton.addEventListener('click', () => {
-            const color = colorDisplay.style.backgroundColor;
-            const formattedColor = this.formatColor(color, format);
-            
-            if (overlay) {
-                overlay.classList.remove('show');
-                setTimeout(() => {
-                    hideOverlay('color-picker-overlay');
-                    resolve(formattedColor);
-                }, 300);
-            } else {
-                const inlinePicker = confirmButton.closest('.color-picker-inline');
-                if (inlinePicker) {
-                    inlinePicker.style.display = 'none';
-                    resolve(formattedColor);
-                }
-            }
-        });
-
-        buttonSection.appendChild(cancelButton);
-        buttonSection.appendChild(confirmButton);
-
-        content.appendChild(colorPreview);
-        content.appendChild(colorWheelSection);
-        content.appendChild(presetColorsSection);
-        content.appendChild(colorInputSection);
-        content.appendChild(buttonSection);
-        container.appendChild(content);
+        this._bindEvents(container, { ...options, closeBtnId, hexInputId, cancelBtnId, confirmBtnId });
+        this._initCanvas(container);
 
         return container;
     }
 
-    // 格式化颜色
-    formatColor(color, format) {
-        try {
-            if (format === 'hex') {
-                // 如果是rgb或rgba格式，转换为hex
-                if (color.startsWith('rgb')) {
-                    const rgbMatch = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\s*(,\s*([\d.]+))?\)/);
-                    if (rgbMatch) {
-                        const r = parseInt(rgbMatch[1]);
-                        const g = parseInt(rgbMatch[2]);
-                        const b = parseInt(rgbMatch[3]);
-                        const a = rgbMatch[5] ? parseFloat(rgbMatch[5]) : 1;
-                        
-                        if (a === 1) {
-                            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
-                        } else {
-                            return `rgba(${r}, ${g}, ${b}, ${a})`;
-                        }
-                    }
-                }
-                return color.toUpperCase();
-            } else if (format === 'rgb') {
-                // 如果是hex格式，转换为rgb
-                if (color.startsWith('#')) {
-                    const hex = color.replace('#', '');
-                    const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
-                    const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
-                    const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
-                    return `rgb(${r}, ${g}, ${b})`;
-                } else if (color.startsWith('rgba')) {
-                    return color.replace('rgba', 'rgb').replace(/,\s*[\d.]+\)$/, ')');
-                }
-                return color;
-            } else if (format === 'rgba') {
-                // 如果是hex格式，转换为rgba
-                if (color.startsWith('#')) {
-                    const hex = color.replace('#', '');
-                    const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
-                    const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
-                    const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
-                    return `rgba(${r}, ${g}, ${b}, 1)`;
-                } else if (color.startsWith('rgb')) {
-                    return color.replace('rgb', 'rgba').replace(')', ', 1)');
-                }
-                return color;
+    _initCanvas(container) {
+        const canvas = container.querySelector('.CUI-color-picker-canvas');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        const w = parseInt(canvas.getAttribute('width')) || 320;
+        const h = parseInt(canvas.getAttribute('height')) || 200;
+
+        this._drawSaturationCanvas(ctx, w, h);
+    }
+
+    _drawSaturationCanvas(ctx, width, height) {
+        if (!ctx) return;
+
+        const hueColor = this._hslToRgbString(this.currentHue, 100, 50);
+
+        const satGradient = ctx.createLinearGradient(0, 0, width, 0);
+        satGradient.addColorStop(0, 'hsl(0, 0%, 100%)');
+        satGradient.addColorStop(1, hueColor);
+        ctx.fillStyle = satGradient;
+        ctx.fillRect(0, 0, width, height);
+
+        const lightGradient = ctx.createLinearGradient(0, 0, 0, height);
+        lightGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        lightGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+        ctx.fillStyle = lightGradient;
+        ctx.fillRect(0, 0, width, height);
+    }
+
+    _updatePointer(container) {
+        const pointer = container.querySelector('.CUI-color-picker-pointer');
+        const canvas = container.querySelector('.CUI-color-picker-canvas');
+        if (!pointer || !canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (this.currentSaturation / 100) * rect.width;
+        const y = ((100 - this.currentLightness) / 100) * rect.height;
+
+        pointer.style.left = `${x}px`;
+        pointer.style.top = `${y}px`;
+    }
+
+    _updatePreview(container) {
+        const preview = container.querySelector('.CUI-color-picker-preview');
+        const hexInput = container.querySelector('.CUI-color-picker-hex-input');
+        if (!preview || !hexInput) return;
+
+        const hex = this._hslToHex(this.currentHue, this.currentSaturation, this.currentLightness);
+        preview.style.background = hex;
+        hexInput.value = hex;
+    }
+
+    _bindEvents(container, options) {
+        const { presetColors, format, resolve, reject, overlay, closeBtnId, hexInputId, cancelBtnId, confirmBtnId } = options;
+
+        const closeBtn = container.querySelector(`#${closeBtnId}`);
+        closeBtn?.addEventListener('click', () => {
+            this._closePicker(overlay, reject, 'Color picker closed');
+        });
+
+        const hueSlider = container.querySelector('.CUI-color-picker-hue-slider');
+        hueSlider?.addEventListener('input', (e) => {
+            this.currentHue = parseInt(e.target.value);
+            const canvas = container.querySelector('.CUI-color-picker-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                this._drawSaturationCanvas(ctx, canvas.width, canvas.height);
             }
-            return color;
-        } catch (error) {
-            return color;
+            this._updatePreview(container);
+        });
+
+        const canvas = container.querySelector('.CUI-color-picker-canvas');
+        canvas?.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            this.currentSaturation = Math.round((x / rect.width) * 100);
+            this.currentLightness = Math.round(100 - (y / rect.height) * 100);
+
+            this._updatePointer(container);
+            this._updatePreview(container);
+        });
+
+        const brightnessSlider = container.querySelector('.CUI-color-picker-brightness-slider');
+        brightnessSlider?.addEventListener('input', (e) => {
+            this.currentLightness = parseInt(e.target.value);
+            this._updatePointer(container);
+            this._updatePreview(container);
+        });
+
+        container.querySelectorAll('.CUI-color-picker-preset').forEach(btn => {
+            btn.style.backgroundColor = btn.dataset.color;
+            btn.addEventListener('click', () => {
+                const color = btn.dataset.color;
+                this._parseColor(color);
+                const canvasEl = container.querySelector('.CUI-color-picker-canvas');
+                if (canvasEl) {
+                    const ctx = canvasEl.getContext('2d');
+                    this._drawSaturationCanvas(ctx, canvasEl.width, canvasEl.height);
+                }
+                this._updatePointer(container);
+                this._updatePreview(container);
+            });
+        });
+
+        container.querySelectorAll('.CUI-btn[data-format]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const newFormat = btn.dataset.format;
+                const hexInput = container.querySelector(`#${hexInputId}`);
+                if (!hexInput) return;
+
+                const currentHex = hexInput.value;
+                let formattedValue = currentHex;
+
+                if (newFormat === 'rgb') {
+                    const [r, g, b] = this._hslToRgb(this.currentHue, this.currentSaturation, this.currentLightness);
+                    formattedValue = `rgb(${r}, ${g}, ${b})`;
+                } else if (newFormat === 'rgba') {
+                    const [r, g, b] = this._hslToRgb(this.currentHue, this.currentSaturation, this.currentLightness);
+                    formattedValue = `rgba(${r}, ${g}, ${b}, 1)`;
+                }
+
+                hexInput.value = formattedValue;
+            });
+        });
+
+        const cancelBtn = container.querySelector(`#${cancelBtnId}`);
+        cancelBtn?.addEventListener('click', () => {
+            this._closePicker(overlay, reject, 'Color picker closed');
+        });
+
+        const confirmBtn = container.querySelector(`#${confirmBtnId}`);
+        confirmBtn?.addEventListener('click', () => {
+            const hexInput = container.querySelector(`#${hexInputId}`);
+            const selectedColor = hexInput?.value || this._hslToHex(this.currentHue, this.currentSaturation, this.currentLightness);
+            
+            this._closePicker(overlay, null, null);
+            if (resolve) resolve(selectedColor);
+        });
+    }
+
+    _closePicker(overlay, reject, reason) {
+        if (overlay) {
+            this.close();
+            if (reject && reason) reject(reason);
         }
     }
 }
 
-// 导出打开颜色选择器的函数
-function openColorPicker(options = {}) {
-    return new Promise((resolve, reject) => {
-        const colorPicker = new ColorPicker();
-        colorPicker.open({ ...options, resolve, reject });
-    });
+const colorPicker = new ColorPicker();
+
+async function openColorPicker(options = {}) {
+    return colorPicker.open(options);
 }
 
-// 导出
-export { ColorPicker, openColorPicker };
+export { colorPicker, openColorPicker, ColorPicker };
+export default colorPicker;
 
-// 避免全局变量冲突，使用更安全的命名空间
+// 保证命名空间完整
 if (!window.CUI) {
     window.CUI = {};
 }
 
-// 暴露到全局
-window.CUI.ColorPicker = ColorPicker;
-window.CUI.openColorPicker = openColorPicker;
+// 注册到全局生命周期调度器，声明对 core, overlay 的强依赖关系
+window.CUI.registerModule('colorPicker', {
+    dependencies: ['core', 'overlay'],
+    stages: {
+        CORE: () => {
+            window.CUI.colorPicker = colorPicker;
+            window.CUI.openColorPicker = openColorPicker;
+        }
+    }
+});

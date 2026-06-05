@@ -1,0 +1,234 @@
+<article class="CUI-section">
+    <h1>颜色工具</h1>
+    <p>颜色选择 Input 组件与相关工具</p>
+
+    <section>
+        <h2>颜色选择输入框</h2>
+        <p>框架提供了自动化的颜色选择 Input 组件，支持原生选择器和自定义颜色选择器两种模式。所有交互通过框架的事件委托机制自动绑定，无需用户编写额外的 JavaScript 代码。</p>
+
+        <section>
+            <h3>1. 原生颜色选择器（默认）</h3>
+            <p>直接使用原生的颜色选择器，无需任何额外配置：</p>
+            
+            <div class="CUI-box CUI-p-md">
+                <label>选择颜色：</label>
+                <input type="color" name="nativeColor" value="#165DFF">
+            </div>
+
+            <pre><code class="language-html">&lt;input type="color" name="nativeColor" value="#165DFF"&gt;</code></pre>
+
+            <p><strong>说明：</strong>这是浏览器原生的颜色选择器，外观和行为因浏览器而异。</p>
+        </section>
+
+        <section>
+            <h3>2. 自定义颜色选择器</h3>
+            <p>添加 <code>data-cui-color-picker="true"</code> 属性，使用框架自带的颜色选择器：</p>
+            
+            <div class="CUI-box CUI-p-md">
+                <label>选择颜色（自定义选择器）：</label>
+                <input type="color" name="customColor" value="#C2185B" data-cui-color-picker="true">
+            </div>
+
+            <pre><code class="language-html">&lt;input type="color" name="customColor" value="#C2185B" data-cui-color-picker="true"&gt;</code></pre>
+
+            <p><strong>说明：</strong>使用框架的自定义颜色选择器，提供统一的用户体验和更多功能。框架通过事件委托机制自动绑定点击事件，无需用户编写任何 JavaScript 代码。</p>
+        </section>
+
+        <section>
+            <h3>3. 在表单中使用</h3>
+            
+            <div class="CUI-box CUI-p-md">
+                <form id="colorForm">
+                    <div style="margin-bottom: var(--size-md);">
+                        <label class="CUI-block CUI-mb-xs">主题颜色（自定义选择器）</label>
+                        <input type="color" name="themeColor" value="#165DFF" data-cui-color-picker="true">
+                    </div>
+                    <div style="margin-bottom: var(--size-md);">
+                        <label class="CUI-block CUI-mb-xs">背景颜色（原生选择器）</label>
+                        <input type="color" name="bgColor" value="#FFFFFF">
+                    </div>
+                    <div>
+                        <label class="CUI-block CUI-mb-xs">文字颜色（原生选择器）</label>
+                        <input type="color" name="textColor" value="#333333">
+                    </div>
+                </form>
+            </div>
+
+            <pre><code class="language-html">&lt;form id="colorForm"&gt;
+    &lt;input type="color" name="themeColor" value="#165DFF" data-cui-color-picker="true"&gt;
+    &lt;input type="color" name="bgColor" value="#FFFFFF"&gt;
+    &lt;input type="color" name="textColor" value="#333333"&gt;
+&lt;/form&gt;</code></pre>
+        </section>
+
+        <section>
+            <h3>4. 获取和设置颜色值</h3>
+            
+            <p>使用框架的输入框注册表 API 操作颜色值：</p>
+
+            <pre><code class="language-javascript">// 获取颜色值
+const themeColor = CUI.input.getValue('colorForm.themeColor');
+console.log('主题颜色:', themeColor);
+
+// 设置颜色值
+CUI.input.setValue('colorForm.themeColor', '#FF5722');
+
+// 获取整个表单的颜色数据
+const formData = CUI.input.getFormData('colorForm');
+console.log('表单颜色数据:', formData);</code></pre>
+        </section>
+
+        <section>
+            <h3>5. 属性说明</h3>
+            
+            <table class="CUI-table">
+                <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>类型</th>
+                        <th>默认值</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>必须为 <code>"color"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>表单字段名称，用于表单数据收集</td>
+                    </tr>
+                    <tr>
+                        <td><code>value</code></td>
+                        <td>string</td>
+                        <td>#000000</td>
+                        <td>初始颜色值，必须是有效的 HEX 颜色值</td>
+                    </tr>
+                    <tr>
+                        <td><code>data-cui-color-picker</code></td>
+                        <td>string</td>
+                        <td>-</td>
+                        <td>设置为 <code>"true"</code> 使用框架自定义颜色选择器</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h3>6. 两种模式对比</h3>
+            
+            <table class="CUI-table">
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>原生选择器</th>
+                        <th>自定义选择器</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>外观一致性</td>
+                        <td>因浏览器而异</td>
+                        <td>统一风格</td>
+                    </tr>
+                    <tr>
+                        <td>功能丰富度</td>
+                        <td>基础功能</td>
+                        <td>完整功能（色盘、预设色、格式转换）</td>
+                    </tr>
+                    <tr>
+                        <td>颜色格式</td>
+                        <td>仅 HEX</td>
+                        <td>支持 HEX、RGB、RGBA</td>
+                    </tr>
+                    <tr>
+                        <td>预设颜色</td>
+                        <td>无</td>
+                        <td>支持自定义预设</td>
+                    </tr>
+                    <tr>
+                        <td>使用方式</td>
+                        <td>直接使用</td>
+                        <td>需添加 data 属性</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h3>7. 框架绑定机制</h3>
+            
+            <p>框架通过以下机制自动处理颜色选择器交互：</p>
+            
+            <ol>
+                <li><strong>DOMObserver 监听</strong>：自动检测页面上的颜色输入框</li>
+                <li><strong>UI 美化</strong>：为带 <code>data-cui-color-picker="true"</code> 的输入框创建自定义 UI（颜色预览方块 + 颜色值显示）</li>
+                <li><strong>事件委托</strong>：通过事件委托机制统一处理点击事件，避免直接绑定到每个元素</li>
+                <li><strong>自动同步</strong>：选择颜色后自动更新输入框的值和显示</li>
+            </ol>
+
+            <p><strong>优势：</strong></p>
+            <ul>
+                <li>前台 HTML 保持干净，无需写 onclick 属性</li>
+                <li>自动处理动态添加的元素</li>
+                <li>与用户代码完全隔离，互不干扰</li>
+                <li>性能优化，整个页面只有一个事件监听器</li>
+            </ul>
+        </section>
+    </section>
+
+    <section>
+        <h2>颜色工具函数</h2>
+        <p>框架提供了一些实用的颜色处理工具函数：</p>
+
+        <section>
+            <h3>颜色格式转换</h3>
+            
+            <pre><code class="language-javascript">// HEX 转 RGB
+function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+// RGB 转 HEX
+function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(x => {
+        const hex = x.toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+}</code></pre>
+        </section>
+
+        <section>
+            <h3>颜色对比</h3>
+            
+            <pre><code class="language-javascript">// 计算颜色对比度
+function getContrastRatio(color1, color2) {
+    const rgb1 = hexToRgb(color1);
+    const rgb2 = hexToRgb(color2);
+    
+    const lum1 = (0.2126 * rgb1.r + 0.7152 * rgb1.g + 0.0722 * rgb1.b) / 255;
+    const lum2 = (0.2126 * rgb2.r + 0.7152 * rgb2.g + 0.0722 * rgb2.b) / 255;
+    
+    const ratio = (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
+    return ratio.toFixed(2);
+}
+
+// 判断是否应该使用深色文字
+function shouldUseDarkText(backgroundColor) {
+    const rgb = hexToRgb(backgroundColor);
+    const luminance = (0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b) / 255;
+    return luminance > 0.5;
+}</code></pre>
+        </section>
+    </section>
+</article>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遮罩测试</title>
+    <!-- 引入核心样式 -->
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    
+    <style>
+        .test-container {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            /* 让内容可滚动以测试滚动阻挡 */
+            overflow: auto;
+        }
+        .scroll-content {
+            height: 500px;
+            background: linear-gradient(#e66465, #9198e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body style="height: 2000px; background-color: #f0f0f0;">
+    <h1 style="padding-left: 20px;">遮罩层重构测试页面</h1>
+    
+    <div style="padding: 20px;">
+        <button id="btn-fullscreen" class="CUI-btn CUI-btn-primary">全屏遮罩 (3秒后关闭)</button>
+        <button id="btn-container" class="CUI-btn CUI-btn-secondary">开启局部容器遮罩</button>
+        <button id="btn-container-close" class="CUI-btn CUI-btn-warning">关闭局部容器遮罩</button>
+    </div>
+
+    <div id="test-box" class="test-container">
+        <h2>测试局部容器</h2>
+        <p>这是内部可滚动的长内容。</p>
+        <div class="scroll-content">往下滚</div>
+    </div>
+
+    <!-- 引入入口脚本 -->
+    <script type="module" src="/modules/js/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 等待一下让模块初始化
+            setTimeout(() => {
+                document.getElementById('btn-fullscreen').addEventListener('click', () => {
+                    const overlayObj = window.CUI.overlay({ autoClose: 3000, type: 'glass' });
+                    if(overlayObj) {
+                        overlayObj.element.innerHTML = '<h2 style="color: #333;">全屏遮罩，3秒后自动关闭... 此时尝试滚动页面将被阻止</h2>';
+                    }
+                });
+
+                document.getElementById('btn-container').addEventListener('click', () => {
+                    const overlayObj = window.CUI.overlay({ target: '#test-box', type: 'glass' });
+                    if(overlayObj) {
+                        overlayObj.element.innerHTML = '<h3 style="color: #333;">局部容器遮罩<br>此时尝试滚动将被阻止</h3>';
+                    }
+                });
+
+                document.getElementById('btn-container-close').addEventListener('click', () => {
+                    window.CUI.overlay.close('#test-box');
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

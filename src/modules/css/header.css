@@ -8,7 +8,7 @@
  */
 
 /* 头部样式 */
-.header {
+.CUI-header {
     text-align: center;
     margin-bottom: var(--size-xl);
     padding: var(--size-xl) 0;
@@ -17,24 +17,24 @@
     box-shadow: var(--shadow-sm);
 }
 
-.header h1 {
+.CUI-header h1 {
     color: var(--primary-color);
     margin-bottom: var(--size-sm);
 }
 
-.header p {
+.CUI-header p {
     font-size: 16px;
     color: var(--text-secondary);
 }
 
 /* Header元素位置控制类 */
-.header-element-right {
+.CUI-header-element-right {
     margin-left: auto;
     display: flex;
     align-items: center;
 }
 
-.header-element-center {
+.CUI-header-element-center {
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -42,13 +42,13 @@
 }
 
 /* Header搜索框样式 */
-.header-search {
+.CUI-header-search {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.header-search-input {
+.CUI-header-search-input {
     width: 280px;
     padding: 12px 20px 12px 48px;
     border: 2px solid var(--border-color);
@@ -59,16 +59,16 @@
     outline: none;
 }
 
-.header-search-input:focus {
+.CUI-header-search-input:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(22, 93, 255, 0.1);
 }
 
-.header-search-input::placeholder {
+.CUI-header-search-input::placeholder {
     color: var(--text-light);
 }
 
-.header-search-icon {
+.CUI-header-search-icon {
     position: absolute;
     left: 18px;
     top: 12px;

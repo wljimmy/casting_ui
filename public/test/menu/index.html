@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="../../modules/css/menu.css">
 </head>
 <body>
-    <div class="container">
+    <div class="CUI-container">
         <h1>菜单组件测试</h1>
 
-        <div class="section">
+        <div class="CUI-section">
             <h2>测试1：基本菜单功能（侧边栏菜单）</h2>
-            <div class="container-fluid">
-                <menu id="test-menu-1" class="menu-sidebar">
+            <div class="CUI-container-fluid">
+                <menu id="test-menu-1" class="CUI-menu-sidebar">
                     <ul>
                         <li data-id="home" data-action="handleMenuClick">首页</li>
                         <li data-id="products" data-action="handleMenuClick">产品
@@ -37,15 +37,15 @@
                     </ul>
                 </menu>
             </div>
-            <div class="container-fluid" id="test-result-1">
+            <div class="CUI-container-fluid" id="test-result-1">
                 <p>点击菜单项测试激活状态切换和子菜单展开/收起</p>
             </div>
         </div>
 
-        <!-- <div class="section">
+        <!-- <div class="CUI-section">
             <h2>测试2：Data属性功能（侧边栏菜单）</h2>
-            <div class="container-fluid">
-                <menu id="test-menu-2" class="menu-sidebar">
+            <div class="CUI-container-fluid">
+                <menu id="test-menu-2" class="CUI-menu-sidebar">
                     <ul>
                         <li data-id="home-data" data-icon="outline/home.svg" data-action='{"callback":"handleMenuClick"}'>首页</li>
                         <li data-id="products-data" data-icon="outline/package.svg" data-action="testAction">产品</li>
@@ -58,15 +58,15 @@
                     </ul>
                 </menu>
             </div>
-            <div class="container-fluid" id="test-result-2">
+            <div class="CUI-container-fluid" id="test-result-2">
                 <p>点击菜单项测试Data属性功能</p>
             </div>
         </div>
 
-        <div class="section">
+        <div class="CUI-section">
             <h2>测试3：API测试（侧边栏菜单）</h2>
-            <div class="container-fluid">
-                <menu id="test-menu-3" class="menu-sidebar">
+            <div class="CUI-container-fluid">
+                <menu id="test-menu-3" class="CUI-menu-sidebar">
                     <ul>
                         <li data-id="item1">菜单项1</li>
                         <li data-id="item2">菜单项2</li>
@@ -74,24 +74,24 @@
                     </ul>
                 </menu>
             </div>
-            <div class="container-fluid">
-                <button class="btn btn-primary" onclick="testSetActive()">设置第二项为激活</button>
-                <button class="btn btn-secondary" onclick="testAddItem()">添加菜单项（旧方式）</button>
-                <button class="btn btn-secondary" onclick="testAddSubItem()">添加子菜单项（旧方式）</button>
+            <div class="CUI-container-fluid">
+                <button class="CUI-btn CUI-btn-primary" onclick="testSetActive()">设置第二项为激活</button>
+                <button class="CUI-btn CUI-btn-secondary" onclick="testAddItem()">添加菜单项（旧方式）</button>
+                <button class="CUI-btn CUI-btn-secondary" onclick="testAddSubItem()">添加子菜单项（旧方式）</button>
             </div>
-            <div class="container-fluid" style="margin-top: 15px;">
-                <button class="btn btn-primary" onclick="testAddItemsNew()">添加同级菜单项（新方式）</button>
-                <button class="btn btn-secondary" onclick="testAddSubItemsNew()">添加子菜单项（新方式）</button>
+            <div class="CUI-container-fluid" style="margin-top: 15px;">
+                <button class="CUI-btn CUI-btn-primary" onclick="testAddItemsNew()">添加同级菜单项（新方式）</button>
+                <button class="CUI-btn CUI-btn-secondary" onclick="testAddSubItemsNew()">添加子菜单项（新方式）</button>
             </div>
-            <div class="container-fluid" id="test-result-3">
+            <div class="CUI-container-fluid" id="test-result-3">
                 <p>点击按钮测试API功能</p>
             </div>
         </div> -->
 
-        <div class="section">
+        <div class="CUI-section">
             <h2>测试4：内联菜单</h2>
-            <div class="container-fluid">
-                <menu id="test-menu-4" class="menu-inline">
+            <div class="CUI-container-fluid">
+                <menu id="test-menu-4" class="CUI-menu-inline">
                     <ul>
                         <li data-id="inline-home">首页
                             <ul>
@@ -157,7 +157,7 @@
                     </ul>
                 </menu>
             </div>
-            <div class="container-fluid" id="test-result-4">
+            <div class="CUI-container-fluid" id="test-result-4">
                 <p>测试内联菜单的功能和样式</p>
                 <p>测试内容1：点击按钮展开弹出菜单</p>
                 <p>测试内容2：点击其他按钮自动关闭之前的弹出菜单</p>
@@ -172,13 +172,13 @@
             </div>
         </div>
 
-        <div class="section">
+        <div class="CUI-section">
             <h2>测试5：弹出式菜单</h2>
-            <div class="container-fluid">
-                <button id="popup-trigger-button" class="btn btn-primary">显示弹出菜单</button>
-                <menu id="test-menu-5" class="menu-popup menu-hidden" data-trigger="popup-trigger-button">
+            <div class="CUI-container-fluid">
+                <button id="popup-trigger-button" class="CUI-btn CUI-btn-primary">显示弹出菜单</button>
+                <menu id="test-menu-5" class="CUI-menu-popup CUI-menu-hidden" data-trigger="popup-trigger-button">
                     <ul>
-                        <li class="menu-active" data-id="popup-home" data-action="handleMenuClick">首页</li>
+                        <li class="CUI-menu-active" data-id="popup-home" data-action="handleMenuClick">首页</li>
                         <li data-id="popup-products" data-action="handleMenuClick">产品
                             <ul>
                                 <li data-id="popup-phone" data-action="handleMenuClick">手机</li>
@@ -215,7 +215,7 @@
                     </ul>
                 </menu>
             </div>
-            <div class="container-fluid" id="test-result-5">
+            <div class="CUI-container-fluid" id="test-result-5">
                 <p>点击按钮测试弹出式菜单</p>
                 <p>测试内容1：点击按钮显示/隐藏弹出菜单</p>
                 <p>测试内容2：点击页面其他地方自动关闭弹出菜单</p>
@@ -235,11 +235,11 @@
         let lastClickedMenuId = 'test-menu-1';
         
         function handleMenuClick() {
-            const menu = document.querySelector('menu:has(li.menu-active)');
+            const menu = document.querySelector('menu:has(li.CUI-menu-active)');
             const menuId = menu ? menu.id : lastClickedMenuId;
             lastClickedMenuId = menuId;
             
-            const activeItem = menu ? menu.querySelector('li.menu-active') : null;
+            const activeItem = menu ? menu.querySelector('li.CUI-menu-active') : null;
             const menuText = activeItem ? activeItem.textContent.trim() : '未知';
             const menuType = menuId.includes('popup') ? '弹出菜单' : menuId.includes('inline') ? '内联菜单' : '侧边栏菜单';
             

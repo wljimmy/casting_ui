@@ -6,13 +6,13 @@
     <div class="CUI-box">
         <p>点击下方按钮查看 Toast 效果：</p>
         <div class="CUI-grid CUI-grid-4c">
-            <button class="btn btn-primary" onclick="showToast('success', '操作成功')">成功Toast</button>
-            <button class="btn btn-primary" onclick="showToast('error', '操作失败')">错误Toast</button>
-            <button class="btn btn-primary" onclick="showToast('warning', '警告信息')">警告Toast</button>
-            <button class="btn btn-primary" onclick="showToast('info', '提示信息')">信息Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('success', '操作成功')">成功Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('error', '操作失败')">错误Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('warning', '警告信息')">警告Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('info', '提示信息')">信息Toast</button>
         </div>
     </div>
-    <pre><code>&lt;button class="btn btn-primary" onclick="showToast('success', '操作成功')"&gt;成功Toast&lt;/button&gt;
+    <pre><code class="language-html">&lt;button class="CUI-btn CUI-btn-primary" onclick="showToast('success', '操作成功')"&gt;成功Toast&lt;/button&gt;
 
 showToast(type, message, position)
 
@@ -23,9 +23,9 @@ showToast(type, message, position)
     <h3>不同位置的 Toast</h3>
     <div class="CUI-box">
         <div class="CUI-grid CUI-grid-4c">
-            <button class="btn btn-primary" onclick="showToast('success', '顶部 Toast', 'top')">顶部 Toast</button>
-            <button class="btn btn-primary" onclick="showToast('success', '居中 Toast', 'center')">居中 Toast</button>
-            <button class="btn btn-primary" onclick="showToast('success', '底部 Toast', 'bottom')">底部 Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('success', '顶部 Toast', 'top')">顶部 Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('success', '居中 Toast', 'center')">居中 Toast</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="showToast('success', '底部 Toast', 'bottom')">底部 Toast</button>
         </div>
     </div>
 
@@ -61,7 +61,7 @@ showToast(type, message, position)
 
     <h3>使用示例</h3>
     <div class="CUI-box">
-        <pre><code>// 成功提示
+        <pre><code class="language-js">// 成功提示
 showToast('success', '保存成功！');
 
 // 错误提示

@@ -7,28 +7,37 @@ Casting UI 的核心功能模块文档。
 
 | 模块 | 描述 |
 |------|------|
+| [LifecycleScheduler](./LifecycleScheduler.md) | 生命周期调度器，提供 Pipeline 分阶段时序调度与沙箱级联防雪崩隔离机制 |
 | [DOMObserver](./DOMObserver.md) | DOM 变化观察者，自动监听和初始化组件 |
 | [ColorPicker](./ColorPicker.md) | 颜色选择器，支持多种颜色格式 |
 | [ThemeManager](./ThemeManager.md) | 主题管理器，支持主题切换和自定义主题 |
 
 ## 核心架构
 
-### 模块依赖关系
+### 模块依赖图 (DAG 拓扑结构)
 
 ```
-core.js (基础)
-├── DOMObserver (独立)
-├── ColorPicker (依赖 core)
-├── ThemeManager (依赖 core, ColorPicker)
-└── 其他组件模块 (独立)
+       [scheduler] (时序与容灾引擎)
+            │
+         [core] (最底座 API 支持)
+      ┌─────┼──────────────┐
+      ▼     ▼              ▼
+[overlay] [input]  [imageZoom] (依赖 core)
+      │     │
+      ▼     ▼
+  [modal] [colorPicker] (依赖 core, overlay)
+      │     │
+      ▼     ▼
+     [ui] (依赖 core, colorPicker, modal)
 ```
 
-### 初始化流程
+### 初始化流程 (Pipeline Flow)
 
-1. DOM 加载完成
-2. 初始化 DOMObserver
-3. 扫描并初始化现有组件
-4. 监听后续 DOM 变化
+1. 加载 `scheduler.js` 准备全局注册 API。
+2. 异步并行加载所有业务 ES 模块，通过 `registerModule` 进行登记。
+3. 并行下载完成后，触发运行 `scheduler.runPipeline()` 驱动生命周期流转。
+4. Pipeline 逐个推进阶段：`ENV` ➔ `CORE` ➔ `DOM_REGISTRY` ➔ `INTERACTION` ➔ `READY`。
+5. 在每次执行每个模块的钩子前，动态进行**上游依赖健康校验**与**级联停运隔离**保护。
 
 ## 模块设计原则
 

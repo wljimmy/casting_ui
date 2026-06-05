@@ -1,0 +1,231 @@
+{
+  "description": "历史行政区划代码表 - 已撤销但仍有有效身份证的代码",
+  "version": "20260605",
+  "updateNote": "手动维护，发现新的历史代码时请添加",
+  "data": [
+    {
+      "code": "371200",
+      "name": "莱芜市",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "济南市",
+      "mergedCode": "370100",
+      "year": 2019,
+      "note": "2019年撤销地级莱芜市，整体并入济南市，设立莱芜区、钢城区",
+      "children": [
+        {
+          "code": "371201",
+          "name": "莱城区",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "济南市莱芜区",
+          "mergedCode": "370116",
+          "year": 2019
+        },
+        {
+          "code": "371202",
+          "name": "钢城区",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "济南市钢城区",
+          "mergedCode": "370117",
+          "year": 2019
+        }
+      ]
+    },
+    {
+      "code": "612300",
+      "name": "汉中地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "汉中市",
+      "mergedCode": "610700",
+      "year": 1996,
+      "note": "1996年撤地设市，汉中地区改为地级汉中市",
+      "children": [
+        {
+          "code": "612301",
+          "name": "汉中市",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "汉中市汉台区",
+          "mergedCode": "610702",
+          "year": 1996
+        }
+      ]
+    },
+    {
+      "code": "612100",
+      "name": "渭南地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "渭南市",
+      "mergedCode": "610500",
+      "year": 1994,
+      "note": "1994年撤地设市，渭南地区改为地级渭南市",
+      "children": [
+        {
+          "code": "612101",
+          "name": "渭南市",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "渭南市临渭区",
+          "mergedCode": "610502",
+          "year": 1994
+        }
+      ]
+    },
+    {
+      "code": "612600",
+      "name": "延安地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "延安市",
+      "mergedCode": "610600",
+      "year": 1997,
+      "note": "1997年撤地设市，延安地区改为地级延安市",
+      "children": [
+        {
+          "code": "612601",
+          "name": "延安市",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "延安市宝塔区",
+          "mergedCode": "610602",
+          "year": 1997
+        }
+      ]
+    },
+    {
+      "code": "612400",
+      "name": "咸阳地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "咸阳市",
+      "mergedCode": "610400",
+      "year": 1983,
+      "note": "1983年撤地设市，咸阳地区改为地级咸阳市",
+      "children": [
+        {
+          "code": "612401",
+          "name": "咸阳市",
+          "level": 3,
+          "status": "merged",
+          "mergedTo": "咸阳市秦都区",
+          "mergedCode": "610402",
+          "year": 1983
+        }
+      ]
+    },
+    {
+      "code": "513200",
+      "name": "万县地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "重庆市",
+      "mergedCode": "500100",
+      "year": 1997,
+      "note": "1997年重庆直辖，万县地区划归重庆市",
+      "children": []
+    },
+    {
+      "code": "513300",
+      "name": "涪陵地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "重庆市",
+      "mergedCode": "500100",
+      "year": 1997,
+      "note": "1997年重庆直辖，涪陵地区划归重庆市",
+      "children": []
+    },
+    {
+      "code": "513400",
+      "name": "黔江地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "重庆市",
+      "mergedCode": "500100",
+      "year": 1997,
+      "note": "1997年重庆直辖，黔江地区划归重庆市",
+      "children": []
+    },
+    {
+      "code": "511400",
+      "name": "南充地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "南充市",
+      "mergedCode": "511300",
+      "year": 1993,
+      "note": "1993年撤地设市，南充地区改为地级南充市",
+      "children": []
+    },
+    {
+      "code": "511800",
+      "name": "雅安地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "雅安市",
+      "mergedCode": "511800",
+      "year": 2000,
+      "note": "2000年撤地设市，雅安地区改为地级雅安市",
+      "children": []
+    },
+    {
+      "code": "511900",
+      "name": "巴中地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "巴中市",
+      "mergedCode": "511900",
+      "year": 2000,
+      "note": "2000年撤地设市，巴中地区改为地级巴中市",
+      "children": []
+    },
+    {
+      "code": "511700",
+      "name": "达川地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "达州市",
+      "mergedCode": "511700",
+      "year": 1999,
+      "note": "1999年撤地设市，达川地区改为地级达州市",
+      "children": []
+    },
+    {
+      "code": "512000",
+      "name": "资阳地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "资阳市",
+      "mergedCode": "512000",
+      "year": 2000,
+      "note": "2000年撤地设市，资阳地区改为地级资阳市",
+      "children": []
+    },
+    {
+      "code": "511600",
+      "name": "广安地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "广安市",
+      "mergedCode": "511600",
+      "year": 1998,
+      "note": "1998年撤地设市，广安地区改为地级广安市",
+      "children": []
+    },
+    {
+      "code": "511500",
+      "name": "眉山地区",
+      "level": 2,
+      "status": "merged",
+      "mergedTo": "眉山市",
+      "mergedCode": "511400",
+      "year": 2000,
+      "note": "2000年撤地设市，眉山地区改为地级眉山市",
+      "children": []
+    }
+  ]
+}

@@ -11,7 +11,7 @@ import { debug } from './core.js';
 import { domObserver } from './dom-observer.js';
 
 // 标准菜单类名列表
-const STANDARD_MENU_CLASSES = ['menu-sidebar', 'menu-popup', 'menu-inline'];
+const STANDARD_MENU_CLASSES = ['CUI-menu-sidebar', 'CUI-menu-popup', 'CUI-menu-inline'];
 
 // 菜单实例管理器
 class MenuManager {
@@ -27,27 +27,68 @@ class MenuManager {
         this.setupResponsiveSidebar();
         this.scanAndInitMenus();
         this.registerObserver();
-        this.addBodySidebarClickListener();
     }
 
-    // 添加body下侧边栏菜单点击事件监听
-    addBodySidebarClickListener() {
-        // 监听body下的menu.menu-sidebar点击事件
-        document.addEventListener('click', (e) => {
-            const target = e.target.closest('menu.menu-sidebar');
-            if (target && target.parentElement === document.body) {
-                // 阻止事件冒泡，只激活菜单自己的行为
-                e.stopPropagation();
-                // 切换.head-menu-opened类到menu元素上
-                target.classList.toggle('head-menu-opened');
-            }
+    // 初始化移动端抽屉所需的辅助元素
+    initDrawerElements() {
+        if (document.querySelector('.CUI-menu-trigger')) return;
+
+        // 1. 创建汉堡按钮
+        const trigger = document.createElement('div');
+        trigger.className = 'CUI-menu-trigger';
+        // 使用精致的 SVG 汉堡图标
+        trigger.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: translate(-1px, -1px);">
+                <line class="line-top" x1="3" y1="6" x2="21" y2="6"></line>
+                <line class="line-mid" x1="3" y1="12" x2="21" y2="12"></line>
+                <line class="line-bot" x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        `;
+        
+        // 2. 创建遮罩层
+        const backdrop = document.createElement('div');
+        backdrop.className = 'CUI-menu-backdrop';
+
+        // 插入到 body 中
+        document.body.appendChild(trigger);
+        document.body.appendChild(backdrop);
+
+        // 3. 绑定点击事件
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleDrawer();
         });
+
+        backdrop.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.closeDrawer();
+        });
+        
+        debug('移动端抽屉辅助元素注入成功');
+    }
+
+    // 打开/关闭抽屉
+    toggleDrawer() {
+        document.body.classList.toggle('CUI-drawer-opened');
+        const trigger = document.querySelector('.CUI-menu-trigger');
+        if (trigger) {
+            trigger.classList.toggle('CUI-trigger-active');
+        }
+    }
+
+    // 关闭抽屉
+    closeDrawer() {
+        document.body.classList.remove('CUI-drawer-opened');
+        const trigger = document.querySelector('.CUI-menu-trigger');
+        if (trigger) {
+            trigger.classList.remove('CUI-trigger-active');
+        }
     }
 
     // 设置响应式侧边栏
     setupResponsiveSidebar() {
         // 读取页面中的第一个侧边栏菜单
-        this.sidebarMenu = document.querySelector('menu.menu-sidebar');
+        this.sidebarMenu = document.querySelector('menu.CUI-menu-sidebar');
         if (this.sidebarMenu) {
             // 保存原始位置信息
             this.originalPosition = {
@@ -85,10 +126,13 @@ class MenuManager {
         const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches;
         
         if (isMobile) {
+            // 初始化移动抽屉辅助元素
+            this.initDrawerElements();
             // 移动到body顶部
             this.moveSidebarToTop();
         } else {
-            // 还原到原始位置
+            // 关闭抽屉并还原到原始位置
+            this.closeDrawer();
             this.restoreSidebarPosition();
         }
     }
@@ -160,7 +204,7 @@ class MenuManager {
         debug('菜单实例创建', null, { menuId });
         
         // 如果是内联菜单，先转换结构，创建弹出菜单
-        if (menuElement.classList.contains('menu-inline')) {
+        if (menuElement.classList.contains('CUI-menu-inline')) {
             const innerPopups = menuInstance.convertToNestedPopupStructure();
             
             // 递归初始化这些弹出菜单
@@ -222,26 +266,26 @@ class MenuManager {
         if (!menu) return;
 
         // 如果是弹出菜单或内联菜单，先关闭其他已打开的同级菜单
-        if (menu.classList.contains('menu-popup')) {
+        if (menu.classList.contains('CUI-menu-popup')) {
             // 查找所有已显示的弹出菜单
-            const visiblePopups = document.querySelectorAll('.menu-popup.menu-visible');
+            const visiblePopups = document.querySelectorAll('.CUI-menu-popup.CUI-menu-visible');
             visiblePopups.forEach(popup => {
                 if (popup.id !== menuId) {
-                    popup.classList.remove('menu-visible');
-                    popup.classList.add('menu-hidden');
+                    popup.classList.remove('CUI-menu-visible');
+                    popup.classList.add('CUI-menu-hidden');
                     debug('关闭其他弹出菜单', null, { id: popup.id });
                 }
             });
         }
 
         // 切换当前菜单的显示/隐藏状态
-        if (menu.classList.contains('menu-hidden')) {
-            menu.classList.remove('menu-hidden');
-            menu.classList.add('menu-visible');
+        if (menu.classList.contains('CUI-menu-hidden')) {
+            menu.classList.remove('CUI-menu-hidden');
+            menu.classList.add('CUI-menu-visible');
             debug('显示菜单', null, { id: menuId });
         } else {
-            menu.classList.remove('menu-visible');
-            menu.classList.add('menu-hidden');
+            menu.classList.remove('CUI-menu-visible');
+            menu.classList.add('CUI-menu-hidden');
             debug('隐藏菜单', null, { id: menuId });
         }
     }
@@ -341,7 +385,7 @@ class MenuManager {
                     subUl = document.createElement('ul');
                     targetElement.appendChild(subUl);
                     // 初始化为关闭状态
-                    targetElement.classList.add('menu-closed');
+                    targetElement.classList.add('CUI-menu-closed');
                 }
                 
                 // 添加子菜单项
@@ -449,7 +493,7 @@ class MenuInstance {
             if (subUl) {
                 // 创建弹出菜单容器
                 const popupMenu = document.createElement('menu');
-                popupMenu.className = 'menu-popup menu-hidden';
+                popupMenu.className = 'CUI-menu-popup CUI-menu-hidden';
                 // 给弹出菜单一个唯一ID，确保不重复
                 const popupId = `${this.id}-popup-${index}`;
                 popupMenu.id = popupId;
@@ -514,7 +558,7 @@ class MenuInstance {
                 
                 // 创建菜单文本区域容器
                 const menuText = document.createElement('div');
-                menuText.className = 'menu-text';
+                menuText.className = 'CUI-menu-text';
                 
                 // 设置文字内容到menu-text容器中
                 const textNode = document.createTextNode(textContent.trim());
@@ -555,7 +599,7 @@ class MenuInstance {
     // 渲染展开图标
     renderExpandIcon(link) {
         // 检查是否已有展开图标
-        if (link.querySelector('.menu-expand-icon')) {
+        if (link.querySelector('.CUI-menu-expand-icon')) {
             return;
         }
         
@@ -564,7 +608,7 @@ class MenuInstance {
         
         // 创建图标元素并添加到a标签末尾（在menu-text外面）
         const iconSpan = document.createElement('span');
-        iconSpan.className = 'menu-expand-icon menu-icon';
+        iconSpan.className = 'CUI-menu-expand-icon CUI-menu-icon';
         iconSpan.innerHTML = `
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <use href="${basePath}outline/chevron-right.svg#icon"></use>
@@ -576,10 +620,10 @@ class MenuInstance {
     // 渲染单个图标
     renderIcon(link, iconName) {
         // 检查是否已有图标
-        let iconContainer = link.querySelector('.menu-icon-container');
+        let iconContainer = link.querySelector('.CUI-menu-icon-container');
         if (!iconContainer) {
             iconContainer = document.createElement('span');
-            iconContainer.className = 'menu-icon-container';
+            iconContainer.className = 'CUI-menu-icon-container';
             // 直接插入到a标签的开头
             link.insertBefore(iconContainer, link.firstChild);
         }
@@ -597,7 +641,7 @@ class MenuInstance {
             }
             
             iconContainer.innerHTML = `
-                <span class="menu-icon">
+                <span class="CUI-menu-icon">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <use href="${iconPath}#icon"></use>
                     </svg>
@@ -605,32 +649,42 @@ class MenuInstance {
             `;
         } else {
             // 否则使用文本图标
-            iconContainer.innerHTML = `<span class="menu-icon">${iconName}</span>`;
+            iconContainer.innerHTML = `<span class="CUI-menu-icon">${iconName}</span>`;
         }
     }
 
     // 渲染单个徽标
     renderBadge(link, badgeName) {
         // 检查是否已有徽章
-        if (link.querySelector('.badge')) {
+        if (link.querySelector('.CUI-badge')) {
             return;
         }
 
-        // 直接在a标签后添加badge元素
+        // 创建badge元素
         const badge = document.createElement('span');
-        badge.className = `badge ${badgeName.toLowerCase()}`;
+        badge.className = `CUI-badge CUI-badge-${badgeName.toLowerCase()}`;
         
-        // 插入到a标签的末尾
-        link.appendChild(badge);
+        // 优先插入到 .CUI-menu-text 容器内部，使其与文字连在一行
+        const menuText = link.querySelector('.CUI-menu-text');
+        if (menuText) {
+            menuText.appendChild(badge);
+        } else {
+            link.appendChild(badge);
+        }
     }
 
-    // 初始化子菜单：为有子菜单的li添加menu-closed类
+    // 初始化子菜单：为有子菜单的li根据菜单类型添加CUI-menu-closed或CUI-menu-opened类
     initSubmenus() {
+        const isSidebar = this.element.classList.contains('CUI-menu-sidebar');
         const items = this.element.querySelectorAll('li');
         items.forEach(item => {
             const submenu = item.querySelector(':scope > ul');
             if (submenu) {
-                item.classList.add('menu-closed');
+                if (isSidebar) {
+                    item.classList.add('CUI-menu-opened');
+                } else {
+                    item.classList.add('CUI-menu-closed');
+                }
             }
         });
     }
@@ -649,10 +703,10 @@ class MenuInstance {
     // 为内联菜单和弹出菜单添加自动触发功能
     initAutoTrigger() {
         // 检查是否是内联菜单中的弹出菜单（被内联菜单控制，不使用data-trigger）
-        const isInnerPopupOfInline = this.element.closest('menu.menu-inline') !== null;
+        const isInnerPopupOfInline = this.element.closest('menu.CUI-menu-inline') !== null;
         
         // 弹出菜单：通过 data-trigger 属性找到触发按钮
-        if (this.element.classList.contains('menu-popup') && !isInnerPopupOfInline) {
+        if (this.element.classList.contains('CUI-menu-popup') && !isInnerPopupOfInline) {
             const triggerId = this.element.getAttribute('data-trigger');
             if (triggerId) {
                 const triggerButton = document.getElementById(triggerId);
@@ -666,7 +720,7 @@ class MenuInstance {
                     
                     // 点击页面其他地方关闭菜单
                     const documentClickHandler = (e) => {
-                        if (!this.element.classList.contains('menu-hidden') && 
+                        if (!this.element.classList.contains('CUI-menu-hidden') && 
                             !this.element.contains(e.target) && 
                             !triggerButton.contains(e.target)) {
                             this.hide();
@@ -680,7 +734,7 @@ class MenuInstance {
         }
         
         // 内联菜单：自动为一级 li 添加按钮点击监听
-        if (this.element.classList.contains('menu-inline')) {
+        if (this.element.classList.contains('CUI-menu-inline')) {
             const items = this.element.querySelectorAll(':scope > ul > li');
             items.forEach(item => {
                 const link = item.querySelector(':scope > a');
@@ -688,8 +742,8 @@ class MenuInstance {
                 
                 if (link && submenu) {
                     // 为子菜单添加默认隐藏类
-                    if (!submenu.classList.contains('menu-hidden')) {
-                        submenu.classList.add('menu-hidden');
+                    if (!submenu.classList.contains('CUI-menu-hidden')) {
+                        submenu.classList.add('CUI-menu-hidden');
                     }
                     
                     // 添加按钮点击事件
@@ -698,18 +752,18 @@ class MenuInstance {
                         e.stopPropagation();
                         
                         // 关闭其他已打开的内联菜单
-                        const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.menu-hidden)');
+                        const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.CUI-menu-hidden)');
                         allOpenMenus.forEach(menu => {
                             if (menu !== submenu) {
-                                menu.classList.add('menu-hidden');
+                                menu.classList.add('CUI-menu-hidden');
                             }
                         });
                         
                         // 切换当前子菜单
-                        if (submenu.classList.contains('menu-hidden')) {
-                            submenu.classList.remove('menu-hidden');
+                        if (submenu.classList.contains('CUI-menu-hidden')) {
+                            submenu.classList.remove('CUI-menu-hidden');
                         } else {
-                            submenu.classList.add('menu-hidden');
+                            submenu.classList.add('CUI-menu-hidden');
                         }
                     };
                     this.addEventListener(link, 'click', linkClickHandler);
@@ -720,9 +774,9 @@ class MenuInstance {
                         e.stopPropagation();
                         
                         // 关闭其他已打开的内联菜单
-                        const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.menu-hidden)');
+                        const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.CUI-menu-hidden)');
                         allOpenMenus.forEach(menu => {
-                            menu.classList.add('menu-hidden');
+                            menu.classList.add('CUI-menu-hidden');
                         });
                     };
                     this.addEventListener(link, 'click', linkClickHandler);
@@ -731,10 +785,10 @@ class MenuInstance {
             
             // 点击页面其他地方关闭所有内联菜单
             const documentClickHandlerInline = (e) => {
-                const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.menu-hidden)');
+                const allOpenMenus = this.element.querySelectorAll(':scope > ul > li > menu:not(.CUI-menu-hidden)');
                 allOpenMenus.forEach(menu => {
                     if (!menu.contains(e.target)) {
-                        menu.classList.add('menu-hidden');
+                        menu.classList.add('CUI-menu-hidden');
                     }
                 });
             };
@@ -746,7 +800,7 @@ class MenuInstance {
 
     // 切换菜单显示/隐藏
     toggle() {
-        if (this.element.classList.contains('menu-hidden')) {
+        if (this.element.classList.contains('CUI-menu-hidden')) {
             this.show();
         } else {
             this.hide();
@@ -755,15 +809,15 @@ class MenuInstance {
 
     // 显示菜单
     show() {
-        this.element.classList.remove('menu-hidden');
-        this.element.classList.add('menu-visible');
+        this.element.classList.remove('CUI-menu-hidden');
+        this.element.classList.add('CUI-menu-visible');
         debug('显示菜单', null, { id: this.id });
     }
 
     // 隐藏菜单
     hide() {
-        this.element.classList.remove('menu-visible');
-        this.element.classList.add('menu-hidden');
+        this.element.classList.remove('CUI-menu-visible');
+        this.element.classList.add('CUI-menu-hidden');
         debug('隐藏菜单', null, { id: this.id });
     }
 
@@ -789,32 +843,38 @@ class MenuInstance {
             e.preventDefault();
             
             // 检查当前菜单项是否是已展开状态
-            if (item.classList.contains('menu-opened')) {
+            if (item.classList.contains('CUI-menu-opened')) {
                 // 当前是展开状态，切换为关闭状态
-                item.classList.remove('menu-opened');
-                item.classList.add('menu-closed');
+                item.classList.remove('CUI-menu-opened');
+                item.classList.add('CUI-menu-closed');
             } else {
-                // 当前是关闭状态，先关闭同ul下的所有已展开子菜单
-                const parentUl = item.parentElement;
-                const allOpenedItems = parentUl.querySelectorAll('li.menu-opened');
-                allOpenedItems.forEach(openedItem => {
-                    openedItem.classList.remove('menu-opened');
-                    openedItem.classList.add('menu-closed');
-                });
-                
-                // 展开当前菜单
-                item.classList.remove('menu-closed');
-                item.classList.add('menu-opened');
+                if (this.element.classList.contains('CUI-menu-sidebar')) {
+                    // 侧边栏允许独立折叠展开多个，不强制关闭同级
+                    item.classList.remove('CUI-menu-closed');
+                    item.classList.add('CUI-menu-opened');
+                } else {
+                    // 其他菜单类型（如弹出/内联）保持手风琴效果
+                    const parentUl = item.parentElement;
+                    const allOpenedItems = Array.from(parentUl.children).filter(child => child.classList.contains('CUI-menu-opened'));
+                    allOpenedItems.forEach(openedItem => {
+                        openedItem.classList.remove('CUI-menu-opened');
+                        openedItem.classList.add('CUI-menu-closed');
+                    });
+                    item.classList.remove('CUI-menu-closed');
+                    item.classList.add('CUI-menu-opened');
+                }
             }
         } else {
             // 没有子菜单的情况
-            // 先关闭同ul下的所有已展开子菜单
-            const parentUl = item.parentElement;
-            const allOpenedItems = parentUl.querySelectorAll('li.menu-opened');
-            allOpenedItems.forEach(openedItem => {
-                openedItem.classList.remove('menu-opened');
-                openedItem.classList.add('menu-closed');
-            });
+            if (!this.element.classList.contains('CUI-menu-sidebar')) {
+                // 非侧边栏才需要关闭其他同级展开项
+                const parentUl = item.parentElement;
+                const allOpenedItems = Array.from(parentUl.children).filter(child => child.classList.contains('CUI-menu-opened'));
+                allOpenedItems.forEach(openedItem => {
+                    openedItem.classList.remove('CUI-menu-opened');
+                    openedItem.classList.add('CUI-menu-closed');
+                });
+            }
             
             // 处理 data-action 回调
             const actionData = item.getAttribute('data-action');
@@ -823,8 +883,17 @@ class MenuInstance {
             }
 
             // 只有侧边菜单才设置激活状态
-            if (this.element.classList.contains('menu-sidebar')) {
+            if (this.element.classList.contains('CUI-menu-sidebar')) {
                 this.setActive(item);
+                
+                // 如果在移动端且抽屉处于开启状态，自动关闭抽屉
+                if (window.innerWidth < 768) {
+                    document.body.classList.remove('CUI-drawer-opened');
+                    const trigger = document.querySelector('.CUI-menu-trigger');
+                    if (trigger) {
+                        trigger.classList.remove('CUI-trigger-active');
+                    }
+                }
             }
         }
     }
@@ -1036,13 +1105,18 @@ class MenuInstance {
                     });
                     
                     // ========== 处理内联脚本 ==========
-                    const inlineScripts = [];
-                    const inlineScriptRegex = /<script(?![^>]*src)[^>]*>([\s\S]*?)<\/script>/gi;
-                    let scriptMatch;
-                    while ((scriptMatch = inlineScriptRegex.exec(finalContent)) !== null) {
-                        inlineScripts.push(scriptMatch[1]);
-                    }
-                    // 移除已提取的内联脚本（稍后会执行）
+                    // 使用DOMParser安全地提取脚本内容
+                    const tempDoc = document.createElement('div');
+                    tempDoc.innerHTML = finalContent;
+                    const scriptElements = tempDoc.querySelectorAll('script:not([src])');
+                    const scriptCodes = [];
+                    scriptElements.forEach(script => {
+                        if (script.textContent.trim()) {
+                            scriptCodes.push(script.textContent);
+                        }
+                    });
+                    
+                    // 移除已提取的内联脚本
                     finalContent = finalContent.replace(/<script(?![^>]*src)[^>]*>[\s\S]*?<\/script>/gi, '');
                     
                     // ========== 添加新的CSS ==========
@@ -1072,13 +1146,15 @@ class MenuInstance {
                     });
                     
                     // ========== 执行内联脚本 ==========
-                    console.log('[页面加载] 发现内联脚本数量:', inlineScripts.length);
-                    inlineScripts.forEach((scriptCode, index) => {
+                    console.log('[页面加载] 发现内联脚本数量:', scriptCodes.length);
+                    scriptCodes.forEach((scriptCode, index) => {
                         if (scriptCode.trim()) {
-                            const scriptEl = document.createElement('script');
-                            scriptEl.textContent = scriptCode;
-                            document.body.appendChild(scriptEl);
-                            console.log('  [执行] 内联脚本 #' + (index + 1));
+                            try {
+                                eval(scriptCode);
+                                console.log('  [执行] 内联脚本 #' + (index + 1));
+                            } catch (error) {
+                                console.error('  [错误] 内联脚本 #' + (index + 1) + ':', error);
+                            }
                         }
                     });
                     
@@ -1111,11 +1187,11 @@ class MenuInstance {
     setActive(item) {
         // 清除整个菜单中所有菜单项的激活状态
         this.element.querySelectorAll('li').forEach(li => {
-            li.classList.remove('menu-active');
+            li.classList.remove('CUI-menu-active');
         });
         
         // 设置当前菜单项为激活
-        item.classList.add('menu-active');
+        item.classList.add('CUI-menu-active');
     }
 
     // 销毁实例

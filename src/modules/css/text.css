@@ -8,14 +8,14 @@
  */
 
 /* 系统组件样式 */
-.sys-component {
+.CUI-sys-component {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 /* 正文宋体样式 */
-.text-serif {
+.CUI-text-serif {
     font-family: var(--font-serif);
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-body);
@@ -28,7 +28,7 @@
 }
 
 /* 标题宋体样式 */
-.text-serif.title {
+.CUI-text-serif.CUI-title {
     font-size: var(--font-size-title);
     font-weight: var(--font-weight-title);
     line-height: 1.4;
@@ -51,11 +51,11 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-.section-subtitle {
+.CUI-section-subtitle {
     margin: var(--size-md) 0;
 }
 
-.section-subtitle h3 {
+.CUI-section-subtitle h3 {
     font-size: 16px;
     font-weight: 500;
     color: var(--text-primary);

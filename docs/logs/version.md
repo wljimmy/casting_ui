@@ -1,5 +1,81 @@
 # 版本更新日志
 
+## v0.5.5 (2026-05-19)
+
+### 主题管理器与颜色选择器修复
+
+#### 主题管理器模块 (theme-manager.js / theme-manager.css)
+- **v0.5.5** - 修复全屏遮罩失效问题
+  - 修正遮罩class命名，从 `overlay` 改为 `CUI-overlay`
+  - 确保遮罩层正常显示，防止弹窗内容全屏显示
+- **v0.5.5** - 移除模板引擎循环语法
+  - 移除 `{{#each}}` 模板语法，改用JS循环生成色标和格式按钮
+  - 模板中仅保留变量替换 `{{变量名}}`
+- **v0.5.5** - 样式收敛到独立CSS文件
+  - 所有主题管理器样式移至 `theme-manager.css`
+  - 模板中不再包含内联样式
+- **v0.5.5** - 主题卡片升级为横向滚动容器
+  - 优化主题预览区展示效果
+  - 添加完整的主题描述、按钮示例和颜色展示
+- **v0.5.5** - 关闭按钮移至右上角
+  - 与颜色选择器保持一致的关闭按钮样式
+- **v0.5.5** - 新增色彩配置面板
+  - 添加/编辑主题时显示完整的8色配置面板
+  - 使用原生 `input[type=color]` 实现颜色选择
+
+#### 颜色选择器模块 (color-picker.js / color-picker.css)
+- **v0.5.5** - 修复色盘生成无效问题
+  - Canvas初始化改为读取模板尺寸
+  - 移除CSS冲突背景，确保色盘正常显示
+- **v0.5.5** - 关闭按钮移至右上角
+  - 统一弹窗关闭按钮位置
+
+### 代码高亮修复
+
+#### Prism集成优化
+- **v0.5.5** - 修复代码高亮路径错误
+  - 统一Prism文件引用路径为 `/css/prism/`、`/js/prism/`
+- **v0.5.5** - 添加显式初始化调用
+  - 在所有加载prism.js的HTML文件中添加 `Prism.highlightAll()`
+- **v0.5.5** - 手册页面代码块语言标注
+  - 为所有手册子页面的代码块添加 `class="language-xxx"`
+  - 支持HTML、JavaScript等语言高亮
+- **v0.5.5** - 主页fetch后自动激活高亮
+  - 在menu.js中添加页面加载完成后调用 `Prism.highlightAll()`
+
+### 图标搜索页面修复
+
+#### 脚本语法修复
+- **v0.5.5** - 修复JavaScript语法错误
+  - 修复引号混合使用问题
+  - 格式化代码结构
+- **v0.5.5** - 修复初始化问题
+  - 将 `DOMContentLoaded` 事件改为直接调用
+  - 确保AJAX加载页面时脚本正常执行
+- **v0.5.5** - 修复标签显示问题
+  - 将标签索引改为标签文字显示
+  - 使用 `getTag()` 函数获取对应标签
+
+#### CSS类名规范
+- **v0.5.5** - 统一CSS类名前缀
+  - `card` → `CUI-card`
+  - `btn-primary` → `CUI-btn-primary`
+  - `tag-search` → `CUI-tag-search`
+
+### 模块版本汇总
+
+| 模块 | 文件 | 版本 | 描述 |
+|------|------|------|------|
+| theme-manager | src/modules/js/theme-manager.js | 0.5.5 | 主题管理模块，支持主题切换和自定义 |
+| theme-manager-css | src/modules/css/theme-manager.css | 0.5.5 | 主题管理器样式 |
+| color-picker | src/modules/js/color-picker.js | 0.5.5 | 颜色选择器模块 |
+| color-picker-css | src/modules/css/color-picker.css | 0.5.5 | 颜色选择器样式 |
+| menu | src/modules/js/menu.js | 0.5.5 | 菜单模块，支持fetch加载子页面 |
+| progress | src/modules/js/progress.js | 0.3.0 | 进度条模块，data属性驱动 |
+| status | src/modules/js/status.js | 0.3.0 | 状态栏模块 |
+
+---
+
 ## v0.5.4 (2026-04-26)
 
 ### 进度条模块重构 (progress.js / progress.css)

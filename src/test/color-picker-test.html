@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色选择器测试 | Casting UI</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/color-picker.css">
+</head>
+<body>
+    <div class="CUI-container" style="padding: 40px;">
+        <h1>Casting UI - 颜色选择器测试</h1>
+        <p class="CUI-text-muted">测试颜色选择器的各项功能</p>
+
+        <hr>
+
+        <!-- ==================== 1. 基础功能测试 ==================== -->
+        <h2>1. 基础功能测试</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-primary" onclick="testBasicPicker()">打开颜色选择器</button>
+            <div id="result-basic" class="CUI-text-muted CUI-mt-md">
+                <div>选择的颜色：<span id="color-basic">-</span></div>
+                <div>预览：<span id="preview-basic" style="display: inline-block; width: 40px; height: 40px; border-radius: 4px; vertical-align: middle; margin-left: 8px;"></span></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 2. 颜色格式测试 ==================== -->
+        <h2>2. 颜色格式测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-3c">
+                <button class="CUI-btn" onclick="testFormatPicker('hex')">HEX 格式</button>
+                <button class="CUI-btn" onclick="testFormatPicker('rgb')">RGB 格式</button>
+                <button class="CUI-btn" onclick="testFormatPicker('rgba')">RGBA 格式</button>
+            </div>
+            <div id="result-format" class="CUI-text-muted CUI-mt-md">
+                输出结果：<span id="color-format">-</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 3. 自定义预设颜色 ==================== -->
+        <h2>3. 自定义预设颜色</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-secondary" onclick="testCustomPreset()">自定义预设颜色</button>
+            <div class="CUI-grid CUI-grid-5c CUI-gap-sm CUI-mt-md">
+                <div style="width: 100%; aspect-ratio: 1; background: #FF6B6B; border-radius: 4px;"></div>
+                <div style="width: 100%; aspect-ratio: 1; background: #4ECDC4; border-radius: 4px;"></div>
+                <div style="width: 100%; aspect-ratio: 1; background: #45B7D1; border-radius: 4px;"></div>
+                <div style="width: 100%; aspect-ratio: 1; background: #96CEB4; border-radius: 4px;"></div>
+                <div style="width: 100%; aspect-ratio: 1; background: #FFEAA7; border-radius: 4px;"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 4. 初始颜色测试 ==================== -->
+        <h2>4. 初始颜色测试</h2>
+        <div class="CUI-box">
+            <div class="CUI-grid CUI-grid-4c">
+                <button class="CUI-btn" onclick="testInitialColor('#FF5733')">红色</button>
+                <button class="CUI-btn" onclick="testInitialColor('#33FF57')">绿色</button>
+                <button class="CUI-btn" onclick="testInitialColor('#3357FF')">蓝色</button>
+                <button class="CUI-btn" onclick="testInitialColor('#FF33FF')">紫色</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 5. 取消测试 ==================== -->
+        <h2>5. 取消操作测试</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-secondary" onclick="testCancel()">打开选择器后点击取消</button>
+            <div id="result-cancel" class="CUI-text-muted CUI-mt-md">-</div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 6. 颜色应用示例 ==================== -->
+        <h2>6. 颜色应用示例</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-primary" onclick="applyColorToElement()">选择颜色应用到元素</button>
+            <div id="apply-container" style="margin-top: 20px;">
+                <div id="apply-element" style="width: 200px; height: 100px; border-radius: 8px; background: #E9ECEF; transition: all 0.3s;"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 7. 颜色信息显示 ==================== -->
+        <h2>7. 颜色信息显示</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-secondary" onclick="showColorInfo()">选择颜色查看信息</button>
+            <div id="color-info" class="CUI-text-muted CUI-mt-md">
+                <table class="CUI-table">
+                    <tbody>
+                        <tr>
+                            <td>HEX</td>
+                            <td id="info-hex">-</td>
+                        </tr>
+                        <tr>
+                            <td>RGB</td>
+                            <td id="info-rgb">-</td>
+                        </tr>
+                        <tr>
+                            <td>RGBA</td>
+                            <td id="info-rgba">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ==================== 8. 颜色对比测试 ==================== -->
+        <h2>8. 颜色对比测试</h2>
+        <div class="CUI-box">
+            <button class="CUI-btn CUI-btn-secondary" onclick="compareColors()">选择两个颜色对比</button>
+            <div id="compare-container" class="CUI-grid CUI-grid-2c CUI-gap-md CUI-mt-md">
+                <div>
+                    <div id="compare-color1" style="width: 100%; height: 100px; border-radius: 8px; background: #165DFF;"></div>
+                    <p id="compare-value1">#165DFF</p>
+                </div>
+                <div>
+                    <div id="compare-color2" style="width: 100%; height: 100px; border-radius: 8px; background: #67C23A;"></div>
+                    <p id="compare-value2">#67C23A</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { openColorPicker } from '/modules/js/color-picker.js';
+        
+        let compareIndex = 1;
+
+        async function testBasicPicker() {
+            try {
+                const color = await openColorPicker();
+                document.getElementById('color-basic').textContent = color;
+                document.getElementById('preview-basic').style.backgroundColor = color;
+            } catch (e) {
+                document.getElementById('color-basic').textContent = '用户取消';
+            }
+        }
+
+        async function testFormatPicker(format) {
+            try {
+                const color = await openColorPicker({ 
+                    format: format,
+                    initialColor: '#165DFF'
+                });
+                document.getElementById('color-format').textContent = color;
+            } catch (e) {
+                document.getElementById('color-format').textContent = '用户取消';
+            }
+        }
+
+        async function testCustomPreset() {
+            try {
+                const customColors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+                const color = await openColorPicker({ 
+                    presetColors: customColors,
+                    initialColor: customColors[0]
+                });
+                document.getElementById('color-basic').textContent = color;
+                document.getElementById('preview-basic').style.backgroundColor = color;
+            } catch (e) {
+                console.log('取消选择');
+            }
+        }
+
+        async function testInitialColor(color) {
+            try {
+                await openColorPicker({ initialColor: color });
+            } catch (e) {
+                console.log('取消选择');
+            }
+        }
+
+        async function testCancel() {
+            try {
+                await openColorPicker();
+                document.getElementById('result-cancel').textContent = '用户确认选择';
+            } catch (e) {
+                document.getElementById('result-cancel').textContent = '用户已取消选择';
+            }
+        }
+
+        async function applyColorToElement() {
+            try {
+                const color = await openColorPicker();
+                document.getElementById('apply-element').style.backgroundColor = color;
+            } catch (e) {
+                console.log('取消选择');
+            }
+        }
+
+        async function showColorInfo() {
+            try {
+                const color = await openColorPicker();
+                document.getElementById('info-hex').textContent = color.toUpperCase();
+                
+                if (color.startsWith('#')) {
+                    const hex = color.replace('#', '');
+                    const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
+                    const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
+                    const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
+                    document.getElementById('info-rgb').textContent = `rgb(${r}, ${g}, ${b})`;
+                    document.getElementById('info-rgba').textContent = `rgba(${r}, ${g}, ${b}, 1)`;
+                } else {
+                    document.getElementById('info-rgb').textContent = color;
+                    document.getElementById('info-rgba').textContent = color;
+                }
+            } catch (e) {
+                console.log('取消选择');
+            }
+        }
+
+        async function compareColors() {
+            try {
+                const color = await openColorPicker();
+                if (compareIndex === 1) {
+                    document.getElementById('compare-color1').style.backgroundColor = color;
+                    document.getElementById('compare-value1').textContent = color;
+                    compareIndex = 2;
+                } else {
+                    document.getElementById('compare-color2').style.backgroundColor = color;
+                    document.getElementById('compare-value2').textContent = color;
+                    compareIndex = 1;
+                }
+            } catch (e) {
+                console.log('取消选择');
+            }
+        }
+
+        window.testBasicPicker = testBasicPicker;
+        window.testFormatPicker = testFormatPicker;
+        window.testCustomPreset = testCustomPreset;
+        window.testInitialColor = testInitialColor;
+        window.testCancel = testCancel;
+        window.applyColorToElement = applyColorToElement;
+        window.showColorInfo = showColorInfo;
+        window.compareColors = compareColors;
+    </script>
+</body>
+</html>

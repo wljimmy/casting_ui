@@ -9,48 +9,31 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    
-    /* 响应式标题尺寸 - 仅在非section/subtitle上下文中生效 */
-    :not(.section):not(.section-subtitle) > h1 { font-size: 24px; }
-    :not(.section):not(.section-subtitle) > h2 { font-size: 20px; }
-    :not(.section):not(.section-subtitle) > h3 { font-size: 18px; }
-    :not(.section):not(.section-subtitle) > h4 { font-size: 16px; }
-    
-    .text-serif { font-size: 14px; }
-    .text-serif.title { font-size: 18px; }
-    
-    .header h1 {
-        font-size: 24px;
-    }
-    
     /* 移动端折叠表格 */
-    .table-responsive {
+    .CUI-table-responsive {
         overflow-x: auto;
     }
     
-    .table-collapse {
+    .CUI-table-collapse {
         display: block;
     }
     
-    .table-collapse thead {
+    .CUI-table-collapse thead {
         display: none;
     }
     
-    .table-collapse tbody {
+    .CUI-table-collapse tbody {
         display: block;
     }
     
-    .table-collapse tr {
+    .CUI-table-collapse tr {
         display: block;
         margin-bottom: var(--size-md);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
     }
     
-    .table-collapse td {
+    .CUI-table-collapse td {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -58,7 +41,7 @@
         padding: var(--size-sm) var(--size-md);
     }
     
-    .table-collapse td:before {
+    .CUI-table-collapse td:before {
         content: attr(data-label);
         font-weight: 600;
         color: var(--text-secondary);
@@ -67,22 +50,22 @@
 
 /* 容器查询 */
 @container (max-width: 480px) {
-    .card-container,
-    .general-container,
-    .button-container,
-    .input-container,
-    .select-container,
-    .modal-container,
-    .toast-container,
-    .loading-container,
-    .image-container,
-    .list-container,
-    .table-container,
-    .badge-container,
-    .progress-container,
-    .text-container,
-    .icon-container,
-    .divider-container {
+    .CUI-card-container,
+    .CUI-general-container,
+    .CUI-button-container,
+    .CUI-input-container,
+    .CUI-select-container,
+    .CUI-modal-container,
+    .CUI-toast-container,
+    .CUI-loading-container,
+    .CUI-image-container,
+    .CUI-list-container,
+    .CUI-table-container,
+    .CUI-badge-container,
+    .CUI-progress-container,
+    .CUI-text-container,
+    .CUI-icon-container,
+    .CUI-divider-container {
         padding: var(--size-sm);
     }
 }

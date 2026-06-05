@@ -1,3 +1,13 @@
+<!--
+Page-Info: Progress Bar Component Manual
+Type: component-demo
+Purpose: Demonstrate progress bar component usage
+Framework-Usage: Use framework CSS classes and components
+Ignored-Rules:
+  - inline-script: Demo control code for testing progress bar functionality
+Note: Inline JS is for demo purposes only, not part of framework.
+      Progress bar functionality is provided by framework module.
+-->
 <section class="CUI-section">
     <h2>进度条</h2>
     <p>进度条组件用于显示任务完成的百分比。基于data属性驱动：通过修改元素的data-value属性来控制进度条。</p>
@@ -92,10 +102,10 @@
     <div class="CUI-box">
         <div id="progress8" class="CUI-progress" data-value="0"></div>
         <div class="CUI-btn-group">
-            <button class="btn btn-primary" onclick="startProgress()">开始</button>
-            <button class="btn btn-secondary" onclick="pauseProgress()">暂停</button>
-            <button class="btn btn-warning" onclick="resetProgress()">重置</button>
-            <button class="btn btn-success" onclick="completeProgress()">完成</button>
+            <button class="CUI-btn CUI-btn-primary" onclick="startProgress()">开始</button>
+            <button class="CUI-btn CUI-btn-secondary" onclick="pauseProgress()">暂停</button>
+            <button class="CUI-btn CUI-btn-warning" onclick="resetProgress()">重置</button>
+            <button class="CUI-btn CUI-btn-success" onclick="completeProgress()">完成</button>
         </div>
     </div>
     <pre><code class="language-html">&lt;div id="progress8" class="CUI-progress" data-value="0"&gt;&lt;/div&gt;</code></pre>
@@ -124,7 +134,7 @@
             </tbody>
         </table>
     </div>
-    <pre><code class="language-javascript">// 获取进度条值
+    <pre><code class="language-js">// 获取进度条值
 const value = document.getElementById('progress8').dataset.value;
 
 // 设置进度条值（自动更新UI）

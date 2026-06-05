@@ -12,16 +12,10 @@
   min-height: 100vh;
   display: grid;
   grid-template-rows:
-    minmax(var(--web-header-height),auto)
-    1fr
-    minmax(var(--web-footer-height),auto);
+    minmax(var(--web-header-height), auto) 1fr minmax(var(--web-footer-height), auto);
 
   grid-template-columns:
-    1fr
-    var(--web-sidebar-left-width)
-    minmax(0, var(--web-main-max-width))
-    var(--web-sidebar-right-width)
-    1fr;
+    1fr var(--web-sidebar-left-width) minmax(0, var(--web-main-max-width)) var(--web-sidebar-right-width) 1fr;
 
   grid-template-areas:
     "header  header  header  header  header"
@@ -29,19 +23,35 @@
     "footer  footer  footer  footer  footer";
 }
 
-.CUI-layout-web header         { grid-area: header; }
-.CUI-layout-web .CUI-sidebar-left  { grid-area: left; }
-.CUI-layout-web main           { grid-area: main; }
-.CUI-layout-web .CUI-sidebar-right { grid-area: right; }
-.CUI-layout-web footer         { grid-area: footer; }
+.CUI-layout-web header {
+  grid-area: header;
+}
+
+.CUI-layout-web .CUI-sidebar-left {
+  grid-area: left;
+}
+
+.CUI-layout-web main {
+  grid-area: main;
+}
+
+.CUI-layout-web .CUI-sidebar-right {
+  grid-area: right;
+}
+
+.CUI-layout-web footer {
+  grid-area: footer;
+}
 
 /* 网页版 header / footer：和主体 5 列完全对齐，左右.占位 */
 .CUI-layout-web header,
 .CUI-layout-web footer {
-  /* 关键：只继承 5 列的宽度规则，不继承多行区域 */ 
-  padding-inline: calc((100vw - var(--web-sidebar-left-width) - var(--web-sidebar-right-width) - var(--web-main-max-width)) / 2); 
+  /* 关键：只继承 5 列的宽度规则，不继承多行区域 */
+  padding-inline: calc((100vw - var(--web-sidebar-left-width) - var(--web-sidebar-right-width) - var(--web-main-max-width)) / 2);
 }
-header, footer {
+
+header,
+footer {
   display: grid;
 }
 
@@ -56,14 +66,10 @@ header, footer {
   overflow: hidden;
 
   grid-template-rows:
-    var(--shell-header-height)
-    1fr
-    var(--shell-footer-height);
+    var(--shell-header-height) 1fr var(--shell-footer-height);
 
   grid-template-columns:
-    var(--shell-sidebar-left-width)
-    1fr
-    var(--shell-sidebar-right-width);
+    var(--shell-sidebar-left-width) 1fr var(--shell-sidebar-right-width);
 
   grid-template-areas:
     "header  header  header"
@@ -71,11 +77,25 @@ header, footer {
     "footer  footer  footer";
 }
 
-.CUI-layout-shell header         { grid-area: header; }
-.CUI-layout-shell .CUI-sidebar-left  { grid-area: left; }
-.CUI-layout-shell main           { grid-area: main; }
-.CUI-layout-shell .CUI-sidebar-right { grid-area: right; }
-.CUI-layout-shell footer         { grid-area: footer; }
+.CUI-layout-shell header {
+  grid-area: header;
+}
+
+.CUI-layout-shell .CUI-sidebar-left {
+  grid-area: left;
+}
+
+.CUI-layout-shell main {
+  grid-area: main;
+}
+
+.CUI-layout-shell .CUI-sidebar-right {
+  grid-area: right;
+}
+
+.CUI-layout-shell footer {
+  grid-area: footer;
+}
 
 /* main 主内容区完整样式 */
 main {
@@ -129,15 +149,162 @@ body.CUI-hidden-sidebar-left.CUI-hidden-sidebar-right main {
   grid-column: left / right;
 }
 
-body.CUI-hidden-sidebar-left .CUI-sidebar-left  { display: none; }
-body.CUI-hidden-sidebar-right .CUI-sidebar-right{ display: none; }
+body.CUI-hidden-sidebar-left .CUI-sidebar-left {
+  display: none;
+}
+
+body.CUI-hidden-sidebar-right .CUI-sidebar-right {
+  display: none;
+}
 
 body.CUI-hidden-footer {
   --web-footer-height: 0px;
   --shell-footer-height: 0px;
 }
 
-body.CUI-hidden-header header               { display: none; }
-body.CUI-hidden-sidebar-left .CUI-sidebar-left  { display: none; }
-body.CUI-hidden-sidebar-right .CUI-sidebar-right{ display: none; }
-body.CUI-hidden-footer footer               { display: none; }
+body.CUI-hidden-header header {
+  display: none;
+}
+
+body.CUI-hidden-sidebar-left .CUI-sidebar-left {
+  display: none;
+}
+
+body.CUI-hidden-sidebar-right .CUI-sidebar-right {
+  display: none;
+}
+
+body.CUI-hidden-footer footer {
+  display: none;
+}
+
+/* ========== 移动端布局全宽 + 抽屉体系 ========== */
+@media (max-width: 768px) {
+
+  /* --- 核心修复：web 布局改为单列，内容占满全宽 --- */
+  .CUI-layout-web {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer" !important;
+  }
+
+  /* 清零 header/footer 桌面版的左右居中 padding，避免内容被压窄 */
+  .CUI-layout-web header,
+  .CUI-layout-web footer {
+    padding-inline: 0 !important;
+  }
+
+  /* shell 布局同样改为单列 */
+  .CUI-layout-shell {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer" !important;
+  }
+
+  /* main 主体全宽，无内缩 */
+  main {
+    grid-column: 1 / -1 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  /* 移动端强制重塑右侧为浮动抽屉，脱离网格流 */
+  .CUI-layout-shell .CUI-sidebar-right,
+  .CUI-layout-web .CUI-sidebar-right {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 260px !important;
+    height: 100vh !important;
+    background: rgba(250, 250, 250, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    z-index: 10003 !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 40px 15px 20px 15px !important;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.08) !important;
+    border-radius: 0 !important;
+    border: none !important;
+    display: block !important;
+  }
+
+  body.CUI-right-drawer-opened .CUI-sidebar-right {
+    transform: translateX(0) !important;
+  }
+
+  /* 右侧拉环触发器 */
+  .CUI-sidebar-right-trigger {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 52px;
+    border-radius: 8px 0 0 8px;
+    background: rgba(250, 250, 250, 0.85);
+    border: 1px solid var(--border-color);
+    border-right: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10005;
+    cursor: pointer;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.2s ease, right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .CUI-sidebar-right-trigger:hover {
+    background: rgba(250, 250, 250, 0.95);
+  }
+
+  .CUI-sidebar-right-trigger svg {
+    width: 14px;
+    height: 14px;
+    color: var(--primary-color);
+    transform: translateX(1px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body.CUI-right-drawer-opened .CUI-sidebar-right-trigger {
+    right: 260px;
+  }
+
+  body.CUI-right-drawer-opened .CUI-sidebar-right-trigger svg {
+    transform: translateX(1px) rotate(180deg);
+  }
+
+  /* 右侧抽屉遮罩层 */
+  .CUI-sidebar-right-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 10002;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    transition: opacity var(--transition-normal);
+  }
+
+  body.CUI-right-drawer-opened .CUI-sidebar-right-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ========== iPad / 桌面（≥ 769px）隐藏汉堡按钮 ========== */
+@media (min-width: 769px) {
+  .CUI-menu-trigger {
+    display: none !important;
+  }
+}

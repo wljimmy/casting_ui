@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../modules/css/responsive.css">
     <link rel="stylesheet" href="../modules/css/components.css">
     <link rel="stylesheet" href="../modules/css/progress.css">
-    <link rel="stylesheet" href="../modules/css/prism/prism.css">
+    <link rel="stylesheet" href="/css/prism/prism.css">
 </head>
 
 <body>
@@ -100,10 +100,10 @@
                 <div class="CUI-box">
                     <div id="progress8" class="CUI-progress" data-value="0"></div>
                     <div class="CUI-btn-group">
-                        <button class="btn btn-primary" onclick="startProgress()">开始</button>
-                        <button class="btn btn-secondary" onclick="pauseProgress()">暂停</button>
-                        <button class="btn btn-warning" onclick="resetProgress()">重置</button>
-                        <button class="btn btn-success" onclick="completeProgress()">完成</button>
+                        <button class="CUI-btn CUI-btn-primary" onclick="startProgress()">开始</button>
+                        <button class="CUI-btn CUI-btn-secondary" onclick="pauseProgress()">暂停</button>
+                        <button class="CUI-btn CUI-btn-warning" onclick="resetProgress()">重置</button>
+                        <button class="CUI-btn CUI-btn-success" onclick="completeProgress()">完成</button>
                     </div>
                 </div>
                 <pre><code class="language-html">&lt;div id="progress8" class="CUI-progress" data-value="0"&gt;&lt;/div&gt;</code></pre>
@@ -130,7 +130,8 @@ document.getElementById('progress8').dataset.value = 75;</code></pre>
     </div>
 
     <script type="module" src="../modules/js/index.js"></script>
-    <script src="../modules/js/prism/prism.js"></script>
+    <script src="/js/prism/prism.js"></script>
+    <script>Prism.highlightAll();</script>
 
     <script>
         let timer = null;

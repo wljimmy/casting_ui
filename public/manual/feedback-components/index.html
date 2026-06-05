@@ -11,18 +11,18 @@
         <h4>1.1 UI示例</h4>
         <div id="modal-container-1" class="CUI-grid CUI-grid-4c">
             <!-- 弹窗触发按钮 -->
-            <button id="btn-modal1" class="btn btn-primary" onclick="showModalById('modal1')">信息弹窗</button>
-            <button id="btn-modal2" class="btn btn-primary" onclick="showModalById('modal2')">确认弹窗</button>
-            <button id="btn-modal3" class="btn btn-primary" onclick="showModalById('modal3')">顶部弹窗</button>
-            <button id="btn-modal4" class="btn btn-primary" onclick="showModalById('modal4')">底部弹窗</button>
-            <button id="btn-modal7" class="btn btn-primary" onclick="showModalById('modal7')">左侧弹窗</button>
-            <button id="btn-modal8" class="btn btn-primary" onclick="showModalById('modal8')">右侧弹窗</button>
-            <div id="transparent-bg-container-2" class="transparent-bg-container">
-                <div class="transparent-bg-content">
-                    <button id="btn-modal5" class="btn btn-primary" onclick="showModalById('modal5')">毛玻璃弹窗</button>
+            <button id="btn-modal1" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal1')">信息弹窗</button>
+            <button id="btn-modal2" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal2')">确认弹窗</button>
+            <button id="btn-modal3" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal3')">顶部弹窗</button>
+            <button id="btn-modal4" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal4')">底部弹窗</button>
+            <button id="btn-modal7" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal7')">左侧弹窗</button>
+            <button id="btn-modal8" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal8')">右侧弹窗</button>
+            <div id="transparent-bg-container-2" class="CUI-transparent-bg-container">
+                <div class="CUI-transparent-bg-content">
+                    <button id="btn-modal5" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal5')">毛玻璃弹窗</button>
                 </div>
             </div>
-            <button id="btn-modal6" class="btn btn-primary" onclick="showModalById('modal6')">带输入框的弹窗</button>
+            <button id="btn-modal6" class="CUI-btn CUI-btn-primary" onclick="showModalById('modal6')">带输入框的弹窗</button>
         </div>
         
         <h4>1.2 参数说明</h4>
@@ -73,8 +73,8 @@
         <p><strong>引用方法：</strong>使用 <code>showModal()</code> 方法创建弹窗。</p>
         
         <div class="CUI-code">
-            <pre><code>&lt;!-- 触发按钮 --&gt;
-&lt;button class="btn btn-primary" onclick="showModalExample()"&gt;显示弹窗&lt;/button&gt;
+            <pre><code class="language-js">&lt;!-- 触发按钮 --&gt;
+&lt;button class="CUI-btn CUI-btn-primary" onclick="showModalExample()"&gt;显示弹窗&lt;/button&gt;
 
 &lt;script&gt;
 function showModalExample() {
@@ -114,12 +114,12 @@ function showModalExample() {
         <h4>2.1 UI示例</h4>
         <div id="toast-container" class="CUI-grid CUI-grid-4c">
             <!-- Toast触发按钮 -->
-            <button id="btn-toast-success" class="btn btn-primary" onclick="showToast('success', '操作成功')">成功Toast</button>
-            <button id="btn-toast-error" class="btn btn-primary" onclick="showToast('error', '操作失败')">错误Toast</button>
-            <button id="btn-toast-warning" class="btn btn-primary" onclick="showToast('warning', '警告信息')">警告Toast</button>
-            <button id="btn-toast-info" class="btn btn-primary" onclick="showToast('info', '提示信息')">信息Toast</button>
-            <button id="btn-toast-top" class="btn btn-primary" onclick="showToast('success', '顶部Toast', 'top')">顶部Toast</button>
-            <button id="btn-toast-bottom" class="btn btn-primary" onclick="showToast('success', '底部Toast', 'bottom')">底部Toast</button>
+            <button id="btn-toast-success" class="CUI-btn CUI-btn-primary" onclick="showToast('success', '操作成功')">成功Toast</button>
+            <button id="btn-toast-error" class="CUI-btn CUI-btn-primary" onclick="showToast('error', '操作失败')">错误Toast</button>
+            <button id="btn-toast-warning" class="CUI-btn CUI-btn-primary" onclick="showToast('warning', '警告信息')">警告Toast</button>
+            <button id="btn-toast-info" class="CUI-btn CUI-btn-primary" onclick="showToast('info', '提示信息')">信息Toast</button>
+            <button id="btn-toast-top" class="CUI-btn CUI-btn-primary" onclick="showToast('success', '顶部Toast', 'top')">顶部Toast</button>
+            <button id="btn-toast-bottom" class="CUI-btn CUI-btn-primary" onclick="showToast('success', '底部Toast', 'bottom')">底部Toast</button>
         </div>
         
         <h4>2.2 参数说明</h4>
@@ -158,8 +158,8 @@ function showModalExample() {
         <p><strong>引用方法：</strong>使用 <code>showToast()</code> 方法显示Toast消息。</p>
         
         <div class="CUI-code">
-            <pre><code>&lt;!-- 触发按钮 --&gt;
-&lt;button class="btn btn-primary" onclick="showToastExample()"&gt;显示Toast&lt;/button&gt;
+            <pre><code class="language-js">&lt;!-- 触发按钮 --&gt;
+&lt;button class="CUI-btn CUI-btn-primary" onclick="showToastExample()"&gt;显示Toast&lt;/button&gt;
 
 &lt;script&gt;
 function showToastExample() {
@@ -192,20 +192,20 @@ function showToastExample() {
         <h4>3.1 UI示例</h4>
         <div id="loading-container">
             <!-- 加载动画 -->
-            <div class="magazine-component-showcase">
-                <div class="magazine-component-showcase-title">加载动画</div>
-                <div class="radio-group">
-                    <div class="radio-item">
+            <div class="CUI-magazine-component-showcase">
+                <div class="CUI-magazine-component-showcase-title">加载动画</div>
+                <div class="CUI-radio-group">
+                    <div class="CUI-radio-item">
                         <span>小加载动画：</span>
-                        <div id="loading-sm" class="loading loading-sm"></div>
+                        <div id="loading-sm" class="CUI-loading CUI-loading-sm"></div>
                     </div>
-                    <div class="radio-item">
+                    <div class="CUI-radio-item">
                         <span>中加载动画：</span>
-                        <div id="loading-md" class="loading"></div>
+                        <div id="loading-md" class="CUI-loading"></div>
                     </div>
-                    <div class="radio-item">
+                    <div class="CUI-radio-item">
                         <span>大加载动画：</span>
-                        <div id="loading-lg" class="loading loading-lg"></div>
+                        <div id="loading-lg" class="CUI-loading CUI-loading-lg"></div>
                     </div>
                 </div>
             </div>
@@ -213,31 +213,31 @@ function showToastExample() {
             <div class="CUI-m-md"></div>
             
             <!-- 骨架屏 -->
-            <div class="magazine-component-showcase">
-                <div class="magazine-component-showcase-title">卡片骨架屏</div>
-                <div id="skeleton-card" class="skeleton skeleton-card"></div>
+            <div class="CUI-magazine-component-showcase">
+                <div class="CUI-magazine-component-showcase-title">卡片骨架屏</div>
+                <div id="skeleton-card" class="CUI-skeleton CUI-skeleton-card"></div>
             </div>
             
             <div class="CUI-m-md"></div>
             
-            <div class="magazine-component-showcase">
-                <div class="magazine-component-showcase-title">列表骨架屏</div>
-                <div id="skeleton-list-1" class="skeleton skeleton-list"></div>
-                <div id="skeleton-list-2" class="skeleton skeleton-list"></div>
-                <div id="skeleton-list-3" class="skeleton skeleton-list"></div>
+            <div class="CUI-magazine-component-showcase">
+                <div class="CUI-magazine-component-showcase-title">列表骨架屏</div>
+                <div id="skeleton-list-1" class="CUI-skeleton CUI-skeleton-list"></div>
+                <div id="skeleton-list-2" class="CUI-skeleton CUI-skeleton-list"></div>
+                <div id="skeleton-list-3" class="CUI-skeleton CUI-skeleton-list"></div>
             </div>
             
             <div class="CUI-m-md"></div>
             
-            <div class="magazine-component-showcase">
-                <div class="magazine-component-showcase-title">表格骨架屏</div>
-                <div id="skeleton-table-1" class="skeleton skeleton-table"></div>
-                <div id="skeleton-table-2" class="skeleton skeleton-table"></div>
-                <div id="skeleton-table-3" class="skeleton skeleton-table"></div>
+            <div class="CUI-magazine-component-showcase">
+                <div class="CUI-magazine-component-showcase-title">表格骨架屏</div>
+                <div id="skeleton-table-1" class="CUI-skeleton CUI-skeleton-table"></div>
+                <div id="skeleton-table-2" class="CUI-skeleton CUI-skeleton-table"></div>
+                <div id="skeleton-table-3" class="CUI-skeleton CUI-skeleton-table"></div>
             </div>
             
             <!-- 加载遮罩触发按钮 -->
-            <button id="btn-loading-overlay" class="btn btn-primary" onclick="showLoading()">显示加载遮罩</button>
+            <button id="btn-loading-overlay" class="CUI-btn CUI-btn-primary" onclick="showLoading()">显示加载遮罩</button>
         </div>
         
         <h4>3.2 参数说明</h4>
@@ -296,14 +296,14 @@ function showToastExample() {
         <p><strong>引用方法：</strong>直接在HTML中使用骨架屏类，或使用 <code>showLoading()</code> 方法显示加载遮罩。</p>
         
         <div class="CUI-code">
-            <pre><code>&lt;!-- 加载动画 --&gt;
-&lt;div class="loading"&gt;&lt;/div&gt;
+            <pre><code class="language-html">&lt;!-- 加载动画 --&gt;
+&lt;div class="CUI-loading"&gt;&lt;/div&gt;
 
 &lt;!-- 卡片骨架屏 --&gt;
-&lt;div class="skeleton skeleton-card"&gt;&lt;/div&gt;
+&lt;div class="CUI-skeleton CUI-skeleton-card"&gt;&lt;/div&gt;
 
 &lt;!-- 加载遮罩 --&gt;
-&lt;button class="btn btn-primary" onclick="showLoadingExample()"&gt;显示加载遮罩&lt;/button&gt;
+&lt;button class="CUI-btn CUI-btn-primary" onclick="showLoadingExample()"&gt;显示加载遮罩&lt;/button&gt;
 
 &lt;script&gt;
 function showLoadingExample() {
@@ -330,35 +330,35 @@ function showLoadingExample() {
         <h4>4.1 UI示例</h4>
         <div id="message-container">
             <!-- 基础信息提示 -->
-            <div class="message message-info">
+            <div class="CUI-message CUI-message-info">
                 <div>这是一个基础信息提示，用于展示一般性的提示内容。</div>
             </div>
             
             <div class="CUI-m-md"></div>
             
             <!-- 成功信息提示 -->
-            <div class="message message-success">
+            <div class="CUI-message CUI-message-success">
                 <div>操作成功！您的更改已保存。</div>
             </div>
             
             <div class="CUI-m-md"></div>
             
             <!-- 警告信息提示 -->
-            <div class="message message-warning">
+            <div class="CUI-message CUI-message-warning">
                 <div>请注意：此操作不可逆，请谨慎处理。</div>
             </div>
             
             <div class="CUI-m-md"></div>
             
             <!-- 错误信息提示 -->
-            <div class="message message-error">
+            <div class="CUI-message CUI-message-error">
                 <div>操作失败！请检查网络连接后重试。</div>
             </div>
             
             <div class="CUI-m-md"></div>
             
             <!-- 带标题的信息提示 -->
-            <div class="message message-info">
+            <div class="CUI-message CUI-message-info">
                 <h4>系统更新</h4>
                 <div>系统将于今晚进行维护更新，预计耗时2小时。</div>
             </div>
@@ -404,13 +404,13 @@ function showLoadingExample() {
         <p><strong>引用方法：</strong>直接在HTML中使用相应的类名。</p>
         
         <div class="CUI-code">
-            <pre><code>&lt;!-- 基础信息提示 --&gt;
-&lt;div class="message message-info"&gt;
+            <pre><code class="language-html">&lt;!-- 基础信息提示 --&gt;
+&lt;div class="CUI-message CUI-message-info"&gt;
     &lt;div&gt;这是一个基础信息提示&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- 带标题的信息提示 --&gt;
-&lt;div class="message message-success"&gt;
+&lt;div class="CUI-message CUI-message-success"&gt;
     &lt;h4&gt;操作成功&lt;/h4&gt;
     &lt;div&gt;您的更改已保存&lt;/div&gt;
 &lt;/div&gt;</code></pre>

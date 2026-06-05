@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证高级验证测试 - Casting UI</title>
+    <!-- 全量引用 CSS -->
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    
+    <style>
+        /* 测试页面专用样式 */
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+        }
+        
+        .test-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .state-display {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--gray-100);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .test-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .test-result.success {
+            background: rgba(102, 187, 106, 0.1);
+            border: 1px solid var(--success-color);
+        }
+        
+        .test-result.error {
+            background: rgba(255, 77, 79, 0.1);
+            border: 1px solid var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="CUI-section">
+        <div class="CUI-container">
+            <h1 class="CUI-text-xl CUI-text-bold CUI-mb-lg">身份证高级验证测试</h1>
+            
+            <!-- 测试说明 -->
+            <div class="CUI-message CUI-message-info CUI-mb-lg">
+                <div>
+                    <strong>测试说明：</strong><br>
+                    1. 使用 <code>data-validate="idcard-adv"</code> 启用高级验证<br>
+                    2. 实时解析省/市/区/生日/性别<br>
+                    3. 完整验证包含校验码验证<br>
+                    4. 状态挂靠在注册表 node.idcard 中
+                </div>
+            </div>
+            
+            <!-- 测试1：高级身份证验证 -->
+            <div class="test-section">
+                <h2 class="test-title">测试1：高级身份证验证（带消息框）</h2>
+                
+                <div class="CUI-input-box" data-validate="idcard-adv" data-label="身份证号" data-hint="请输入18位身份证号码">
+                    <input type="text" name="idcard_adv_test1" class="CUI-input" placeholder="请输入身份证号" maxlength="18">
+                    <span class="CUI-input__info">
+                        <div class="CUI-message CUI-message-info">
+                            <div></div>
+                        </div>
+                    </span>
+                    <span class="CUI-input__error">
+                        <div class="CUI-message CUI-message-error">
+                            <div></div>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="state-display" id="state1">等待输入...</div>
+                
+                <button type="button" class="CUI-btn CUI-btn-primary CUI-mt-md" onclick="showState1()">查看状态</button>
+            </div>
+            
+            <!-- 测试2：高级身份证验证（无 message 框） -->
+            <div class="test-section">
+                <h2 class="test-title">测试2：高级身份证验证（无 message 框）</h2>
+                
+                <div class="CUI-input-box" data-validate="idcard-adv" data-label="身份证号">
+                    <input type="text" name="idcard_adv_test2" class="CUI-input" placeholder="请输入身份证号" maxlength="18">
+                </div>
+                
+                <div class="state-display" id="state2">等待输入...</div>
+                
+                <button type="button" class="CUI-btn CUI-btn-primary CUI-mt-md" onclick="showState2()">查看状态</button>
+            </div>
+            
+            <!-- 测试3：高级身份证验证（自定义信息） -->
+            <div class="test-section">
+                <h2 class="test-title">测试3：高级身份证验证（自定义信息）</h2>
+                
+                <div class="CUI-input-box" data-validate="idcard-adv" data-label="身份证号" data-hint="请输入正确的18位身份证">
+                    <input type="text" name="idcard_adv_custom" class="CUI-input" placeholder="请输入身份证号" maxlength="18">
+                    <span class="CUI-input__info">
+                        <div class="CUI-message CUI-message-info">
+                            <div>请输入正确的18位身份证</div>
+                        </div>
+                    </span>
+                    <span class="CUI-input__error">
+                        <div class="CUI-message CUI-message-error">
+                            <div>身份证格式有误，请检查</div>
+                        </div>
+                    </span>
+                </div>
+                
+                <p class="CUI-text-sm CUI-text-muted CUI-mt-sm">自定义提示和错误信息优先于默认信息</p>
+            </div>
+            
+            <!-- 测试4：普通身份证验证（对比） -->
+            <div class="test-section">
+                <h2 class="test-title">测试4：普通身份证验证（对比）</h2>
+                
+                <div class="CUI-input-box" data-validate="idcard" data-label="身份证号" data-error="身份证号格式错误">
+                    <input type="text" name="idcard_normal" class="CUI-input" placeholder="请输入身份证号" maxlength="18">
+                    <div class="CUI-input__error">
+                        <div class="CUI-message CUI-message-error"><div>身份证号格式错误</div></div>
+                    </div>
+                </div>
+                
+                <p class="CUI-text-sm CUI-text-muted CUI-mt-sm">普通验证仅检查格式（18位数字+X），无实时解析</p>
+            </div>
+            
+            <!-- 测试5：自动化测试 -->
+            <div class="test-section">
+                <h2 class="test-title">测试5：自动化测试</h2>
+                
+                <button type="button" class="CUI-btn CUI-btn-success" onclick="runAutoTest()">运行自动化测试</button>
+                
+                <div id="autoTestResult" class="test-result" style="display:none;"></div>
+            </div>
+            
+            <!-- 测试身份证列表 -->
+            <div class="test-section">
+                <h2 class="test-title">测试身份证号码（仅供测试）</h2>
+                
+                <table class="CUI-table">
+                    <thead>
+                        <tr>
+                            <th>身份证号</th>
+                            <th>预期结果</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>11010119900307723X</td>
+                            <td>有效</td>
+                            <td>北京市东城区，1990年3月7日，女性，校验码X</td>
+                        </tr>
+                        <tr>
+                            <td>110101199003077238</td>
+                            <td>校验码错误</td>
+                            <td>最后一位应为X</td>
+                        </tr>
+                        <tr>
+                            <td>119901199003077238</td>
+                            <td>市级代码无效</td>
+                            <td>不存在1199市</td>
+                        </tr>
+                        <tr>
+                            <td>110101199013077238</td>
+                            <td>出生日期无效</td>
+                            <td>月份13无效</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- 加载模块：只引用入口模块 -->
+    <script src="/modules/js/index.js" type="module"></script>
+    
+    <script>
+        // 等待框架初始化完成
+        function waitForCUI(callback) {
+            if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                callback();
+            } else {
+                // 监听 Pipeline 完成事件
+                document.addEventListener('cui-pipeline-complete', callback);
+                
+                // 备用：定时检查
+                const checkInterval = setInterval(() => {
+                    if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                        clearInterval(checkInterval);
+                        callback();
+                    }
+                }, 100);
+            }
+        }
+        
+        // 显示状态1
+        function showState1() {
+            waitForCUI(() => {
+                const input = document.querySelector('input[name="idcard_adv_test1"]');
+                const stateEl = document.getElementById('state1');
+                
+                if (window.CUI && window.CUI.input) {
+                    const node = window.CUI.input.get('idcard_adv_test1');
+                    if (node && node.idcard) {
+                        stateEl.textContent = JSON.stringify(node.idcard, null, 2);
+                    } else {
+                        stateEl.textContent = '状态未初始化（请先输入内容）';
+                    }
+                } else {
+                    stateEl.textContent = 'CUI.input 未加载';
+                }
+            });
+        }
+        
+        // 显示状态2
+        function showState2() {
+            waitForCUI(() => {
+                const input = document.querySelector('input[name="idcard_adv_test2"]');
+                const stateEl = document.getElementById('state2');
+                
+                if (window.CUI && window.CUI.input) {
+                    const node = window.CUI.input.get('idcard_adv_test2');
+                    if (node && node.idcard) {
+                        stateEl.textContent = JSON.stringify(node.idcard, null, 2);
+                    } else {
+                        stateEl.textContent = '状态未初始化（请先输入内容）';
+                    }
+                } else {
+                    stateEl.textContent = 'CUI.input 未加载';
+                }
+            });
+        }
+        
+        // 自动化测试
+        function runAutoTest() {
+            const resultEl = document.getElementById('autoTestResult');
+            resultEl.style.display = 'block';
+            resultEl.className = 'test-result';
+            
+            const testCases = [
+                { idcard: '11010119900307723X', expected: 'valid', desc: '北京市东城区，女性，校验码X' },
+                { idcard: '110101199003077238', expected: 'error', desc: '校验码错误（应为X）' },
+                { idcard: '119901199003077238', expected: 'error', desc: '市级代码无效' },
+                { idcard: '110101199013077238', expected: 'error', desc: '月份无效' },
+                { idcard: '110101199032077238', expected: 'error', desc: '日期无效' },
+            ];
+            
+            let passed = 0;
+            let failed = 0;
+            const results = [];
+            
+            testCases.forEach(async (tc) => {
+                const state = await window.CUI.idcardValidator.parse(tc.idcard);
+                const actualValid = state.isValid;
+                const expectedValid = tc.expected === 'valid';
+                
+                if (actualValid === expectedValid) {
+                    passed++;
+                    results.push(`✓ ${tc.idcard} - ${tc.desc}`);
+                } else {
+                    failed++;
+                    results.push(`✗ ${tc.idcard} - 预期: ${tc.expected}, 实际: ${state.status} (${state.error || '无错误'})`);
+                }
+                
+                // 所有测试完成后显示结果
+                if (passed + failed === testCases.length) {
+                    resultEl.innerHTML = `
+                        <strong>测试结果：</strong> 通过 ${passed} / 失败 ${failed}<br>
+                        <pre>${results.join('\n')}</pre>
+                    `;
+                    
+                    if (failed === 0) {
+                        resultEl.classList.add('success');
+                    } else {
+                        resultEl.classList.add('error');
+                    }
+                }
+            });
+        }
+        
+        // 定时更新状态显示
+        setInterval(() => {
+            showState1();
+            showState2();
+        }, 500);
+    </script>
+</body>
+</html>

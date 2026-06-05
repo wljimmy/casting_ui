@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/modules/css/progress.css">
     <link rel="stylesheet" href="/modules/css/menu.css">
     <link rel="stylesheet" href="/modules/css/input.css">
-    <link rel="stylesheet" href="/modules/css/prism/prism.css">
+    <link rel="stylesheet" href="/css/prism/prism.css">
 </head>
 <body class="CUI-page">
     <header>
@@ -115,8 +115,8 @@
                     <input type="text" name="search" class="CUI-input" placeholder="独立搜索框" id="searchInput">
                 </div>
                 <div class="CUI-span-6c CUI-flex CUI-gap-sm CUI-ai-center">
-                    <button class="btn btn-secondary" onclick="testGetValue('search')">获取值</button>
-                    <button class="btn btn-secondary" onclick="testElement('search')">获取DOM</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('search')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testElement('search')">获取DOM</button>
                     <span id="result-search" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -135,9 +135,9 @@
                 </div>
                 <div class="CUI-grid CUI-grid-12c CUI-mb-md">
                     <div class="CUI-span-6c CUI-flex CUI-gap-sm">
-                        <button type="button" class="btn btn-primary" onclick="testGetFormData('loginForm')">获取表单数据</button>
-                        <button type="button" class="btn btn-secondary" onclick="testSetFormData('loginForm')">设置表单数据</button>
-                        <button type="button" class="btn btn-secondary" onclick="testGetValue('loginForm.username')">获取用户名</button>
+                        <button type="button" class="CUI-btn CUI-btn-primary" onclick="testGetFormData('loginForm')">获取表单数据</button>
+                        <button type="button" class="CUI-btn CUI-btn-secondary" onclick="testSetFormData('loginForm')">设置表单数据</button>
+                        <button type="button" class="CUI-btn CUI-btn-secondary" onclick="testGetValue('loginForm.username')">获取用户名</button>
                     </div>
                 </div>
                 <div id="result-loginForm" class="CUI-text-muted CUI-mb-md"></div>
@@ -158,8 +158,8 @@
                 </div>
                 <div class="CUI-grid CUI-grid-12c CUI-mb-md">
                     <div class="CUI-span-6c CUI-flex CUI-gap-sm">
-                        <button type="button" class="btn btn-primary" onclick="testGetFormData('registerForm')">获取注册表单数据</button>
-                        <button type="button" class="btn btn-secondary" onclick="testSetFormData('registerForm')">设置注册表单数据</button>
+                        <button type="button" class="CUI-btn CUI-btn-primary" onclick="testGetFormData('registerForm')">获取注册表单数据</button>
+                        <button type="button" class="CUI-btn CUI-btn-secondary" onclick="testSetFormData('registerForm')">设置注册表单数据</button>
                     </div>
                 </div>
                 <div id="result-registerForm" class="CUI-text-muted CUI-mb-md"></div>
@@ -168,7 +168,7 @@
             <h2>Input 注册表</h2>
             <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
                 <div class="CUI-span-12c">
-                    <button class="btn btn-secondary CUI-mb-md" onclick="refreshRegistry()">刷新注册表</button>
+                    <button class="CUI-btn CUI-btn-secondary CUI-mb-md" onclick="refreshRegistry()">刷新注册表</button>
                     <pre id="registry-display" class="CUI-p-md CUI-bg-gray-100 CUI-radius-md CUI-overflow-auto" style="max-height: 400px;"></pre>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                     <textarea name="description" class="CUI-input" placeholder="请输入描述..." rows="3"></textarea>
                 </div>
                 <div class="CUI-span-4c CUI-flex CUI-gap-sm CUI-ai-center">
-                    <button class="btn btn-secondary" onclick="testGetValue('description')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('description')">获取值</button>
                     <span id="result-description" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                     </select>
                 </div>
                 <div class="CUI-span-8c CUI-flex CUI-gap-sm CUI-ai-center">
-                    <button class="btn btn-secondary" onclick="testGetValue('city')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('city')">获取值</button>
                     <span id="result-city" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                     <label><input type="checkbox" name="hobby" class="CUI-input" value="sport"> 运动</label>
                 </div>
                 <div class="CUI-span-12c CUI-mt-sm">
-                    <button class="btn btn-secondary" onclick="testGetValue('hobby')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('hobby')">获取值</button>
                     <span id="result-hobby" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -221,7 +221,7 @@
                     <label><input type="radio" name="gender" class="CUI-input" value="other"> 其他</label>
                 </div>
                 <div class="CUI-span-12c CUI-mt-sm">
-                    <button class="btn btn-secondary" onclick="testGetValue('gender')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('gender')">获取值</button>
                     <span id="result-gender" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -230,7 +230,7 @@
             <div class="CUI-grid CUI-grid-12c CUI-mb-lg">
                 <input type="hidden" name="token" value="abc123xyz">
                 <div class="CUI-span-12c">
-                    <button class="btn btn-secondary" onclick="testGetValue('token')">获取值</button>
+                    <button class="CUI-btn CUI-btn-secondary" onclick="testGetValue('token')">获取值</button>
                     <span id="result-token" class="CUI-text-muted"></span>
                 </div>
             </div>
@@ -286,7 +286,8 @@
     </main>
 
     <script type="module" src="/modules/js/index.js"></script>
-    <script src="/modules/js/prism/prism.js"></script>
+    <script src="/js/prism/prism.js"></script>
+    <script>Prism.highlightAll();</script>
     <script src="/modules/js/input.js"></script>
     <script>
         function refreshRegistry() {

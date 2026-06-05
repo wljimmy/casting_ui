@@ -10,7 +10,7 @@
    容器基础样式
    ================================ */
 
-.input,
+.CUI-input,
 .CUI-input {
     position: relative;
     display: flex;
@@ -29,8 +29,8 @@
    内部元素基础样式
    ================================ */
 
-.input > input,
-.input > textarea,
+.CUI-input > input,
+.CUI-input > textarea,
 .CUI-input > input,
 .CUI-input > textarea,
 .CUI-input > select {
@@ -41,8 +41,8 @@
     line-height: 1.5;
 }
 
-.input > input,
-.input > textarea {
+.CUI-input > input,
+.CUI-input > textarea {
     border: none;
     outline: none;
     background: transparent;
@@ -132,7 +132,7 @@
    Textarea 特殊样式
    ================================ */
 
-.input > textarea,
+.CUI-input > textarea,
 .CUI-input > textarea {
     resize: vertical;
     min-height: 80px;
@@ -166,8 +166,8 @@
    Placeholder 样式
    ================================ */
 
-.input > input::placeholder,
-.input > textarea::placeholder {
+.CUI-input > input::placeholder,
+.CUI-input > textarea::placeholder {
     color: var(--text-light);
 }
 
@@ -175,7 +175,7 @@
    聚焦状态
    ================================ */
 
-.input:focus-within,
+.CUI-input:focus-within,
 .CUI-input:focus-within {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
@@ -185,13 +185,13 @@
    禁用状态
    ================================ */
 
-.input-disabled {
+.CUI-input-disabled {
     background-color: var(--gray-100);
     cursor: not-allowed;
 }
 
-.input-disabled > input,
-.input-disabled > textarea {
+.CUI-input-disabled > input,
+.CUI-input-disabled > textarea {
     cursor: not-allowed;
     color: var(--text-light);
 }
@@ -224,14 +224,50 @@
     display: block;
 }
 
-.CUI-input-box.is-error > .CUI-input__error {
+.CUI-input-box.CUI-is-error > .CUI-input__error {
     display: block;
 }
 
-.CUI-input-box > .CUI-input__info > .message,
-.CUI-input-box > .CUI-input__error > .message {
+.CUI-input-box > .CUI-input__info > .CUI-message,
+.CUI-input-box > .CUI-input__error > .CUI-message {
     margin: 0;
     padding: var(--size-sm) var(--size-md);
+}
+
+/* ================================
+   颜色选择输入框
+   ================================ */
+
+.CUI-input-color {
+    cursor: pointer;
+    justify-content: center;
+    gap: var(--size-sm);
+    padding: var(--size-sm);
+}
+
+.CUI-input-color:hover {
+    border-color: var(--primary-color);
+}
+
+.CUI-input-color__preview {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+.CUI-input-color:hover .CUI-input-color__preview {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.2);
+}
+
+.CUI-input-color__value {
+    font-family: monospace;
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    min-width: 80px;
+    text-align: center;
 }
 
 /* ================================
@@ -244,4 +280,8 @@
 
 .CUI-input.CUI-input--error:focus-within {
     box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.1);
+}
+
+.CUI-input.CUI-input--error .CUI-input__icon {
+    color: var(--danger-color, #ff4d4f);
 }

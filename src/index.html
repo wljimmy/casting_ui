@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="./modules/css/progress.css">
     <link rel="stylesheet" href="./modules/css/input.css">
     <link rel="stylesheet" href="./modules/css/form.css">
-    <link rel="stylesheet" href="./modules/css/prism/prism.css">
+    <link rel="stylesheet" href="./modules/css/color-picker.css">
+    <link rel="stylesheet" href="/css/prism/prism.css">
     <link rel="stylesheet" href="./modules/css/menu.css">
 
 </head>
@@ -31,13 +32,13 @@
     <header>
         <div class="CUI-grid CUI-grid-2c CUI-grid-v-center">
             <div>
-                <h1>Casting UI</h1>
+                <h3>Casting UI</h3>
                 <p>极简UI组件库</p>
             </div>
             <div class="CUI-grid CUI-grid-right">
-                <div class="header-search">
-                    <input type="text" placeholder="搜索组件..." id="menuSearch" class="header-search-input">
-                    <span class="header-search-icon">
+                <div class="CUI-header-search">
+                    <input type="text" placeholder="搜索组件..." id="menuSearch" class="CUI-header-search-CUI-input">
+                    <span class="CUI-header-search-icon">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <use href="/icons/outline/search.svg#icon"></use>
@@ -51,10 +52,10 @@
     <!-- 侧边栏菜单组件 -->
     <aside class="CUI-sidebar-left CUI-visible">
         <div class="CUI-fluid CUI-sticky">
-            <menu id="magazineMenu" class="menu-sidebar ">
+            <menu id="magazineMenu" class="CUI-menu-sidebar ">
                 <ul>
                     <!-- 初始化指南 -->
-                    <li class="menu-active" data-id="init-guide"
+                    <li class="CUI-menu-active" data-id="init-guide"
                         data-action='{"url":"manual/init-guide/index.html","container":"#content-container"}'
                         data-default="true">初始化指南</li>
 
@@ -118,6 +119,13 @@
                             <li data-id="form-container"
                                 data-action='{"url":"manual/form-components/form-container/index.html","container":"#content-container"}'>
                                 表单布局</li>
+                            <li data-id="form-more">更多组件
+                                <ul>
+                                    <li data-id="color-tools" data-badge="new"
+                                        data-action='{"url":"manual/form-components/color-tools/index.html","container":"#content-container"}'>
+                                        颜色工具</li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
@@ -129,6 +137,11 @@
                                 文本</li>
                         </ul>
                     </li>
+
+                    <!-- 主题管理器 -->
+                    <li data-id="theme-manager-container" data-badge="new"
+                        data-action='{"url":"manual/theme-manager-container/index.html","container":"#content-container"}'>
+                        主题管理器</li>
 
                     <!-- 第三方插件 -->
                     <li data-id="third-party">第三方插件
@@ -160,7 +173,8 @@
 
     <!-- 框架脚本 -->
     <script type="module" src="./modules/js/index.js"></script>
-    <script src="./modules/js/prism/prism.js"></script>
+    <script src="/js/prism/prism.js"></script>
+    <script>Prism.highlightAll();</script>
 </body>
 
 </html>

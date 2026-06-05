@@ -1,0 +1,138 @@
+<section class="CUI-section">
+    <h2>颜色选择器</h2>
+    <p>颜色选择器是 Casting UI 框架的核心模块，提供直观的颜色选择界面，支持多种颜色格式转换。</p>
+
+    <h3>功能特性</h3>
+    <div class="CUI-box">
+        <ul>
+            <li>支持预设颜色快速选择</li>
+            <li>标准色盘自由选取</li>
+            <li>亮度调节滑块</li>
+            <li>手动输入颜色值</li>
+            <li>颜色格式转换（HEX/RGB/RGBA）</li>
+            <li>实时颜色预览</li>
+        </ul>
+    </div>
+
+    <h3>快速开始</h3>
+    <div class="CUI-box">
+        <pre><code class="language-js">import { openColorPicker } from '/modules/js/color-picker.js';
+
+// 基础用法
+const color = await openColorPicker();
+console.log('选择的颜色:', color);
+
+// 带选项的用法
+const result = await openColorPicker({
+    presetColors: ['#165DFF', '#67C23A', '#E6A23C'],
+    format: 'hex',
+    initialColor: '#FF5733'
+});</code></pre>
+    </div>
+
+    <h3>API 选项</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>选项</th>
+                    <th>类型</th>
+                    <th>默认值</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>presetColors</td>
+                    <td>Array</td>
+                    <td>内置15种颜色</td>
+                    <td>预设颜色数组</td>
+                </tr>
+                <tr>
+                    <td>format</td>
+                    <td>String</td>
+                    <td>hex</td>
+                    <td>输出格式：hex/rgb/rgba</td>
+                </tr>
+                <tr>
+                    <td>initialColor</td>
+                    <td>String</td>
+                    <td>#165DFF</td>
+                    <td>初始颜色</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>颜色格式</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-3c">
+            <div class="CUI-card">
+                <h4>HEX</h4>
+                <p>#FF5733</p>
+                <p>#165DFF</p>
+                <p>#FFFFFF</p>
+            </div>
+            <div class="CUI-card">
+                <h4>RGB</h4>
+                <p>rgb(255, 87, 51)</p>
+                <p>rgb(22, 93, 255)</p>
+                <p>rgb(255, 255, 255)</p>
+            </div>
+            <div class="CUI-card">
+                <h4>RGBA</h4>
+                <p>rgba(255, 87, 51, 1)</p>
+                <p>rgba(22, 93, 255, 0.5)</p>
+                <p>rgba(255, 255, 255, 0.8)</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>测试功能</h3>
+    <div class="CUI-box">
+        <button onclick="openPicker()" class="CUI-btn">打开颜色选择器</button>
+        <div id="result-color" class="CUI-text-muted CUI-mt-md">
+            <div>选择的颜色：<span id="color-value">-</span></div>
+            <div>预览：<span id="color-preview" style="display: inline-block; width: 40px; height: 40px; border-radius: 4px; vertical-align: middle; margin-left: 8px;"></span></div>
+        </div>
+    </div>
+
+    <h3>不同格式输出测试</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-3c">
+            <button onclick="openPickerWithFormat('hex')" class="CUI-btn">HEX 格式</button>
+            <button onclick="openPickerWithFormat('rgb')" class="CUI-btn">RGB 格式</button>
+            <button onclick="openPickerWithFormat('rgba')" class="CUI-btn">RGBA 格式</button>
+        </div>
+    </div>
+</section>
+
+<script type="module">
+    import { openColorPicker } from '/modules/js/color-picker.js';
+    
+    async function openPicker() {
+        try {
+            const color = await openColorPicker();
+            document.getElementById('color-value').textContent = color;
+            document.getElementById('color-preview').style.backgroundColor = color;
+        } catch (e) {
+            document.getElementById('color-value').textContent = '取消选择';
+        }
+    }
+    
+    async function openPickerWithFormat(format) {
+        try {
+            const color = await openColorPicker({ 
+                format: format,
+                initialColor: '#165DFF'
+            });
+            document.getElementById('color-value').textContent = color;
+            document.getElementById('color-preview').style.backgroundColor = color;
+        } catch (e) {
+            document.getElementById('color-value').textContent = '取消选择';
+        }
+    }
+    
+    window.openPicker = openPicker;
+    window.openPickerWithFormat = openPickerWithFormat;
+</script>

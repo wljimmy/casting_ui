@@ -9,30 +9,30 @@
 
 </head>
 <body>
-    <div class="test-container">
+    <div class="CUI-test-container">
         <h1>弹窗模块测试</h1>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>基本弹窗测试</h2>
             <p>测试基本弹窗的显示和交互功能。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testBasicModal()">显示基本弹窗</button>
-                <button class="btn btn-default" onclick="testConfirmModal()">显示确认弹窗</button>
+            <div class="CUI-button-group">
+                <button class="CUI-btn CUI-btn-primary" onclick="testBasicModal()">显示基本弹窗</button>
+                <button class="CUI-btn CUI-btn-default" onclick="testConfirmModal()">显示确认弹窗</button>
             </div>
             
-            <div class="result-container">
+            <div class="CUI-result-container">
                 <h3>操作结果：</h3>
                 <div id="modalResult"></div>
             </div>
         </div>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>自定义弹窗测试</h2>
             <p>测试带有自定义内容和样式的弹窗。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testCustomModal()">显示自定义弹窗</button>
+            <div class="CUI-button-group">
+                <button class="CUI-btn CUI-btn-primary" onclick="testCustomModal()">显示自定义弹窗</button>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                     <div>
                         <h3>自定义内容</h3>
                         <p>这是一个带有自定义HTML内容的弹窗</p>
-                        <input type="text" placeholder="请输入内容" class="input">
+                        <input type="text" placeholder="请输入内容" class="CUI-input">
                     </div>
                 `,
                 width: '400px',

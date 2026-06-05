@@ -9,64 +9,64 @@
 
 </head>
 <body>
-    <div class="test-container">
+    <div class="CUI-test-container">
         <h1>颜色选择器测试</h1>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>基本功能测试</h2>
             <p>测试颜色选择器的基本功能，包括弹窗模式和内联模式。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testModalColorPicker()">弹窗打开颜色选择器</button>
-                <button class="btn btn-default" onclick="testInlineColorPicker()">内联打开颜色选择器</button>
+            <div class="CUI-button-group">
+                <button class="CUI-btn CUI-btn-primary" onclick="testModalColorPicker()">弹窗打开颜色选择器</button>
+                <button class="CUI-btn CUI-btn-default" onclick="testInlineColorPicker()">内联打开颜色选择器</button>
             </div>
             
-            <div class="result-container">
+            <div class="CUI-result-container">
                 <h3>选择结果：</h3>
                 <div id="colorResult" style="font-family: monospace;"></div>
-                <div id="colorPreview" class="color-preview" style="background-color: #165DFF;"></div>
+                <div id="colorPreview" class="CUI-color-preview" style="background-color: #165DFF;"></div>
             </div>
         </div>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>自定义预设颜色</h2>
             <p>测试使用自定义预设颜色的颜色选择器。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testCustomPresetColors()">自定义预设颜色</button>
+            <div class="CUI-button-group">
+                <button class="CUI-btn CUI-btn-primary" onclick="testCustomPresetColors()">自定义预设颜色</button>
             </div>
             
-            <div class="result-container">
+            <div class="CUI-result-container">
                 <h3>选择结果：</h3>
                 <div id="customColorResult" style="font-family: monospace;"></div>
-                <div id="customColorPreview" class="color-preview" style="background-color: #FF6B6B;"></div>
+                <div id="customColorPreview" class="CUI-color-preview" style="background-color: #FF6B6B;"></div>
             </div>
         </div>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>不同颜色格式</h2>
             <p>测试不同颜色格式的输出。</p>
             
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="testHexFormat()">HEX格式</button>
-                <button class="btn btn-default" onclick="testRgbFormat()">RGB格式</button>
-                <button class="btn btn-default" onclick="testRgbaFormat()">RGBA格式</button>
+            <div class="CUI-button-group">
+                <button class="CUI-btn CUI-btn-primary" onclick="testHexFormat()">HEX格式</button>
+                <button class="CUI-btn CUI-btn-default" onclick="testRgbFormat()">RGB格式</button>
+                <button class="CUI-btn CUI-btn-default" onclick="testRgbaFormat()">RGBA格式</button>
             </div>
             
-            <div class="result-container">
+            <div class="CUI-result-container">
                 <h3>选择结果：</h3>
                 <div id="formatColorResult" style="font-family: monospace;"></div>
-                <div id="formatColorPreview" class="color-preview" style="background-color: #4ECDC4;"></div>
+                <div id="formatColorPreview" class="CUI-color-preview" style="background-color: #4ECDC4;"></div>
             </div>
         </div>
         
-        <div class="section">
+        <div class="CUI-section">
             <h2>内联模式测试</h2>
             <p>测试内联模式的颜色选择器。</p>
             
-            <button class="btn btn-default" onclick="testInlineMode()">内联打开颜色选择器</button>
+            <button class="CUI-btn CUI-btn-default" onclick="testInlineMode()">内联打开颜色选择器</button>
             
-            <div id="inlineColorContainer" class="inline-container">
+            <div id="inlineColorContainer" class="CUI-inline-container">
                 <!-- 内联颜色选择器将在这里显示 -->
             </div>
         </div>
