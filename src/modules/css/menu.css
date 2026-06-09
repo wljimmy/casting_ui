@@ -400,6 +400,11 @@ menu.CUI-menu-sidebar .CUI-badge-demo {
 }
 
 /* ========== 响应式菜单 ========== */
+/* 默认隐藏移动端菜单触发器 */
+.CUI-menu-trigger {
+    display: none !important;
+}
+
 @media (max-width: 768px) {
     menu {
         width: 100%;
@@ -444,6 +449,7 @@ menu.CUI-menu-sidebar .CUI-badge-demo {
 
     /* 移动端左侧极简零打扰书签触发器 */
     .CUI-menu-trigger {
+        display: flex !important;
         position: fixed;
         top: 0;
         left: 0;
@@ -456,7 +462,6 @@ menu.CUI-menu-sidebar .CUI-badge-demo {
         border-left: none; /* 去除贴边边框 */
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        display: flex;
         align-items: center;
         justify-content: center;
         z-index: 10005;

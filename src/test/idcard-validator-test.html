@@ -156,6 +156,54 @@
                 <div id="autoTestResult" class="test-result" style="display:none;"></div>
             </div>
             
+            <!-- 测试6：表单集成与注册表数据展示 -->
+            <div class="test-section">
+                <h2 class="test-title">测试6：表单集成与注册表数据展示</h2>
+                
+                <form id="idcardFormTest">
+                    <div class="CUI-grid CUI-grid-12c">
+                        <div class="CUI-span-6c">
+                            <input type="text" name="name" class="CUI-input-box" data-label="姓名" data-validate="required" placeholder="请输入姓名">
+                        </div>
+                        <div class="CUI-span-6c">
+                            <input type="text" name="idcard" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="请输入18位身份证号">
+                        </div>
+                        <div class="CUI-span-6c">
+                            <input type="tel" name="phone" class="CUI-input-box" data-label="手机号" data-validate="phone" placeholder="请输入手机号">
+                        </div>
+                        <div class="CUI-span-6c">
+                            <input type="email" name="email" class="CUI-input-box" data-label="邮箱" data-validate="email" placeholder="请输入邮箱">
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="CUI-grid CUI-grid-12c CUI-mt-md">
+                    <div class="CUI-span-8c">
+                        <label class="CUI-label">注册表数据（CUI.input.getAll()）</label>
+                        <textarea id="registryDisplay" class="CUI-input" rows="10" readonly placeholder="注册表数据将显示在这里..." style="font-family: monospace; font-size: 0.875rem;"></textarea>
+                    </div>
+                    <div class="CUI-span-4c">
+                        <div class="CUI-box">
+                            <h4>快捷操作</h4>
+                            <button type="button" class="CUI-btn CUI-btn-primary CUI-mb-sm" onclick="refreshRegistry()">刷新注册表</button>
+                            <button type="button" class="CUI-btn CUI-btn-secondary CUI-mb-sm" onclick="clearForm()">清空表单</button>
+                            <button type="button" class="CUI-btn CUI-btn-success" onclick="validateForm()">验证表单</button>
+                            <button type="button" class="CUI-btn CUI-btn-warning CUI-mt-sm" onclick="testIdcardParse()">手动测试解析</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="CUI-message CUI-message-info CUI-mt-md">
+                    <div>
+                        <strong>调试说明：</strong><br>
+                        1. 在身份证输入框中输入 "11010119900307723X" 后失焦<br>
+                        2. 点击"手动测试解析"按钮检查身份证验证器是否正常工作<br>
+                        3. 查看控制台输出，了解注册表节点状态<br>
+                        4. 如果节点有 idcard 属性但注册表显示为空，说明注册表序列化有问题
+                    </div>
+                </div>
+            </div>
+            
             <!-- 测试身份证列表 -->
             <div class="test-section">
                 <h2 class="test-title">测试身份证号码（仅供测试）</h2>
@@ -303,10 +351,115 @@
             });
         }
         
+        // 刷新注册表显示
+        function refreshRegistry() {
+            waitForCUI(() => {
+                const registryEl = document.getElementById('registryDisplay');
+                
+                if (window.CUI && window.CUI.input) {
+                    const allData = window.CUI.input.getAll();
+                    // 移除 element 属性以避免循环引用
+                    const cleanData = JSON.parse(JSON.stringify(allData, (key, value) => {
+                        if (key === 'element') return '[HTMLElement]';
+                        return value;
+                    }));
+                    registryEl.textContent = JSON.stringify(cleanData, null, 2);
+                    
+                    // 检查身份证节点是否有 idcard 属性
+                    const idcardNode = window.CUI.input.get('idcardFormTest.idcard');
+                    if (idcardNode) {
+                        console.log('[调试] 身份证节点:', idcardNode);
+                        console.log('[调试] 身份证 idcard 属性:', idcardNode.idcard);
+                    } else {
+                        console.log('[调试] 身份证节点未找到，请检查路径');
+                    }
+                } else {
+                    registryEl.textContent = 'CUI.input 未加载';
+                }
+            });
+        }
+        
+        // 清空表单
+        function clearForm() {
+            waitForCUI(() => {
+                if (window.CUI && window.CUI.input) {
+                    window.CUI.input.setFormData('idcardFormTest', {
+                        name: '',
+                        idcard: '',
+                        phone: '',
+                        email: ''
+                    });
+                    refreshRegistry();
+                }
+            });
+        }
+        
+        // 验证表单
+        function validateForm() {
+            waitForCUI(() => {
+                if (window.CUI && window.CUI.input) {
+                    const isValid = window.CUI.input.isFormValid('idcardFormTest');
+                    const resultEl = document.createElement('div');
+                    resultEl.className = `test-result ${isValid ? 'success' : 'error'}`;
+                    resultEl.innerHTML = isValid 
+                        ? '<strong>✓ 表单验证通过！</strong>' 
+                        : '<strong>✗ 表单验证失败，请检查红色标记的字段</strong>';
+                    
+                    const testSection = document.querySelector('.test-section:last-of-type');
+                    testSection.parentNode.insertBefore(resultEl, testSection);
+                    
+                    setTimeout(() => {
+                        resultEl.remove();
+                    }, 3000);
+                    
+                    refreshRegistry();
+                }
+            });
+        }
+        
+        // 手动测试身份证解析
+        function testIdcardParse() {
+            waitForCUI(() => {
+                if (window.CUI && window.CUI.idcardValidator) {
+                    // 使用测试身份证号
+                    const testIdcard = '11010119900307723X';
+                    console.log('[测试] 开始测试身份证解析:', testIdcard);
+                    
+                    window.CUI.idcardValidator.parse(testIdcard).then((state) => {
+                        console.log('[测试] 解析结果:', state);
+                        console.log('[测试] 解析结果 JSON:', JSON.stringify(state, null, 2));
+                        
+                        // 检查节点
+                        const node = window.CUI.input.get('idcardFormTest.idcard');
+                        if (node) {
+                            console.log('[测试] 注册表节点:', node);
+                            console.log('[测试] 节点 idcard 属性:', node.idcard);
+                            
+                            // 手动设置 idcard 属性
+                            node.idcard = state;
+                            console.log('[测试] 已手动设置 node.idcard');
+                            
+                            // 刷新显示
+                            refreshRegistry();
+                            
+                            alert('身份证解析完成！\n\n省份: ' + state.province.name + '\n城市: ' + state.city.name + '\n区: ' + state.district.name + '\n生日: ' + state.birth.date + '\n年龄: ' + state.birth.age + '\n性别: ' + state.gender + '\n有效: ' + state.isValid);
+                        } else {
+                            console.error('[测试] 节点未找到: idcardFormTest.idcard');
+                            alert('节点未找到: idcardFormTest.idcard');
+                        }
+                    });
+                } else {
+                    console.error('[测试] 身份证验证器未加载');
+                    alert('身份证验证器未加载');
+                }
+            });
+        }
+        
         // 定时更新状态显示
         setInterval(() => {
             showState1();
             showState2();
+            refreshRegistry();
         }, 500);
     </script>
 </body>

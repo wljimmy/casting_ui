@@ -1,167 +1,77 @@
 /*
  * Casting UI Framework
- * Version: 0.5.1
+ * Version: 0.5.7
  * Module: index.js
- * Description: 模块加载器，按需加载各功能模块
+ * Description: 模块入口文件，统一导入所有模块并启动生命周期 Pipeline
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */
 
+/**
+ * 入口模块设计说明：
+ * 
+ * 1. 使用静态 import 语句，确保模块按顺序加载
+ * 2. ES6 模块特性：所有 import 完成后才执行后续代码
+ * 3. 所有模块注册完成后，启动 Pipeline
+ * 4. 发布打包时，此文件作为入口，所有模块合并为单文件
+ */
+
 // ==============================
-// 环境检测（核心模块）
+// 第一层：基础模块（无依赖）
 // ==============================
-const CUIEnvironment = {
-    browser: 'unknown',
-    browserVersion: 0,
-    platform: 'unknown',
-    features: {
-        nativeInputIcons: false,
-        viewTransitions: false,
-        containerQueries: false
-    },
-    verified: {
-        browser: false,
-        platform: false,
-        isFake: false
-    }
-};
+import './env.js';           // 环境检测
+import './scheduler.js';     // 生命周期调度器
+import './utils.js';         // 工具函数
 
-(function initEnv() {
-    const ua = navigator.userAgent.toLowerCase();
-    const platform = navigator.platform.toLowerCase();
-    const vendor = navigator.vendor.toLowerCase();
+// ==============================
+// 第二层：核心模块（依赖 scheduler）
+// ==============================
+import './core.js';          // 核心 API
+import './dom-observer.js';  // DOM 观察器
 
-    let detectedBrowser = 'unknown';
-    let detectedVersion = 0;
+// ==============================
+// 第三层：基础组件（依赖 core, dom-observer）
+// ==============================
+import './template-engine.js';  // 模板引擎
+import './ui.js';               // UI 基础组件
+import './overlay.js';          // 遮罩层
 
-    if ((ua.includes('edg') || ua.includes('edge')) && vendor.includes('microsoft')) {
-        detectedBrowser = 'edge';
-        const match = ua.match(/Edge\/(\d+)/) || ua.match(/edg\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('chrome') && !ua.includes('edg') && vendor.includes('google')) {
-        detectedBrowser = 'chrome';
-        const match = ua.match(/Chrome\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('edg') && vendor.includes('apple')) {
-        detectedBrowser = 'safari';
-        const match = ua.match(/Version\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('firefox')) {
-        detectedBrowser = 'firefox';
-        const match = ua.match(/Firefox\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('opera') || ua.includes('opr')) {
-        detectedBrowser = 'opera';
-        const match = ua.match(/(?:Opera|OPR)\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('edg') && !ua.includes('chrome')) {
-        detectedBrowser = 'edge';
-        const match = ua.match(/edg\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('chrome') && !ua.includes('edg')) {
-        detectedBrowser = 'chrome';
-        const match = ua.match(/Chrome\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    } else if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('edg')) {
-        detectedBrowser = 'safari';
-        const match = ua.match(/Version\/(\d+)/);
-        detectedVersion = match ? parseInt(match[1]) : 0;
-    }
+// ==============================
+// 第四层：功能组件（依赖基础组件）
+// ==============================
+import './modal.js';           // 弹窗
+import './message.js';         // 消息提示
+import './menu.js';            // 菜单
+import './progress.js';        // 进度条
+import './image-zoom.js';      // 图片放大
+import './color-picker.js';    // 颜色选择器
+import './theme-manager.js';   // 主题管理器
 
-    CUIEnvironment.browser = detectedBrowser;
-    CUIEnvironment.browserVersion = detectedVersion;
-    CUIEnvironment.verified.browser = detectedBrowser !== 'unknown';
+// ==============================
+// 第五层：表单组件（依赖功能组件）
+// ==============================
+import './form.js';            // 表单
+import './input.js';           // 输入框
 
-    let detectedPlatform = 'unknown';
-    if (platform.includes('mac')) {
-        detectedPlatform = /iphone|ipad|ipod/.test(ua) ? 'ios' : 'mac';
-    } else if (platform.includes('win')) {
-        detectedPlatform = 'windows';
-    } else if (platform.includes('linux')) {
-        detectedPlatform = 'linux';
-    } else if (ua.includes('android')) {
-        detectedPlatform = 'android';
-    }
+// ==============================
+// 第六层：扩展模块（依赖表单组件）
+// ==============================
+import './location-data.js';      // 行政区划数据
+import './idcard-validator.js';   // 身份证高级验证
 
-    CUIEnvironment.platform = detectedPlatform;
-    CUIEnvironment.verified.platform = detectedPlatform !== 'unknown';
+// ==============================
+// 启动生命周期 Pipeline
+// ==============================
+// 所有模块 import 完成后，执行以下代码
+// 模块已通过 registerModule 注册到调度器
+// 现在启动 Pipeline，按阶段执行各模块的生命周期钩子
 
-    CUIEnvironment.features.nativeInputIcons = detectNativeInputIcons();
-    CUIEnvironment.features.viewTransitions = typeof document.startViewTransition === 'function';
-    CUIEnvironment.features.containerQueries = CSS.supports('container-type: inline-size');
-
-    // 暴露到全局
-    window.CUI = window.CUI || {};
-    window.CUI.env = CUIEnvironment;
-
-    console.log('环境检测完成:', {
-        browser: CUI.env.browser,
-        platform: CUI.env.platform,
-        browserVersion: CUI.env.browserVersion,
-        hasNativeIcons: CUI.env.features.nativeInputIcons
+if (window.CUI && window.CUI.scheduler) {
+    window.CUI.scheduler.runPipeline().then(() => {
+        console.log('[CUI] 框架初始化完成');
+    }).catch(error => {
+        console.error('[CUI] 框架初始化失败:', error);
     });
-})();
-
-function detectNativeInputIcons() {
-    // Safari 完全不支持原生图标显示
-    if (CUIEnvironment.browser === 'safari') {
-        return false;
-    }
-
-    // Chrome 浏览器（版本号未知或已知支持）
-    if (CUIEnvironment.browser === 'chrome') {
-        return true;
-    }
-
-    // Edge 浏览器（版本号未知或已知支持）
-    if (CUIEnvironment.browser === 'edge') {
-        return true;
-    }
-
-    // Firefox 93+ 支持（版本号未知时保守返回 false）
-    if (CUIEnvironment.browser === 'firefox' && CUIEnvironment.browserVersion >= 93) {
-        return true;
-    }
-
-    // Opera 浏览器（版本号未知时保守返回 false）
-    if (CUIEnvironment.browser === 'opera' && CUIEnvironment.browserVersion >= 66) {
-        return true;
-    }
-
-    return false;
+} else {
+    console.warn('[CUI] 调度器未加载，框架无法启动');
 }
-
-// ==============================
-// 模块加载
-// ==============================
-// 优先加载调度器模块，随后加载DOM观察器和遮罩模块
-import('./scheduler.js').then(() => {
-    console.log('生命周期调度器模块加载完成');
-    return import('./dom-observer.js');
-}).then(() => {
-    console.log('DOM观察器模块加载完成');
-    return import('./overlay.js');
-}).then(() => {
-    console.log('独立遮罩模块加载完成');
-    // 加载核心模块
-    return import('./core.js');
-}).then(module => {
-    // 核心模块加载完成后，加载其他模块
-    return Promise.all([
-        import('./modal.js'),
-        import('./message.js'),
-        import('./image-zoom.js'),
-        import('./color-picker.js'),
-        import('./theme-manager.js'),
-        import('./menu.js'),
-        import('./ui.js'),
-        import('./progress.js'),
-        import('./input.js'),
-        import('./form.js')
-    ]);
-}).then(() => {
-    console.log('所有模块加载完成，开始启动生命周期流水线 Pipeline');
-    return window.CUI.scheduler.runPipeline();
-}).catch(error => {
-    console.error('模块加载或生命周期流水线执行失败:', error);
-});

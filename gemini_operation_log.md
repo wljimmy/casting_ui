@@ -14,6 +14,34 @@
 
 ## 历史操作日志
 
+### [2026-06-09]
+- **操作人**: Trae
+- **操作内容**:
+  1. **身份证高级验证器逐位解析显示功能**：
+     - 修改 `_setupDefaultMessages(wrapper)` 方法，检查用户是否设置了 `data-info` 属性
+     - 关键词清洗规则：忽略大小写、忽略 -_ 连接符、忽略其他符号，清洗后为 "idinfo" 才启用
+     - 如果后面还有别的词汇，则属于用户自定义内容，不做处理
+     - 逐位解析显示：从输入满2位开始显示省份信息，逐步显示省市、生日、性别等
+  
+  2. **修复逐位解析功能失效问题**：
+     - 在 input.js 中添加 `data-info` 属性传递到新的 input 元素
+     - 确保 `_setupDefaultMessages` 能正确获取 `data-info` 属性
+  
+  3. **修改初始提示词**：
+     - 将初始提示词改为"请输入身份证号码"
+     - 更新 `_setupDefaultMessages` 和 `updateMessageDisplay` 方法中的提示文本
+  
+  4. **修复 blur 事件清空 info 内容的问题**：
+     - 当值为空时，只有启用逐位解析才恢复初始提示词
+     - 其他情况不动 info 内容（保护用户自定义内容）
+     - Error 内容不清除，只通过 CSS 类控制显示/隐藏
+  
+  5. **设计原则确认**：
+     - Error 内容：通过状态控制显示/隐藏，内容不动（除非必要）
+     - Info 内容：只有启用逐位解析时才动态调整，其他情况不动
+     - 保持 input.js 基础模块不变，所有 info 元素的创建和更新由 idcard-validator.js 负责
+     - 避免多个模块操作同一件事，保持逻辑清晰
+
 ### [2026-06-07]
 - **操作人**: Trae
 - **操作内容**:
@@ -277,3 +305,192 @@
      - 实际值（无空格）存储在注册表中（`CUI.input.get('name').value`）
      - 身份证解析状态挂靠在 `CUI.input.get('name').idcard`
 - **状态**: 事件管理器与身份证格式化模块开发完成，待测试验证。
+
+### [2026-06-09]
+- **操作人**: Trae
+- **操作内容**:
+  1. **身份证高级验证器手册页创建**：
+     - 创建 `public/manual/form-components/idcard-validator-container/index.html`
+     - 包含功能特性介绍、验证规则对比、解析状态输出、验证示例、JavaScript API、错误类型等完整文档
+     - 提供交互式演示输入框，支持实时解析和验证
+     - 包含表单集成示例和提交验证功能
+     - 说明与格式化模块的配合使用
+     - 文档符合框架手册页规范，使用 `CUI-section` 最外层容器
+
+  2. **表单组件索引页更新**：
+     - 更新 `public/manual/form-components/index.html`，添加身份证高级验证器入口卡片
+
+- **状态**: 身份证高级验证器手册页已完成创建，可通过手册页访问查看完整文档和交互演示。
+
+### [2026-06-09 第二阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **表单组件菜单更新**：
+     - 更新 `src/index.html`，在"表单组件"下新增"高级互动组件"子菜单项
+     - 将"身份证高级验证"挂载到"高级互动组件"下
+     - 添加 `data-badge="new"` 标记新功能
+
+- **状态**: 菜单更新完成，用户可通过侧边栏菜单访问身份证高级验证器手册页。
+
+### [2026-06-09 第三阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **测试页面数据展示功能增强**：
+     - 在 `src/test/idcard-validator-test.html` 中新增"测试6：表单集成与注册表数据展示"
+     - 创建完整的表单示例（姓名、身份证号、手机号、邮箱）
+     - 添加注册表数据展示文本框，实时显示 `CUI.input.getAll()` 的完整数据
+     - 提供三个快捷操作按钮：刷新注册表、清空表单、验证表单
+     - 注册表数据显示时自动过滤 `element` 属性避免循环引用
+
+- **状态**: 测试页面已增强，支持完整的表单集成测试和注册表数据实时展示。
+
+### [2026-06-09 第四阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **创建多个测试页面用于调试身份证验证器问题**：
+     - `src/test/idcard-debug-test.html` - 身份证验证器调试测试
+     - `src/test/registry-structure-test.html` - 注册表结构测试
+     - `src/test/idcard-event-test.html` - 身份证验证器事件测试
+     - `src/test/idcard-complete-test.html` - 身份证验证器完整测试
+     - `src/test/idcard-simple-test.html` - 身份证验证器简单测试
+     - 这些测试页面用于诊断身份证验证器是否正常工作
+     - 检查注册表节点是否有 idcard 属性
+     - 手动测试身份证解析功能
+
+  2. **在测试6中添加手动测试解析功能**：
+     - 添加"手动测试解析"按钮
+     - 添加调试说明
+     - 在 refreshRegistry 函数中添加节点检查日志
+
+- **状态**: 已创建多个测试页面用于诊断身份证验证器问题，需要用户测试以确定具体原因。
+
+**可能的问题原因**：
+1. 身份证验证器的 `updateRegistryState` 方法没有被正确调用
+2. 注册表节点路径不正确
+3. 身份证状态没有被正确添加到注册表节点中
+
+**测试建议**：
+1. 打开 `src/test/idcard-simple-test.html` 进行简单测试
+2. 在身份证输入框中输入 "11010119900307723X"
+3. 点击"检查节点"按钮，查看注册表节点是否有 idcard 属性
+4. 如果没有 idcard 属性，点击"手动测试"按钮进行手动测试
+5. 查看控制台输出，了解具体的错误信息
+
+### [2026-06-09 第五阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复身份证高级验证失效问题**：
+     - 问题原因：`input.js` 在处理 `CUI-input-box` 时，没有将 `data-validate` 属性复制到新创建的 `CUI-input-box` div 上
+     - 身份证验证器监听的是父元素 `.CUI-input-box` 的 `data-validate` 属性，而不是内部 input 元素的
+     - 修改 `src/modules/js/input.js`，在生成新的 `CUI-input-box` HTML 时，将 `data-validate` 属性添加到新的 div 上
+
+- **状态**: 已修复身份证高级验证失效问题，现在用户页面中的身份证验证应该能正常工作了。
+
+### [2026-06-09 第六阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复身份证验证器 setError 错误**：
+     - 问题原因：`input.js` 在处理 `CUI-input-box` 时，只在 `errorText` 有值时才生成 `.CUI-input__error` 结构
+     - `setError` 方法期望这个结构总是存在，所以当身份证验证器调用 `setError` 时会失败
+     - 修改 `src/modules/js/input.js`，让它总是生成 `.CUI-input__error` 结构，即使没有错误消息
+
+- **状态**: 已修复 setError 错误，身份证验证器现在能正常显示错误信息了。
+
+### [2026-06-09 第七阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复单纯 input 元素的身份证验证失效问题**：
+     - 问题原因：身份证验证器只检查 `.CUI-input-box` 的 `data-validate` 属性，如果是单纯的 `input` 元素就会跳过验证
+     - 修改 `src/modules/js/idcard-validator.js`：
+       - 在 `input` 和 `blur` 事件监听器中，增加对单纯 `input` 元素的支持
+       - 优先检查父元素 `.CUI-input-box` 的 `data-validate` 属性
+       - 如果没有父元素，则检查 `input` 本身的 `data-validate` 属性
+       - 错误信息处理只在存在 `.CUI-input-box` 时执行（单纯 input 只添加样式）
+
+- **状态**: 已修复单纯 input 元素的身份证验证失效问题，现在两种方式都能正常工作。
+
+### [2026-06-09 第八阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **将身份证验证器改为同步方式**：
+     - 修改 `src/modules/js/idcard-validator.js` 的 `parse` 方法，移除异步包装
+     - 添加内部 `_cleanIdcard` 方法进行数据清洗（移除分隔符、转换大写）
+     - 更新所有事件监听器中的 `parse` 调用（从异步改为同步）
+
+  2. **封装简洁的验证接口**：
+     - 添加 `CUI.validateIdcard(idcard)` 接口
+     - 自动进行数据清洗（支持各种格式输入）
+     - 返回标准化的身份证号和详细解析数据
+     - 返回结构：`{ idcard, isValid, province, city, district, birth, age, gender, checksum, checksumValid, error }`
+
+- **状态**: 已完成同步化改造和接口封装。
+
+**新接口使用示例**：
+```javascript
+// 支持各种输入格式
+const result = CUI.validateIdcard('11010119900307723x');  // 小写x
+// 或
+const result = CUI.validateIdcard('110101-19900307-723X'); // 带分隔符
+
+// 返回结果
+{
+    idcard: '11010119900307723X',
+    isValid: true,
+    province: { code: '11', name: '北京市', valid: true },
+    city: { code: '1101', name: '市辖区', valid: true },
+    district: { code: '110101', name: '东城区', valid: true },
+    birth: '1990-03-07',
+    age: 34,
+    gender: 'female',
+    checksum: 'X',
+    checksumValid: true,
+    error: null
+}
+```
+
+### [2026-06-09 第九阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复单纯 input 元素的验证样式问题**：
+     - 问题原因：`updateValidationClass` 方法在 wrapper 为 null 时直接返回，不做任何处理
+     - 修改方法签名：`updateValidationClass(wrapper, input, hasValue, isValid, message)`
+     - 参照普通验证的实现方式：
+       - 如果有 `.CUI-input-box` wrapper，添加 `CUI-is-error` 类
+       - 如果有 `.CUI-input` wrapper，添加 `CUI-input--error` 类，并设置 `input.title`
+       - 如果没有 wrapper，直接在 input 上添加 `CUI-input--error` 类，并设置 `input.title`
+     - 更新所有调用 `updateValidationClass` 的地方
+
+- **状态**: 已修复单纯 input 元素的验证样式问题，现在两种方式都能正确显示验证效果。
+
+### [2026-06-09 第十阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复超过18位的长度验证问题**：
+     - 问题原因：blur 事件中的验证逻辑没有处理 `value.length > 18` 的情况
+     - 原逻辑只处理了：正好18位、不足18位、空值三种情况
+     - 添加了对超过18位情况的处理，显示错误信息："身份证号位数不正确，最多18位"
+
+- **状态**: 已修复长度验证问题，现在超过18位也会显示错误。
+
+### [2026-06-09 第十一阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **为普通验证添加 success 样式**：
+     - 问题原因：普通验证在验证成功时只调用 `clearErrorState`，不添加 success 样式
+     - 新增 `showSuccess` 函数，在验证成功时添加 success 样式
+     - 修改 `validateInput` 函数，验证成功时调用 `showSuccess`
+     - 修改 `showError` 函数，添加错误样式前先清除 success 样式
+     - 修改 `clearErrorState` 函数，清除所有验证状态（包括 success）
+
+- **状态**: 已为普通验证添加 success 样式，现在验证通过的输入框都会显示绿色成功状态。
+
+### [2026-06-09 第十二阶段]
+- **操作人**: Trae
+- **操作内容**:
+  1. **修复单纯 input 元素（带 CUI-input 类）的验证样式问题**：
+     - 问题原因：当 input 元素本身有 `class="CUI-input"` 时，`input.closest('.CUI-input')` 会返回 input 自己
+     - 导致添加了错误的样式类（`CUI-is-success` 而不是 `CUI-input--success`）
+     - 修改 `updateValidationClass` 方法，添加 `isSelfWrapper` 判断
+     - 当 wrapper 是 input 自己时，直接在 input 上添加正确的样式类
+
+- **状态**: 已修复单纯 input 元素的验证样式问题。

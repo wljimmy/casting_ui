@@ -29,6 +29,7 @@ DATA_DIR = Path(__file__).parent.resolve()
 RAW_SOURCE_FILE = DATA_DIR / "administrative_divisions_raw.json"  # 原始树形元数据
 FLAT_FILE = DATA_DIR / "administrative_divisions.json"            # 扁平化 JSON
 CSV_FILE = DATA_DIR / "administrative_divisions.csv"             # CSV 表格
+VERSION_FILE = DATA_DIR / "version.json"                          # 版本号文件
 BACKUP_DIR = DATA_DIR / "backups"
 LOG_FILE = DATA_DIR / "update_log.md"
 
@@ -141,6 +142,22 @@ def save_csv(records, path):
         writer.writerows(records)
 
 
+def save_version():
+    """保存版本号文件（日期格式 YYYYMMDD）"""
+    version = datetime.now().strftime("%Y%m%d")
+    version_data = {
+        "version": version,
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "source": "国家地名信息库",
+        "url": "https://dmfw.mca.gov.cn/"
+    }
+    VERSION_FILE.write_text(
+        json.dumps(version_data, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    return version
+
+
 def backup_existing():
     """备份当前的数据文件"""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -246,6 +263,10 @@ def main():
     # 5c. 保存 CSV
     save_csv(filtered, CSV_FILE)
     print(f"▶ CSV 表格已保存: {CSV_FILE}")
+
+    # 5d. 保存版本号
+    version = save_version()
+    print(f"▶ 版本号已保存: {version}")
 
     # ---- 6. 记录日志 ----
     lv_count = {1: 0, 2: 0, 3: 0}

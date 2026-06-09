@@ -67,45 +67,41 @@ const CUIIdCardValidator = {
     /**
      * 解析身份证号码
      * @param {string} value - 身份证号码（已清理）
-     * @returns {Promise<Object>} 解析状态对象
+     * @returns {Object} 解析状态对象
      */
     parse(value) {
-        const self = this;
+        // 数据清洗：移除所有非数字和非X字符，转换为大写
+        const cleanValue = this._cleanIdcard(value);
+        const len = cleanValue.length;
         
-        // 等待数据加载
-        return this.waitForData().then(function() {
-            // 清理输入（只保留数字和X/x）
-            const cleanValue = value.replace(/[^0-9Xx]/g, '');
-            const len = cleanValue.length;
-            
-            // 初始化状态
-            const state = {
-                status: 'parsing',
-                phase: 0,
-                province: { code: '', name: '', valid: null },
-                city: { code: '', name: '', valid: null },
-                district: { code: '', name: '', valid: null },
-                birth: { date: '', year: '', month: '', day: '', age: 0, valid: null },
-                gender: '',
-                checksumValid: null,
-                isValid: false,
-                displayText: '',
-                error: ''
-            };
-            
-            // 空值
-            if (len === 0) {
-                state.status = 'waiting';
-                return state;
-            }
-            
-            // 位数过多
-            if (len > 18) {
-                state.status = 'error';
-                state.error = '身份证号位数不正确';
-                return state;
-            }
+        // 初始化状态
+        const state = {
+            status: 'parsing',
+            phase: 0,
+            province: { code: '', name: '', valid: null },
+            city: { code: '', name: '', valid: null },
+            district: { code: '', name: '', valid: null },
+            birth: { date: '', year: '', month: '', day: '', age: 0, valid: null },
+            gender: '',
+            checksumValid: null,
+            isValid: false,
+            displayText: '',
+            error: ''
+        };
         
+        // 空值
+        if (len === 0) {
+            state.status = 'waiting';
+            return state;
+        }
+        
+        // 位数过多
+        if (len > 18) {
+            state.status = 'error';
+            state.error = '身份证号位数不正确';
+            return state;
+        }
+    
         // 阶段1：省级代码（2位）
         if (len >= 2) {
             state.phase = 1;
@@ -126,7 +122,6 @@ const CUIIdCardValidator = {
                     return state;
                 }
             } else {
-                // 数据未加载，使用代码显示（不标记错误）
                 state.province.name = `省码${provinceCode}`;
                 state.province.valid = null;
             }
@@ -144,7 +139,6 @@ const CUIIdCardValidator = {
                     state.city.name = city.name;
                     state.city.valid = true;
                 } else {
-                    // 直辖市没有市级，使用省级名称作为市级显示
                     state.city.name = state.province.name;
                     state.city.valid = true;
                 }
@@ -189,7 +183,6 @@ const CUIIdCardValidator = {
             state.birth.month = month;
             state.birth.day = day;
             
-            // 验证日期有效性
             const birthDate = new Date(`${year}-${month}-${day}`);
             const isValidDate = birthDate instanceof Date && !isNaN(birthDate) &&
                 birthDate.getFullYear() === parseInt(year) &&
@@ -200,7 +193,6 @@ const CUIIdCardValidator = {
                 state.birth.date = `${year}-${month}-${day}`;
                 state.birth.valid = true;
                 
-                // 计算年龄
                 const today = new Date();
                 let age = today.getFullYear() - birthDate.getFullYear();
                 const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -228,8 +220,7 @@ const CUIIdCardValidator = {
         if (len === 18) {
             state.phase = 6;
             
-            // 校验码验证
-            const checksumValid = self.validateChecksum(cleanValue);
+            const checksumValid = this.validateChecksum(cleanValue);
             state.checksumValid = checksumValid;
             
             if (checksumValid) {
@@ -242,11 +233,20 @@ const CUIIdCardValidator = {
             }
         }
         
-        // 生成显示文本
-        state.displayText = self.generateDisplayText(state);
+        state.displayText = this.generateDisplayText(state);
         
         return state;
-        });
+    },
+    
+    /**
+     * 数据清洗：移除分隔符，转换为大写
+     * @param {string} value - 原始身份证号
+     * @returns {string} 清洗后的身份证号
+     */
+    _cleanIdcard(value) {
+        if (!value) return '';
+        // 移除所有非数字和非X字符，转换为大写
+        return String(value).toUpperCase().replace(/[^0-9X]/g, '');
     },
 
     /**
@@ -344,18 +344,22 @@ const CUIIdCardValidator = {
             const target = e.target;
             if (!target.matches('input')) return;
             
-            // 检查父元素 .CUI-input-box 的 data-validate 属性
+            // 检查验证类型：优先检查父元素 .CUI-input-box，其次检查 input 本身
             const wrapper = target.closest('.CUI-input-box');
-            if (!wrapper) return;
+            let validateType = null;
             
-            const validateType = wrapper.dataset.validate;
+            if (wrapper) {
+                validateType = wrapper.dataset.validate;
+            } else {
+                validateType = target.dataset.validate;
+            }
+            
             if (validateType !== 'idcard-adv') return;
             
             const value = target.value;
-            this.parse(value).then((state) => {
-                this.updateRegistryState(target, state);
-                this.updateMessageDisplay(target, state);
-            });
+            const state = this.parse(value);
+            this.updateRegistryState(target, state);
+            this.updateMessageDisplay(target, state);
         });
         
         // 监听 blur 事件（验证完整性）
@@ -363,11 +367,16 @@ const CUIIdCardValidator = {
             const target = e.target;
             if (!target.matches('input')) return;
             
-            // 检查父元素 .CUI-input-box 的 data-validate 属性
+            // 检查验证类型：优先检查父元素 .CUI-input-box，其次检查 input 本身
             const wrapper = target.closest('.CUI-input-box');
-            if (!wrapper) return;
+            let validateType = null;
             
-            const validateType = wrapper.dataset.validate;
+            if (wrapper) {
+                validateType = wrapper.dataset.validate;
+            } else {
+                validateType = target.dataset.validate;
+            }
+            
             if (validateType !== 'idcard-adv') return;
             
             const value = target.value.replace(/[^0-9Xx]/g, '');
@@ -378,35 +387,72 @@ const CUIIdCardValidator = {
             const path = parentId ? `${parentId}.${target.name}` : target.name;
             
             if (value.length === 18) {
-                this.parse(value).then((state) => {
-                    const isValid = state.isValid;
-                    this.updateRegistryValid(target, isValid);
-                    this.updateValidationClass(wrapper, value.length > 0, isValid);
-                    
-                    if (!isValid && state.error) {
-                        // 使用新 API 设置错误信息
-                        if (window.CUI && window.CUI.input) {
-                            window.CUI.input.setError(path, state.error);
-                        }
+                const state = this.parse(value);
+                const isValid = state.isValid;
+                this.updateRegistryValid(target, isValid);
+                this.updateValidationClass(wrapper, target, value.length > 0, isValid, state.error);
+                
+                if (wrapper && !isValid && state.error) {
+                    if (window.CUI && window.CUI.input) {
+                        window.CUI.input.setError(path, state.error);
                     }
-                });
+                }
+            } else if (value.length > 18) {
+                // 超过18位，显示错误信息
+                this.updateRegistryValid(target, false);
+                this.updateValidationClass(wrapper, target, true, false, '身份证号位数不正确，最多18位');
+                
+                if (wrapper && window.CUI && window.CUI.input) {
+                    window.CUI.input.setError(path, '身份证号位数不正确，最多18位');
+                }
             } else if (value.length > 0 && value.length < 18) {
                 // 输入不完整，显示错误信息
                 this.updateRegistryValid(target, false);
-                this.updateValidationClass(wrapper, true, false);
+                this.updateValidationClass(wrapper, target, true, false, '身份证号不完整，请输入18位身份证号');
                 
-                if (window.CUI && window.CUI.input) {
+                if (wrapper && window.CUI && window.CUI.input) {
                     window.CUI.input.setError(path, '身份证号不完整，请输入18位身份证号');
                 }
             } else {
-                // 空值，清除错误状态
-                this.updateValidationClass(wrapper, false, false);
+                // 空值，清除验证状态
+                this.updateValidationClass(wrapper, target, false, false);
+                this.updateRegistryValid(target, null);
                 
-                if (window.CUI && window.CUI.input) {
-                    window.CUI.input.clearMessages(path);
+                // 只有启用逐位解析时，才恢复初始提示词
+                // 其他情况不动 info 内容
+                const enableParseDisplay = wrapper && wrapper.dataset.enableParseDisplay === 'true';
+                if (enableParseDisplay) {
+                    const infoEl = wrapper.querySelector('.CUI-input__info .CUI-message div');
+                    if (infoEl) {
+                        infoEl.textContent = '请输入身份证号码';
+                    }
+                }
+                
+                // 清除 error 状态（通过 CSS 类控制显示/隐藏，不清除内容）
+                if (wrapper) {
+                    wrapper.classList.remove('CUI-is-error');
                 }
             }
         }, true);
+        
+        // 注册简洁的验证接口
+        window.CUI.validateIdcard = (idcard) => {
+            const state = this.parse(idcard);
+            
+            return {
+                idcard: state.status === 'valid' ? this._cleanIdcard(idcard) : null,
+                isValid: state.isValid,
+                province: state.province,
+                city: state.city,
+                district: state.district,
+                birth: state.birth.date || '',
+                age: state.birth.age || 0,
+                gender: state.gender || '',
+                checksum: state.status === 'valid' ? this._cleanIdcard(idcard).substring(17) : '',
+                checksumValid: state.checksumValid,
+                error: state.error || null
+            };
+        };
         
         console.log('[CUIIdCardValidator] 模块初始化完成');
     },
@@ -416,16 +462,59 @@ const CUIIdCardValidator = {
      * @param {HTMLElement} wrapper - CUI-input-box 元素
      */
     _setupDefaultMessages(wrapper) {
-        // 设置默认 Info 提示
-        const infoEl = wrapper.querySelector('.CUI-input__info .CUI-message div');
-        if (infoEl && !infoEl.textContent.trim()) {
-            infoEl.textContent = '请输入正确的中华人民共和国18位身份证';
+        // 检查用户是否设置了启用逐位解析显示的标记
+        // 约定：清洗后的关键词为 "idinfo" 时才启用逐位解析显示功能
+        // 清洗规则：忽略大小写、忽略 -_ 连接符、忽略其他符号
+        // 如果后面还有别的词汇，则属于用户自定义内容，不做处理
+        const input = wrapper.querySelector('input');
+        const infoValue = input && input.dataset.info ? input.dataset.info.trim() : '';
+        
+        // 清洗关键词：移除连接符和符号，转小写
+        const cleanedValue = infoValue.toLowerCase().replace(/[-_\s]/g, '').replace(/[^\w]/g, '');
+        
+        // 只有清洗后正好是 "idinfo" 时才启用
+        const enableParseDisplay = cleanedValue === 'idinfo';
+        
+        // 标记 wrapper，用于后续判断是否启用逐位解析显示
+        wrapper.dataset.enableParseDisplay = enableParseDisplay ? 'true' : 'false';
+        
+        // 只有用户明确设置关键词时，才启用逐位解析显示功能
+        // 其他情况（设置了其他内容或没有设置）都不做额外处理
+        if (enableParseDisplay) {
+            // 确保 info 元素存在
+            let infoEl = wrapper.querySelector('.CUI-input__info');
+            if (!infoEl) {
+                // 创建 info 元素
+                infoEl = document.createElement('span');
+                infoEl.className = 'CUI-input__info';
+                infoEl.innerHTML = '<div class="CUI-message CUI-message-info"><div></div></div>';
+                
+                // 插入到合适的位置（在 hint 之后，error 之前）
+                const hintEl = wrapper.querySelector('.CUI-input__hint');
+                const errorEl = wrapper.querySelector('.CUI-input__error');
+                if (hintEl) {
+                    hintEl.after(infoEl);
+                } else if (errorEl) {
+                    errorEl.before(infoEl);
+                } else {
+                    wrapper.appendChild(infoEl);
+                }
+            }
+            
+            // 设置默认提示文本（等待用户输入时显示）
+            const msgEl = infoEl.querySelector('.CUI-message div');
+            if (msgEl) {
+                msgEl.textContent = '请输入身份证号码';
+            }
         }
         
         // 设置默认 Error 错误
-        const errorEl = wrapper.querySelector('.CUI-input__error .CUI-message div');
-        if (errorEl && !errorEl.textContent.trim()) {
-            errorEl.textContent = '身份证号格式不正确';
+        const errorEl = wrapper.querySelector('.CUI-input__error');
+        if (errorEl) {
+            const msgEl = errorEl.querySelector('.CUI-message div');
+            if (msgEl && !msgEl.textContent.trim()) {
+                msgEl.textContent = '身份证号格式不正确';
+            }
         }
     },
 
@@ -468,20 +557,52 @@ const CUIIdCardValidator = {
 
     /**
      * 更新验证 CSS 类
-     * @param {HTMLElement} wrapper - 包装元素
+     * @param {HTMLElement} wrapper - 包装元素（可能为 null）
+     * @param {HTMLElement} input - 输入框元素
      * @param {boolean} hasValue - 是否有值
      * @param {boolean} isValid - 是否有效
+     * @param {string} message - 错误信息（可选）
      */
-    updateValidationClass(wrapper, hasValue, isValid) {
-        if (!wrapper) return;
+    updateValidationClass(wrapper, input, hasValue, isValid, message) {
+        // 如果没有 wrapper，尝试查找 .CUI-input 或直接在 input 上添加样式
+        // 注意：如果 input 本身就是 .CUI-input，则 wrapper 就是 input 自己
+        if (!wrapper) {
+            wrapper = input.closest('.CUI-input');
+        }
         
-        wrapper.classList.remove('CUI-is-error', 'CUI-is-success', 'CUI-input--error', 'CUI-input--success');
+        // 判断 wrapper 是否是 input 自己（单纯 input 元素）
+        const isSelfWrapper = wrapper === input;
+        
+        // 清除现有状态
+        if (wrapper && !isSelfWrapper) {
+            wrapper.classList.remove('CUI-is-error', 'CUI-is-success', 'CUI-input--error', 'CUI-input--success');
+        }
+        input.classList.remove('CUI-input--error', 'CUI-input--success');
+        input.title = '';
         
         if (hasValue) {
             if (isValid) {
-                wrapper.classList.add('CUI-is-success');
+                // 成功状态
+                if (wrapper && wrapper.classList.contains('CUI-input-box')) {
+                    wrapper.classList.add('CUI-is-success');
+                } else if (wrapper && !isSelfWrapper) {
+                    wrapper.classList.add('CUI-input--success');
+                } else {
+                    // 单纯 input 元素，直接在 input 上添加样式
+                    input.classList.add('CUI-input--success');
+                }
             } else {
-                wrapper.classList.add('CUI-is-error');
+                // 错误状态
+                if (wrapper && wrapper.classList.contains('CUI-input-box')) {
+                    wrapper.classList.add('CUI-is-error');
+                } else if (wrapper && !isSelfWrapper) {
+                    wrapper.classList.add('CUI-input--error');
+                    input.title = message || '身份证号格式不正确';
+                } else {
+                    // 单纯 input 元素，直接在 input 上添加样式
+                    input.classList.add('CUI-input--error');
+                    input.title = message || '身份证号格式不正确';
+                }
             }
         }
     },
@@ -497,6 +618,10 @@ const CUIIdCardValidator = {
         const wrapper = input.closest('.CUI-input-box');
         if (!wrapper) return;
         
+        // 检查是否启用逐位解析显示功能
+        // 只有用户明确设置 data-info="ID Info" 时才启用
+        const enableParseDisplay = wrapper.dataset.enableParseDisplay === 'true';
+        
         const infoEl = wrapper.querySelector('.CUI-input__info');
         const errorEl = wrapper.querySelector('.CUI-input__error');
         
@@ -505,15 +630,17 @@ const CUIIdCardValidator = {
                 const msgEl = errorEl.querySelector('.CUI-message div');
                 if (msgEl) msgEl.textContent = state.error;
             }
-        } else if (state.displayText) {
+        } else if (state.displayText && enableParseDisplay) {
+            // 只有用户明确设置 data-info="ID Info" 时，才更新逐位解析显示
             if (infoEl) {
                 const msgEl = infoEl.querySelector('.CUI-message div');
                 if (msgEl) msgEl.textContent = state.displayText;
             }
-        } else if (state.status === 'waiting') {
+        } else if (state.status === 'waiting' && enableParseDisplay) {
+            // 只有用户明确设置关键词时，才显示等待提示
             if (infoEl) {
                 const msgEl = infoEl.querySelector('.CUI-message div');
-                if (msgEl) msgEl.textContent = '请输入正确的中华人民共和国18位身份证';
+                if (msgEl) msgEl.textContent = '请输入身份证号码';
             }
         }
     }

@@ -285,3 +285,105 @@ CUI.input.getAll()
 ```
 
 表单会自动将按钮包装在 `.CUI-form-actions` 容器中，并添加适当的样式。
+
+## 身份证高级验证 (idcard-adv)
+
+### 概述
+
+身份证高级验证模块提供完整的身份证号码解析和验证功能，包括：
+
+- 实时分段解析（省/市/区/生日/性别）
+- 校验码验证（ISO 7064 MOD 11-2）
+- 行政区划名称查询（需加载 location-data 模块）
+- 状态挂靠到注册表（`node.idcard`）
+
+### 使用方法
+
+使用 `data-validate="idcard-adv"` 启用高级验证：
+
+```html
+<div class="CUI-input-box" data-validate="idcard-adv" data-label="身份证号" data-hint="请输入18位身份证号码">
+    <input type="text" name="idcard" class="CUI-input" placeholder="请输入身份证号" maxlength="18">
+    <div class="CUI-input__message"></div>
+</div>
+```
+
+### 验证类型对比
+
+| 验证类型 | 触发方式 | 功能 |
+|----------|----------|------|
+| 普通验证 | `data-validate="idcard"` | 正则匹配（18位格式） |
+| 高级验证 | `data-validate="idcard-adv"` | 完整解析（省/市/区/生日/性别/校验码） |
+
+### 解析阶段
+
+| 输入长度 | 阶段 | 解析内容 |
+|----------|------|----------|
+| 2位 | 1 | 省级代码 → 省份名称 |
+| 4位 | 2 | 地级代码 → 城市名称 |
+| 6位 | 3 | 县级代码 → 区县名称 |
+| 8-14位 | 4 | 出生日期 → 计算年龄 |
+| 17位 | 5 | 顺序码 → 判断性别 |
+| 18位 | 6 | 完整验证（含校验码） |
+
+### 状态对象结构
+
+高级验证的状态挂靠在注册表节点的 `idcard` 属性中：
+
+```javascript
+{
+  status: 'parsing',      // waiting | parsing | valid | error
+  phase: 0,               // 当前解析阶段 0-6
+  province: { code: '', name: '', valid: null },
+  city: { code: '', name: '', valid: null },
+  district: { code: '', name: '', valid: null },
+  birth: { date: '', year: '', month: '', day: '', age: 0, valid: null },
+  gender: '',             // 'male' | 'female'
+  checksumValid: null,    // true | false | null
+  isValid: false,
+  displayText: '',        // 显示文本（如：北京市 市辖区 朝阳区 1990年01月15日 34岁 女性）
+  error: ''               // 错误信息
+}
+```
+
+### 获取状态
+
+```javascript
+// 获取身份证解析状态
+const node = CUI.input.get('idcard');
+if (node && node.idcard) {
+    console.log('省份:', node.idcard.province.name);
+    console.log('年龄:', node.idcard.birth.age);
+    console.log('性别:', node.idcard.gender);
+    console.log('是否有效:', node.idcard.isValid);
+}
+```
+
+### 行政区划数据
+
+高级验证依赖 `location-data` 模块提供的行政区划数据：
+
+- 数据来源：国家地名信息库
+- 数据路径：`/location/administrative_divisions.json`
+- 版本管理：`/location/version.json`
+
+如果数据未加载，验证仍可正常工作，但行政区划名称将显示为代码（如"省码11"）。
+
+### 模块依赖
+
+```html
+<!-- 需要加载以下模块 -->
+<script src="/src/modules/js/location-data.js" type="module"></script>
+<script src="/src/modules/js/idcard-validator.js" type="module"></script>
+```
+
+### 错误处理
+
+| 错误类型 | 显示文本 |
+|----------|----------|
+| 省级代码无效 | 省 XX 行政区域错误 |
+| 市级代码无效 | 省 市 XX 行政区域错误 |
+| 区级代码无效 | 省 市 区 XX 行政区域错误 |
+| 出生日期无效 | 省 市 区 出生年月输入错误 |
+| 校验码错误 | 校验码错误 |
+| 位数不正确 | 身份证号位数不正确 |

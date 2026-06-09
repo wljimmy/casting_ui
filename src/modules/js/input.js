@@ -224,6 +224,104 @@ const CUIInputRegistry = {
             }
         }
         return true;
+    },
+
+    /**
+     * 设置 Info 提示信息
+     * 注意：外观由 CSS 控制，JavaScript 只设置内容
+     * @param {string} path - 节点路径
+     * @param {string} text - 提示信息文本
+     */
+    setInfo(path, text) {
+        const node = this.get(path);
+        if (!node) {
+            console.warn('[CUI.input] setInfo: 节点不存在');
+            return;
+        }
+        
+        if (!node.element) {
+            console.warn('[CUI.input] setInfo: 元素引用丢失');
+            return;
+        }
+        
+        const wrapper = node.element.closest('.CUI-input-box');
+        if (!wrapper) {
+            console.warn('[CUI.input] setInfo: 元素不在 CUI-input-box 内，请使用正确的结构');
+            return;
+        }
+        
+        const infoEl = wrapper.querySelector('.CUI-input__info .CUI-message div');
+        if (!infoEl) {
+            console.warn('[CUI.input] setInfo: 缺少 .CUI-input__info 结构');
+            return;
+        }
+        
+        infoEl.textContent = text || '';
+    },
+
+    /**
+     * 设置 Error 错误信息
+     * 注意：外观由 CSS 控制，JavaScript 只设置内容和状态类
+     * @param {string} path - 节点路径
+     * @param {string} text - 错误信息文本
+     */
+    setError(path, text) {
+        const node = this.get(path);
+        if (!node) {
+            console.warn('[CUI.input] setError: 节点不存在');
+            return;
+        }
+        
+        if (!node.element) {
+            console.warn('[CUI.input] setError: 元素引用丢失');
+            return;
+        }
+        
+        const wrapper = node.element.closest('.CUI-input-box');
+        if (!wrapper) {
+            console.warn('[CUI.input] setError: 元素不在 CUI-input-box 内，请使用正确的结构');
+            return;
+        }
+        
+        const errorEl = wrapper.querySelector('.CUI-input__error .CUI-message div');
+        if (!errorEl) {
+            console.warn('[CUI.input] setError: 缺少 .CUI-input__error 结构');
+            return;
+        }
+        
+        errorEl.textContent = text || '';
+        wrapper.classList.toggle('CUI-is-error', !!text);
+    },
+
+    /**
+     * 清除所有消息（Info 和 Error）
+     * @param {string} path - 节点路径
+     */
+    clearMessages(path) {
+        const node = this.get(path);
+        if (!node) {
+            console.warn('[CUI.input] clearMessages: 节点不存在');
+            return;
+        }
+        
+        if (!node.element) {
+            console.warn('[CUI.input] clearMessages: 元素引用丢失');
+            return;
+        }
+        
+        const wrapper = node.element.closest('.CUI-input-box');
+        if (!wrapper) {
+            console.warn('[CUI.input] clearMessages: 元素不在 CUI-input-box 内，请使用正确的结构');
+            return;
+        }
+        
+        const infoEl = wrapper.querySelector('.CUI-input__info .CUI-message div');
+        const errorEl = wrapper.querySelector('.CUI-input__error .CUI-message div');
+        
+        if (infoEl) infoEl.textContent = '';
+        if (errorEl) errorEl.textContent = '';
+        
+        wrapper.classList.remove('CUI-is-error');
     }
 };
 
@@ -426,6 +524,7 @@ function CUIInputInit() {
             const errorText = input.dataset.error || '';
             const isError = input.dataset.isError === 'true';
             const isSimple = input.classList.contains('CUI-input--simple');
+            const validateType = input.dataset.validate || '';
 
             let iconHtml = '';
             if (input.tagName !== 'TEXTAREA') {
@@ -447,12 +546,10 @@ function CUIInputInit() {
                 ? `<span class="CUI-input__info"><div class="CUI-message CUI-message-info"><div>${infoText}</div></div></span>`
                 : '';
 
-            const errorHtml = errorText
-                ? `<span class="CUI-input__error"><div class="CUI-message CUI-message-error"><div>${errorText}</div></div></span>`
-                : '';
+            const errorHtml = `<span class="CUI-input__error"><div class="CUI-message CUI-message-error"><div>${errorText || ''}</div></div></span>`;
 
             const boxHtml = `
-<div class="CUI-input-box${isError ? ' CUI-is-error' : ''}">
+<div class="CUI-input-box${isError ? ' CUI-is-error' : ''}"${validateType ? ` data-validate="${validateType}"` : ''}>
     ${labelHtml}
     <div class="CUI-input${isSimple ? ' CUI-input--simple' : ''}">
         <input type="${input.type}" name="${input.name}" class="" placeholder="${input.placeholder}" value="${input.value}">
@@ -475,6 +572,7 @@ function CUIInputInit() {
                 });
                 if (input.dataset.validate) newInput.dataset.validate = input.dataset.validate;
                 if (input.dataset.validatePattern) newInput.dataset.validatePattern = input.dataset.validatePattern;
+                if (input.dataset.info) newInput.dataset.info = input.dataset.info;
             }
 
             input.remove();
@@ -613,18 +711,25 @@ function CUIInputInit() {
     }
 
     function validateInput(input, wrapper) {
-        const ruleName = input.dataset.validate;
-        if (!ruleName) return;
+        // 检查父元素的 data-validate 属性（支持 CUI-input-box 结构）
+        const validateType = wrapper && wrapper.dataset.validate 
+            ? wrapper.dataset.validate 
+            : input.dataset.validate;
+        
+        if (!validateType) return;
 
-        const rule = CUIInputRules[ruleName];
+        // 跳过高级身份证验证（由 idcard-validator.js 独立处理）
+        if (validateType === 'idcard-adv') return;
+
+        const rule = CUIInputRules[validateType];
         if (!rule) return;
 
-        const pattern = ruleName === 'custom'
+        const pattern = validateType === 'custom'
             ? new RegExp(input.dataset.validatePattern || '')
             : rule.pattern;
 
         const value = input.value;
-        const valid = ruleName === 'required'
+        const valid = validateType === 'required'
             ? pattern.test(value)
             : (!value || pattern.test(value));
 
@@ -635,13 +740,23 @@ function CUIInputInit() {
         if (node) node.valid = valid;
 
         if (valid) {
-            clearErrorState(input, wrapper);
+            showSuccess(input, wrapper);
         } else {
             showError(input, wrapper, msg);
         }
     }
 
     function showError(input, wrapper, message) {
+        if (!wrapper) wrapper = input.closest('.CUI-input-box') || input.closest('.CUI-input');
+        if (!wrapper) {
+            input.classList.add('CUI-input--error');
+            input.title = message;
+            return;
+        }
+        
+        wrapper.classList.remove('CUI-is-success', 'CUI-input--success');
+        input.classList.remove('CUI-input--success');
+        
         if (wrapper.classList.contains('CUI-input-box')) {
             wrapper.classList.add('CUI-is-error');
         } else {
@@ -650,11 +765,38 @@ function CUIInputInit() {
         }
     }
 
+    function showSuccess(input, wrapper) {
+        if (!wrapper) wrapper = input.closest('.CUI-input-box') || input.closest('.CUI-input');
+        if (!wrapper) {
+            input.classList.add('CUI-input--success');
+            return;
+        }
+        
+        wrapper.classList.remove('CUI-is-error', 'CUI-input--error');
+        input.classList.remove('CUI-input--error');
+        input.title = '';
+        
+        if (wrapper.classList.contains('CUI-input-box')) {
+            wrapper.classList.add('CUI-is-success');
+        } else {
+            wrapper.classList.add('CUI-input--success');
+        }
+        
+        const path = resolvePath(input);
+        const node = CUIInputRegistry.get(path);
+        if (node) node.valid = true;
+    }
+
     function clearErrorState(input, wrapper) {
         if (!wrapper) wrapper = input.closest('.CUI-input-box') || input.closest('.CUI-input');
-        if (!wrapper) return;
+        if (!wrapper) {
+            input.classList.remove('CUI-input--error', 'CUI-input--success');
+            input.title = '';
+            return;
+        }
 
-        wrapper.classList.remove('CUI-is-error', 'CUI-input--error');
+        wrapper.classList.remove('CUI-is-error', 'CUI-input--error', 'CUI-is-success', 'CUI-input--success');
+        input.classList.remove('CUI-input--error', 'CUI-input--success');
         input.title = '';
 
         const path = resolvePath(input);

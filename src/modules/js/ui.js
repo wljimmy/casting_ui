@@ -33,7 +33,12 @@ class UI {
     // 右侧移动端抽屉
     initRightSidebarDrawer() {
         const rightSidebar = document.querySelector('.CUI-sidebar-right');
-        if (!rightSidebar || document.querySelector('.CUI-sidebar-right-trigger')) return;
+        // 只有当右侧边栏存在且没有隐藏类时才创建触发器
+        if (!rightSidebar || 
+            document.querySelector('.CUI-sidebar-right-trigger') ||
+            rightSidebar.classList.contains('CUI-hidden-sidebar-right')) {
+            return;
+        }
 
         // 仅在拥有右侧边栏时创建右侧抽屉边缘拉环标签
         const rightTrigger = document.createElement('div');

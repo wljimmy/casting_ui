@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证验证器调试 - Casting UI</title>
+    <!-- 全量引用 CSS -->
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    
+    <style>
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+        }
+        
+        .debug-log {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--gray-100);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-left: 3px solid var(--primary-color);
+            background: white;
+        }
+        
+        .log-entry.error {
+            border-left-color: var(--danger-color);
+        }
+        
+        .log-entry.success {
+            border-left-color: var(--success-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="CUI-section">
+        <div class="CUI-container">
+            <h1 class="CUI-text-xl CUI-text-bold CUI-mb-lg">身份证验证器调试测试</h1>
+            
+            <div class="CUI-message CUI-message-info CUI-mb-lg">
+                <div>
+                    <strong>调试说明：</strong><br>
+                    1. 点击"运行调试测试"按钮<br>
+                    2. 查看调试日志，了解身份证验证器的执行过程<br>
+                    3. 检查注册表是否包含 idcard 属性
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <h2>步骤1: 输入身份证号</h2>
+                <form id="testForm">
+                    <input type="text" name="idcard" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="请输入18位身份证号">
+                </form>
+            </div>
+            
+            <div class="test-section">
+                <h2>步骤2: 运行调试测试</h2>
+                <button type="button" class="CUI-btn CUI-btn-primary" onclick="runDebugTest()">运行调试测试</button>
+                <button type="button" class="CUI-btn CUI-btn-secondary" onclick="clearDebugLog()">清空日志</button>
+            </div>
+            
+            <div class="test-section">
+                <h2>调试日志</h2>
+                <div id="debugLog" class="debug-log">
+                    等待调试...
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <h2>注册表数据</h2>
+                <textarea id="registryDisplay" class="CUI-input" rows="15" readonly style="font-family: monospace; font-size: 0.875rem;"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 加载模块 -->
+    <script src="/modules/js/index.js" type="module"></script>
+    
+    <script>
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('debugLog');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+        
+        function clearDebugLog() {
+            document.getElementById('debugLog').innerHTML = '日志已清空...';
+        }
+        
+        function waitForCUI(callback) {
+            if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                callback();
+            } else {
+                document.addEventListener('cui-pipeline-complete', callback);
+                const checkInterval = setInterval(() => {
+                    if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                        clearInterval(checkInterval);
+                        callback();
+                    }
+                }, 100);
+            }
+        }
+        
+        function runDebugTest() {
+            waitForCUI(() => {
+                log('框架初始化完成', 'success');
+                
+                // 检查身份证验证器是否加载
+                if (!window.CUI.idcardValidator) {
+                    log('身份证验证器未加载!', 'error');
+                    return;
+                }
+                log('身份证验证器已加载', 'success');
+                
+                // 测试 parse 方法
+                const testIdcard = '11010119900307723X';
+                log(`开始解析身份证号: ${testIdcard}`);
+                
+                window.CUI.idcardValidator.parse(testIdcard).then((state) => {
+                    log(`解析完成! 状态: ${state.status}`, 'success');
+                    log(`省份: ${state.province.name} (${state.province.code})`);
+                    log(`城市: ${state.city.name} (${state.city.code})`);
+                    log(`区县: ${state.district.name} (${state.district.code})`);
+                    log(`生日: ${state.birth.date} (${state.birth.age}岁)`);
+                    log(`性别: ${state.gender === 'male' ? '男' : '女'}`);
+                    log(`校验码有效: ${state.checksumValid}`);
+                    log(`整体有效: ${state.isValid}`);
+                    
+                    // 检查注册表节点
+                    log('检查注册表节点...');
+                    const node = window.CUI.input.get('testForm.idcard');
+                    
+                    if (!node) {
+                        log('节点未找到: testForm.idcard', 'error');
+                        
+                        // 尝试其他路径
+                        log('尝试其他路径...');
+                        const allData = window.CUI.input.getAll();
+                        log(`所有注册表键: ${Object.keys(allData).join(', ')}`);
+                        
+                        // 尝试独立路径
+                        const node2 = window.CUI.input.get('idcard');
+                        if (node2) {
+                            log('找到独立节点: idcard', 'success');
+                            log(`节点数据: ${JSON.stringify({type: node2.type, value: node2.value, valid: node2.valid})}`);
+                        }
+                    } else {
+                        log('找到节点: testForm.idcard', 'success');
+                        log(`节点类型: ${node.type}`);
+                        log(`节点值: ${node.value}`);
+                        log(`节点有效: ${node.valid}`);
+                        log(`节点 idcard 属性: ${node.idcard ? '存在' : '不存在'}`, node.idcard ? 'success' : 'error');
+                        
+                        if (!node.idcard) {
+                            log('手动设置 idcard 属性...');
+                            node.idcard = state;
+                            log('已设置 idcard 属性', 'success');
+                        }
+                    }
+                    
+                    // 更新注册表显示
+                    const allData = window.CUI.input.getAll();
+                    const cleanData = JSON.parse(JSON.stringify(allData, (key, value) => {
+                        if (key === 'element') return '[HTMLElement]';
+                        return value;
+                    }));
+                    document.getElementById('registryDisplay').textContent = JSON.stringify(cleanData, null, 2);
+                    
+                    log('调试完成', 'success');
+                });
+            });
+        }
+        
+        // 页面加载时自动运行
+        window.addEventListener('load', () => {
+            log('页面加载完成，等待框架初始化...');
+        });
+    </script>
+</body>
+</html>

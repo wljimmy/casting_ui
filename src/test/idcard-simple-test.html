@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证验证器简单测试</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+</head>
+<body>
+    <div class="CUI-section">
+        <div class="CUI-container">
+            <h1>身份证验证器简单测试</h1>
+            
+            <div class="CUI-box CUI-mb-lg">
+                <h3>测试表单</h3>
+                <form id="testForm">
+                    <input type="text" name="idcard" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="请输入身份证号">
+                </form>
+            </div>
+            
+            <div class="CUI-box CUI-mb-lg">
+                <button type="button" class="CUI-btn CUI-btn-primary" onclick="checkNode()">检查节点</button>
+                <button type="button" class="CUI-btn CUI-btn-success" onclick="manualTest()">手动测试</button>
+            </div>
+            
+            <div class="CUI-box">
+                <h3>结果</h3>
+                <pre id="result" style="background: #f8f9fa; padding: 1rem; white-space: pre-wrap;"></pre>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/modules/js/index.js" type="module"></script>
+    
+    <script>
+        function result(text) {
+            document.getElementById('result').textContent = text;
+            console.log('[测试]', text);
+        }
+        
+        function waitForCUI(callback) {
+            if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                callback();
+            } else {
+                document.addEventListener('cui-pipeline-complete', callback);
+            }
+        }
+        
+        function checkNode() {
+            waitForCUI(() => {
+                result('检查节点...');
+                
+                const node = window.CUI.input.get('testForm.idcard');
+                if (node) {
+                    result(`节点存在\n类型: ${node.type}\n值: ${node.value}\n有效: ${node.valid}\nidcard属性: ${node.idcard !== undefined}`);
+                    
+                    if (node.idcard) {
+                        result(`\nidcard内容:\n${JSON.stringify(node.idcard, null, 2)}`);
+                    }
+                } else {
+                    result('节点不存在');
+                    
+                    // 检查所有节点
+                    const allData = window.CUI.input.getAll();
+                    result(`\n所有注册表键: ${Object.keys(allData).join(', ')}`);
+                }
+            });
+        }
+        
+        async function manualTest() {
+            await new Promise(resolve => waitForCUI(resolve));
+            
+            result('手动测试开始...');
+            
+            if (!window.CUI.idcardValidator) {
+                result('身份证验证器未加载');
+                return;
+            }
+            
+            const testIdcard = '11010119900307723X';
+            result(`解析: ${testIdcard}`);
+            
+            try {
+                const state = await window.CUI.idcardValidator.parse(testIdcard);
+                result(`解析完成: ${JSON.stringify(state, null, 2)}`);
+                
+                // 手动设置
+                const node = window.CUI.input.get('testForm.idcard');
+                if (node) {
+                    node.idcard = state;
+                    result('已设置node.idcard');
+                    result(`node.idcard: ${JSON.stringify(node.idcard, null, 2)}`);
+                } else {
+                    result('节点不存在');
+                }
+            } catch (error) {
+                result(`错误: ${error.message}`);
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            result('等待框架初始化...');
+            
+            waitForCUI(() => {
+                result('框架初始化完成');
+            });
+        });
+    </script>
+</body>
+</html>

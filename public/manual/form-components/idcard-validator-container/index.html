@@ -1,0 +1,297 @@
+<section class="CUI-section">
+    <h2>身份证高级验证器（IDCard Validator）</h2>
+    <p>身份证高级验证器提供完整的身份证号码解析和验证功能，支持分段解析（省/市/区/生日/性别）、校验码验证（ISO 7064 MOD 11-2）、实时解析和历史行政区划数据支持。</p>
+
+    <h3>快速上手</h3>
+    <div class="CUI-box">
+        <p>只需为输入框添加 <code>class="CUI-input-box"</code> 和 <code>data-validate="idcard-adv"</code>，框架自动完成身份证解析和验证：</p>
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-6c">
+                <input type="text" name="idcardDemo" class="CUI-input-box" data-label="身份证号码" data-validate="idcard-adv" placeholder="请输入18位身份证号">
+            </div>
+        </div>
+    </div>
+    <pre><code class="language-html">&lt;input type="text" name="idcard" class="CUI-input-box" 
+       data-label="身份证号码" 
+       data-validate="idcard-adv" 
+       placeholder="请输入18位身份证号"&gt;</code></pre>
+
+    <hr class="CUI-hr">
+
+    <h3>功能特性</h3>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-12c">
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>分段解析</h4>
+                    <p>自动解析省、市、区、出生日期、性别信息</p>
+                </div>
+            </div>
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>校验码验证</h4>
+                    <p>基于 ISO 7064 MOD 11-2 算法验证校验码</p>
+                </div>
+            </div>
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>实时解析</h4>
+                    <p>输入时逐位解析，即时显示解析结果</p>
+                </div>
+            </div>
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>历史数据支持</h4>
+                    <p>支持已撤销行政区划（如莱芜市、汉中地区等）</p>
+                </div>
+            </div>
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>状态挂靠</h4>
+                    <p>解析状态挂靠到注册表，可通过 API 获取详细信息</p>
+                </div>
+            </div>
+            <div class="CUI-span-4c">
+                <div class="CUI-card">
+                    <h4>自动提示</h4>
+                    <p>自动设置默认提示信息和错误信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>验证规则对比</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr>
+                    <th>验证类型</th>
+                    <th>触发条件</th>
+                    <th>功能描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>data-validate="idcard"</code></td>
+                    <td>普通验证</td>
+                    <td>仅正则匹配（18位数字或17位数字+X）</td>
+                </tr>
+                <tr>
+                    <td><code>data-validate="idcard-adv"</code></td>
+                    <td>高级验证</td>
+                    <td>完整解析（省/市/区/生日/性别）+ 校验码验证</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>解析状态输出</h3>
+    <div class="CUI-box">
+        <p>解析状态挂靠在注册表节点的 <code>idcard</code> 属性中，包含以下字段：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>status</code></td><td>string</td><td>状态：waiting/parsing/valid/error</td></tr>
+                <tr><td><code>phase</code></td><td>number</td><td>解析阶段（0-6）</td></tr>
+                <tr><td><code>province</code></td><td>object</td><td>省级信息：{code, name, valid}</td></tr>
+                <tr><td><code>city</code></td><td>object</td><td>地级信息：{code, name, valid}</td></tr>
+                <tr><td><code>district</code></td><td>object</td><td>县级信息：{code, name, valid}</td></tr>
+                <tr><td><code>birth</code></td><td>object</td><td>出生日期：{date, year, month, day, age, valid}</td></tr>
+                <tr><td><code>gender</code></td><td>string</td><td>性别：male/female</td></tr>
+                <tr><td><code>checksumValid</code></td><td>boolean</td><td>校验码是否有效</td></tr>
+                <tr><td><code>isValid</code></td><td>boolean</td><td>整体是否有效</td></tr>
+                <tr><td><code>displayText</code></td><td>string</td><td>可读的解析结果文本</td></tr>
+                <tr><td><code>error</code></td><td>string</td><td>错误信息（验证失败时）</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>获取解析状态示例</h4>
+    <div class="CUI-box">
+        <pre><code class="language-javascript">// 获取身份证解析状态
+const idcardState = CUI.input.get('idcard').idcard;
+
+// 输出解析结果
+console.log(idcardState.province.name);  // 如：山东省
+console.log(idcardState.city.name);      // 如：济南市
+console.log(idcardState.district.name);  // 如：历下区
+console.log(idcardState.birth.date);     // 如：1990-01-15
+console.log(idcardState.birth.age);      // 年龄
+console.log(idcardState.gender);         // male 或 female
+console.log(idcardState.isValid);        // 是否有效</code></pre>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>验证示例</h3>
+
+    <h4>基础验证</h4>
+    <div class="CUI-box">
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-6c">
+                <input type="text" name="idcardBasic" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="输入真实身份证号测试">
+            </div>
+        </div>
+        <p class="CUI-text-sm CUI-text-muted">输入身份证号后，失焦时自动验证并显示解析结果</p>
+    </div>
+
+    <h4>自定义提示信息</h4>
+    <div class="CUI-box">
+        <p>可以通过 <code>data-info</code> 和 <code>data-error</code> 自定义提示和错误信息：</p>
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-6c">
+                <input type="text" name="idcardCustom" class="CUI-input-box" 
+                       data-label="身份证号" 
+                       data-validate="idcard-adv" 
+                       data-info="请输入18位身份证号码" 
+                       data-error="身份证信息有误，请检查"
+                       placeholder="自定义提示示例">
+            </div>
+        </div>
+        <pre><code class="language-html">&lt;input type="text" name="idcard" class="CUI-input-box" 
+       data-label="身份证号" 
+       data-validate="idcard-adv" 
+       data-info="自定义提示" 
+       data-error="自定义错误信息"&gt;</code></pre>
+    </div>
+
+    <h4>表单集成示例</h4>
+    <div class="CUI-box">
+        <form id="idcardForm">
+            <div class="CUI-grid CUI-grid-12c">
+                <div class="CUI-span-4c">
+                    <input type="text" name="name" class="CUI-input-box" data-label="姓名" data-validate="required" placeholder="请输入姓名">
+                </div>
+                <div class="CUI-span-4c">
+                    <input type="text" name="idcard" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="请输入身份证号">
+                </div>
+                <div class="CUI-span-4c">
+                    <button type="button" class="btn btn-primary" onclick="checkForm()">提交验证</button>
+                </div>
+            </div>
+        </form>
+        <pre><code class="language-javascript">function checkForm() {
+    if (CUI.input.isFormValid('idcardForm')) {
+        const data = CUI.input.getFormData('idcardForm');
+        const idcardState = CUI.input.get('idcardForm.idcard').idcard;
+        console.log('表单数据:', data);
+        console.log('身份证解析:', idcardState);
+        showToast('success', '验证通过！');
+    } else {
+        showToast('error', '请检查表单');
+    }
+}</code></pre>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>错误类型</h3>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr><th>错误信息</th><th>触发条件</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>身份证号位数不正确</td><td>输入超过18位</td></tr>
+                <tr><td>省级代码无效</td><td>前2位省份代码不存在</td></tr>
+                <tr><td>区级代码无效</td><td>前6位行政区划代码不存在</td></tr>
+                <tr><td>出生日期无效</td><td>第7-14位不是有效日期</td></tr>
+                <tr><td>校验码错误</td><td>第18位校验码不正确</td></tr>
+                <tr><td>身份证号不完整，请输入18位身份证号</td><td>失焦时输入位数不足18位</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>JavaScript API</h3>
+
+    <h4>模块访问</h4>
+    <div class="CUI-box">
+        <pre><code class="language-javascript">// 访问身份证验证器模块
+const validator = window.CUI.idcardValidator;
+
+// 手动解析身份证号
+validator.parse('11010119900307723X').then(state => {
+    console.log(state);
+    // { status: 'valid', province: {...}, city: {...}, ... }
+});</code></pre>
+    </div>
+
+    <h4>parse 方法</h4>
+    <div class="CUI-box">
+        <table class="CUI-table">
+            <thead>
+                <tr><th>参数</th><th>类型</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>value</code></td><td>string</td><td>身份证号码（支持带空格格式）</td></tr>
+            </tbody>
+        </table>
+        <p>返回 Promise，resolve 时返回解析状态对象。</p>
+    </div>
+
+    <h4>validateChecksum 方法</h4>
+    <div class="CUI-box">
+        <pre><code class="language-javascript">// 单独验证校验码
+const isValid = validator.validateChecksum('11010119900307723X');
+console.log(isValid);  // true 或 false</code></pre>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>与格式化模块配合</h3>
+    <div class="CUI-box">
+        <p>身份证高级验证器与格式化模块配合使用时，输入框会自动格式化显示：</p>
+        <div class="CUI-grid CUI-grid-12c CUI-mt-md CUI-mb-md">
+            <div class="CUI-span-6c">
+                <input type="text" name="idcardFormatted" class="CUI-input-box" data-label="格式化显示" data-validate="idcard-adv" placeholder="输入身份证号">
+            </div>
+        </div>
+        <p class="CUI-text-sm CUI-text-muted">格式化效果：<code>11 01 01 1990 03 07 723 X</code></p>
+        <p class="CUI-text-sm CUI-text-muted">复制时自动去除空格，保持原始值</p>
+    </div>
+
+    <hr class="CUI-hr">
+
+    <h3>模块依赖</h3>
+    <div class="CUI-box">
+        <p>身份证高级验证器依赖以下模块：</p>
+        <table class="CUI-table">
+            <thead>
+                <tr><th>模块</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>input</code></td><td>输入框注册表模块</td></tr>
+                <tr><td><code>location-data</code></td><td>行政区划数据模块</td></tr>
+            </tbody>
+        </table>
+        <p class="CUI-text-sm CUI-text-muted">模块在 INTERACTION 阶段初始化，自动监听 input 和 blur 事件。</p>
+    </div>
+
+    <script>
+        function checkForm() {
+            if (window.CUI && window.CUI.input) {
+                if (CUI.input.isFormValid('idcardForm')) {
+                    const data = CUI.input.getFormData('idcardForm');
+                    const idcardState = CUI.input.get('idcardForm.idcard').idcard;
+                    console.log('表单数据:', data);
+                    console.log('身份证解析:', idcardState);
+                    if (window.showToast) {
+                        showToast('success', '验证通过！');
+                    }
+                } else {
+                    if (window.showToast) {
+                        showToast('error', '请检查表单');
+                    }
+                }
+            }
+        }
+    </script>
+</section>

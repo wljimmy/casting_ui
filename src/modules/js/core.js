@@ -198,13 +198,20 @@ if (!window.CUI) {
     window.CUI = {};
 }
 
-// 注册到全局生命周期调度器，并在 CORE 阶段释放核心 API 成员
-window.CUI.registerModule('core', {
-    stages: {
-        CORE: () => {
-            window.CUI.DEBUG_MODE = DEBUG_MODE;
-            window.CUI.debug = debug;
-            window.CUI.PopupBase = PopupBase;
+// 注册到全局生命周期调度器（如果调度器已加载）
+if (typeof window.CUI.registerModule === 'function') {
+    window.CUI.registerModule('core', {
+        stages: {
+            CORE: () => {
+                window.CUI.DEBUG_MODE = DEBUG_MODE;
+                window.CUI.debug = debug;
+                window.CUI.PopupBase = PopupBase;
+            }
         }
-    }
-});
+    });
+} else {
+    // 调度器未加载时直接释放 API
+    window.CUI.DEBUG_MODE = DEBUG_MODE;
+    window.CUI.debug = debug;
+    window.CUI.PopupBase = PopupBase;
+}

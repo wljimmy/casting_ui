@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证验证器事件测试 - Casting UI</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+</head>
+<body>
+    <div class="CUI-section">
+        <div class="CUI-container">
+            <h1 class="CUI-text-xl CUI-text-bold CUI-mb-lg">身份证验证器事件测试</h1>
+            
+            <div class="CUI-message CUI-message-info CUI-mb-lg">
+                <div>
+                    <strong>测试步骤：</strong><br>
+                    1. 在身份证输入框中输入内容<br>
+                    2. 查看下方的调试日志，了解事件是否被正确触发<br>
+                    3. 检查身份证验证器是否正确检测到 `data-validate="idcard-adv"` 属性
+                </div>
+            </div>
+            
+            <div class="CUI-box CUI-mb-lg">
+                <h3>测试表单</h3>
+                <form id="testForm">
+                    <div class="CUI-grid CUI-grid-12c">
+                        <div class="CUI-span-6c">
+                            <input type="text" name="username" class="CUI-input-box" data-label="用户名" placeholder="请输入用户名">
+                        </div>
+                        <div class="CUI-span-6c">
+                            <input type="text" name="idcard" class="CUI-input-box" data-label="身份证号" data-validate="idcard-adv" placeholder="请输入身份证号">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="CUI-box">
+                <button type="button" class="CUI-btn CUI-btn-secondary" onclick="clearLog()">清空日志</button>
+                <button type="button" class="CUI-btn CUI-btn-primary" onclick="checkFormStructure()">检查表单结构</button>
+            </div>
+            
+            <div class="CUI-box CUI-mt-lg">
+                <h3>调试日志</h3>
+                <div id="eventLog" style="height: 300px; overflow-y: auto; background: #f5f5f5; padding: 1rem; font-family: monospace; font-size: 0.875rem; white-space: pre-wrap; word-break: break-all;"></div>
+            </div>
+            
+            <div class="CUI-box CUI-mt-lg">
+                <h3>注册表数据</h3>
+                <textarea id="registryOutput" class="CUI-input" rows="10" readonly style="font-family: monospace; width: 100%;"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/modules/js/index.js" type="module"></script>
+    
+    <script>
+        const eventLog = document.getElementById('eventLog');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.style.cssText = `margin: 5px 0; padding: 5px; border-left: 3px solid ${type === 'error' ? '#dc3545' : type === 'success' ? '#28a745' : '#007bff'};`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            eventLog.appendChild(entry);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        }
+        
+        function clearLog() {
+            eventLog.innerHTML = '';
+            log('日志已清空');
+        }
+        
+        function waitForCUI(callback) {
+            if (window.CUI && window.CUI.scheduler && window.CUI.scheduler._pipelineComplete) {
+                callback();
+            } else {
+                document.addEventListener('cui-pipeline-complete', callback);
+            }
+        }
+        
+        function checkFormStructure() {
+            waitForCUI(() => {
+                log('检查表单结构...', 'success');
+                
+                const form = document.getElementById('testForm');
+                const inputs = form.querySelectorAll('input');
+                
+                log(`找到 ${inputs.length} 个 input 元素`);
+                
+                inputs.forEach((input, index) => {
+                    const wrapper = input.closest('.CUI-input-box');
+                    log(`输入框 ${index + 1}:`);
+                    log(`  名称: ${input.name}`);
+                    log(`  类名: ${input.className}`);
+                    log(`  有 wrapper: ${!!wrapper}`);
+                    if (wrapper) {
+                        log(`  wrapper 类名: ${wrapper.className}`);
+                        log(`  wrapper data-validate: ${wrapper.dataset.validate || '无'}`);
+                        log(`  wrapper 是否匹配 .CUI-input-box: ${wrapper.classList.contains('CUI-input-box')}`);
+                    }
+                });
+                
+                // 检查注册表
+                updateRegistryDisplay();
+            });
+        }
+        
+        function updateRegistryDisplay() {
+            waitForCUI(() => {
+                if (window.CUI && window.CUI.input) {
+                    const allData = window.CUI.input.getAll();
+                    document.getElementById('registryOutput').textContent = JSON.stringify(allData, (key, value) => {
+                        if (key === 'element') return '[HTMLElement]';
+                        return value;
+                    }, 2);
+                    
+                    // 检查身份证节点
+                    const idcardNode = window.CUI.input.get('testForm.idcard');
+                    if (idcardNode) {
+                        log('找到身份证节点', 'success');
+                        log(`  idcard 属性: ${idcardNode.idcard ? '存在' : '不存在'}`);
+                        if (idcardNode.idcard) {
+                            log(`  idcard 内容: ${JSON.stringify(idcardNode.idcard)}`, 'success');
+                        }
+                    } else {
+                        log('未找到身份证节点', 'error');
+                    }
+                }
+            });
+        }
+        
+        // 监听 input 事件
+        document.addEventListener('input', (e) => {
+            const target = e.target;
+            if (!target.matches('input')) return;
+            
+            const wrapper = target.closest('.CUI-input-box');
+            if (!wrapper) return;
+            
+            const validateType = wrapper.dataset.validate;
+            
+            log(`input 事件触发:`);
+            log(`  目标名称: ${target.name}`);
+            log(`  目标值: ${target.value}`);
+            log(`  包装器 data-validate: ${validateType || '无'}`);
+            
+            if (validateType === 'idcard-adv') {
+                log(`  ✓ 检测到 idcard-adv 验证`, 'success');
+            }
+        });
+        
+        // 监听 blur 事件
+        document.addEventListener('blur', (e) => {
+            const target = e.target;
+            if (!target.matches('input')) return;
+            
+            const wrapper = target.closest('.CUI-input-box');
+            if (!wrapper) return;
+            
+            const validateType = wrapper.dataset.validate;
+            
+            if (validateType === 'idcard-adv') {
+                log(`blur 事件触发 (idcard-adv):`);
+                log(`  目标名称: ${target.name}`);
+                log(`  目标值: ${target.value}`);
+                
+                // 检查节点
+                waitForCUI(() => {
+                    const path = `testForm.${target.name}`;
+                    const node = window.CUI.input.get(path);
+                    if (node) {
+                        log(`  ✓ 找到节点: ${path}`, 'success');
+                        log(`  节点 idcard 属性: ${node.idcard ? '存在' : '不存在'}`);
+                        if (node.idcard) {
+                            log(`  idcard 状态: ${node.idcard.status}`, 'success');
+                            log(`  idcard 显示文本: ${node.idcard.displayText || '无'}`);
+                        }
+                    } else {
+                        log(`  ✗ 未找到节点: ${path}`, 'error');
+                    }
+                    
+                    // 更新注册表显示
+                    updateRegistryDisplay();
+                });
+            }
+        });
+        
+        // 页面加载
+        window.addEventListener('load', () => {
+            log('页面加载完成，等待框架初始化...');
+            
+            waitForCUI(() => {
+                log('框架初始化完成', 'success');
+                log('');
+                log('请在身份证输入框中输入内容，查看事件日志');
+                log('');
+                
+                // 检查初始化状态
+                if (window.CUI.idcardValidator) {
+                    log('身份证验证器已加载', 'success');
+                } else {
+                    log('身份证验证器未加载', 'error');
+                }
+                
+                if (window.CUI.locationData) {
+                    log('locationData 已加载', 'success');
+                    log(`  locationData._loaded: ${window.CUI.locationData._loaded}`);
+                } else {
+                    log('locationData 未加载', 'error');
+                }
+                
+                // 初始检查
+                checkFormStructure();
+            });
+        });
+    </script>
+</body>
+</html>

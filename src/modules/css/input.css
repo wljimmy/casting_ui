@@ -285,3 +285,39 @@
 .CUI-input.CUI-input--error .CUI-input__icon {
     color: var(--danger-color, #ff4d4f);
 }
+
+/* ================================
+   成功状态
+   ================================ */
+
+.CUI-input.CUI-input--success {
+    border-color: var(--success-color, #66BB6A);
+}
+
+.CUI-input.CUI-input--success:focus-within {
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.1);
+}
+
+.CUI-input.CUI-input--success .CUI-input__icon {
+    color: var(--success-color, #66BB6A);
+}
+
+.CUI-input-box.CUI-is-success {
+    border-color: var(--success-color, #66BB6A);
+}
+
+.CUI-input-box.CUI-is-success .CUI-input {
+    border-color: var(--success-color, #66BB6A);
+}
+
+.CUI-input-box.CUI-is-success .CUI-input__info {
+    color: var(--success-color, #66BB6A);
+}
+
+.CUI-input-box.CUI-is-error {
+    border-color: var(--danger-color, #ff4d4f);
+}
+
+.CUI-input-box.CUI-is-error .CUI-input {
+    border-color: var(--danger-color, #ff4d4f);
+}

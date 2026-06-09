@@ -84,6 +84,12 @@ class LifecycleScheduler {
             }
         }
 
+        // 标记 Pipeline 完成
+        this._pipelineComplete = true;
+        
+        // 触发 Pipeline 完成事件
+        document.dispatchEvent(new CustomEvent('cui-pipeline-complete'));
+        
         if (window.CUI && window.CUI.DEBUG_MODE) {
             console.log('%c[CUI Scheduler] ✔ 所有功能模块加载执行成功，CUI 已完全就位！', 'color: #67C23A; font-weight: bold; font-size: 13px;');
         }

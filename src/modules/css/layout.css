@@ -302,9 +302,11 @@ body.CUI-hidden-footer footer {
   }
 }
 
-/* ========== iPad / 桌面（≥ 769px）隐藏汉堡按钮 ========== */
+/* ========== iPad / 桌面（≥ 769px）隐藏所有移动端触发器 ========== */
 @media (min-width: 769px) {
-  .CUI-menu-trigger {
+  .CUI-menu-trigger,
+  .CUI-sidebar-right-trigger,
+  .CUI-sidebar-right-backdrop {
     display: none !important;
   }
 }
