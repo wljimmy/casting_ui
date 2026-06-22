@@ -23,5 +23,5 @@
 
 /* 过渡动画 */
 * {
-    transition: all var(--transition-normal);
+    /* transition: all var(--transition-normal); */
 }

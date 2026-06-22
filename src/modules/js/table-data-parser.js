@@ -1,8 +1,8 @@
 /* 
  * Casting UI Framework
- * Version: 0.5.8
+ * Version: 0.6.0
  * Module: table-data-parser.js
- * Description: 表格数据解析器 - 支持HTML、CSV、JSON数据源
+ * Description: 表格数据解析器 - 支持HTML、CSV、JSON数据源，自带容错与数据对齐
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */
@@ -10,22 +10,62 @@
 import { debug } from './core.js';
 
 /**
- * 表格数据结构
- * @typedef {Object} TableData
- * @property {Array<Object>} headers - 表头配置
- * @property {Array<Object>} data - 表格数据
- * @property {Array<Object>} footerData - 汇总行数据
- * @property {Object} metadata - 元数据（行数、列数等）
+ * 触发超列异常的双重报错
  */
+function reportExtraColumnsError(tableId, expectedCols, actualCols, rowIndex, rawRow) {
+    const errMsg = `表格数据异常：实际数据列数 (${actualCols}) 超过表头标准列数 (${expectedCols})。`;
+    console.error(`[CUI Table Error] 表格 ID: ${tableId || '未知'}。行号: ${rowIndex + 1}。标准列数: ${expectedCols}，实际列数: ${actualCols}。问题数据行:`, rawRow);
+    
+    if (typeof window !== 'undefined') {
+        if (window.CUI && typeof window.CUI.showToast === 'function') {
+            window.CUI.showToast('error', errMsg);
+        } else {
+            alert(errMsg);
+        }
+    }
+}
 
 /**
- * 解析结果
- * @typedef {Object} ParseResult
- * @property {boolean} success - 是否成功
- * @property {TableData|null} data - 解析后的数据
- * @property {Array<string>} errors - 错误信息
- * @property {Array<string>} warnings - 警告信息
+ * 表格数据注册表（全局统一托管所有表格实例及其内存数据）
  */
+class TableDataRegistry {
+    constructor() {
+        this.registry = new Map();
+    }
+
+    register(id, tableData) {
+        if (!id) return null;
+        this.registry.set(id, tableData);
+        debug('表格组件在注册表注册成功', null, { id, totalRows: tableData.data?.length || 0 });
+        return id;
+    }
+
+    get(id) {
+        return this.registry.get(id);
+    }
+
+    update(id, tableData) {
+        if (this.registry.has(id)) {
+            const current = this.registry.get(id);
+            const updated = { ...current, ...tableData, updatedAt: new Date() };
+            this.registry.set(id, updated);
+            return true;
+        }
+        return false;
+    }
+
+    unregister(id) {
+        return this.registry.delete(id);
+    }
+
+    has(id) {
+        return this.registry.has(id);
+    }
+
+    clear() {
+        this.registry.clear();
+    }
+}
 
 /**
  * 表格数据解析器基类
@@ -37,452 +77,228 @@ class TableDataParser {
     }
 
     /**
-     * 解析数据
-     * @param {*} input - 输入数据
-     * @returns {ParseResult}
+     * 基础数据清洗与容错对齐逻辑
+     * @param {Array} rawRows 二维数组或对象数组
+     * @param {Array} headers 基准表头
+     * @param {string} tableId 表格ID，用于报错定位
+     * @returns {Array} 标准化的行数据
      */
-    parse(input) {
-        this.errors = [];
-        this.warnings = [];
-        
-        try {
-            const rawData = this.extractRawData(input);
-            const validatedData = this.validateAndNormalize(rawData);
-            const structuredData = this.buildTableStructure(validatedData);
-            
-            return {
-                success: true,
-                data: structuredData,
-                errors: this.errors,
-                warnings: this.warnings
-            };
-        } catch (error) {
-            this.errors.push(error.message);
-            return {
-                success: false,
-                data: null,
-                errors: this.errors,
-                warnings: this.warnings
-            };
-        }
-    }
+    cleanAndAlignData(rawRows, headers, tableId) {
+        if (!Array.isArray(rawRows)) return [];
+        const expectedCols = headers.length;
 
-    /**
-     * 提取原始数据（子类实现）
-     */
-    extractRawData(input) {
-        throw new Error('子类必须实现 extractRawData 方法');
-    }
+        return rawRows.map((row, rowIndex) => {
+            const cleanRow = { _id: rowIndex, _originalIndex: rowIndex };
 
-    /**
-     * 验证并标准化数据
-     * @param {Array} rawData - 原始数据
-     * @returns {Object} 标准化后的数据
-     */
-    validateAndNormalize(rawData) {
-        if (!Array.isArray(rawData) || rawData.length === 0) {
-            throw new Error('数据不能为空');
-        }
-
-        // 计算最大列数
-        const maxCols = Math.max(...rawData.map(row => this.getRowLength(row)));
-
-        // 标准化每行数据
-        const normalizedRows = rawData.map((row, index) => {
-            return this.normalizeRow(row, maxCols, index);
-        });
-
-        return {
-            rows: normalizedRows,
-            maxCols: maxCols,
-            totalRows: rawData.length
-        };
-    }
-
-    /**
-     * 获取行数据长度
-     */
-    getRowLength(row) {
-        if (Array.isArray(row)) {
-            return row.length;
-        } else if (typeof row === 'object' && row !== null) {
-            return Object.keys(row).length;
-        }
-        return 0;
-    }
-
-    /**
-     * 标准化单行数据（防呆处理）
-     */
-    normalizeRow(row, maxCols, rowIndex) {
-        if (Array.isArray(row)) {
-            // 数组数据：补齐空数据
-            const normalized = [...row];
-            while (normalized.length < maxCols) {
-                normalized.push('');
-                this.warnings.push(`第 ${rowIndex + 1} 行数据短缺，已补充空值`);
-            }
-            return normalized;
-        } else if (typeof row === 'object' && row !== null) {
-            // 对象数据：保持原样，由 buildTableStructure 处理
-            return row;
-        }
-        throw new Error(`第 ${rowIndex + 1} 行数据格式无效`);
-    }
-
-    /**
-     * 构建表格结构
-     */
-    buildTableStructure(normalizedData) {
-        const { rows, maxCols, totalRows } = normalizedData;
-        
-        // 提取表头（第一行或对象键）
-        let headers = this.extractHeaders(rows, maxCols);
-        
-        // 提取数据行
-        let dataRows = rows.slice(1);
-        if (dataRows.length === 0 && totalRows === 1) {
-            // 如果只有一行数据，则为空数据
-            dataRows = [];
-        }
-
-        // 转换为标准数据格式
-        const headersList = headers.map((h, i) => ({
-            field: h.field || `col_${i}`,
-            label: h.label || h.text || h.value || `列${i + 1}`
-        }));
-
-        const data = dataRows.map((row, rowIndex) => {
-            const rowData = { _id: rowIndex, _originalIndex: rowIndex };
-            
             if (Array.isArray(row)) {
-                headersList.forEach((header, colIndex) => {
-                    rowData[header.field] = row[colIndex] ?? '';
+                // 1. 数组类型数据源（如 CSV 某一行，或 HTML 某一行，或 JSON 纯数组）
+                const actualCols = row.length;
+
+                if (actualCols < expectedCols) {
+                    // 缺列自动补齐
+                    const alignedRow = [...row];
+                    while (alignedRow.length < expectedCols) {
+                        alignedRow.push('');
+                    }
+                    headers.forEach((h, colIndex) => {
+                        cleanRow[h.field] = alignedRow[colIndex] ?? '';
+                    });
+                    this.warnings.push(`行 ${rowIndex + 1} 列数不足 (${actualCols}/${expectedCols})，已补空列。`);
+                } else if (actualCols > expectedCols) {
+                    // 超列双重报错提示，截断处理以防止溢出
+                    reportExtraColumnsError(tableId, expectedCols, actualCols, rowIndex, row);
+                    headers.forEach((h, colIndex) => {
+                        cleanRow[h.field] = row[colIndex] ?? '';
+                    });
+                } else {
+                    // 列数正常
+                    headers.forEach((h, colIndex) => {
+                        cleanRow[h.field] = row[colIndex] ?? '';
+                    });
+                }
+            } else if (typeof row === 'object' && row !== null) {
+                // 2. 对象类型数据源（支持多冗余字段数据场景）
+                // 遍历表头，进行精准匹配，若数据源缺失该字段则留空
+                headers.forEach(h => {
+                    cleanRow[h.field] = row[h.field] !== undefined && row[h.field] !== null ? row[h.field] : '';
                 });
-            } else {
-                headersList.forEach((header) => {
-                    rowData[header.field] = row[header.field] ?? '';
-                });
-            }
-            
-            return rowData;
-        });
 
-        return {
-            headers: headersList,
-            data: data,
-            footerData: null,
-            metadata: {
-                totalRows: data.length,
-                totalCols: headersList.length,
-                hasHeader: totalRows > 0
-            }
-        };
-    }
-
-    /**
-     * 提取表头
-     */
-    extractHeaders(rows, maxCols) {
-        if (rows.length === 0) return [];
-        
-        const firstRow = rows[0];
-        
-        if (Array.isArray(firstRow)) {
-            // 数组格式：使用第一行作为表头
-            return firstRow.map((cell, i) => ({
-                field: `col_${i}`,
-                label: String(cell ?? `列${i + 1}`)
-            }));
-        } else if (typeof firstRow === 'object') {
-            // 对象格式：使用对象的键作为表头
-            const keys = Object.keys(firstRow);
-            return keys.map(key => ({
-                field: key,
-                label: this.formatHeaderLabel(key)
-            }));
-        }
-        
-        return [];
-    }
-
-    /**
-     * 格式化表头标签
-     */
-    formatHeaderLabel(field) {
-        // 下划线转驼峰
-        const formatted = field.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
-        // 驼峰转空格
-        const withSpaces = formatted.replace(/([A-Z])/g, ' $1');
-        // 首字母大写
-        return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1);
-    }
-}
-
-/**
- * HTML表格解析器
- */
-class HTMLTableParser extends TableDataParser {
-    /**
-     * 从HTML表格元素提取数据
-     */
-    extractRawData(input) {
-        if (typeof input === 'string') {
-            // 可能是选择器或HTML字符串
-            if (input.trim().startsWith('<')) {
-                // HTML字符串
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(input, 'text/html');
-                input = doc.querySelector('table');
-            } else {
-                // 选择器
-                input = document.querySelector(input);
-            }
-        }
-
-        if (!input || input.tagName !== 'TABLE') {
-            throw new Error('无效的HTML表格元素');
-        }
-
-        const rows = [];
-        const tbody = input.querySelector('tbody');
-        const thead = input.querySelector('thead');
-        
-        // 提取表头
-        if (thead) {
-            const headerRows = thead.querySelectorAll('tr');
-            headerRows.forEach(tr => {
-                const cells = Array.from(tr.querySelectorAll('th, td'));
-                rows.push(cells.map(cell => cell.textContent.trim()));
-            });
-        }
-
-        // 提取数据行
-        const dataBody = tbody || input;
-        const dataRows = dataBody.querySelectorAll('tr');
-        dataRows.forEach(tr => {
-            const cells = Array.from(tr.querySelectorAll('td'));
-            if (cells.length > 0) {
-                rows.push(cells.map(cell => this.extractCellValue(cell)));
-            }
-        });
-
-        if (rows.length === 0) {
-            throw new Error('表格中没有找到有效数据');
-        }
-
-        return rows;
-    }
-
-    /**
-     * 提取单元格值
-     */
-    extractCellValue(cell) {
-        // 检查是否有data属性
-        const dataValue = cell.getAttribute('data-value');
-        if (dataValue) return dataValue;
-
-        // 检查是否有data-type属性
-        const dataType = cell.getAttribute('data-type');
-        if (dataType) {
-            return {
-                value: cell.textContent.trim(),
-                type: dataType
-            };
-        }
-
-        return cell.textContent.trim();
-    }
-
-    /**
-     * 构建表格结构（覆盖父类）
-     */
-    buildTableStructure(normalizedData) {
-        const { rows, maxCols, totalRows } = normalizedData;
-        
-        // 计算表头行数（如果有thead的话）
-        let headers = [];
-        let dataRows = rows;
-        
-        // 检查是否有多级表头
-        const thead = document.querySelector('thead');
-        if (thead) {
-            const headerRows = thead.querySelectorAll('tr');
-            if (headerRows.length > 1) {
-                // 多级表头
-                headers = this.extractMultiLevelHeaders(thead);
-                dataRows = rows.slice(headerRows.length);
-            } else {
-                headers = this.extractHeaders(rows, maxCols);
-                dataRows = rows.slice(1);
-            }
-        } else {
-            headers = this.extractHeaders(rows, maxCols);
-            dataRows = rows.slice(1);
-        }
-
-        // 转换为标准数据格式
-        const headersList = headers.map((h, i) => ({
-            field: h.field || `col_${i}`,
-            label: h.label || h.text || h.value || `列${i + 1}`,
-            colspan: h.colspan || 1,
-            rowspan: h.rowspan || 1
-        }));
-
-        const data = dataRows.map((row, rowIndex) => {
-            const rowData = { _id: rowIndex, _originalIndex: rowIndex };
-            
-            if (Array.isArray(row)) {
-                headersList.forEach((header, colIndex) => {
-                    const cellValue = row[colIndex];
-                    if (typeof cellValue === 'object' && cellValue !== null) {
-                        rowData[header.field] = cellValue.value ?? '';
-                        rowData[`_${header.field}_type`] = cellValue.type;
-                    } else {
-                        rowData[header.field] = cellValue ?? '';
+                // 系统冗余参数、多余无效字段：内存完整保留不丢失
+                Object.keys(row).forEach(key => {
+                    if (cleanRow[key] === undefined) {
+                        cleanRow[key] = row[key];
                     }
                 });
             } else {
-                headersList.forEach((header) => {
-                    rowData[header.field] = row[header.field] ?? '';
+                // 异常行容错：整行置空
+                headers.forEach(h => {
+                    cleanRow[h.field] = '';
                 });
+                this.warnings.push(`行 ${rowIndex + 1} 格式无效，已静默修复为空行。`);
             }
-            
-            return rowData;
+
+            return cleanRow;
         });
-
-        // 检查是否需要汇总行
-        let footerData = null;
-        const tfoot = document.querySelector('tfoot');
-        if (tfoot) {
-            const footerCells = Array.from(tfoot.querySelectorAll('td'));
-            if (footerCells.length > 0) {
-                footerData = {};
-                headersList.forEach((header, i) => {
-                    footerData[header.field] = footerCells[i]?.textContent.trim() || '';
-                });
-            }
-        }
-
-        return {
-            headers: headersList,
-            data: data,
-            footerData: footerData,
-            metadata: {
-                totalRows: data.length,
-                totalCols: headersList.length,
-                hasHeader: true,
-                hasMultiLevelHeader: thead && thead.querySelectorAll('tr').length > 1
-            }
-        };
-    }
-
-    /**
-     * 提取多级表头
-     */
-    extractMultiLevelHeaders(thead) {
-        const headerRows = thead.querySelectorAll('tr');
-        const headers = [];
-        
-        headerRows.forEach((tr, rowIndex) => {
-            const cells = Array.from(tr.querySelectorAll('th, td'));
-            cells.forEach((cell, cellIndex) => {
-                const colspan = parseInt(cell.getAttribute('colspan')) || 1;
-                const rowspan = parseInt(cell.getAttribute('rowspan')) || 1;
-                const text = cell.textContent.trim();
-                
-                if (rowIndex === headerRows.length - 1) {
-                    // 最后一级表头
-                    headers.push({
-                        field: `col_${cellIndex}`,
-                        label: text,
-                        colspan: colspan,
-                        rowspan: rowspan
-                    });
-                }
-            });
-        });
-        
-        return headers;
     }
 }
 
 /**
- * CSV数据解析器
+ * HTML 表格解析器
+ */
+class HTMLTableParser extends TableDataParser {
+    /**
+     * 解析页面原生 HTML Table 结构（最高优先级）
+     * @param {HTMLTableElement} tableElement HTML 表格 DOM 元素
+     * @returns {Object} 解析后的标准化表格数据
+     */
+    parse(tableElement) {
+        if (!tableElement || tableElement.tagName !== 'TABLE') {
+            throw new Error('无效的 HTML 表格元素');
+        }
+
+        const tableId = tableElement.id;
+        const thead = tableElement.querySelector('thead');
+        const tbody = tableElement.querySelector('tbody');
+        const tfoot = tableElement.querySelector('tfoot');
+
+        // 1. 提取表头配置
+        const headers = [];
+        if (thead) {
+            const ths = thead.querySelectorAll('tr:last-child th');
+            ths.forEach((th, index) => {
+                const field = th.getAttribute('data-field') || th.textContent.trim() || `col_${index}`;
+                const label = th.textContent.trim() || field;
+                const type = th.getAttribute('data-type') || 'text';
+                const summary = th.getAttribute('data-summary') || '';
+                headers.push({ field, label, type, summary, element: th });
+            });
+        }
+
+        // 2. 提取表尾自定义汇总初始配置（如有）
+        const footerData = {};
+        if (tfoot) {
+            const footerCells = tfoot.querySelectorAll('tr:first-child td, tr:first-child th');
+            headers.forEach((h, index) => {
+                const cell = footerCells[index];
+                if (cell) {
+                    const cellText = cell.textContent.trim();
+                    // 仅当 td 有文本内容时，才算作“用户手动自定义的展示内容”
+                    if (cellText !== '') {
+                        footerData[h.field] = cellText;
+                    }
+                }
+            });
+        }
+
+        // 3. 提取表体原生数据
+        const rawRows = [];
+        if (tbody) {
+            const trs = tbody.querySelectorAll('tr');
+            trs.forEach(tr => {
+                const tds = tr.querySelectorAll('td');
+                if (tds.length > 0) {
+                    const rowData = Array.from(tds).map(td => {
+                        const val = td.getAttribute('data-value');
+                        return val !== null ? val : td.textContent.trim();
+                    });
+                    rawRows.push(rowData);
+                }
+            });
+        }
+
+        // 4. 清洗与对齐数据
+        const cleanRows = this.cleanAndAlignData(rawRows, headers, tableId);
+
+        return {
+            headers,
+            data: cleanRows,
+            footerData,
+            metadata: {
+                totalRows: cleanRows.length,
+                totalCols: headers.length,
+                hasHeader: headers.length > 0,
+                hasFooter: !!tfoot
+            }
+        };
+    }
+}
+
+/**
+ * CSV 格式解析器
  */
 class CSVParser extends TableDataParser {
-    constructor(options = {}) {
-        super();
-        this.options = {
-            delimiter: options.delimiter || ',',
-            quote: options.quote || '"',
-            hasHeader: options.hasHeader !== undefined ? options.hasHeader : true,
-            skipEmptyLines: options.skipEmptyLines !== undefined ? options.skipEmptyLines : true,
-            ...options
+    /**
+     * 解析 CSV 文本数据
+     * @param {string} csvText CSV 字符串
+     * @param {Object} options 包含 headers 基准的配置项
+     * @param {string} tableId 表格ID
+     * @returns {Object} 解析结果
+     */
+    parse(csvText, options = {}, tableId = '') {
+        if (typeof csvText !== 'string') {
+            throw new Error('CSV 数据源必须是字符串');
+        }
+
+        const lines = csvText.split(/\r?\n/).map(l => l.trim()).filter(l => l !== '');
+        if (lines.length === 0) {
+            return { headers: [], data: [], footerData: {} };
+        }
+
+        // 解析每行 CSV 数据
+        const rawRows = lines.map(line => this.parseCSVLine(line));
+
+        let headers = options.headers || [];
+        let dataStartIdx = 0;
+
+        // 若没有外部传入的 thead 表头，则将 CSV 首行当作表头
+        if (headers.length === 0) {
+            const firstLine = rawRows[0];
+            headers = firstLine.map((h, index) => ({
+                field: h || `col_${index}`,
+                label: h || `列${index + 1}`,
+                type: 'text',
+                summary: ''
+            }));
+            dataStartIdx = 1;
+        }
+
+        const cleanRows = this.cleanAndAlignData(rawRows.slice(dataStartIdx), headers, tableId);
+
+        return {
+            headers,
+            data: cleanRows,
+            footerData: {},
+            metadata: {
+                totalRows: cleanRows.length,
+                totalCols: headers.length
+            }
         };
     }
 
-    /**
-     * 解析CSV数据
-     */
-    extractRawData(input) {
-        if (typeof input !== 'string') {
-            throw new Error('CSV数据必须是字符串格式');
-        }
-
-        const lines = input.split(/\r?\n/);
-        const rows = [];
-        
-        lines.forEach((line, index) => {
-            if (this.options.skipEmptyLines && line.trim() === '') {
-                return;
-            }
-            
-            const row = this.parseCSVLine(line);
-            if (row.length > 0) {
-                rows.push(row);
-            } else {
-                this.warnings.push(`第 ${index + 1} 行为空，已跳过`);
-            }
-        });
-
-        if (rows.length === 0) {
-            throw new Error('CSV数据为空');
-        }
-
-        return rows;
-    }
-
-    /**
-     * 解析单行CSV
-     */
     parseCSVLine(line) {
-        const { delimiter, quote } = this.options;
         const result = [];
         let current = '';
         let inQuotes = false;
-        
+        const delimiter = ',';
+        const quote = '"';
+
         for (let i = 0; i < line.length; i++) {
             const char = line[i];
             const nextChar = line[i + 1];
-            
+
             if (inQuotes) {
                 if (char === quote && nextChar === quote) {
-                    // 转义的引号
                     current += quote;
                     i++;
                 } else if (char === quote) {
-                    // 引号结束
                     inQuotes = false;
                 } else {
                     current += char;
                 }
             } else {
                 if (char === quote) {
-                    // 引号开始
                     inQuotes = true;
                 } else if (char === delimiter) {
-                    // 分隔符
                     result.push(current.trim());
                     current = '';
                 } else {
@@ -490,251 +306,98 @@ class CSVParser extends TableDataParser {
                 }
             }
         }
-        
         result.push(current.trim());
         return result;
     }
-
-    /**
-     * 验证并标准化数据（覆盖父类）
-     */
-    validateAndNormalize(rawData) {
-        // CSV不需要额外的标准化，因为我们已经在解析时处理了
-        return {
-            rows: rawData,
-            maxCols: Math.max(...rawData.map(row => row.length)),
-            totalRows: rawData.length
-        };
-    }
 }
 
 /**
- * JSON数据解析器
+ * JSON 格式解析器
  */
 class JSONParser extends TableDataParser {
     /**
-     * 解析JSON数据
+     * 解析 JSON 数据源
+     * @param {string|Array|Object} jsonInput JSON输入
+     * @param {Object} options 包含 headers 基准的配置项
+     * @param {string} tableId 表格ID
+     * @returns {Object} 解析结果
      */
-    extractRawData(input) {
-        let jsonData = input;
-        
-        if (typeof input === 'string') {
+    parse(jsonInput, options = {}, tableId = '') {
+        let jsonObj = jsonInput;
+        if (typeof jsonInput === 'string') {
             try {
-                jsonData = JSON.parse(input);
-            } catch (error) {
-                throw new Error(`JSON解析失败: ${error.message}`);
+                jsonObj = JSON.parse(jsonInput);
+            } catch (e) {
+                throw new Error(`JSON 解析失败: ${e.message}`);
             }
         }
 
-        if (Array.isArray(jsonData)) {
-            return jsonData;
+        let rawRows = [];
+        let jsonHeaders = null;
+        let jsonFooterData = {};
+
+        // 识别 JSON 数据格式
+        if (Array.isArray(jsonObj)) {
+            // 格式 A: 纯对象数组 [ { field1: val1, ... }, ... ]
+            rawRows = jsonObj;
+        } else if (jsonObj && typeof jsonObj === 'object') {
+            // 格式 B: 包裹型结构 { headers: [], data: [], footerData: {} }
+            if (Array.isArray(jsonObj.data)) {
+                rawRows = jsonObj.data;
+            } else if (Array.isArray(jsonObj.rows)) {
+                rawRows = jsonObj.rows;
+            }
+            if (Array.isArray(jsonObj.headers)) {
+                jsonHeaders = jsonObj.headers;
+            }
+            if (jsonObj.footerData) {
+                jsonFooterData = jsonObj.footerData;
+            }
         }
 
-        if (typeof jsonData === 'object' && jsonData !== null) {
-            // 检查是否是表格格式
-            if (jsonData.headers && Array.isArray(jsonData.headers)) {
-                // 标准表格格式
-                const rows = [jsonData.headers];
-                if (jsonData.data && Array.isArray(jsonData.data)) {
-                    rows.push(...jsonData.data);
-                }
-                return rows;
-            }
+        let headers = options.headers || [];
 
-            // 对象数组
-            if (jsonData.data && Array.isArray(jsonData.data)) {
-                return jsonData.data;
-            }
-
-            // 单个对象
-            if (jsonData.rows && Array.isArray(jsonData.rows)) {
-                return jsonData.rows;
-            }
-
-            // 尝试转换对象为数组
-            const keys = Object.keys(jsonData);
-            if (keys.length > 0 && typeof jsonData[keys[0]] === 'object') {
-                // 对象包含对象数组
-                return Object.values(jsonData);
-            }
-
-            // 单行对象
-            return [jsonData];
-        }
-
-        throw new Error('无效的JSON数据格式');
-    }
-
-    /**
-     * 构建表格结构（覆盖父类）
-     */
-    buildTableStructure(normalizedData) {
-        const { rows, maxCols, totalRows } = normalizedData;
-        
-        let headers = [];
-        let dataRows = rows;
-
-        // 检查第一行是否是对象
-        if (totalRows > 0) {
-            const firstRow = rows[0];
-            if (typeof firstRow === 'object' && !Array.isArray(firstRow)) {
-                // 对象数组：键作为表头
-                headers = Object.keys(firstRow).map(key => ({
+        // 若没有外部传入的 HTML thead，并且数据自带表头，则使用数据自带表头
+        if (headers.length === 0) {
+            if (jsonHeaders) {
+                headers = jsonHeaders.map((h, index) => {
+                    if (typeof h === 'string') {
+                        return { field: h, label: h, type: 'text', summary: '' };
+                    }
+                    return {
+                        field: h.field || `col_${index}`,
+                        label: h.label || h.field || `列${index + 1}`,
+                        type: h.type || 'text',
+                        summary: h.summary || ''
+                    };
+                });
+            } else if (rawRows.length > 0 && !Array.isArray(rawRows[0]) && typeof rawRows[0] === 'object') {
+                // 基于第一行对象的 Key 自动推导表头
+                headers = Object.keys(rawRows[0]).map(key => ({
                     field: key,
-                    label: this.formatHeaderLabel(key)
+                    label: key,
+                    type: 'text',
+                    summary: ''
                 }));
-                dataRows = rows;
-            } else if (Array.isArray(firstRow)) {
-                // 数组格式
-                headers = this.extractHeaders(rows, maxCols);
-                dataRows = rows.slice(1);
             }
         }
 
-        // 转换为标准数据格式
-        const headersList = headers.map((h, i) => ({
-            field: h.field || `col_${i}`,
-            label: h.label || h.text || h.value || `列${i + 1}`
-        }));
-
-        const data = dataRows.map((row, rowIndex) => {
-            const rowData = { _id: rowIndex, _originalIndex: rowIndex };
-            
-            if (Array.isArray(row)) {
-                headersList.forEach((header, colIndex) => {
-                    rowData[header.field] = row[colIndex] ?? '';
-                });
-            } else if (typeof row === 'object' && row !== null) {
-                headersList.forEach((header) => {
-                    rowData[header.field] = row[header.field] ?? '';
-                });
-            }
-            
-            return rowData;
-        });
+        const cleanRows = this.cleanAndAlignData(rawRows, headers, tableId);
 
         return {
-            headers: headersList,
-            data: data,
-            footerData: null,
+            headers,
+            data: cleanRows,
+            footerData: jsonFooterData,
             metadata: {
-                totalRows: data.length,
-                totalCols: headersList.length,
-                hasHeader: typeof rows[0] === 'object' && !Array.isArray(rows[0])
+                totalRows: cleanRows.length,
+                totalCols: headers.length
             }
         };
     }
 }
 
 /**
- * 表格数据注册表
- */
-class TableDataRegistry {
-    constructor() {
-        this.registry = new Map();
-        this.idCounter = 0;
-    }
-
-    /**
-     * 注册表格数据
-     * @param {string} id - 表格ID
-     * @param {TableData} data - 表格数据
-     * @param {Object} options - 配置选项
-     * @returns {string} 注册ID
-     */
-    register(id, data, options = {}) {
-        const registerId = id || `table_data_${++this.idCounter}`;
-        
-        const tableData = {
-            id: registerId,
-            data: data,
-            headers: data.headers,
-            rows: data.data,
-            footerData: data.footerData,
-            metadata: data.metadata,
-            config: {
-                striped: options.striped !== undefined ? options.striped : true,
-                sortable: options.sortable !== undefined ? options.sortable : true,
-                filterable: options.filterable !== undefined ? options.filterable : true,
-                ...options
-            },
-            createdAt: new Date(),
-            updatedAt: new Date()
-        };
-
-        this.registry.set(registerId, tableData);
-        debug('表格数据已注册', null, { id: registerId, totalRows: data.data?.length || 0 });
-        
-        return registerId;
-    }
-
-    /**
-     * 获取表格数据
-     */
-    get(id) {
-        return this.registry.get(id);
-    }
-
-    /**
-     * 获取所有注册数据
-     */
-    getAll() {
-        return Array.from(this.registry.values());
-    }
-
-    /**
-     * 更新表格数据
-     */
-    update(id, data) {
-        const tableData = this.registry.get(id);
-        if (tableData) {
-            tableData.data = data;
-            tableData.rows = data.data;
-            tableData.headers = data.headers;
-            tableData.footerData = data.footerData;
-            tableData.metadata = data.metadata;
-            tableData.updatedAt = new Date();
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 删除注册数据
-     */
-    unregister(id) {
-        return this.registry.delete(id);
-    }
-
-    /**
-     * 检查是否已注册
-     */
-    has(id) {
-        return this.registry.has(id);
-    }
-
-    /**
-     * 获取统计数据
-     */
-    getStats() {
-        return {
-            total: this.registry.size,
-            totalRows: Array.from(this.registry.values()).reduce((sum, t) => sum + (t.data?.data?.length || 0), 0),
-            totalCols: Array.from(this.registry.values()).reduce((sum, t) => sum + (t.data?.headers?.length || 0), 0)
-        };
-    }
-
-    /**
-     * 清空注册表
-     */
-    clear() {
-        this.registry.clear();
-        this.idCounter = 0;
-    }
-}
-
-/**
- * 表格数据管理器（统一入口）
+ * 表格数据管理器（重构后的核心入口，支持数据清洗与统一分发）
  */
 class TableDataManager {
     constructor() {
@@ -745,192 +408,124 @@ class TableDataManager {
     }
 
     /**
-     * 自动识别数据格式并解析
-     * @param {*} data - 输入数据
-     * @param {Object} options - 配置选项
-     * @returns {ParseResult}
+     * 自动识别格式并清洗解析数据源
+     * @param {*} data 原始数据（可以是DOM, JSON对象, CSV字符串等）
+     * @param {Object} options 解析与表头映射配置
+     * @returns {Object} 标准化后的表格结构数据
      */
     parse(data, options = {}) {
-        // 检测数据格式
-        const type = this.detectDataType(data);
-        
-        debug('开始解析数据', null, { detectedType: type });
-        
-        let parser;
-        switch (type) {
-            case 'html':
-                parser = this.htmlParser;
-                break;
-            case 'csv':
-                parser = this.csvParser;
-                break;
-            case 'json':
-                parser = this.jsonParser;
-                break;
-            default:
-                return {
-                    success: false,
-                    data: null,
-                    errors: ['无法识别数据格式'],
-                    warnings: []
-                };
-        }
+        const formatType = this.detectDataType(data);
+        const tableId = options.id || '';
+        let result;
 
-        const result = parser.parse(data);
-        
-        if (result.success && options.register !== false) {
-            this.registry.register(options.id, result.data, options);
+        try {
+            switch (formatType) {
+                case 'html':
+                    result = this.htmlParser.parse(data);
+                    break;
+                case 'csv':
+                    result = this.csvParser.parse(data, options, tableId);
+                    break;
+                case 'json':
+                    result = this.jsonParser.parse(data, options, tableId);
+                    break;
+                default:
+                    throw new Error('未识别的数据格式，无法完成解析');
+            }
+            
+            // 仅在明确要求注册时写入全局注册表
+            if (options.register !== false && tableId) {
+                this.registry.register(tableId, {
+                    id: tableId,
+                    headers: result.headers,
+                    data: result.data,
+                    footerData: result.footerData,
+                    metadata: result.metadata,
+                    config: options.config || {}
+                });
+            }
+
+            return { success: true, data: result };
+        } catch (error) {
+            console.error('[CUI Table Parser Error]', error);
+            return { success: false, error: error.message };
         }
-        
-        return result;
     }
 
-    /**
-     * 检测数据格式
-     */
     detectDataType(data) {
-        if (typeof data === 'string') {
-            const trimmed = data.trim();
-            
-            // HTML检测
-            if (trimmed.startsWith('<table') || trimmed.startsWith('<thead')) {
-                return 'html';
-            }
-            
-            // JSON检测
-            if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-                try {
-                    JSON.parse(trimmed);
-                    return 'json';
-                } catch (e) {
-                    // 不是JSON，继续检测
-                }
-            }
-            
-            // CSV检测（包含逗号或制表符）
-            if (trimmed.includes(',') || trimmed.includes('\t')) {
-                return 'csv';
-            }
-        }
-        
-        // DOM元素检测
         if (data instanceof Element || data instanceof HTMLTableElement) {
             return 'html';
         }
-        
-        // 对象检测
+        if (typeof data === 'string') {
+            const trimmed = data.trim();
+            if (trimmed.startsWith('<table') || trimmed.startsWith('<thead') || trimmed.startsWith('<table>')) {
+                return 'html';
+            }
+            if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
+                return 'json';
+            }
+            if (trimmed.includes(',') || trimmed.includes('\n')) {
+                return 'csv';
+            }
+        }
         if (typeof data === 'object' && data !== null) {
             return 'json';
         }
-        
         return 'unknown';
     }
 
-    /**
-     * 解析HTML表格
-     */
-    parseHTML(elementOrSelector) {
-        return this.parse(elementOrSelector, { register: true });
-    }
-
-    /**
-     * 解析CSV数据
-     */
-    parseCSV(csvString, options = {}) {
-        return this.parse(csvString, { ...options, register: true });
-    }
-
-    /**
-     * 解析JSON数据
-     */
-    parseJSON(jsonStringOrObject, options = {}) {
-        return this.parse(jsonStringOrObject, { ...options, register: true });
-    }
-
-    /**
-     * 获取注册的数据
-     */
     getData(id) {
-        return this.registry.get(id);
+        const item = this.registry.get(id);
+        return item ? item.data : null;
     }
 
-    /**
-     * 更新数据
-     */
-    updateData(id, data) {
-        const result = this.parse(data, { register: false });
-        if (result.success) {
-            return this.registry.update(id, result.data);
-        }
-        return false;
+    getHeaders(id) {
+        const item = this.registry.get(id);
+        return item ? item.headers : null;
     }
 
-    /**
-     * 导出数据为JSON
-     */
+    getFooterData(id) {
+        const item = this.registry.get(id);
+        return item ? item.footerData : null;
+    }
+
+    updateData(id, cleanData) {
+        return this.registry.update(id, { data: cleanData });
+    }
+
     exportJSON(id) {
-        const tableData = this.registry.get(id);
-        if (tableData) {
-            return JSON.stringify(tableData.data, null, 2);
-        }
-        return null;
+        const tableItem = this.registry.get(id);
+        if (!tableItem) return null;
+        return JSON.stringify(tableItem.data, null, 2);
     }
 
-    /**
-     * 导出数据为CSV
-     */
     exportCSV(id) {
-        const tableData = this.registry.get(id);
-        if (!tableData) return null;
+        const tableItem = this.registry.get(id);
+        if (!tableItem) return null;
 
-        const { headers, data } = tableData.data;
+        const headers = tableItem.headers;
+        const data = tableItem.data;
         const lines = [];
 
-        // 表头
-        lines.push(headers.map(h => h.label).join(','));
+        // 写入表头
+        lines.push(headers.map(h => `"${String(h.label).replace(/"/g, '""')}"`).join(','));
 
-        // 数据行
+        // 写入数据
         data.forEach(row => {
-            const values = headers.map(h => {
-                const value = row[h.field] ?? '';
-                // 转义CSV值
-                if (String(value).includes(',') || String(value).includes('"')) {
-                    return `"${String(value).replace(/"/g, '""')}"`;
-                }
-                return value;
+            const rowValues = headers.map(h => {
+                const val = row[h.field] ?? '';
+                return `"${String(val).replace(/"/g, '""')}"`;
             });
-            lines.push(values.join(','));
+            lines.push(rowValues.join(','));
         });
 
         return lines.join('\n');
-    }
-
-    /**
-     * 获取统计信息
-     */
-    getStats() {
-        return this.registry.getStats();
-    }
-
-    /**
-     * 检查数据是否存在
-     */
-    hasData(id) {
-        return this.registry.has(id);
-    }
-
-    /**
-     * 删除数据
-     */
-    removeData(id) {
-        return this.registry.unregister(id);
     }
 }
 
 // 创建全局单例
 const tableDataManager = new TableDataManager();
 
-// 导出
 export { 
     TableDataParser, 
     HTMLTableParser, 

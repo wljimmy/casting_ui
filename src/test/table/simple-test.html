@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单表格测试</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/header.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/progress.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/color-picker.css">
+    <link rel="stylesheet" href="/modules/css/table.css">
+    <link rel="stylesheet" href="/modules/css/menu.css">
+</head>
+<body class="CUI-container">
+    <div class="CUI-wrap">
+        <header>
+            <h1>简单表格测试</h1>
+            <p class="CUI-text--light">基础表格功能验证 · 静态数据 · 无远程数据源</p>
+        </header>
+
+        <main class="CUI-content">
+            <section class="CUI-section">
+                <table class="CUI-table" id="simple-table"
+                    data-freeze-header="true"
+                    data-freeze-first-col="true"
+                    data-freeze-last-col="false"
+                    data-freeze-footer="true"
+                    data-cui-table='{"type":"functional","striped":true,"pageSize":10}'>
+                    <thead>
+                        <tr>
+                            <th data-field="ID" data-type="number">ID</th>
+                            <th data-field="姓名" data-type="text">姓名</th>
+                            <th data-field="年龄" data-type="number" data-summary="sum">年龄</th>
+                            <th data-field="薪资" data-type="currency" data-summary="sum">薪资</th>
+                            <th data-field="手机号" data-type="phone">手机号</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>张三</td>
+                            <td>25</td>
+                            <td>10000</td>
+                            <td>13800138000</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>李四</td>
+                            <td>30</td>
+                            <td>20000</td>
+                            <td>13900139000</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>王五</td>
+                            <td>35</td>
+                            <td>30000</td>
+                            <td>13700137000</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>汇总</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="/modules/js/index.js"></script>
+
+    <script>
+        document.addEventListener('cui-pipeline-complete', function () {
+            console.log('[简单测试] 框架初始化完成');
+            
+            setTimeout(() => {
+                const tableEntry = window.CUI.table.getTableEntry('simple-table');
+                if (tableEntry) {
+                    console.log('[简单测试] 表格状态:', tableEntry.initStatus);
+                    console.log('[简单测试] 数据行数:', tableEntry.rawData.length);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

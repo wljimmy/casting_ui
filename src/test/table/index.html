@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格重构全量验证测试</title>
+    <link rel="stylesheet" href="/modules/css/core.css">
+    <link rel="stylesheet" href="/modules/css/container.css">
+    <link rel="stylesheet" href="/modules/css/layout.css">
+    <link rel="stylesheet" href="/modules/css/text.css">
+    <link rel="stylesheet" href="/modules/css/header.css">
+    <link rel="stylesheet" href="/modules/css/animation.css">
+    <link rel="stylesheet" href="/modules/css/responsive.css">
+    <link rel="stylesheet" href="/modules/css/components.css">
+    <link rel="stylesheet" href="/modules/css/status.css">
+    <link rel="stylesheet" href="/modules/css/progress.css">
+    <link rel="stylesheet" href="/modules/css/input.css">
+    <link rel="stylesheet" href="/modules/css/form.css">
+    <link rel="stylesheet" href="/modules/css/color-picker.css">
+    <link rel="stylesheet" href="/modules/css/table.css">
+    <link rel="stylesheet" href="/modules/css/menu.css">
+</head>
+<body class="CUI-container">
+    <div class="CUI-wrap">
+        <header>
+            <div class="CUI-grid CUI-grid-v-center">
+                <div>
+                    <h1>表格重构全量字段验证</h1>
+                    <p class="CUI-text--light">全量字段加载 · 含长文本高度限制 · 掩码等宽字体 · 按类型列宽 · 多方向冻结</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="CUI-content">
+            <section class="CUI-section">
+                <table class="CUI-table" id="test-table"
+                    data-freeze-header="true"
+                    data-freeze-first-col="true"
+                    data-freeze-last-col="false"
+                    data-freeze-footer="false"
+                    data-cui-table='{"dataSource":"/测试用数据/仿真测试数据（JSON格式）.json","type":"functional","striped":true,"pageSize":10}'>
+                    <thead>
+                        <tr>
+                            <th data-field="ID" data-type="number" style="width: 64px;">ID</th>
+                            <th data-field="姓名" data-type="text" style="width: 100px;">姓名</th>
+                            <th data-field="性别" data-type="text" style="width: 64px;">性别</th>
+                            <th data-field="身份证号" data-type="idcard">身份证号</th>
+                            <th data-field="手机号" data-type="phone">手机号</th>
+                            <th data-field="邮箱" data-type="email">邮箱</th>
+                            <th data-field="出生日期" data-type="date">出生日期</th>
+                            <th data-field="年龄" data-type="number" data-summary="avg">年龄</th>
+                            <th data-field="省份" data-type="text" style="width: 120px;">省份</th>
+                            <th data-field="城市" data-type="text" style="width: 120px;">城市</th>
+                            <th data-field="详细地址" data-type="text-long" style="width: 260px;">详细地址</th>
+                            <th data-field="邮编" data-type="text" style="width: 90px;">邮编</th>
+                            <th data-field="公司名称" data-type="text" style="width: 200px;">公司名称</th>
+                            <th data-field="职位" data-type="text" style="width: 130px;">职位</th>
+                            <th data-field="入职日期" data-type="date">入职日期</th>
+                            <th data-field="薪资" data-type="currency" data-summary="sum">薪资</th>
+                            <th data-field="学历" data-type="text" style="width: 90px;">学历</th>
+                            <th data-field="专业" data-type="text" style="width: 140px;">专业</th>
+                            <th data-field="毕业院校" data-type="text" style="width: 220px;">毕业院校</th>
+                            <th data-field="个人简介" data-type="text-long" style="width: 320px;">个人简介</th>
+                            <th data-field="头像链接" data-type="image" style="width: 80px;">头像</th>
+                            <th data-field="备注" data-type="text-long" style="width: 300px;">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td>汇总</td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="/modules/js/index.js"></script>
+
+    <script>
+        document.addEventListener('cui-pipeline-complete', function () {
+            console.log('[测试日志] 框架初始化完成');
+            
+            setTimeout(() => {
+                const tableEntry = window.CUI.table.getTableEntry('test-table');
+                if (tableEntry) {
+                    console.log('[测试日志] 表格注册表状态:', tableEntry.initStatus);
+                    console.log('[测试日志] 数据总行数:', tableEntry.rawData.length);
+                    if (tableEntry.rawData.length > 0) {
+                        console.log('[测试日志] 第一行数据:', tableEntry.rawData[0]);
+                    }
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

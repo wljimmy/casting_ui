@@ -1,345 +1,445 @@
 /* 
  * Casting UI Framework
- * Version: 0.5.8
+ * Version: 0.6.0
  * Module: table.css
- * Description: 表格组件样式
+ * Description: 表格组件样式 - 统一边框折叠、背景色挂载与 sticky 多方向冻结层级
  * Copyright (c) 2026 Bingo工作室
  * Email: wljimmy@hotmail.com
  */
 
 /* ============================================================
- * 容器与布局
+ * 容器与外部工具栏
  * ============================================================ */
 
-/* 表格容器 */
 .CUI-table-container {
-    position: relative;
-    overflow: hidden;
+    overflow: auto;
+    width: 100%;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
     background: var(--bg-color);
+    box-sizing: border-box;
+    padding: 0;
 }
 
-/* 横向滚动容器 */
-.CUI-table-scroll-x {
-    overflow-x: auto;
-    max-width: 100%;
-    width: 100%;
-    position: relative;
+.CUI-table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-md);
+    padding: var(--size-sm) var(--size-md);
+    background: var(--bg-gray);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+    box-sizing: border-box;
 }
 
-/* 纵向滚动容器 */
-.CUI-table-scroll-y {
-    overflow-y: auto;
-    max-height: 500px;
+.CUI-table-footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-md);
+    padding: var(--size-sm) var(--size-md);
+    background: var(--bg-gray);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    box-sizing: border-box;
+}
+
+.CUI-table-status-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--size-sm);
+    font-size: var(--font-size-xs);
+    color: var(--text-light);
+}
+
+.CUI-table-status-bar .CUI-divider {
+    color: var(--border-color);
+}
+
+.CUI-table-pagination {
+    display: flex;
+    gap: var(--size-sm);
+    align-items: center;
+    font-size: var(--font-size-sm);
+}
+
+.CUI-pagination-size,
+.CUI-pagination-jump {
+    display: flex;
+    align-items: center;
+    gap: var(--size-xs);
+}
+
+.CUI-pagination-select {
+    padding: 2px 4px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-color);
+}
+
+.CUI-pagination-jump-input {
+    width: 45px;
+    padding: 2px 4px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    box-sizing: border-box;
 }
 
 /* ============================================================
- * 表格主体
+ * 表格主体与单元格尺寸限制
  * ============================================================ */
 
 .CUI-table {
-    width: auto;
+    width: 100%;
     min-width: 100%;
-    table-layout: auto;
-    border-collapse: collapse;
+    table-layout: fixed;
+    /* 采用独立边框，防止滚动时边框塌陷漏缝 */
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: var(--font-size-sm);
-    background: transparent;
+    background: var(--bg-color);
 }
 
-/* 表格单元格基础样式 */
-.CUI-table td,
-.CUI-table th {
+.CUI-table th,
+.CUI-table td {
     padding: var(--size-sm) var(--size-md);
+    /* 显式在单元格挂载背景色，解决 sticky 漏色 */
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    border-right: 1px solid var(--gray-100);
     vertical-align: middle;
-}
+    box-sizing: border-box;
+    line-height: 1.5em;
 
-.CUI-table td:last-child,
-.CUI-table th:last-child {
-    border-right: none;
-}
-
-/* ============================================================
- * 表头样式
- * ============================================================ */
-
-.CUI-table-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: var(--bg-color);
-}
-
-.CUI-table-header th {
-    padding: var(--size-sm) var(--size-md);
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-primary);
-    background: var(--bg-gray);
-    border-bottom: 2px solid var(--border-color);
-    border-right: 1px solid var(--gray-300);
-    white-space: nowrap;
-    position: relative;
-}
-
-.CUI-table-header th:last-child {
-    border-right: none;
-}
-
-/* 表头排序指示器 */
-.CUI-table-header th.CUI-table-sortable {
-    cursor: pointer;
-    user-select: none;
-}
-
-.CUI-table-header th.CUI-table-sortable:hover {
-    background: var(--border-color);
-}
-
-.CUI-table-header th.CUI-table-sortable::after {
-    content: '';
-    position: absolute;
-    right: var(--size-sm);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-}
-
-.CUI-table-header th.CUI-table-sort-asc::after {
-    border-bottom: 4px solid var(--text-light);
-}
-
-.CUI-table-header th.CUI-table-sort-desc::after {
-    border-top: 4px solid var(--text-light);
-}
-
-/* ============================================================
- * 表格主体行
- * ============================================================ */
-
-.CUI-table-body tr {
-    transition: background-color var(--transition-fast);
-}
-
-.CUI-table-body tr:hover {
-    background-color: var(--gray-200);
-}
-
-.CUI-table-body tr.CUI-table-row-highlight {
-    background-color: rgba(137, 140, 145, 0.15);
-}
-
-/* 单元格悬停高亮 - 在行高亮之上再高亮 */
-.CUI-table tbody tr td:hover,
-.CUI-table-body tr td:hover {
-    background-color: var(--gray-300) !important;
-    transition: background-color var(--transition-fast);
-}
-
-/* ============================================================
- * 方案一：隔行显色（斑马纹）
- * ============================================================ */
-
-.CUI-table-striped .CUI-table-body tr:nth-child(even) {
-    background-color: var(--bg-gray);
-}
-
-.CUI-table-striped .CUI-table-body tr:nth-child(even):hover {
-    background-color: var(--gray-200);
-}
-
-.CUI-table-striped .CUI-table-body tr:nth-child(even) td:hover {
-    background-color: var(--gray-300) !important;
-}
-
-/* ============================================================
- * 方案二：隔行不显色（默认）
- * ============================================================ */
-
-.CUI-table-plain .CUI-table-body tr {
-    background-color: transparent;
-}
-
-.CUI-table-plain .CUI-table-body tr:hover {
-    background-color: var(--gray-200);
-}
-
-.CUI-table-plain .CUI-table-body tr td:hover {
-    background-color: var(--gray-300) !important;
-}
-
-/* ============================================================
- * 冻结功能
- * ============================================================ */
-
-/* 首列冻结 */
-.CUI-table-first-col {
-    position: sticky;
-    left: 0;
-    z-index: 5;
-    background: var(--bg-color);
-    font-weight: 500;
-    border-right: 2px solid var(--border-color);
-    transition: none;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
-}
-
-.CUI-table-header .CUI-table-first-col {
-    z-index: 15;
-    background: var(--bg-gray);
-}
-
-/* 尾列冻结 */
-.CUI-table-last-col {
-    position: sticky;
-    right: 0;
-    z-index: 5;
-    background: var(--bg-gray);
-    font-weight: 600;
-    border-left: 2px solid var(--border-color);
-    transition: none;
-    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.05);
-}
-
-.CUI-table-header .CUI-table-last-col {
-    z-index: 15;
-    background: var(--bg-gray);
-}
-
-/* 通用冻结列 */
-.CUI-table-col-frozen {
-    position: sticky;
-    z-index: 5;
-    background: var(--bg-color);
-    transition: none;
-}
-
-/* 汇总行冻结 */
-.CUI-table-footer {
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
-    background: var(--bg-gray);
-    font-weight: 600;
-    transition: none;
-}
-
-.CUI-table-footer td {
-    border-top: 2px solid var(--border-color);
-}
-
-/* ============================================================
- * 空状态与文本处理
- * ============================================================ */
-
-.CUI-table-empty {
-    text-align: center;
-    padding: var(--size-xl);
-    color: var(--text-light);
-}
-
-.CUI-table-empty svg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: var(--size-md);
-    opacity: 0.5;
-}
-
-/* 超长文本处理 */
-.CUI-table-text-ellipsis {
+    /* 严格限制单元格最大尺寸 */
+    max-width: 320px;
+    max-height: 5.5em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 200px;
 }
 
-.CUI-table-text-wrap {
-    word-break: break-all;
-    white-space: pre-wrap;
+/* 斑马纹行显色配置 */
+.CUI-table-striped tbody tr:nth-child(even) td {
+    background-color: var(--bg-gray);
 }
 
-/* ============================================================
- * 单元格数据类型样式
- * ============================================================ */
-
-/* 掩码单元格：铭文为实际DOM内容，伪类覆盖显示掩码 */
-.CUI-table-cell-masked {
-    position: relative;
-    font-family: var(--font-mono);
-    color: transparent;
+/* 行 Hover 样式 */
+.CUI-table tbody tr:hover td {
+    background-color: var(--gray-200) !important;
 }
 
-/* 未hover时选中保持透明，避免与伪类掩码重影 */
-.CUI-table-cell-masked::selection {
-    color: transparent;
-    background: var(--primary-light, #b3d4fc);
+/* 单元格 Hover 局部高亮 */
+.CUI-table tbody tr td:hover {
+    background-color: var(--gray-300) !important;
 }
 
-.CUI-table-cell-masked::-moz-selection {
-    color: transparent;
-    background: var(--primary-light, #b3d4fc);
+/* 长文本字段专用：覆盖默认 nowrap，允许换行并 max-height 内滚动 */
+.CUI-td-long {
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-y: auto;
+    vertical-align: top;
+    max-height: 5.5em; /* 约 4 行文本的高度 */
 }
 
-/* hover时伪类已消失，选中应正常显示文字颜色 */
-.CUI-table-cell-masked:hover::selection {
-    color: var(--text-primary);
-}
-
-.CUI-table-cell-masked:hover::-moz-selection {
-    color: var(--text-primary);
-}
-
-/* hover时伪类消失，露出底下的铭文 */
-.CUI-table-cell-masked:hover {
-    color: var(--text-primary);
-}
-
-.CUI-table-cell-masked::before {
-    content: attr(data-masked);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: var(--size-sm) var(--size-md);
-    box-sizing: border-box;
-    color: var(--text-primary);
-    z-index: 2;
-    white-space: nowrap;
-    font-family: var(--font-mono);
-    pointer-events: none;
-    user-select: none;
-    background: transparent;
-}
-
-/* 右对齐列中的掩码：水平右对齐 */
-.CUI-td-number.CUI-table-cell-masked::before {
-    justify-content: flex-end;
-}
-
-/* 密码特殊样式 */
-.CUI-table-cell-masked[data-type="password"]::before {
-    letter-spacing: 2px;
+/* 状态展示 */
+.CUI-table-empty {
+    text-align: center;
+    padding: var(--size-xl) !important;
     color: var(--text-light);
 }
 
-/* hover时伪类消失，露出底下的铭文 */
+/* ============================================================
+ * 表头与排序列
+ * ============================================================ */
+
+.CUI-table thead th {
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-gray);
+    border-bottom: 2px solid var(--border-color);
+    text-align: left;
+    cursor: default;
+    user-select: none;
+}
+
+/* 排序箭头及交互 */
+.CUI-table thead th[data-sortable="true"],
+.CUI-table-toolbar-left+.CUI-table thead th {
+    cursor: pointer;
+}
+
+.CUI-table thead th[data-sortable="true"]:hover {
+    background-color: var(--gray-300) !important;
+}
+
+.CUI-table thead th::after {
+    content: ' ↕';
+    color: var(--text-light);
+    opacity: 0.3;
+    font-size: 0.9em;
+    margin-left: var(--size-xs);
+}
+
+.CUI-table thead th.CUI-sort-asc::after {
+    content: ' ▲';
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+.CUI-table thead th.CUI-sort-desc::after {
+    content: ' ▼';
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+/* ============================================================
+ * 表尾汇总行
+ * ============================================================ */
+
+.CUI-table tfoot td {
+    font-weight: 600;
+    background-color: var(--bg-gray);
+    border-top: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* ============================================================
+ * 极简 Sticky 多方向冻结布局与交角高优先级样式
+ * ============================================================ */
+
+/* 1. 垂直冻结：表头 (z-index: 12) */
+.CUI-table thead.CUI-freeze-thead th {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    background-color: var(--bg-gray);
+}
+
+/* 2. 垂直冻结：表尾 (z-index: 12) */
+.CUI-table tfoot.CUI-freeze-tfoot td {
+    position: sticky;
+    bottom: 0;
+    z-index: 12;
+    background-color: var(--bg-gray);
+    border-top: 2px solid var(--border-color);
+}
+
+/* 3. 水平冻结：首列 (z-index: 11) */
+.CUI-table td.CUI-freeze-first,
+.CUI-table th.CUI-freeze-first {
+    position: sticky;
+    left: 0;
+    z-index: 11;
+    border-right: 2px solid var(--border-color);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 4. 水平冻结：尾列 (z-index: 11) */
+.CUI-table td.CUI-freeze-last,
+.CUI-table th.CUI-freeze-last {
+    position: sticky;
+    right: 0;
+    z-index: 11;
+    border-left: 2px solid var(--border-color);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 5. 黄金相交角最高层级 (z-index: 13) */
+/* 表头与首列交角 */
+.CUI-table thead.CUI-freeze-thead th.CUI-freeze-first {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 13;
+    background-color: var(--bg-gray);
+}
+
+/* 表头与尾列交角 */
+.CUI-table thead.CUI-freeze-thead th.CUI-freeze-last {
+    position: sticky;
+    top: 0;
+    right: 0;
+    z-index: 13;
+    background-color: var(--bg-gray);
+}
+
+/* 表尾与首列交角 */
+.CUI-table tfoot.CUI-freeze-tfoot td.CUI-freeze-first {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 13;
+    background-color: var(--bg-gray);
+}
+
+/* 表尾与尾列交角 */
+.CUI-table tfoot.CUI-freeze-tfoot td.CUI-freeze-last {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    z-index: 13;
+    background-color: var(--bg-gray);
+}
+
+/* ============================================================
+ * 数据类型与敏感掩码样式
+ * ============================================================ */
+
+/* 数字居右对齐 */
+.CUI-td-number {
+    text-align: right !important;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+ * 按数据类型的默认列宽规则（配合 table-layout: fixed 生效）
+ * 在 th 的 style 或内联 width 未指定时，作为缺省依据
+ * ============================================================ */
+
+.CUI-table th[data-type="id"],
+.CUI-table td[data-type="id"] {
+    width: 80px;
+    min-width: 60px;
+}
+
+.CUI-table th[data-type="number"],
+.CUI-table td[data-type="number"] {
+    width: 110px;
+    min-width: 80px;
+}
+
+.CUI-table th[data-type="currency"],
+.CUI-table td[data-type="currency"] {
+    width: 150px;
+    min-width: 120px;
+}
+
+.CUI-table th[data-type="phone"],
+.CUI-table td[data-type="phone"] {
+    width: 140px;
+    min-width: 120px;
+}
+
+.CUI-table th[data-type="idcard"],
+.CUI-table td[data-type="idcard"] {
+    width: 200px;
+    min-width: 180px;
+}
+
+.CUI-table th[data-type="email"],
+.CUI-table td[data-type="email"] {
+    width: 200px;
+    min-width: 150px;
+}
+
+.CUI-table th[data-type="link"],
+.CUI-table td[data-type="link"] {
+    width: 180px;
+    min-width: 120px;
+}
+
+.CUI-table th[data-type="date"],
+.CUI-table td[data-type="date"] {
+    width: 130px;
+    min-width: 110px;
+}
+
+.CUI-table th[data-type="datetime"],
+.CUI-table td[data-type="datetime"] {
+    width: 180px;
+    min-width: 150px;
+}
+
+.CUI-table th[data-type="image"],
+.CUI-table td[data-type="image"] {
+    width: 80px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.CUI-table th[data-type="password"],
+.CUI-table td[data-type="password"] {
+    width: 160px;
+    min-width: 120px;
+}
+
+/* 长文本字段：不做强制换行裁剪，max-height + overflow: auto 保障最大高度 */
+.CUI-table th[data-type="text-long"],
+.CUI-table td[data-type="text-long"] {
+    width: 280px;
+    min-width: 200px;
+    max-width: 400px;
+    white-space: normal;
+    word-break: break-word;
+    overflow: auto;
+    vertical-align: top;
+}
+
+/* 敏感数据脱敏掩码核心机制 */
+.CUI-table-cell-masked {
+    position: relative;
+    color: transparent !important;
+    /* 文字底层设为透明，保证仍可拖选 */
+    font-family: var(--font-mono); /* 掩码字段统一等宽字体，保障对齐 */
+}
+
+/* 拖选保护 */
+.CUI-table-cell-masked::selection {
+    color: transparent !important;
+    background: rgba(22, 93, 255, 0.2) !important;
+}
+
+.CUI-table-cell-masked::-moz-selection {
+    color: transparent !important;
+    background: rgba(22, 93, 255, 0.2) !important;
+}
+
+/* 掩码覆盖层，通过 CSS 伪元素 attr 获取 */
+.CUI-table-cell-masked::before {
+    content: attr(data-masked);
+    position: absolute;
+    left: var(--size-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    pointer-events: none;
+    /* 穿透鼠标，支持直接拖选底层透明文字 */
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* 数字型掩码偏右对齐 */
+.CUI-td-number.CUI-table-cell-masked::before {
+    left: auto;
+    right: var(--size-md);
+}
+
+/* 悬停显色交互（与旧版体验对齐） */
+.CUI-table-cell-masked:hover {
+    color: var(--text-primary) !important;
+}
+
 .CUI-table-cell-masked:hover::before {
     display: none;
 }
 
-/* 货币：符号左对齐，数字右对齐 */
+/* ============================================================
+ * 单元格内置元素样式
+ * ============================================================ */
+
 .CUI-table-cell-currency {
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     gap: var(--size-xs);
@@ -354,221 +454,29 @@
 .CUI-currency-amount {
     font-variant-numeric: tabular-nums;
     text-align: right;
-    flex: 1;
     font-family: var(--font-mono);
 }
 
-/* 数字列：整列右对齐，强制覆盖 */
-.CUI-td-number {
-    text-align: right !important;
-}
-
-/* 数字：等宽字体 */
-.CUI-table-cell-number {
-    font-variant-numeric: tabular-nums;
-    font-family: var(--font-mono);
-}
-
-/* 邮箱链接 */
-.CUI-table-cell-email {
-    color: var(--primary-color);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.CUI-table-cell-email:hover {
-    text-decoration: underline;
-    color: var(--primary-hover);
-}
-
-/* 超链接 */
+.CUI-table-cell-email,
 .CUI-table-cell-link {
     color: var(--primary-color);
     text-decoration: none;
     cursor: pointer;
 }
 
+.CUI-table-cell-email:hover,
 .CUI-table-cell-link:hover {
     text-decoration: underline;
     color: var(--primary-hover);
 }
 
-/* ============================================================
- * 交互元素
- * ============================================================ */
-
-/* 文字链接 */
-.CUI-table-link {
-    color: var(--primary-color);
-    text-decoration: underline;
-    cursor: pointer;
+/* 可编辑状态 */
+.CUI-editable-cell {
+    outline: none;
+    cursor: text;
 }
 
-.CUI-table-link:hover {
-    color: var(--primary-hover);
-    text-decoration: none;
-}
-
-/* ============================================================
- * 筛选与工具栏
- * ============================================================ */
-
-.CUI-table-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--size-md);
-    padding: var(--size-sm) var(--size-md);
-    background: var(--bg-gray);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.CUI-table-toolbar-left {
-    display: flex;
-    gap: var(--size-sm);
-    align-items: center;
-    flex: 1;
-}
-
-.CUI-table-toolbar-right {
-    display: flex;
-    gap: var(--size-sm);
-    align-items: center;
-}
-
-.CUI-table-filter-wrapper {
-    flex: 1;
-    max-width: 300px;
-}
-
-.CUI-table-actions {
-    display: flex;
-    gap: var(--size-xs);
-}
-
-/* ============================================================
- * 分页
- * ============================================================ */
-
-.CUI-table-pagination {
-    display: flex;
-    gap: var(--size-xs);
-    align-items: center;
-}
-
-.CUI-table-page-btn {
-    padding: var(--size-xs) var(--size-sm);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: var(--bg-color);
-    cursor: pointer;
-    font-size: var(--font-size-sm);
-    transition: all var(--transition-fast);
-}
-
-.CUI-table-page-btn:hover:not(:disabled) {
-    background: var(--border-color);
-}
-
-.CUI-table-page-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.CUI-table-page-btn.active {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* ============================================================
- * 响应式
- * ============================================================ */
-
-@media (max-width: 768px) {
-    .CUI-table-scroll-y {
-        max-height: 300px;
-    }
-    
-    .CUI-table td,
-    .CUI-table th {
-        padding: var(--size-xs) var(--size-sm);
-        font-size: var(--font-size-xs);
-    }
-}
-
-/* ============================================================
- * 展示类表格（纯外观，无交互）
- * ============================================================ */
-
-.CUI-table-display {
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    background: var(--bg-color);
-    overflow: hidden;
-}
-
-.CUI-table-display table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.CUI-table-display thead th {
-    padding: var(--size-sm) var(--size-md);
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-primary);
-    background: var(--bg-gray);
-    border-bottom: 2px solid var(--border-color);
-    border-right: 1px solid var(--gray-300);
-    white-space: nowrap;
-}
-
-.CUI-table-display thead th:last-child {
-    border-right: none;
-}
-
-.CUI-table-display tbody td {
-    padding: var(--size-sm) var(--size-md);
-    border-bottom: 1px solid var(--border-color);
-    border-right: 1px solid var(--gray-300);
-    font-size: var(--font-size-sm);
-}
-
-.CUI-table-display tbody td:last-child {
-    border-right: none;
-}
-
-.CUI-table-display tbody tr:nth-child(even) {
-    background: var(--bg-gray);
-}
-
-.CUI-table-display tbody tr:hover {
-    background: rgba(22, 93, 255, 0.05);
-}
-
-.CUI-table-display img {
-    border-radius: var(--radius-sm);
-    object-fit: cover;
-}
-
-/* ============================================================
- * 多级表头合并
- * ============================================================ */
-
-.CUI-table thead th[colspan]:not([colspan="1"]),
-.CUI-table thead th[rowspan]:not([rowspan="1"]) {
-    text-align: center;
-    vertical-align: middle;
-    border-right: 1px solid var(--gray-300);
-}
-
-.CUI-table thead th[colspan]:not([colspan="1"]):last-child,
-.CUI-table thead th[rowspan]:not([rowspan="1"]):last-child {
-    border-right: none;
-}
-
-.CUI-table-first-col[colspan]:not([colspan="1"]),
-.CUI-table-first-col[rowspan]:not([rowspan="1"]) {
-    z-index: 16;
+.CUI-editable-cell:focus {
+    background-color: var(--gray-100) !important;
+    box-shadow: inset 0 0 0 1px var(--primary-color);
 }

@@ -1,0 +1,8 @@
+- [x] CUITableRegistry 实现并通过基础单元测试
+- [x] Table 类成功从 registry 拉取配置并渲染表格
+- [x] 编辑单元格能够写回 registry 并触发 `cui-table-data-updated`
+- [x] 首次渲染后触发 `cui-table-data-ready`
+- [x] 冻结、功能切换配置能够通过 `registry.setDisplayMode`/`registry.toggleMask` 动态更新视图
+- [x] 测试页面使用新 API 能正常加载数据并展示
+- [x] 所有旧手动渲染/脱敏代码已删除，项目 lint 警告全零
+- [x] gemini_operation_log.md 已记录第七阶段重构内容

@@ -3,189 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casting UI - 遮罩测试页</title>
-    <link rel="stylesheet" href="/modules/css/core.css">
-    <link rel="stylesheet" href="/modules/css/container.css">
-    <link rel="stylesheet" href="/modules/css/layout.css">
-    <link rel="stylesheet" href="/modules/css/text.css">
-    <link rel="stylesheet" href="/modules/css/components.css">
-    <link rel="stylesheet" href="/modules/css/status.css">
+    <title>遮罩测试</title>
+    <!-- 引入核心样式 -->
+    <link rel="stylesheet" href/modules/css/core.css">
+    <link rel="stylesheet" href/modules/css/components.css">
+    
+    <style>
+        .test-container {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            /* 让内容可滚动以测试滚动阻挡 */
+            overflow: auto;
+        }
+        .scroll-content {
+            height: 500px;
+            background: linear-gradient(#e66465, #9198e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+    </style>
 </head>
-<body>
-    <article class="CUI-section" style="padding: var(--size-xl);">
-        <h1>遮罩功能测试</h1>
-        <p>测试全屏遮罩与容器级遮罩的创建、移除和批量操作</p>
+<body style="height: 2000px; background-color: #f0f0f0;">
+    <h1 style="padding-left: 20px;">遮罩层重构测试页面</h1>
+    
+    <div style="padding: 20px;">
+        <button id="btn-fullscreen" class="CUI-btn CUI-btn-primary">全屏遮罩 (3秒后关闭)</button>
+        <button id="btn-container" class="CUI-btn CUI-btn-secondary">开启局部容器遮罩</button>
+        <button id="btn-container-close" class="CUI-btn CUI-btn-warning">关闭局部容器遮罩</button>
+    </div>
 
-        <!-- 操作按钮区 -->
-        <div class="CUI-box CUI-p-md" style="margin-bottom: var(--size-lg);">
-            <div class="CUI-flex CUI-flex-wrap" style="gap: var(--size-sm);">
-                <button id="fullscreen-glass-btn" class="CUI-btn CUI-btn-primary">全屏毛玻璃遮罩</button>
-                <button id="fullscreen-transparent-btn" class="CUI-btn CUI-btn-secondary">全屏透明遮罩</button>
-                <button id="container-all-glass-btn" class="CUI-btn CUI-btn-primary">所有容器加毛玻璃遮罩</button>
-                <button id="container-all-transparent-btn" class="CUI-btn CUI-btn-secondary">所有容器加透明遮罩</button>
-                <button id="clear-all-overlay-btn" class="CUI-btn" style="background: var(--danger-color); color: white;">移除所有遮罩</button>
-            </div>
-        </div>
+    <div id="test-box" class="test-container">
+        <h2>测试局部容器</h2>
+        <p>这是内部可滚动的长内容。</p>
+        <div class="scroll-content">往下滚</div>
+    </div>
 
-        <!-- 容器网格 -->
-        <div class="CUI-grid CUI-grid-2c" style="gap: var(--size-md);">
-            <!-- 容器 1 -->
-            <div id="card-1" class="CUI-box CUI-p-lg" style="min-height: 200px; position: relative;">
-                <h3>卡片 A</h3>
-                <p>这是一个示例卡片容器，可对其添加遮罩观察效果</p>
-                <div class="CUI-flex" style="gap: var(--size-sm);">
-                    <button id="overlay-card1-glass" class="CUI-btn CUI-btn-primary">加毛玻璃遮罩</button>
-                    <button id="overlay-card1-transparent" class="CUI-btn CUI-btn-secondary">加透明遮罩</button>
-                    <button id="clear-card1" class="CUI-btn">移除遮罩</button>
-                </div>
-            </div>
-
-            <!-- 容器 2 -->
-            <div id="card-2" class="CUI-box CUI-p-lg" style="min-height: 200px; position: relative;">
-                <h3>卡片 B</h3>
-                <p>每个卡片可独立控制遮罩，互不影响</p>
-                <div class="CUI-flex" style="gap: var(--size-sm);">
-                    <button id="overlay-card2-glass" class="CUI-btn CUI-btn-primary">加毛玻璃遮罩</button>
-                    <button id="overlay-card2-transparent" class="CUI-btn CUI-btn-secondary">加透明遮罩</button>
-                    <button id="clear-card2" class="CUI-btn">移除遮罩</button>
-                </div>
-            </div>
-
-            <!-- 容器 3 -->
-            <div id="card-3" class="CUI-box CUI-p-lg" style="min-height: 200px; position: relative;">
-                <h3>卡片 C</h3>
-                <p>遮罩支持自动关闭倒计时功能</p>
-                <div class="CUI-flex" style="gap: var(--size-sm);">
-                    <button id="overlay-card3-auto" class="CUI-btn CUI-btn-primary">加遮罩（3秒自动关）</button>
-                    <button id="clear-card3" class="CUI-btn">移除遮罩</button>
-                </div>
-            </div>
-
-            <!-- 容器 4 -->
-            <div id="card-4" class="CUI-box CUI-p-lg" style="min-height: 200px; position: relative;">
-                <h3>卡片 D</h3>
-                <p>遮罩层内容可自由定制，显示任意 HTML</p>
-                <div class="CUI-flex" style="gap: var(--size-sm);">
-                    <button id="overlay-card4-custom" class="CUI-btn CUI-btn-primary">加遮罩+自定义内容</button>
-                    <button id="clear-card4" class="CUI-btn">移除遮罩</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 状态信息 -->
-        <div class="CUI-box CUI-p-md" style="margin-top: var(--size-lg);">
-            <p class="CUI-text-sm">点击遮罩空白区域可关闭遮罩。容器遮罩会自动定位为相对父容器。</p>
-            <div id="status-bar" class="CUI-text-sm" style="color: var(--text-secondary);">就绪</div>
-        </div>
-    </article>
-
-    <script type="module">
-        import('/modules/js/overlay.js').then(mod => {
-            const O = mod.Overlay;
-
-            function status(msg) {
-                document.getElementById('status-bar').textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
-            }
-
-            function findContainer(el) {
-                return el.closest('[id^="card-"]');
-            }
-
-            document.addEventListener('click', function(e) {
-                const id = e.target.id;
-
-                if (id === 'fullscreen-glass-btn') {
-                    const m = window.CUI.overlay({ type: 'glass' });
-                    m.innerHTML = '<div class="CUI-box CUI-p-xl" style="text-align: center; background: var(--bg-color);"><h2>全屏毛玻璃遮罩</h2><p>点击遮罩空白区域关闭</p></div>';
-                    status('已创建全屏毛玻璃遮罩');
-                    return;
-                }
-
-                if (id === 'fullscreen-transparent-btn') {
-                    const m = window.CUI.overlay({ type: 'transparent' });
-                    m.innerHTML = '<div class="CUI-box CUI-p-xl" style="text-align: center; background: var(--bg-color);"><h2>全屏透明遮罩</h2><p>点击遮罩空白区域关闭</p></div>';
-                    status('已创建全屏透明遮罩');
-                    return;
-                }
-
-                if (id === 'container-all-glass-btn') {
-                    document.querySelectorAll('[id^="card-"]').forEach(function(card) {
-                        const m = window.CUI.overlay({ target: card, type: 'glass' });
-                        m.innerHTML = '<div class="CUI-box CUI-p-md" style="text-align: center; background: var(--bg-color);"><p>毛玻璃遮罩</p></div>';
-                    });
-                    status('已为所有容器添加毛玻璃遮罩');
-                    return;
-                }
-
-                if (id === 'container-all-transparent-btn') {
-                    document.querySelectorAll('[id^="card-"]').forEach(function(card) {
-                        const m = window.CUI.overlay({ target: card, type: 'transparent' });
-                        m.innerHTML = '<div class="CUI-box CUI-p-md" style="text-align: center; background: var(--bg-color);"><p>透明遮罩</p></div>';
-                    });
-                    status('已为所有容器添加透明遮罩');
-                    return;
-                }
-
-                if (id === 'clear-all-overlay-btn') {
-                    window.CUI.overlay.closeAll();
-                    status('已移除所有遮罩');
-                    return;
-                }
-
-                if (id.startsWith('overlay-card') && id.endsWith('-glass')) {
-                    var cardId = 'card-' + id.match(/card(\d+)/)[1];
-                    var card = document.getElementById(cardId);
-                    if (card) {
-                        var m = window.CUI.overlay({ target: card, type: 'glass' });
-                        m.innerHTML = '<div class="CUI-box CUI-p-md" style="text-align: center; background: var(--bg-color);"><p>毛玻璃遮罩已启用</p></div>';
-                        status('卡片 ' + cardId + ' 已添加毛玻璃遮罩');
+    <!-- 引入入口脚本 -->
+    <script type="module" src/modules/js/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 等待一下让模块初始化
+            setTimeout(() => {
+                document.getElementById('btn-fullscreen').addEventListener('click', () => {
+                    const overlayObj = window.CUI.overlay({ autoClose: 3000, type: 'glass' });
+                    if(overlayObj) {
+                        overlayObj.element.innerHTML = '<h2 style="color: #333;">全屏遮罩，3秒后自动关闭... 此时尝试滚动页面将被阻止</h2>';
                     }
-                    return;
-                }
+                });
 
-                if (id.startsWith('overlay-card') && id.endsWith('-transparent')) {
-                    var cardId = 'card-' + id.match(/card(\d+)/)[1];
-                    var card = document.getElementById(cardId);
-                    if (card) {
-                        var m = window.CUI.overlay({ target: card, type: 'transparent' });
-                        m.innerHTML = '<div class="CUI-box CUI-p-md" style="text-align: center; background: var(--bg-color);"><p>透明遮罩已启用</p></div>';
-                        status('卡片 ' + cardId + ' 已添加透明遮罩');
+                document.getElementById('btn-container').addEventListener('click', () => {
+                    const overlayObj = window.CUI.overlay({ target: '#test-box', type: 'glass' });
+                    if(overlayObj) {
+                        overlayObj.element.innerHTML = '<h3 style="color: #333;">局部容器遮罩<br>此时尝试滚动将被阻止</h3>';
                     }
-                    return;
-                }
+                });
 
-                if (id.startsWith('overlay-card') && id.endsWith('-auto')) {
-                    var cardId = 'card-' + id.match(/card(\d+)/)[1];
-                    var card = document.getElementById(cardId);
-                    if (card) {
-                        var m = window.CUI.overlay({ target: card, type: 'glass', autoClose: 3000 });
-                        m.innerHTML = '<div class="CUI-box CUI-p-md" style="text-align: center; background: var(--bg-color);"><p>3 秒后自动关闭</p></div>';
-                        status('卡片 ' + cardId + ' 已添加带倒计时的遮罩');
-                    }
-                    return;
-                }
-
-                if (id.startsWith('overlay-card') && id.endsWith('-custom')) {
-                    var cardId = 'card-' + id.match(/card(\d+)/)[1];
-                    var card = document.getElementById(cardId);
-                    if (card) {
-                        var m = window.CUI.overlay({ target: card, type: 'glass' });
-                        m.innerHTML = '<div class="CUI-box CUI-p-lg" style="text-align: center; background: var(--bg-color); max-width: 280px;"><h3>自定义内容</h3><p class="CUI-text-sm">遮罩内可显示任意 HTML 内容</p><div class="CUI-flex" style="gap: var(--size-sm); justify-content: center; margin-top: var(--size-md);"><button class="CUI-btn CUI-btn-primary">确定</button><button class="CUI-btn CUI-btn-secondary">取消</button></div></div>';
-                        status('卡片 ' + cardId + ' 已添加自定义内容遮罩');
-                    }
-                    return;
-                }
-
-                if (id.startsWith('clear-card')) {
-                    var cardId = 'card-' + id.match(/card(\d+)/)[1];
-                    var card = document.getElementById(cardId);
-                    if (card) {
-                        window.CUI.overlay.close(card);
-                        status('已移除 ' + cardId + ' 的遮罩');
-                    }
-                    return;
-                }
-            });
+                document.getElementById('btn-container-close').addEventListener('click', () => {
+                    window.CUI.overlay.close('#test-box');
+                });
+            }, 500);
         });
     </script>
 </body>

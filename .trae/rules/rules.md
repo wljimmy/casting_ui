@@ -29,6 +29,6 @@
 ## 路径规范
 - Vite开发模式下，`src/` 和 `public/` 目录为默认根目录
 - 页面链接生成时需注意路径前缀：
-  - `src/` 目录下文件路径：`/src/...`
+  - `src/` 目录下文件路径：`/...`（无需 src 前缀）
   - `public/` 目录下文件路径：`/...`（无需 public 前缀）
-  - 示例：`/src/modules/css/core.css`、`/manual/theme-manager-container/index.html`
+  - 示例：`/modules/css/core.css`、`/manual/theme-manager-container/index.html`

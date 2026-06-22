@@ -46,6 +46,7 @@ import './progress.js';        // 进度条
 import './image-zoom.js';      // 图片放大
 import './color-picker.js';    // 颜色选择器
 import './theme-manager.js';   // 主题管理器
+import './table.js';           // 表格组件（含注册表、数据层、渲染层、初始化模块）
 
 // ==============================
 // 第五层：表单组件（依赖功能组件）
